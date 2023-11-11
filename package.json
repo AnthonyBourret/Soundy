@@ -1,0 +1,19 @@
+{
+  "name": "soundy",
+  "version": "1.0.0",
+  "description": "All about the sound",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnthonyBourret/Soundy.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AnthonyBourret/Soundy/issues"
+  },
+  "homepage": "https://github.com/AnthonyBourret/Soundy#readme"
+}

@@ -1,0 +1,8 @@
+# Standard folers and files
+node_modules
+*.local
+.env
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json

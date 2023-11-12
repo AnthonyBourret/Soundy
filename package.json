@@ -2,32 +2,40 @@
   "name": "soundy",
   "version": "1.0.0",
   "description": "All about the sound",
-  "main": "index.ts",
   "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "check": "tsc",
+    "lint": "eslint",
     "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AnthonyBourret/Soundy.git"
   },
-  "author": "",
+  "contributors": [
+    {
+      "name": "Anthony Bourret",
+      "url": "https://github.com/AnthonyBourret"
+    },
+    {
+      "name": "Guillaume Jolibois",
+      "url": "https://github.com/Joliwood",
+      "email": "jolibois.contact@gmail.com"
+    }
+  ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/AnthonyBourret/Soundy/issues"
-  },
-  "homepage": "https://github.com/AnthonyBourret/Soundy#readme",
   "dependencies": {
-    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/themes": "^2.0.0",
+    "@vitejs/plugin-react": "^4.1.1",
     "autoprefixer": "^10.4.16",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.0.0",
     "postcss": "^8.4.31",
+    "radix-themes-tw": "^0.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0",
-    "tailwind-merge": "^2.0.0",
     "tailwindcss": "^3.3.5",
-    "tailwindcss-animate": "^1.0.7"
+    "vite": "^4.5.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

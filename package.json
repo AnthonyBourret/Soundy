@@ -2,54 +2,18 @@
   "name": "soundy",
   "version": "1.0.0",
   "description": "All about the sound",
+  "main": "index.ts",
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
-    "check": "tsc",
-    "lint": "eslint",
-    "test": "vitest"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AnthonyBourret/Soundy.git"
   },
-  "contributors": [
-    {
-      "name": "Anthony Bourret",
-      "url": "https://github.com/AnthonyBourret"
-    },
-    {
-      "name": "Guillaume Jolibois",
-      "url": "https://github.com/Joliwood",
-      "email": "jolibois.contact@gmail.com"
-    }
-  ],
+  "author": "",
   "license": "MIT",
-  "dependencies": {
-    "@radix-ui/themes": "^2.0.0",
-    "@vitejs/plugin-react": "^4.1.1",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.31",
-    "radix-themes-tw": "^0.0.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.18.0",
-    "tailwindcss": "^3.3.5",
-    "vite": "^4.5.0"
+  "bugs": {
+    "url": "https://github.com/AnthonyBourret/Soundy/issues"
   },
-  "devDependencies": {
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "eslint": "^8.53.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-typescript": "^17.1.0",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "typescript": "^5.2.2",
-    "vitest": "^0.34.6"
-  }
+  "homepage": "https://github.com/AnthonyBourret/Soundy#readme"
 }

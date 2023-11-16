@@ -3,19 +3,13 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Listen from './components/Listen';
 
-function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/listen" element={<Listen />} />
-    </Routes>
-  );
-}
-
-export default function WrappedApp() {
+export default function App() {
   return (
     <Suspense fallback="...is loading">
-      <App />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/listen" element={<Listen />} />
+      </Routes>
     </Suspense>
   );
 }

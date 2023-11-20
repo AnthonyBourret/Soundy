@@ -16,7 +16,6 @@ function Home() {
     <>
       <Header />
       <div className="mt-5 flex flex-col items-center w-full h-[500px]">
-        {t('HOME')}
         <p>{t('WELCOME', { ns: 'translation' })}</p>
         <p>{t('Duration', { ns: 'common' })}</p>
 

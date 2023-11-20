@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         appearance="dark"
       >
         <App />
-        <ThemePanel />
+        {/* <ThemePanel /> */}
       </Theme>
     </BrowserRouter>
   </React.StrictMode>,

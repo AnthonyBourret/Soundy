@@ -6,11 +6,7 @@ import { useTranslation } from 'react-i18next';
 import Header from './Header/Header';
 
 function Home() {
-  const { t, i18n } = useTranslation(['common', 'translation']);
-  const lngs = {
-    en: { nativeName: t('LANGUAGE_1', { ns: 'translation' }) },
-    fr: { nativeName: t('LANGUAGE_2', { ns: 'translation' }) },
-  };
+  const { t } = useTranslation(['common', 'translation']);
 
   return (
     <>
@@ -42,18 +38,6 @@ function Home() {
             </Box>
           </Flex>
         </Card>
-        <div>
-          {Object.keys(lngs).map((lng) => (
-            <button
-              key={lng}
-              style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }}
-              type="submit"
-              onClick={() => i18n.changeLanguage(lng)}
-            >
-              {lngs[lng].nativeName}
-            </button>
-          ))}
-        </div>
       </div>
     </>
   );

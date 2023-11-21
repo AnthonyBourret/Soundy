@@ -1,8 +1,20 @@
 import React from 'react';
+import {
+  Flex, Text, Button, Card, Avatar, Box,
+} from '@radix-ui/themes';
+import { useTranslation } from 'react-i18next';
+import Header from './Header/Header';
 
 function Listen() {
+  const { t } = useTranslation(['common', 'translation']);
+
   return (
-    <div>Listen page</div>
+    <>
+      <Header />
+      <div className="mt-5 flex flex-col items-center w-full h-[500px]">
+        <Text>Listen Page</Text>
+      </div>
+    </>
   );
 }
 

@@ -19,7 +19,6 @@ function Home() {
           <Text>{t('TEST', { ns: 'translation' })}</Text>
           <Button className="cursor-pointer">{t('BUTTON_TEXT', { ns: 'translation' })}</Button>
         </Flex>
-
         <Card style={{ maxWidth: 240 }}>
           <Flex gap="3" align="center">
             <Avatar

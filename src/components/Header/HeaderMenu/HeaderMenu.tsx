@@ -12,38 +12,43 @@ function HeaderMenu() {
       <NavigationMenu.Root className="relative z-[1] flex justify-center">
         <NavigationMenu.List className="center shadow-blackA4 m-0 flex list-none rounded-[6px] p-1">
           <NavigationMenu.Item>
-            <Link to="/">
-              <NavigationMenu.Link className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]">
-                {t('Home')}
-              </NavigationMenu.Link>
+            <Link
+              to="/"
+              className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
+            >
+              {t('Home')}
             </Link>
           </NavigationMenu.Item>
           <NavigationMenu.Item>
-            <Link to="/listen">
-              <NavigationMenu.Link className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]">
-                {t('Listen')}
-              </NavigationMenu.Link>
+            <Link
+              to="/listen"
+              className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
+            >
+              {t('Listen')}
             </Link>
           </NavigationMenu.Item>
           <NavigationMenu.Item>
-            <Link to="/">
-              <NavigationMenu.Link className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]">
-                {t('Create')}
-              </NavigationMenu.Link>
+            <Link
+              to="/"
+              className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
+            >
+              {t('Create')}
             </Link>
           </NavigationMenu.Item>
           <NavigationMenu.Item>
-            <Link to="/">
-              <NavigationMenu.Link className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]">
-                {t('Login')}
-              </NavigationMenu.Link>
+            <Link
+              to="/"
+              className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
+            >
+              {t('Login')}
             </Link>
           </NavigationMenu.Item>
           <NavigationMenu.Item>
-            <Link to="/">
-              <NavigationMenu.Link className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]">
-                {t('Register')}
-              </NavigationMenu.Link>
+            <Link
+              to="/"
+              className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
+            >
+              {t('Register')}
             </Link>
           </NavigationMenu.Item>
           <NavigationMenu.Item>

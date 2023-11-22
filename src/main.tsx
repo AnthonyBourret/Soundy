@@ -11,7 +11,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Theme
         accentColor="ruby"
-        grayColor="sand"
+        grayColor="gray"
+        panelBackground="solid"
         radius="large"
         scaling="100%"
         appearance="dark"

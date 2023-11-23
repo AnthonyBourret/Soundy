@@ -46,7 +46,7 @@ function HeaderMenuBurger() {
           <DropdownMenu.Item
             className="group text-[16px] leading-none rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
           >
-            <Link to="/">
+            <Link to="/create">
               {t('Create')}
             </Link>
           </DropdownMenu.Item>

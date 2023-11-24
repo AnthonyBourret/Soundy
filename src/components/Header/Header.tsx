@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Flex, Text, Box } from '@radix-ui/themes';
+import { Flex } from '@radix-ui/themes';
 import HeaderLogo from './HeaderLogo/HeaderLogo';
 import HeaderMenu from './HeaderMenu/HeaderMenu';
 import HeaderMenuBurger from './HeaderMenuBurger/HeaderMenuBurger';
-import Icon from '../../../public/android-chrome-192x192.png';
 
-function Header() {
+function Header({ isConnected } : { isConnected : boolean }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 767);
 
   const handleResize = () => {
@@ -19,14 +17,14 @@ function Header() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  const { t } = useTranslation(['common', 'translation']);
+
   return (
-    <Flex justify="between" align="center" p="3">
+    <Flex justify="between" align="center" m="5" height="5">
       <HeaderLogo />
       {isMobile ? (
-        <HeaderMenuBurger />
+        <HeaderMenuBurger isConnected={isConnected} />
       ) : (
-        <HeaderMenu />
+        <HeaderMenu isConnected={isConnected} />
       )}
 
     </Flex>

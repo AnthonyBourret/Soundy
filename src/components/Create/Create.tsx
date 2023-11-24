@@ -1,13 +1,8 @@
 import React from 'react';
-import {
-  Flex, Text, Button, Card, Avatar, Box,
-} from '@radix-ui/themes';
-import { useTranslation } from 'react-i18next';
-import Header from './Header/Header';
+import { Text } from '@radix-ui/themes';
+import Header from '../Header/Header';
 
 function Create() {
-  const { t } = useTranslation(['common', 'translation']);
-
   return (
     <>
       <Header />

@@ -10,12 +10,7 @@
     "Profile": "My profile",
     "Favorites": "My favorites",
     "Logout": "Disconnect",
-    "Order": "Order",
-    "ReleasedDate": "Released date",
-    "Title": "Title",
-    "Titles": "Titles",
-    "Artist": "Artist",
-    "Album": "Album",
-    "Duration": "Duration",
-    "Style": "Style"
+    "Username": "Username",
+    "Password": "Password",
+    "Email": "Email"
 }

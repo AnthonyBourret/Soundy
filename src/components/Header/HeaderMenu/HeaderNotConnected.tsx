@@ -2,33 +2,47 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import * as Select from '@radix-ui/react-select';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
+import * as Dialog from '@radix-ui/react-dialog';
 import classnames from 'classnames';
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
+import LoginModal from '../../Modals/LoginModal';
+import SignupModal from '../../Modals/SignupModal';
 
 function HeaderNotConnected() {
   const { t, i18n } = useTranslation(['common']);
 
   return (
     <>
-      <NavigationMenu.Item>
-        <Link
-          to="/"
+      {/* Dialog pour ouvrir la modale de connexion */}
+      <Dialog.Root>
+        <Dialog.Trigger
           className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
+          asChild
         >
-          {t('Login')}
-        </Link>
-      </NavigationMenu.Item>
-      <NavigationMenu.Item>
-        <Link
-          to="/"
+          <NavigationMenu.Item>
+            {t('Login')}
+          </NavigationMenu.Item>
+        </Dialog.Trigger>
+        {/* Modale de connexion */}
+        <LoginModal />
+      </Dialog.Root>
+
+      {/* Dialog pour ouvrir la modale d'inscription */}
+      <Dialog.Root>
+        <Dialog.Trigger
           className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
+          asChild
         >
-          {t('Register')}
-        </Link>
-      </NavigationMenu.Item>
+          <NavigationMenu.Item>
+            {t('Register')}
+          </NavigationMenu.Item>
+        </Dialog.Trigger>
+        {/* Modale d'inscription */}
+        <SignupModal />
+      </Dialog.Root>
+
       <NavigationMenu.Item>
         {/* OnValueChange modifie la langue de l'application  */}
         <Select.Root onValueChange={(e: string) => i18n.changeLanguage(e)}>

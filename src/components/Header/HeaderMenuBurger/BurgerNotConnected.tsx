@@ -2,13 +2,16 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as Dialog from '@radix-ui/react-dialog';
 import {
   HamburgerMenuIcon,
   CheckIcon,
 } from '@radix-ui/react-icons';
+import LoginModal from '../../Modals/LoginModal';
+import SignupModal from '../../Modals/SignupModal';
 
 function BurgerNotConnected() {
-  const { t, i18n } = useTranslation(['common', 'translation']);
+  const { t, i18n } = useTranslation(['common']);
   const [language, setLanguage] = React.useState(i18n.language);
 
   function handleLanguageChange(e : string) {
@@ -50,20 +53,32 @@ function BurgerNotConnected() {
               {t('Create')}
             </Link>
           </DropdownMenu.Item>
-          <DropdownMenu.Item
-            className="group text-[16px] leading-none rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
-          >
-            <Link to="/">
-              {t('Login')}
-            </Link>
-          </DropdownMenu.Item>
-          <DropdownMenu.Item
-            className="group text-[16px] leading-none rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
-          >
-            <Link to="/">
-              {t('Register')}
-            </Link>
-          </DropdownMenu.Item>
+          <Dialog.Root>
+            <Dialog.Trigger
+              className="group text-[16px] leading-none rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+            >
+              {/* On remplace DropdownMenu.Item par une <div> sinon Dialog ne fonctionne pas */}
+              <div>
+                {t('Login')}
+              </div>
+            </Dialog.Trigger>
+            {/* Modale de connexion */}
+            <LoginModal />
+          </Dialog.Root>
+
+          {/* Dialog pour ouvrir la modale d'inscription */}
+          <Dialog.Root>
+            <Dialog.Trigger
+              className="group text-[16px] leading-none rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+              asChild
+            >
+              <div>
+                {t('Register')}
+              </div>
+            </Dialog.Trigger>
+            {/* Modale d'inscription */}
+            <SignupModal />
+          </Dialog.Root>
 
           <DropdownMenu.Separator className="h-[1px] bg-violet6 m-[5px]" />
 

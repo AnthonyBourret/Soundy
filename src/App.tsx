@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './components/homePage/Home';
 import Listen from './components/Listen';
 
 export default function App() {

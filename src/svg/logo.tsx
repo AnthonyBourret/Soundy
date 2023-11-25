@@ -1,11 +1,13 @@
 import React from 'react';
 
-function Icon() {
+function Logo(): React.JSX.Element {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 550 550"
+      height="150px"
+      preserveAspectRatio="xMidYMid meet"
     >
       <circle
         cx="275"
@@ -79,4 +81,4 @@ function Icon() {
   );
 }
 
-export default Icon;
+export default Logo;

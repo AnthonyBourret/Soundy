@@ -15,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         radius="large"
         scaling="100%"
         appearance="dark"
+        className="p-5 min-h-screen"
       >
         <App />
         {/* <ThemePanel /> */}

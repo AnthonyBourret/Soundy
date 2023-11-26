@@ -1,11 +1,14 @@
 import React from 'react';
+import { Flex } from '@radix-ui/themes';
 import Hero from './Hero';
+import Services from './Services';
 
 function Home() {
   return (
-    <div className="mt-5 flex flex-col items-center w-full h-[500px]">
+    <Flex className="my-5 flex-col items-center w-full ">
       <Hero />
-    </div>
+      <Services />
+    </Flex>
   );
 }
 

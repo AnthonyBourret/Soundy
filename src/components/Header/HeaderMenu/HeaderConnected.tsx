@@ -5,6 +5,7 @@ import { Text } from '@radix-ui/themes';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as Avatar from '@radix-ui/react-avatar';
+import * as Tooltip from '@radix-ui/react-tooltip';
 import { CheckIcon } from '@radix-ui/react-icons';
 
 function HeaderConnected() {
@@ -22,11 +23,25 @@ function HeaderConnected() {
         {/* Affichage de l'avatar qui au clic affiche un menu déroulant */}
         <DropdownMenu.Trigger asChild>
           <Avatar.Root className="bg-blackA1 inline-flex h-[40px] w-[40px] select-none items-center justify-center overflow-hidden rounded-full align-middle">
-            <Avatar.Image
-              className="h-full w-full rounded-[inherit] object-cover"
-              src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
-              alt="Profile picture"
-            />
+            <Tooltip.Provider>
+              <Tooltip.Root>
+                <Tooltip.Trigger asChild>
+                  <Avatar.Image
+                    className="h-full w-full rounded-[inherit] object-cover"
+                    src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
+                    alt="Profile picture"
+                  />
+                </Tooltip.Trigger>
+                <Tooltip.Content
+                  className="data-[state=delayed-open]:data-[side=bottom]:animate-slideDownAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade text-violet11 select-none rounded-[4px] bg-black px-[15px] py-[10px] text-[15px] leading-none shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] will-change-[transform,opacity]"
+                  sideOffset={5}
+                >
+                  <Text className="text-[12px] text-mauve11">
+                    Click to open
+                  </Text>
+                </Tooltip.Content>
+              </Tooltip.Root>
+            </Tooltip.Provider>
             <Avatar.Fallback
               className="text-violet11 leading-1 flex h-full w-full items-center justify-center bg-black text-[15px] font-medium"
               delayMs={600}

@@ -12,5 +12,6 @@
     "Logout": "Déconnexion",
     "Username": "Nom d'utilisateur",
     "Password": "Mot de passe",
-    "Email": "Adresse mail"
+    "Email": "Adresse mail",
+    "ClickToolTips": "Cliquer pour ouvrir"
 }

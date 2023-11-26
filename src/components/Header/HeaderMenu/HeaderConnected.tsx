@@ -23,6 +23,8 @@ function HeaderConnected() {
         {/* Affichage de l'avatar qui au clic affiche un menu déroulant */}
         <DropdownMenu.Trigger asChild>
           <Avatar.Root className="bg-blackA1 inline-flex h-[40px] w-[40px] select-none items-center justify-center overflow-hidden rounded-full align-middle">
+
+            {/* Info bulle pour indiquer que l'on peut cliquer sur l'avatar pour ouvrir le menu */}
             <Tooltip.Provider>
               <Tooltip.Root>
                 <Tooltip.Trigger asChild>
@@ -37,7 +39,7 @@ function HeaderConnected() {
                   sideOffset={5}
                 >
                   <Text className="text-[12px] text-mauve11">
-                    Click to open
+                    {t('ClickToolTips')}
                   </Text>
                 </Tooltip.Content>
               </Tooltip.Root>

@@ -21,7 +21,7 @@ function HeaderNotConnected() {
           className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
           asChild
         >
-          <NavigationMenu.Item>
+          <NavigationMenu.Item className="text-white border-b-2 border-black/[1] select-none px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none">
             {t('Login')}
           </NavigationMenu.Item>
         </Dialog.Trigger>
@@ -35,7 +35,7 @@ function HeaderNotConnected() {
           className="text-violet11 hover:bg-violet3 focus:shadow-violet7 block select-none rounded-[4px] px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
           asChild
         >
-          <NavigationMenu.Item>
+          <NavigationMenu.Item className="text-white border-b-2 border-black/[1] select-none px-3 py-2 text-[15px] font-medium leading-none no-underline outline-none">
             {t('Register')}
           </NavigationMenu.Item>
         </Dialog.Trigger>

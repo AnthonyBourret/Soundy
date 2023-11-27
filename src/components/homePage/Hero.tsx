@@ -9,7 +9,7 @@ function Hero() {
   return (
     <Flex className="flex-col mt-[200px] gap-10 text-center">
       <Text size="5">{t('HERO_TXT_1', { ns: 'translation' })}</Text>
-      <Flex justify="center" className="align-middle gap-10 mb-5 flex-wrap">
+      <Flex className="gap-10 mb-5">
         <Logo />
         <Heading as="h1" size="9" className="self-center">Soundy</Heading>
       </Flex>

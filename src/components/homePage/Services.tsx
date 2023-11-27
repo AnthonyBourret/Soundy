@@ -4,6 +4,7 @@ import {
   Flex,
   Button,
   Heading,
+  Link,
 } from '@radix-ui/themes';
 import React from 'react';
 import { SpeakerLoudIcon, PlusCircledIcon } from '@radix-ui/react-icons';
@@ -14,23 +15,25 @@ function Services() {
     {
       icon: <SpeakerLoudIcon width={60} height={60} color="var(--accent-a9)" className="my-2" />,
       title: 'Écoutez une grande variété de sons !',
-      text: 'Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed.',
+      text: 'Venez découvrir toutes les variétés du moment, ou des grands classiques ! Sur Soundy vous trouverez forcément votre bonheur !',
       buttonText: 'Écouter',
+      link: '/listen',
     },
     {
       icon: <PlusCircledIcon width={60} height={60} color="var(--accent-a9)" className="my-2" />,
       title: 'Créez vos propres sons !',
-      text: 'Typography is the art and technique of arranging type to make written language legible, readable and appealing when displayed.',
+      text: 'Vous avez un son que vous souhaitez partager ? Venez le partager sur Soundy ! Vous pouvez aussi créer vos propres sons !',
       buttonText: 'Créer',
+      link: '/create',
     },
   ];
 
   return (
-    <Flex className="flex my-[200px] gap-10 flex-wrap !justify-center">
+    <Flex className="my-[200px] gap-10 !items-stretch h-full">
 
       {serviceCards.map((serviceCard) => (
         <Card size="2" style={{ maxWidth: 240 }}>
-          <Flex className="flex-col gap-5 items-center h-full !justify-evenly p-1">
+          <Flex className="flex-col gap-5 h-full !justify-between p-1">
             {serviceCard.icon}
             <Heading as="h3" size="3" className="self-center">
               {serviceCard.title}
@@ -38,9 +41,11 @@ function Services() {
             <Text as="p" size="3">
               {serviceCard.text}
             </Text>
-            <Button variant="solid" className="w-full !cursor-pointer">
-              {serviceCard.buttonText}
-            </Button>
+            <Link href={serviceCard.link} className="w-full">
+              <Button variant="solid" className="w-full">
+                {serviceCard.buttonText}
+              </Button>
+            </Link>
           </Flex>
         </Card>
       ))}

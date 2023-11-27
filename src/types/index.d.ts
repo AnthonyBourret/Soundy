@@ -3,4 +3,5 @@ export type ServiceCard = {
   title: string;
   text: string;
   buttonText: string;
+  link: string;
 };

@@ -8,22 +8,25 @@ import {
 } from '@radix-ui/themes';
 import React from 'react';
 import { SpeakerLoudIcon, PlusCircledIcon } from '@radix-ui/react-icons';
+import { useTranslation } from 'react-i18next';
 import { ServiceCard } from '../../types';
 
 function Services() {
+  const { t } = useTranslation(['common', 'translation']);
+
   const serviceCards: ServiceCard[] = [
     {
       icon: <SpeakerLoudIcon width={60} height={60} color="var(--accent-a9)" className="my-2" />,
-      title: 'Écoutez une grande variété de sons !',
-      text: 'Venez découvrir toutes les variétés du moment, ou des grands classiques ! Sur Soundy vous trouverez forcément votre bonheur !',
-      buttonText: 'Écouter',
+      title: t('SERVICES_TITLE_LISTEN', { ns: 'translation' }),
+      text: t('SERVICES_TXT_LISTEN', { ns: 'translation' }),
+      buttonText: t('Listen', { ns: 'common' }),
       link: '/listen',
     },
     {
       icon: <PlusCircledIcon width={60} height={60} color="var(--accent-a9)" className="my-2" />,
-      title: 'Créez vos propres sons !',
-      text: 'Vous avez un son que vous souhaitez partager ? Venez le partager sur Soundy ! Vous pouvez aussi créer vos propres sons !',
-      buttonText: 'Créer',
+      title: t('SERVICES_TITLE_CREATE', { ns: 'translation' }),
+      text: t('SERVICES_TXT_LISTEN', { ns: 'translation' }),
+      buttonText: t('Create', { ns: 'common' }),
       link: '/create',
     },
   ];

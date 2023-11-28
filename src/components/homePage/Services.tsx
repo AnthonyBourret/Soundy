@@ -35,7 +35,7 @@ function Services() {
     <Flex className="my-[200px] gap-10 !items-stretch h-full">
 
       {serviceCards.map((serviceCard) => (
-        <Card size="2" style={{ maxWidth: 240 }}>
+        <Card size="2" style={{ maxWidth: 240 }} className="p-3">
           <Flex className="flex-col gap-5 h-full !justify-between p-1">
             {serviceCard.icon}
             <Heading as="h3" size="3" className="self-center">

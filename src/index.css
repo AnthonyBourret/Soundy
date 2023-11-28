@@ -13,3 +13,7 @@
 .rt-Button {
     cursor: pointer;
 }
+
+.rt-CardInner {
+    padding: 0;;
+}

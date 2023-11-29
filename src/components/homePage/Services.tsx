@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { ServiceCard } from '../../types';
 import SoundIcon from '../../svg/soundIcon';
 import PlusIcon from '../../svg/plusIcon';
@@ -25,7 +26,7 @@ function Services() {
   ];
 
   return (
-    <div className="flex gap-[5vw] h-full mb-[200px]">
+    <div className="flex flex-wrap gap-[5vw] h-full mb-[200px] justify-center">
 
       {serviceCards.map((serviceCard) => (
         <div className="card max-w-[260px] bg-base-200 text-primary-content border border-1 border-stone-700">
@@ -37,11 +38,11 @@ function Services() {
             <p>
               {serviceCard.text}
             </p>
-            <a href={serviceCard.link} className="w-full">
+            <Link to={serviceCard.link} className="w-full">
               <button type="button" className="btn w-full btn-primary">
                 {serviceCard.buttonText}
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       ))}

@@ -1,20 +1,23 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Flex, Heading, Text } from '@radix-ui/themes';
 import Logo from '../../svg/logo';
 
 function Hero() {
   const { t } = useTranslation(['common', 'translation']);
 
   return (
-    <Flex className="flex-col mt-[200px] gap-10 text-center">
-      <Text size="5">{t('HERO_TXT_1', { ns: 'translation' })}</Text>
-      <Flex className="gap-10 mb-5">
-        <Logo />
-        <Heading as="h1" size="9" className="self-center">Soundy</Heading>
-      </Flex>
-      <Text size="5">{t('HERO_TXT_2', { ns: 'translation' })}</Text>
-    </Flex>
+    <div className="hero min-h-screen text-center">
+      <div className="max-w-md flex flex-col gap-10">
+        <h2>{t('HERO_TXT_1', { ns: 'translation' })}</h2>
+
+        <div className="flex gap-10 mb-5">
+          <Logo />
+          <h1 className="text-5xl font-bold flex self-center pb-3">Soundy</h1>
+        </div>
+
+        <h3>{t('HERO_TXT_2', { ns: 'translation' })}</h3>
+      </div>
+    </div>
   );
 }
 

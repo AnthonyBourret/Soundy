@@ -1,68 +1,54 @@
-import {
-  AspectRatio,
-  Card,
-  Text,
-  Flex,
-  Heading,
-  Separator,
-  Button,
-  Link,
-} from '@radix-ui/themes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { PlayIcon } from '@radix-ui/react-icons';
 import fakeSongs from './fakeSongs';
+import PlayIcon from '../../svg/playIcon';
 
 function OverviewSongs() {
   const { t } = useTranslation(['common', 'translation']);
 
   return (
-    <Flex className="flex-col w-[60%] !items-start mb-[200px]">
-      <Heading className="pl-2">{t('OVERVIEW_TITLE', { ns: 'translation' })}</Heading>
-      <Separator my="3" size="4" className="w-full" />
+    <div className="flex flex-col w-[60%] !items-start mb-[200px]">
+      <h2 className="pl-2">{t('OVERVIEW_TITLE', { ns: 'translation' })}</h2>
+      <div className="divider" />
 
-      <Flex className="gap-y-5 !justify-between w-full my-7">
+      <div className="flex gap-y-5 !justify-between w-full my-7">
         {fakeSongs.map((song) => (
-          <Card size="2" className="w-[17%]">
-            <Flex className="flex-col gap-2 h-full !justify-between p-2 relative">
-              <AspectRatio ratio={3 / 4} className="relative">
-                <img
-                  src={song.picture}
-                  alt={song.title}
-                  className="object-cover w-full h-full rounded-md"
-                />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 duration-150">
-                  <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center">
-                    <PlayIcon
-                      width="75%"
-                      height="75%"
-                      color="#3b1219"
-                      className="pl-1"
-                    />
+          <div className="card w-[17%] bg-base-200 shadow-xl border border-1 border-stone-700">
+            <div className="card-body px-2 pt-2 pb-3 gap-1">
+              <div className="relative mb-2">
+                <figure className="aspect-[3/4]">
+                  <img
+                    src={song.picture}
+                    alt={song.title}
+                    className="object-cover w-full h-full rounded-md"
+                  />
+                </figure>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 duration-50">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center">
+                    <PlayIcon />
                   </div>
                 </div>
-              </AspectRatio>
-              <Heading as="h3" size="3" className="self-center">
+              </div>
+              <h3 className="self-center">
                 {song.title}
-              </Heading>
-              <Text as="p" size="3">
+              </h3>
+              <p className="self-center">
                 {song.artist}
-              </Text>
-            </Flex>
-          </Card>
-
+              </p>
+            </div>
+          </div>
         ))}
-      </Flex>
+      </div>
 
-      <Flex className="self-center mt-10 flex-col gap-5">
-        <Text className="text-center w-[60%]">{t('SERVICES_TXT_1', { ns: 'translation' })}</Text>
-        <Link href="/listen" className="w-[40%]">
-          <Button variant="solid" className="w-full">
+      <div className="flex self-center mt-10 flex-col gap-5 items-center">
+        <p className="text-center w-[60%]">{t('SERVICES_TXT_1', { ns: 'translation' })}</p>
+        <a href="/listen" className="w-[40%] flex">
+          <button type="button" className="w-full btn btn-primary">
             {t('listen', { ns: 'common' })}
-          </Button>
-        </Link>
-      </Flex>
-    </Flex>
+          </button>
+        </a>
+      </div>
+    </div>
   );
 }
 

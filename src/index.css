@@ -1,4 +1,8 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "@radix-ui/themes/styles.css";
+
+.btn {
+  min-height: 2rem;
+  height: auto;
+}

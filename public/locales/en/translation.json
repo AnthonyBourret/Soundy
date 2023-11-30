@@ -5,5 +5,11 @@
     "BUTTON_TEXT": "Let's go",
     "JOB": "Engineering",
     "LANGUAGE_1": "English",
-    "LANGUAGE_2": "French"
+    "LANGUAGE_2": "French",
+    "SERVICES_TITLE_LISTEN": "Listen to a wide variety of sounds !",
+    "SERVICES_TITLE_CREATE": "Create your own sounds !",
+    "SERVICES_TXT_LISTEN": "Come and discover all the current varieties, or the great classics! At Soundy, you're sure to find what you're looking for !",
+    "SERVICES_TXT_CREATE": "Got a sound you'd like to share? Come and share it on Soundy! You can also create your own sounds !",
+    "OVERVIEW_TITLE": "Listen to the latest music",
+    "SERVICES_TXT_1": "Discover even more by browsing our sound catalog !"
 }

@@ -14,6 +14,7 @@ module.exports = {
     project: `${__dirname}/tsconfig.json`,
   },
   plugins: ['import', 'jsx-a11y', 'react', 'react-hooks'],
+  ignorePatterns: ['dist/*'],
   rules: {
     'react/no-unescaped-entities': 0,
     'no-console': 'off',

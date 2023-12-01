@@ -13,5 +13,10 @@
   "SERVICES_TXT_LISTEN": "Venez découvrir toutes les variétés du moment, ou des grands classiques ! Sur Soundy vous trouverez forcément votre bonheur !",
   "SERVICES_TXT_CREATE": "Vous avez un son que vous souhaitez partager ? Venez le partager sur Soundy ! Vous pouvez aussi créer vos propres sons !",
   "OVERVIEW_TITLE": "Écoutez les toutes dernières nouveautés musicales",
-  "SERVICES_TXT_1": "Découvrez plus encore en parcourant notre catalogues de sons !"
+  "SERVICES_TXT_1": "Découvrez plus encore en parcourant notre catalogues de sons !",
+  "LOGIN_MODAL_TITLE": "Bienvenue sur Soundy",
+  "LOGIN_MODAL_LABEL_USERNAME": "Nom d'utilisateur",
+  "LOGIN_MODAL_LABEL_PASSWORD": "Mot de passe",
+  "LOGIN_MODAL_PLACEHOLDER_USERNAME": "Entrez votre nom d'utilisateur ici...",
+  "LOGIN_MODAL_PLACEHOLDER_PASSWORD": "Entrez votre mot de passe ici..."
 }

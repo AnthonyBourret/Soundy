@@ -30,24 +30,24 @@ function LoginModal() {
           {/* Input username */}
           <label className="form-control w-full max-w-xs" htmlFor="username">
             <div className="label">
-              <span className="label-text text-lg font-semibold">{t('LOGIN_MODAL_LABEL_USERNAME', { ns: 'translation' })}</span>
+              <span className="label-text font-semibold">{t('LOGIN_MODAL_LABEL_USERNAME', { ns: 'translation' })}</span>
             </div>
             <input
               type="text"
               placeholder={t('LOGIN_MODAL_PLACEHOLDER_USERNAME', { ns: 'translation' })}
-              className="input input-bordered w-full max-w-lg"
+              className="input input-bordered input-sm w-full max-w-lg"
             />
           </label>
 
           {/* Input password */}
           <label className="form-control w-full max-w-xs" htmlFor="password">
             <div className="label">
-              <span className="label-text text-lg font-semibold">{t('LOGIN_MODAL_LABEL_PASSWORD', { ns: 'translation' })}</span>
+              <span className="label-text font-semibold">{t('LOGIN_MODAL_LABEL_PASSWORD', { ns: 'translation' })}</span>
             </div>
             <input
               type="text"
               placeholder={t('LOGIN_MODAL_PLACEHOLDER_PASSWORD', { ns: 'translation' })}
-              className="input input-bordered w-full max-w-xs"
+              className="input input-bordered input-sm w-full max-w-xs"
             />
           </label>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import LoginModal from '../../modals/LoginModal';
 import SignupModal from '../../modals/SignupModal';
 
@@ -21,19 +21,28 @@ function VisitorMenu() {
             </div>
             <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
               <li>
-                <Link to="/">
+                <NavLink
+                  to="/"
+                  className={({ isActive }) => (isActive ? 'text-red-500' : '')}
+                >
                   {t('MENU_HOME', { ns: 'common' })}
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/listen">
+                <NavLink
+                  to="/listen"
+                  className={({ isActive }) => (isActive ? 'text-red-500' : '')}
+                >
                   {t('MENU_LISTEN', { ns: 'common' })}
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to="/create">
+                <NavLink
+                  to="/create"
+                  className={({ isActive }) => (isActive ? 'text-red-500' : '')}
+                >
                   {t('MENU_CREATE', { ns: 'common' })}
-                </Link>
+                </NavLink>
               </li>
               <li>
                 <button
@@ -81,19 +90,28 @@ function VisitorMenu() {
         <div className="navbar-end hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <Link to="/">
+              <NavLink
+                to="/"
+                className={({ isActive }) => (isActive ? 'text-red-500' : '')}
+              >
                 {t('MENU_HOME', { ns: 'common' })}
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/listen">
+              <NavLink
+                to="/listen"
+                className={({ isActive }) => (isActive ? 'text-red-500' : '')}
+              >
                 {t('MENU_LISTEN', { ns: 'common' })}
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="/create">
+              <NavLink
+                to="/create"
+                className={({ isActive }) => (isActive ? 'text-red-500' : '')}
+              >
                 {t('MENU_CREATE', { ns: 'common' })}
-              </Link>
+              </NavLink>
             </li>
             <li>
               <button

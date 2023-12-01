@@ -9,5 +9,7 @@
     "MENU_LANGUAGE": "Language",
     "MENU_LANGUAGE_1": "French",
     "MENU_LANGUAGE_2": "English",
-    "MODAL_TXT_CLOSE": "Press ESC key or click on ✕ button to close"
+    "MODAL_TXT_CLOSE": "Press ESC key or click on ✕ button to close",
+    "NEUTRAL_PLACEHOLDER": "...",
+    "EMAIL_PLACEHOLDER": "@"
 }

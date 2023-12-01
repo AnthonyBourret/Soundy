@@ -7,6 +7,11 @@ function LoginModal() {
   function closeModal() {
     (window as any).login_modal.close();
   }
+
+  function openSignupModal() {
+    closeModal();
+    (window as any).signup_modal.showModal();
+  }
   return (
     <dialog id="login_modal" className="modal">
       <form method="dialog" className="modal-box">
@@ -25,7 +30,7 @@ function LoginModal() {
           {/* Input username */}
           <label className="form-control w-full max-w-xs" htmlFor="username">
             <div className="label">
-              <span className="label-text text-lg">{t('LOGIN_MODAL_LABEL_USERNAME', { ns: 'translation' })}</span>
+              <span className="label-text text-lg font-semibold">{t('LOGIN_MODAL_LABEL_USERNAME', { ns: 'translation' })}</span>
             </div>
             <input
               type="text"
@@ -37,7 +42,7 @@ function LoginModal() {
           {/* Input password */}
           <label className="form-control w-full max-w-xs" htmlFor="password">
             <div className="label">
-              <span className="label-text text-lg">{t('LOGIN_MODAL_LABEL_PASSWORD', { ns: 'translation' })}</span>
+              <span className="label-text text-lg font-semibold">{t('LOGIN_MODAL_LABEL_PASSWORD', { ns: 'translation' })}</span>
             </div>
             <input
               type="text"
@@ -46,10 +51,22 @@ function LoginModal() {
             />
           </label>
 
+          <p className="py-2 text-sm">
+            {t('LOGIN_MODAL_TXT', { ns: 'translation' })}
+            {' '}
+            <button
+              type="button"
+              onClick={openSignupModal}
+              className="link link-info"
+            >
+              {t('LOGIN_MODAL_LINK', { ns: 'translation' })}
+            </button>
+          </p>
+
           {/* Submit button */}
           <button type="submit" className="btn btn-lg my-4">{t('MENU_LOGIN', { ns: 'common' })}</button>
         </form>
-        <p className="pt-4 text-xs text-center">{t('MODAL_TXT_CLOSE', { ns: 'common' })}</p>
+        <p className="pt-2 text-xs text-center">{t('MODAL_TXT_CLOSE', { ns: 'common' })}</p>
       </form>
 
       {/* Modal backdrop */}

@@ -1,10 +1,12 @@
 {
+    "MENU_APP_NAME": "Soundy",
     "MENU_HOME": "Home",
     "MENU_LISTEN": "Listen",
     "MENU_FAVORITES": "Favorites",
     "MENU_CREATE": "Create",
     "MENU_LOGIN": "Login",
     "MENU_SIGNUP": "Signup",
+    "MENU_PROFILE": "My profile",
     "MENU_LOGOUT": "Logout",
     "MENU_LANGUAGE": "Language",
     "MENU_LANGUAGE_1": "French",

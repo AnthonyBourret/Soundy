@@ -14,7 +14,7 @@ function LoginModal() {
   }
   return (
     <dialog id="login_modal" className="modal">
-      <form method="dialog" className="modal-box">
+      <form method="dialog" className="modal-box border-2 border-stone-700">
 
         {/* Close modal button */}
         <button

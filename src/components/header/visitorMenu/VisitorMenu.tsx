@@ -3,10 +3,26 @@ import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 import LoginModal from '../../modals/LoginModal';
 import SignupModal from '../../modals/SignupModal';
+import { MenuButton } from '../../../types';
 import Logo from '../../../svg/logo';
 
 function VisitorMenu() {
   const { t, i18n } = useTranslation();
+
+  const menuButton: MenuButton[] = [
+    {
+      text: t('MENU_HOME', { ns: 'common' }),
+      link: '/',
+    },
+    {
+      text: t('MENU_LISTEN', { ns: 'common' }),
+      link: '/listen',
+    },
+    {
+      text: t('MENU_CREATE', { ns: 'common' }),
+      link: '/create',
+    },
+  ];
 
   function handleClick(lng: string) {
     i18n.changeLanguage(lng);
@@ -33,35 +49,28 @@ function VisitorMenu() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </div>
             <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
-                >
-                  {t('MENU_HOME', { ns: 'common' })}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/listen"
-                  className={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
-                >
-                  {t('MENU_LISTEN', { ns: 'common' })}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/create"
-                  className={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
-                >
-                  {t('MENU_CREATE', { ns: 'common' })}
-                </NavLink>
-              </li>
+              {/* Route Button */}
+              {menuButton.map((button) => (
+                <li key={button.text}>
+                  <NavLink
+                    to={button.link}
+                    className={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
+                  >
+                    {button.text}
+                  </NavLink>
+                </li>
+              ))}
+
+              {/* Modals Button */}
               <li>
                 <button
                   type="button"
                   className="font-semibold"
-                  onClick={() => document.getElementById('login_modal')?.showModal()}
+                  onClick={() => {
+                    if (document) {
+                      (document.getElementById('login_modal') as HTMLDialogElement).showModal();
+                    }
+                  }}
                 >
                   {t('MENU_LOGIN', { ns: 'common' })}
                 </button>
@@ -70,11 +79,17 @@ function VisitorMenu() {
                 <button
                   type="button"
                   className="font-semibold"
-                  onClick={() => document.getElementById('signup_modal')?.showModal()}
+                  onClick={() => {
+                    if (document) {
+                      (document.getElementById('signup_modal') as HTMLDialogElement).showModal();
+                    }
+                  }}
                 >
                   {t('MENU_SIGNUP', { ns: 'common' })}
                 </button>
               </li>
+
+              {/* Language Button */}
               <li>
                 <details>
                   <summary className="font-semibold">{t('MENU_LANGUAGE', { ns: 'common' })}</summary>
@@ -105,35 +120,27 @@ function VisitorMenu() {
         {/* Desktop Menu */}
         <div className="navbar-end hidden lg:flex">
           <ul className="menu menu-horizontal items-center flex-nowrap">
-            <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
-              >
-                {t('MENU_HOME', { ns: 'common' })}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/listen"
-                className={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
-              >
-                {t('MENU_LISTEN', { ns: 'common' })}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/create"
-                className={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
-              >
-                {t('MENU_CREATE', { ns: 'common' })}
-              </NavLink>
-            </li>
+            {/* Route Button */}
+            {menuButton.map((button) => (
+              <li key={button.text}>
+                <NavLink
+                  to={button.link}
+                  className={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
+                >
+                  {button.text}
+                </NavLink>
+              </li>
+            ))}
+            {/* Modals Button */}
             <li>
               <button
                 type="button"
                 className="btn btn-ghost"
-                onClick={() => document.getElementById('login_modal')?.showModal()}
+                onClick={() => {
+                  if (document) {
+                    (document.getElementById('login_modal') as HTMLDialogElement).showModal();
+                  }
+                }}
               >
                 {t('MENU_LOGIN', { ns: 'common' })}
               </button>
@@ -142,11 +149,16 @@ function VisitorMenu() {
               <button
                 type="button"
                 className="btn btn-ghost"
-                onClick={() => document.getElementById('signup_modal')?.showModal()}
+                onClick={() => {
+                  if (document) {
+                    (document.getElementById('signup_modal') as HTMLDialogElement).showModal();
+                  }
+                }}
               >
                 {t('MENU_SIGNUP', { ns: 'common' })}
               </button>
             </li>
+            {/* Language Button */}
             <li>
               <details>
                 <summary className="btn btn-ghost font-semibold">{t('MENU_LANGUAGE', { ns: 'common' })}</summary>

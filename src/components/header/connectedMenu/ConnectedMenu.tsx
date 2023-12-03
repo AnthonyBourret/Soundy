@@ -1,17 +1,45 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
+import { MenuButton } from '../../../types';
 import Logo from '../../../svg/logo';
 
 function ConnectedMenu() {
   const { t, i18n } = useTranslation();
+
+  const menuButton: MenuButton[] = [
+    {
+      text: t('MENU_HOME', { ns: 'common' }),
+      link: '/',
+    },
+    {
+      text: t('MENU_LISTEN', { ns: 'common' }),
+      link: '/listen',
+    },
+    {
+      text: t('MENU_CREATE', { ns: 'common' }),
+      link: '/create',
+    },
+    {
+      text: t('MENU_FAVORITES', { ns: 'common' }),
+      link: '/favorites',
+    },
+    {
+      text: t('MENU_PROFILE', { ns: 'common' }),
+      link: '/profile',
+    },
+    {
+      text: t('MENU_LOGOUT', { ns: 'common' }),
+      link: '/',
+    },
+  ];
 
   function handleClick(lng: string) {
     i18n.changeLanguage(lng);
   }
 
   return (
-    <div className="navbar bg-base-100 px-8">
+    <div className="navbar bg-base-100 px-8 pt-0">
 
       {/* Logo */}
       <div className="navbar-start flex items-center gap-4">
@@ -41,54 +69,18 @@ function ConnectedMenu() {
               <h2 className="text-lg font-bold">Username</h2>
             </li>
             <div className="divider divider-secondary m-1 px-1" />
-            <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
-              >
-                {t('MENU_HOME', { ns: 'common' })}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/listen"
-                className={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
-              >
-                {t('MENU_LISTEN', { ns: 'common' })}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/create"
-                className={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
-              >
-                {t('MENU_CREATE', { ns: 'common' })}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/favorites"
-                className={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
-              >
-                {t('MENU_FAVORITES', { ns: 'common' })}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/profile"
-                className={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
-              >
-                {t('MENU_PROFILE', { ns: 'common' })}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/"
-                className="font-semibold"
-              >
-                {t('MENU_LOGOUT', { ns: 'common' })}
-              </NavLink>
-            </li>
+            {/* Nav Button */}
+            {menuButton.map((button) => (
+              <li key={button.text}>
+                <NavLink
+                  to={button.link}
+                  className={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
+                >
+                  {button.text}
+                </NavLink>
+              </li>
+            ))}
+            {/* Language Button */}
             <li>
               <details>
                 <summary className="font-semibold">{t('MENU_LANGUAGE', { ns: 'common' })}</summary>
@@ -114,44 +106,23 @@ function ConnectedMenu() {
             </li>
           </ul>
         </div>
-
       </div>
 
       {/* Desktop Menu */}
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal items-center flex-nowrap">
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
-            >
-              {t('MENU_HOME', { ns: 'common' })}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/listen"
-              className={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
-            >
-              {t('MENU_LISTEN', { ns: 'common' })}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/create"
-              className={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
-            >
-              {t('MENU_CREATE', { ns: 'common' })}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/favorites"
-              className={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
-            >
-              {t('MENU_FAVORITES', { ns: 'common' })}
-            </NavLink>
-          </li>
+          {/* Nav Button (array sliced) */}
+          {menuButton.slice(0, 4).map((button) => (
+            <li key={button.text}>
+              <NavLink
+                to={button.link}
+                className={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
+              >
+                {button.text}
+              </NavLink>
+            </li>
+          ))}
+          {/* Avatar Clickable */}
           <div className="dropdown dropdown-hover dropdown-end">
             <div tabIndex={0} role="button" className="avatar m-1 px-4">
               {' '}
@@ -176,6 +147,7 @@ function ConnectedMenu() {
                   {t('MENU_LOGOUT', { ns: 'common' })}
                 </NavLink>
               </li>
+              {/* Language Button */}
               <li>
                 <details>
                   <summary className="font-semibold">{t('MENU_LANGUAGE', { ns: 'common' })}</summary>

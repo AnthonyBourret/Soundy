@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../header/Header';
 
-function Profile() {
+function Profile({ isLogin }: { isLogin: boolean }) {
   return (
     <div className="my-5 flex flex-col items-center w-full min-h-screen">
-      <Header />
+      <Header isLogin={isLogin} />
       <p>Profile</p>
     </div>
   );

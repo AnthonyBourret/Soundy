@@ -2,12 +2,11 @@ import React from 'react';
 import VisitorMenu from './visitorMenu/VisitorMenu';
 import ConnectedMenu from './connectedMenu/ConnectedMenu';
 
-function Header() {
+function Header({ isLogin }: { isLogin: boolean }) {
   return (
-    <>
-      {/* <VisitorMenu /> */}
-      <ConnectedMenu />
-    </>
+    <div className="w-full">
+      {isLogin ? <ConnectedMenu /> : <VisitorMenu />}
+    </div>
   );
 }
 

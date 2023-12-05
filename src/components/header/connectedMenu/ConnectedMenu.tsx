@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MenuButton } from '../../../types';
 import { LanguageSelectorDropdown } from '../../customElements/LanguageSelector';
 import { CustomNavButton } from '../../customElements/MenuButton';
+import Avatar from '../../customElements/Avatar';
 import Logo from '../../../svg/logo';
 
 function ConnectedMenu() {
@@ -62,12 +63,13 @@ function ConnectedMenu() {
 
           <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li className="flex-row items-center">
-              <div tabIndex={0} role="button" className="avatar m-1">
-                {' '}
-                <div className="w-10 rounded-full">
-                  <img src="https://picsum.photos/id/1062/200" alt="user avatar" />
-                </div>
-              </div>
+              <Avatar
+                index={0}
+                role="button"
+                size="10"
+                img="https://picsum.photos/id/1062/200"
+                alt="user avatar"
+              />
               <h2 className="text-lg font-bold">Username</h2>
             </li>
             <div className="divider divider-secondary m-1 px-1" />
@@ -110,12 +112,13 @@ function ConnectedMenu() {
           ))}
           {/* Avatar Clickable */}
           <div className="dropdown dropdown-hover dropdown-end">
-            <div tabIndex={0} role="button" className="avatar m-1 px-4">
-              {' '}
-              <div className="w-12 rounded-full">
-                <img src="https://picsum.photos/id/1062/200" alt="user avatar" />
-              </div>
-            </div>
+            <Avatar
+              index={0}
+              role="button"
+              size="12"
+              img="https://picsum.photos/id/1062/200"
+              alt="user avatar"
+            />
             <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
               {menuButton.slice(4).map((button) => (
                 <li key={button.text}>

@@ -30,3 +30,11 @@ export type OpenModalButtonProps = {
   title: string;
   modalId: string;
 };
+
+export type AvatarProps = {
+  index: number;
+  role: string | undefined;
+  size: string;
+  img: string;
+  alt: string;
+};

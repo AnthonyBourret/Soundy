@@ -2,6 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 import { MenuButton } from '../../../types';
+import { LanguageSelectorDropdown } from '../../customElements/LanguageSelector';
+import { CustomNavButton } from '../../customElements/MenuButton';
 import Logo from '../../../svg/logo';
 
 function ConnectedMenu() {
@@ -72,37 +74,22 @@ function ConnectedMenu() {
             {/* Nav Button */}
             {menuButton.map((button) => (
               <li key={button.text}>
-                <NavLink
-                  to={button.link}
-                  className={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
-                >
-                  {button.text}
-                </NavLink>
+                <CustomNavButton
+                  link={button.link}
+                  title={button.text}
+                  buttonStyle={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
+                />
               </li>
             ))}
             {/* Language Button */}
             <li>
-              <details>
-                <summary className="font-semibold">{t('MENU_LANGUAGE', { ns: 'common' })}</summary>
-                <ul className="p-2">
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => handleClick('fr')}
-                    >
-                      {t('MENU_LANGUAGE_1', { ns: 'common' })}
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => handleClick('en')}
-                    >
-                      {t('MENU_LANGUAGE_2', { ns: 'common' })}
-                    </button>
-                  </li>
-                </ul>
-              </details>
+              <LanguageSelectorDropdown
+                text={t('MENU_LANGUAGE', { ns: 'common' })}
+                firstLanguagge={t('MENU_LANGUAGE_1', { ns: 'common' })}
+                secondLanguage={t('MENU_LANGUAGE_2', { ns: 'common' })}
+                handleClickFr={() => handleClick('fr')}
+                handleClickEn={() => handleClick('en')}
+              />
             </li>
           </ul>
         </div>
@@ -114,12 +101,11 @@ function ConnectedMenu() {
           {/* Nav Button (array sliced) */}
           {menuButton.slice(0, 4).map((button) => (
             <li key={button.text}>
-              <NavLink
-                to={button.link}
-                className={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
-              >
-                {button.text}
-              </NavLink>
+              <CustomNavButton
+                link={button.link}
+                title={button.text}
+                buttonStyle={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
+              />
             </li>
           ))}
           {/* Avatar Clickable */}
@@ -131,45 +117,25 @@ function ConnectedMenu() {
               </div>
             </div>
             <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-              <li>
-                <NavLink
-                  to="/profile"
-                  className="font-semibold"
-                >
-                  {t('MENU_PROFILE', { ns: 'common' })}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/"
-                  className="font-semibold"
-                >
-                  {t('MENU_LOGOUT', { ns: 'common' })}
-                </NavLink>
-              </li>
+              {menuButton.slice(4).map((button) => (
+                <li key={button.text}>
+                  <CustomNavButton
+                    link={button.link}
+                    title={button.text}
+                    buttonStyle={({ isActive }) => (isActive ? 'font-semibold' : 'font-semibold')}
+                  />
+                </li>
+              ))}
+
               {/* Language Button */}
               <li>
-                <details>
-                  <summary className="font-semibold">{t('MENU_LANGUAGE', { ns: 'common' })}</summary>
-                  <ul className="p-2">
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleClick('fr')}
-                      >
-                        {t('MENU_LANGUAGE_1', { ns: 'common' })}
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleClick('en')}
-                      >
-                        {t('MENU_LANGUAGE_2', { ns: 'common' })}
-                      </button>
-                    </li>
-                  </ul>
-                </details>
+                <LanguageSelectorDropdown
+                  text={t('MENU_LANGUAGE', { ns: 'common' })}
+                  firstLanguagge={t('MENU_LANGUAGE_1', { ns: 'common' })}
+                  secondLanguage={t('MENU_LANGUAGE_2', { ns: 'common' })}
+                  handleClickFr={() => handleClick('fr')}
+                  handleClickEn={() => handleClick('en')}
+                />
               </li>
             </ul>
           </div>

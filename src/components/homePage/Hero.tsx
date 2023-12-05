@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Logo from '../../svg/logo';
 
 function Hero() {
-  const { t } = useTranslation(['common', 'translation']);
+  const { t } = useTranslation(['translation']);
 
   return (
     <div className="hero mt-[250px] mb-[200px] text-center">

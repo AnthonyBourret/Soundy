@@ -11,26 +11,6 @@ export type MenuButton = {
   link: string;
 };
 
-export type LanguageSelectorProps = {
-  text: string;
-  firstLanguagge: string;
-  secondLanguage: string;
-  handleClickFr: () => void;
-  handleClickEn: () => void;
-};
-
-export type CustomMenuButtonProps = {
-  link: string;
-  title: string;
-  buttonStyle: (string) => string;
-};
-
-export type OpenModalButtonProps = {
-  buttonStyle: string;
-  title: string;
-  modalId: string;
-};
-
 export type AvatarProps = {
   index: number;
   role: string | undefined;

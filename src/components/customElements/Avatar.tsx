@@ -12,7 +12,6 @@ function Avatar(
 ) {
   return (
     <div tabIndex={index} role={role} className="avatar m-1">
-      {' '}
       <div className={`w-${size} rounded-full`}>
         <img src={img} alt={alt} />
       </div>

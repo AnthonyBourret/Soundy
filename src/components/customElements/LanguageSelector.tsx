@@ -1,15 +1,22 @@
 import React from 'react';
-import { LanguageSelectorProps } from '../../types';
 
-// Language Selector With Dropdown
-export function LanguageSelectorDropdown(
+interface Props {
+  text: string;
+  firstLanguagge: string;
+  secondLanguage: string;
+  handleClickFr: () => void;
+  handleClickEn: () => void;
+}
+
+// Language Selector With Dropdown On Burger Menu
+export function LanguageSelectorBurgerMenu(
   {
     text,
     firstLanguagge,
     secondLanguage,
     handleClickFr,
     handleClickEn,
-  }: LanguageSelectorProps,
+  }: Props,
 ) {
   return (
     <details>
@@ -44,7 +51,7 @@ export function LanguageSelectorButton(
     secondLanguage,
     handleClickFr,
     handleClickEn,
-  }: LanguageSelectorProps,
+  }: Props,
 ) {
   return (
     <details>

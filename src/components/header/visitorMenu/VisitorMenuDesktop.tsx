@@ -10,10 +10,7 @@ interface Props {
 }
 
 function VisitorMenuDesktop({ menuButton }: Props) {
-  const { t, i18n } = useTranslation();
-  function handleClick(lng: string) {
-    i18n.changeLanguage(lng);
-  }
+  const { t } = useTranslation();
   return (
     <div className="navbar-end hidden lg:flex">
       <ul className="menu menu-horizontal items-center flex-nowrap">
@@ -44,13 +41,7 @@ function VisitorMenuDesktop({ menuButton }: Props) {
         </li>
         {/* Language Button */}
         <li>
-          <LanguageSelectorButton
-            text={t('MENU_LANGUAGE', { ns: 'common' })}
-            firstLanguagge={t('MENU_LANGUAGE_1', { ns: 'common' })}
-            secondLanguage={t('MENU_LANGUAGE_2', { ns: 'common' })}
-            handleClickFr={() => handleClick('fr')}
-            handleClickEn={() => handleClick('en')}
-          />
+          <LanguageSelectorButton />
         </li>
       </ul>
     </div>

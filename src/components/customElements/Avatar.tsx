@@ -11,10 +11,8 @@ function Avatar(
   }: AvatarProps,
 ) {
   return (
-    <div tabIndex={index} role={role} className="avatar m-1">
-      <div className={`w-${size} rounded-full`}>
-        <img src={img} alt={alt} />
-      </div>
+    <div tabIndex={index} role={role} className={`w-${size} avatar m-1`}>
+      <img src={img} alt={alt} className="rounded-full" />
     </div>
   );
 }

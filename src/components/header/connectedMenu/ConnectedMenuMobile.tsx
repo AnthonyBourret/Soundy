@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { MenuButton } from '../../../types';
 import { LanguageSelectorBurgerMenu } from '../../customElements/LanguageSelector';
 import CustomButton from '../../customElements/CustomButton';
@@ -10,10 +9,6 @@ interface Props {
 }
 
 function ConnectedMenuMobile({ menuButton }: Props) {
-  const { t, i18n } = useTranslation();
-  function handleClick(lng: string) {
-    i18n.changeLanguage(lng);
-  }
   return (
     <div className="navbar-end">
       <div className="dropdown dropdown-end lg:hidden">
@@ -26,7 +21,7 @@ function ConnectedMenuMobile({ menuButton }: Props) {
             <Avatar
               index={0}
               role="button"
-              size="12"
+              size="1"
               img="https://picsum.photos/id/1062/200"
               alt="user avatar"
             />
@@ -45,13 +40,7 @@ function ConnectedMenuMobile({ menuButton }: Props) {
           ))}
           {/* Language Button */}
           <li>
-            <LanguageSelectorBurgerMenu
-              text={t('MENU_LANGUAGE', { ns: 'common' })}
-              firstLanguagge={t('MENU_LANGUAGE_1', { ns: 'common' })}
-              secondLanguage={t('MENU_LANGUAGE_2', { ns: 'common' })}
-              handleClickFr={() => handleClick('fr')}
-              handleClickEn={() => handleClick('en')}
-            />
+            <LanguageSelectorBurgerMenu />
           </li>
         </ul>
       </div>

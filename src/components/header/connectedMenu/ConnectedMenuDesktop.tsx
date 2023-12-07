@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { MenuButton } from '../../../types';
 import { LanguageSelectorBurgerMenu } from '../../customElements/LanguageSelector';
 import CustomButton from '../../customElements/CustomButton';
@@ -10,10 +9,6 @@ interface Props {
 }
 
 function ConnectedMenuDesktop({ menuButton }: Props) {
-  const { t, i18n } = useTranslation();
-  function handleClick(lng: string) {
-    i18n.changeLanguage(lng);
-  }
   return (
     <div className="navbar-end hidden lg:flex">
       <ul className="menu menu-horizontal items-center flex-nowrap">
@@ -49,13 +44,7 @@ function ConnectedMenuDesktop({ menuButton }: Props) {
 
             {/* Language Button */}
             <li>
-              <LanguageSelectorBurgerMenu
-                text={t('MENU_LANGUAGE', { ns: 'common' })}
-                firstLanguagge={t('MENU_LANGUAGE_1', { ns: 'common' })}
-                secondLanguage={t('MENU_LANGUAGE_2', { ns: 'common' })}
-                handleClickFr={() => handleClick('fr')}
-                handleClickEn={() => handleClick('en')}
-              />
+              <LanguageSelectorBurgerMenu />
             </li>
           </ul>
         </div>

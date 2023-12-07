@@ -10,10 +10,8 @@ interface Props {
 }
 
 function VisitorMenuMobile({ menuButton }: Props) {
-  const { t, i18n } = useTranslation();
-  function handleClick(lng: string) {
-    i18n.changeLanguage(lng);
-  }
+  const { t } = useTranslation();
+
   return (
     <div className="navbar-end">
       <div className="dropdown dropdown-end lg:hidden">
@@ -50,13 +48,7 @@ function VisitorMenuMobile({ menuButton }: Props) {
 
           {/* Language Button */}
           <li>
-            <LanguageSelectorBurgerMenu
-              text={t('MENU_LANGUAGE', { ns: 'common' })}
-              firstLanguagge={t('MENU_LANGUAGE_1', { ns: 'common' })}
-              secondLanguage={t('MENU_LANGUAGE_2', { ns: 'common' })}
-              handleClickFr={() => handleClick('fr')}
-              handleClickEn={() => handleClick('en')}
-            />
+            <LanguageSelectorBurgerMenu />
           </li>
         </ul>
       </div>

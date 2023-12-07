@@ -11,7 +11,7 @@ function HeaderLogo() {
         <Logo />
       </div>
       <Link to="/">
-        <button type="button" className="text-2xl font-bold">{t('MENU_APP_NAME', { ns: 'common' })}</button>
+        <div className="text-2xl font-bold">{t('MENU_APP_NAME', { ns: 'common' })}</div>
       </Link>
     </div>
   );

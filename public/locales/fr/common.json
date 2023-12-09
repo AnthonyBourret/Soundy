@@ -13,5 +13,20 @@
   "Artist": "Artiste",
   "Album": "Album",
   "Duration": "Durée",
-  "Style": "Style"
+  "Style": "Style",
+  "MENU_APP_NAME": "Soundy",
+  "MENU_HOME": "Accueil",
+  "MENU_LISTEN": "Écouter",
+  "MENU_FAVORITES": "Favoris",
+  "MENU_CREATE": "Créer",
+  "MENU_LOGIN": "Connexion",
+  "MENU_SIGNUP": "Inscription",
+  "MENU_PROFILE": "Mon profil",
+  "MENU_LOGOUT": "Déconnexion",
+  "MENU_LANGUAGE": "Langue",
+  "MENU_LANGUAGE_1": "Français",
+  "MENU_LANGUAGE_2": "Anglais",
+  "MODAL_TXT_CLOSE": "Appuyez sur ESC ou cliquez sur le bouton ✕ pour fermer cette fenêtre.",
+  "NEUTRAL_PLACEHOLDER": "...",
+  "EMAIL_PLACEHOLDER": "@"
 }

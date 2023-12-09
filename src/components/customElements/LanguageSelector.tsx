@@ -23,6 +23,7 @@ export function LanguageSelectorBurgerMenu() {
             <button
               type="button"
               onClick={() => handleClick(lng)}
+              className={i18n.language === lng ? 'font-bold' : ''}
             >
               {lngs[lng].nativeName}
             </button>
@@ -55,6 +56,7 @@ export function LanguageSelectorButton() {
             <button
               type="button"
               onClick={() => handleClick(lng)}
+              className={i18n.language === lng ? 'font-bold' : ''}
             >
               {lngs[lng].nativeName}
             </button>

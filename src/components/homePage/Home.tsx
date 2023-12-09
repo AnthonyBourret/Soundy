@@ -13,7 +13,7 @@ function Home({
       <Header isLogin={isLogin} />
 
       {/* Toggle for testing visitor/connected-user menu => To delete */}
-      <div className="form-control">
+      <div className="form-control pt-28">
         <label htmlFor="login" className="label gap-4">
           <span className="label-text">{isLogin ? 'Connected' : 'Not-Connected'}</span>
           <input

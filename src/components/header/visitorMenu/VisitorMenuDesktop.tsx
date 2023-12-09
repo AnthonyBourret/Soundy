@@ -12,7 +12,7 @@ interface Props {
 function VisitorMenuDesktop({ menuButton }: Props) {
   const { t } = useTranslation();
   return (
-    <div className="navbar-end hidden lg:flex">
+    <div className="navbar-end hidden mr-4 lg:flex">
       <ul className="menu menu-horizontal items-center flex-nowrap">
         {/* Route Button */}
         {menuButton.slice(0, 3).map((button) => (

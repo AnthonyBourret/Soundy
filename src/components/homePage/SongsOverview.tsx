@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import fakeSongs from './fakeSongs';
 import PlayIcon from '../../svg/playIcon';
 
-function OverviewSongs() {
+function OverviewSongs(): JSX.Element {
   const { t } = useTranslation(['common', 'translation']);
 
   return (

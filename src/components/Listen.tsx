@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Listen() {
+function Listen(): JSX.Element {
   return (
     <div>Listen page</div>
   );

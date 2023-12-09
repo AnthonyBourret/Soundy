@@ -3,7 +3,7 @@ import Hero from './Hero';
 import Services from './Services';
 import OverviewSongs from './SongsOverview';
 
-function Home() {
+function Home(): JSX.Element {
   return (
     <div className="my-5 flex flex-col items-center w-full min-h-screen">
       <Hero />

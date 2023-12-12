@@ -18,3 +18,12 @@ export type AvatarProps = {
   img: string;
   alt: string;
 };
+
+export type Song = {
+  id: string;
+  title: string;
+  cover: string;
+  artist: {
+    name: string;
+  };
+};

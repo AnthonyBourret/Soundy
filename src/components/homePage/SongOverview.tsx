@@ -2,31 +2,20 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-// import fakeSongs from './fakeSongs';
 import PlayIcon from '../../svg/playIcon';
+import type { Song } from '../../types';
 import SongOverviewQuery from '../../queries/SongOverviewQuery';
 
 function SongOverview(): JSX.Element {
   const { t } = useTranslation(['common', 'translation']);
-  // use the query from appolo client to get the songs
   const { data, loading, error } = useQuery(SongOverviewQuery);
-  const [songs, setSongs] = React.useState([]);
+  const [songs, setSongs] = React.useState<Song[]>([]);
 
   useEffect(() => {
     if (data) {
       setSongs(data.songs);
-      console.log(songs);
     }
   }, [data, songs]);
-
-  useEffect(() => {
-    if (loading) {
-      console.log('Loading...');
-    }
-    if (error) {
-      console.error('Error:', error);
-    }
-  }, [loading, error]);
 
   return (
     <div className="flex flex-col w-[60%] !items-start mb-[200px]">
@@ -40,10 +29,8 @@ function SongOverview(): JSX.Element {
               <div className="relative mb-2 group">
                 <figure className="aspect-[3/4] overflow-hidden rounded-md">
                   <img
-                    // src={song.cover}
-                    src="aza"
-                    alt="aza"
-                    // alt={song.title}
+                    src={song.cover}
+                    alt={song.title}
                     className="object-cover w-full h-full group-hover:blur-[1px] group-hover:scale-105 transition-all duration-200 ease-out"
                   />
                 </figure>
@@ -53,28 +40,37 @@ function SongOverview(): JSX.Element {
                   </div>
                 </div>
               </div>
-              <h3 className="self-center">
-                {/* {song.title} */}
+              <h3 className="self-center text-center">
+                {song.title}
               </h3>
-              <p className="self-center">
-                {/* {song.artist} */}
+              <p className="self-center text-center">
+                {song?.artist?.name}
               </p>
             </div>
           </div>
         ))}
+        {loading && (
+          <div className="flex items-center justify-center w-full">
+            <span className="loading loading-spinner loading-lg" />
+          </div>
+        )}
+        {error && (
+          <div className="flex items-center justify-center w-full">
+            <p>{error.message}</p>
+          </div>
+        )}
       </div>
 
       <div className="flex self-center mt-10 flex-col gap-5 items-center">
         <p className="text-center w-[60%]">{t('SERVICES_TXT_1', { ns: 'translation' })}</p>
-        {/* <Link to="/listen" className="w-[40%] flex"> */}
-        <button
-          type="button"
-          className="w-full btn btn-primary"
-          onClick={() => console.log(data)}
-        >
-          {t('listen', { ns: 'common' })}
-        </button>
-        {/* </Link> */}
+        <Link to="/listen" className="w-[40%] flex">
+          <button
+            type="button"
+            className="w-full btn btn-primary"
+          >
+            {t('listen', { ns: 'common' })}
+          </button>
+        </Link>
       </div>
     </div>
   );

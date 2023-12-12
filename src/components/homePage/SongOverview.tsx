@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import fakeSongs from './fakeSongs';
+import { useQuery } from '@apollo/client';
+// import fakeSongs from './fakeSongs';
 import PlayIcon from '../../svg/playIcon';
+import SongOverviewQuery from '../../queries/SongOverviewQuery';
 
-function OverviewSongs(): JSX.Element {
+function SongOverview(): JSX.Element {
   const { t } = useTranslation(['common', 'translation']);
+  // use the query from appolo client to get the songs
+  const { data, loading, error } = useQuery(SongOverviewQuery);
+  const [songs, setSongs] = React.useState([]);
+
+  useEffect(() => {
+    if (data) {
+      setSongs(data.songs);
+      console.log(songs);
+    }
+  }, [data, songs]);
+
+  useEffect(() => {
+    if (loading) {
+      console.log('Loading...');
+    }
+    if (error) {
+      console.error('Error:', error);
+    }
+  }, [loading, error]);
 
   return (
     <div className="flex flex-col w-[60%] !items-start mb-[200px]">
@@ -13,14 +34,16 @@ function OverviewSongs(): JSX.Element {
       <div className="divider" />
 
       <div className="flex flex-wrap gap-5 justify-center xl:justify-between w-full my-7">
-        {fakeSongs.map((song) => (
+        {data && songs.map((song) => (
           <div className="card w-[17%] min-w-[115px] bg-base-200 shadow-xl border border-1 border-stone-700">
             <div className="card-body px-2 pt-2 pb-3 gap-1 group relative">
               <div className="relative mb-2 group">
                 <figure className="aspect-[3/4] overflow-hidden rounded-md">
                   <img
-                    src={song.picture}
-                    alt={song.title}
+                    // src={song.cover}
+                    src="aza"
+                    alt="aza"
+                    // alt={song.title}
                     className="object-cover w-full h-full group-hover:blur-[1px] group-hover:scale-105 transition-all duration-200 ease-out"
                   />
                 </figure>
@@ -31,10 +54,10 @@ function OverviewSongs(): JSX.Element {
                 </div>
               </div>
               <h3 className="self-center">
-                {song.title}
+                {/* {song.title} */}
               </h3>
               <p className="self-center">
-                {song.artist}
+                {/* {song.artist} */}
               </p>
             </div>
           </div>
@@ -43,14 +66,18 @@ function OverviewSongs(): JSX.Element {
 
       <div className="flex self-center mt-10 flex-col gap-5 items-center">
         <p className="text-center w-[60%]">{t('SERVICES_TXT_1', { ns: 'translation' })}</p>
-        <Link to="/listen" className="w-[40%] flex">
-          <button type="button" className="w-full btn btn-primary">
-            {t('listen', { ns: 'common' })}
-          </button>
-        </Link>
+        {/* <Link to="/listen" className="w-[40%] flex"> */}
+        <button
+          type="button"
+          className="w-full btn btn-primary"
+          onClick={() => console.log(data)}
+        >
+          {t('listen', { ns: 'common' })}
+        </button>
+        {/* </Link> */}
       </div>
     </div>
   );
 }
 
-export default OverviewSongs;
+export default SongOverview;

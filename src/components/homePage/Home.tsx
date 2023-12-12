@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../header/Header';
 import Hero from './Hero';
 import Services from './Services';
-import OverviewSongs from './SongsOverview';
+import SongOverview from './SongOverview';
 
 function Home({
   isLogin,
@@ -28,7 +28,7 @@ function Home({
 
       <Hero />
       <Services />
-      <OverviewSongs />
+      <SongOverview />
     </div>
   );
 }

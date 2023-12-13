@@ -6,7 +6,7 @@ import Logo from '../../svg/logo';
 function HeaderLogo() {
   const { t } = useTranslation();
   return (
-    <div className="navbar-start flex items-center gap-4">
+    <div className="navbar-start flex items-center gap-4 pl-10">
       <div className="w-12 h-12 rounded-full flex items-center justify-center">
         <Logo />
       </div>

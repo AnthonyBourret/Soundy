@@ -13,12 +13,12 @@ function VisitorMenuMobile({ menuButton }: Props) {
   const { t } = useTranslation();
 
   return (
-    <div className="navbar-end">
+    <div className="navbar-end px-0">
       <div className="dropdown dropdown-end lg:hidden">
-        <div tabIndex={0} role="button" className="btn btn-ghost" aria-label="open menu">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        <div tabIndex={0} role="button" className="btn btn-ghost mr-4" aria-label="open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
         </div>
-        <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <ul className="menu menu-md dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           {/* Route Button */}
           {menuButton.slice(0, 3).map((button) => (
             <li key={button.text}>

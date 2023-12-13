@@ -49,8 +49,8 @@ export function LanguageSelectorButton() {
 
   return (
     <details>
-      <summary className="btn btn-ghost font-semibold">{t('MENU_LANGUAGE', { ns: 'common' })}</summary>
-      <ul className="p-2">
+      <summary className="btn btn-ghost font-semibold my-3">{t('MENU_LANGUAGE', { ns: 'common' })}</summary>
+      <ul className="p-2 bg-base-200 border border-stone-700 rounded-t-none">
         {Object.keys(lngs).map((lng) => (
           <li key={lng}>
             <button

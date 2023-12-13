@@ -10,13 +10,13 @@ interface Props {
 
 function ConnectedMenuMobile({ menuButton }: Props) {
   return (
-    <div className="navbar-end">
+    <div className="navbar-end py-4">
       <div className="dropdown dropdown-end lg:hidden">
         <div tabIndex={0} role="button" className="btn btn-ghost mr-4" aria-label="open menu">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
         </div>
 
-        <ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-56">
+        <ul className="menu menu-sm dropdown-content mt-6 z-[1] p-2 shadow bg-base-200 border border-stone-700 rounded-box rounded-t-none w-56">
           <li className="flex-row flex-nowrap items-center">
             <Avatar
               index={0}

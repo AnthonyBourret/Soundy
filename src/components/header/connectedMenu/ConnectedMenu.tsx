@@ -10,7 +10,7 @@ interface Props {
 
 function ConnectedMenu({ menuButton }: Props) {
   return (
-    <div className="navbar bg-base-100 px-8 pt-0">
+    <div className="navbar bg-base-100 bg-opacity-90 backdrop-blur-sm px-0 py-4 lg:py-1">
       <HeaderLogo />
       <ConnectedMenuMobile menuButton={menuButton} />
       <ConnectedMenuDesktop menuButton={menuButton} />

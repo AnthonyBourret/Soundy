@@ -10,7 +10,7 @@ interface Props {
 
 function ConnectedMenuDesktop({ menuButton }: Props) {
   return (
-    <div className="navbar-end hidden lg:flex">
+    <div className="navbar-end hidden mr-4 lg:flex">
       <ul className="menu menu-horizontal items-center flex-nowrap">
         {/* Nav Button (array sliced) */}
         {menuButton.slice(0, 4).map((button) => (
@@ -23,7 +23,7 @@ function ConnectedMenuDesktop({ menuButton }: Props) {
           </li>
         ))}
         {/* Avatar Clickable */}
-        <div className="dropdown dropdown-hover dropdown-end ml-4">
+        <div className="dropdown dropdown-end ml-4 rounded-full border-4 border-base-100 transition hover:border-primary">
           <Avatar
             index={0}
             role="button"
@@ -31,7 +31,7 @@ function ConnectedMenuDesktop({ menuButton }: Props) {
             img="https://picsum.photos/id/1062/200"
             alt="user avatar"
           />
-          <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+          <ul className="dropdown-content z-[1] menu p-2 mt-3 shadow bg-base-100 rounded-box w-52 border border-stone-700">
             {menuButton.slice(4).map((button) => (
               <li key={button.text}>
                 <CustomButton

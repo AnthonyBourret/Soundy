@@ -9,11 +9,11 @@ function Home({
   setIsLogin,
 }: { isLogin: boolean, setIsLogin: React.Dispatch<React.SetStateAction<boolean>> }) {
   return (
-    <div className="my-5 flex flex-col items-center w-full min-h-screen">
+    <div className="mb-5 flex flex-col items-center w-full min-h-screen">
       <Header isLogin={isLogin} />
 
       {/* Toggle for testing visitor/connected-user menu => To delete */}
-      <div className="form-control">
+      <div className="form-control pt-28">
         <label htmlFor="login" className="label gap-4">
           <span className="label-text">{isLogin ? 'Connected' : 'Not-Connected'}</span>
           <input

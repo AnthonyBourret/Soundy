@@ -33,7 +33,7 @@ function Header({ isLogin }: { isLogin: boolean }) {
     },
   ];
   return (
-    <div className="w-full">
+    <div className="w-full fixed z-10">
       {isLogin
         ? <ConnectedMenu menuButton={menuButton} />
         : <VisitorMenu menuButton={menuButton} />}

@@ -13,7 +13,7 @@ interface Props {
 function VisitorMenu({ menuButton }: Props) {
   return (
     <>
-      <div className="navbar bg-base-100 px-8">
+      <div className="navbar bg-base-100 bg-opacity-50 backdrop-blur-[10px] border-b border-stone-700 px-0">
         <HeaderLogo />
         <VisitorMenuMobile menuButton={menuButton} />
         <VisitorMenuDesktop menuButton={menuButton} />

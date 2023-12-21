@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -8,8 +8,9 @@ import SongOverviewQuery from '../../queries/SongOverviewQuery';
 
 function SongOverview(): JSX.Element {
   const { t } = useTranslation(['common', 'translation']);
+  // TODO add the generation of query types
   const { data, loading, error } = useQuery(SongOverviewQuery);
-  const [songs, setSongs] = React.useState<Song[]>([]);
+  const [songs, setSongs] = useState<Song[]>([]);
 
   useEffect(() => {
     if (data) {

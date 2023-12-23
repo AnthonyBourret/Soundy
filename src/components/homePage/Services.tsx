@@ -5,7 +5,7 @@ import { ServiceCard } from '../../types';
 import SoundIcon from '../../svg/soundIcon';
 import PlusIcon from '../../svg/plusIcon';
 
-function Services() {
+function Services(): JSX.Element {
   const { t } = useTranslation(['common', 'translation']);
 
   const serviceCards: ServiceCard[] = [

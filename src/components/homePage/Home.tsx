@@ -2,13 +2,13 @@ import React from 'react';
 import Header from '../header/Header';
 import Hero from './Hero';
 import Services from './Services';
-import OverviewSongs from './SongsOverview';
+import SongOverview from './SongOverview';
 import ScrollToTopButton from '../customElements/ScrollToTopButton';
 
 function Home({
   isLogin,
   setIsLogin,
-}: { isLogin: boolean, setIsLogin: React.Dispatch<React.SetStateAction<boolean>> }) {
+}: { isLogin: boolean, setIsLogin: React.Dispatch<React.SetStateAction<boolean>> }): JSX.Element {
   return (
     <div className="mb-5 flex flex-col items-center w-full min-h-screen">
       <Header isLogin={isLogin} />
@@ -29,7 +29,7 @@ function Home({
 
       <Hero />
       <Services />
-      <OverviewSongs />
+      <SongOverview />
       <ScrollToTopButton />
     </div>
   );

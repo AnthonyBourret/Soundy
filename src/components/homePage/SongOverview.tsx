@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import fakeSongs from './fakeSongs';
+import { useQuery } from '@apollo/client';
 import PlayIcon from '../../svg/playIcon';
+import type { Song } from '../../types';
+import SongOverviewQuery from '../../queries/SongOverviewQuery';
 
-function OverviewSongs() {
+function SongOverview(): JSX.Element {
   const { t } = useTranslation(['common', 'translation']);
+  // TODO add the generation of query types
+  const { data, loading, error } = useQuery(SongOverviewQuery);
+  const [songs, setSongs] = useState<Song[]>([]);
+
+  useEffect(() => {
+    if (data) {
+      setSongs(data.songs);
+    }
+  }, [data, songs]);
 
   return (
     <div className="flex flex-col w-[60%] !items-start mb-[200px]">
@@ -13,13 +24,13 @@ function OverviewSongs() {
       <div className="divider" />
 
       <div className="flex flex-wrap gap-5 justify-center xl:justify-between w-full my-7">
-        {fakeSongs.map((song) => (
+        {data && songs.map((song) => (
           <div className="card w-[17%] min-w-[115px] bg-base-200 shadow-xl border border-1 border-stone-700">
             <div className="card-body px-2 pt-2 pb-3 gap-1 group relative">
               <div className="relative mb-2 group">
                 <figure className="aspect-[3/4] overflow-hidden rounded-md">
                   <img
-                    src={song.picture}
+                    src={song.cover}
                     alt={song.title}
                     className="object-cover w-full h-full group-hover:blur-[1px] group-hover:scale-105 transition-all duration-200 ease-out"
                   />
@@ -30,21 +41,34 @@ function OverviewSongs() {
                   </div>
                 </div>
               </div>
-              <h3 className="self-center">
+              <h3 className="self-center text-center">
                 {song.title}
               </h3>
-              <p className="self-center">
-                {song.artist}
+              <p className="self-center text-center">
+                {song?.artist?.name}
               </p>
             </div>
           </div>
         ))}
+        {loading && (
+          <div className="flex items-center justify-center w-full">
+            <span className="loading loading-spinner loading-lg" />
+          </div>
+        )}
+        {error && (
+          <div className="flex items-center justify-center w-full">
+            <p>{error.message}</p>
+          </div>
+        )}
       </div>
 
       <div className="flex self-center mt-10 flex-col gap-5 items-center">
         <p className="text-center w-[60%]">{t('SERVICES_TXT_1', { ns: 'translation' })}</p>
         <Link to="/listen" className="w-[40%] flex">
-          <button type="button" className="w-full btn btn-primary">
+          <button
+            type="button"
+            className="w-full btn btn-primary"
+          >
             {t('listen', { ns: 'common' })}
           </button>
         </Link>
@@ -53,4 +77,4 @@ function OverviewSongs() {
   );
 }
 
-export default OverviewSongs;
+export default SongOverview;

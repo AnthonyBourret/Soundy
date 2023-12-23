@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Logo from '../../svg/logo';
 
-function Hero() {
+function Hero(): JSX.Element {
   const { t } = useTranslation(['translation']);
 
   return (

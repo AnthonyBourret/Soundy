@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "All about the sound",
   "scripts": {
+    "init": "concurrently \"npm run lyrics_library_api\" \"npm run dev\"",
     "dev": "vite --host",
+    "lyrics_library_api": "cd ../lyrics-library && yarn az",
     "build": "vite build",
     "check": "tsc",
     "lint": "eslint .",

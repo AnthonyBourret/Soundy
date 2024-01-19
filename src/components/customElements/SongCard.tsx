@@ -3,10 +3,10 @@ import PlayIcon from '../../svg/playIcon';
 
 function SongCard() {
   return (
-    <div className="card w-[17%] p-2 m-4 min-w-[115px] bg-base-200 shadow-xl border border-1 border-stone-700">
+    <div className="card w-[17%] m-4 min-w-[115px] bg-base-200 shadow-xl border border-1 border-stone-700">
       <div className="card-body px-2 pt-2 pb-3 gap-1 group relative">
         <div className="relative mb-2 group">
-          <figure className="aspect-[1/1] overflow-hidden rounded-md">
+          <figure className="aspect-[1/1] overflow-hidden rounded-md m-1">
             <img
               src="https://picsum.photos/200/300"
               alt="img"
@@ -19,15 +19,17 @@ function SongCard() {
             </div>
           </div>
         </div>
-        <h3 className="self-center text-cente font-bold my-1">
-          Album title
-        </h3>
-        <p className="self-center text-center my-1">
-          Song Title
-        </p>
-        <div className="flex w-full justify-between my-1 px-2">
-          <p className="text-left">Année</p>
-          <p className="text-right">Durée</p>
+        <div className="flex flex-col gap-2 justify-center text-center text-sm md:text-base">
+          <h3 className="font-bold text-sm md:text-base">
+            Song Title
+          </h3>
+          <p className="text-sm md:text-base">
+            Artist
+          </p>
+          <div className="flex justify-between text-sm my-2 md:text-base sm:my-1">
+            <p>Année</p>
+            <p>Durée</p>
+          </div>
         </div>
       </div>
     </div>

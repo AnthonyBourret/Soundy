@@ -3,9 +3,9 @@ import PlayIcon from '../../svg/playIcon';
 
 function SongCard() {
   return (
-    <div className="card w-[17%] m-4 min-w-[115px] bg-base-200 shadow-xl border border-1 border-stone-700">
-      <div className="card-body px-2 pt-2 pb-3 gap-1 group relative">
-        <div className="relative mb-2 group">
+    <div className="card flex-row w-[90%] justify-between h-30 min-[425px]:w-[17%] m-2 min-w-[115px] bg-base-200 shadow-xl border border-1 border-stone-700">
+      <div className="flex w-full justify-between items-center p-2 min-[425px]:flex-col min-[425px]:card-body min-[425px]:p-1 gap-1 group relative">
+        <div className="relative sm:mb-2 group w-[30%] min-[425px]:w-full">
           <figure className="aspect-[1/1] overflow-hidden rounded-md m-1">
             <img
               src="https://picsum.photos/200/300"
@@ -19,16 +19,16 @@ function SongCard() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-2 justify-center text-center text-sm md:text-base">
-          <h3 className="font-bold text-sm md:text-base">
+        <div className="w-[70%] flex flex-col gap-1 px-2 min-[425px]:w-full min-[425px]:items-center min-[425px]:p-0">
+          <h3 className="font-bold">
             Song Title
           </h3>
-          <p className="text-sm md:text-base">
+          <p>
             Artist
           </p>
-          <div className="flex justify-between text-sm my-2 md:text-base sm:my-1">
-            <p>Année</p>
-            <p>Durée</p>
+          <div className="flex w-full justify-between  text-xs min-[425px]:justify-around min-[425px]:p-2">
+            <p className="text-left">Année</p>
+            <p className="text-right">Durée</p>
           </div>
         </div>
       </div>

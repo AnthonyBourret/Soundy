@@ -13,7 +13,7 @@ function Services(): JSX.Element {
       icon: <SoundIcon />,
       title: t('SERVICES_TITLE_LISTEN', { ns: 'translation' }),
       text: t('SERVICES_TXT_LISTEN', { ns: 'translation' }),
-      buttonText: t('Listen', { ns: 'common' }),
+      buttonText: t('LISTEN', { ns: 'common' }),
       link: '/listen',
     },
     {
@@ -27,9 +27,8 @@ function Services(): JSX.Element {
 
   return (
     <div className="flex flex-wrap gap-[5vw] h-full mb-[200px] justify-center">
-
       {serviceCards.map((serviceCard) => (
-        <div className="card max-w-[260px] bg-base-200 text-primary-content border border-1 border-stone-700">
+        <div className="card max-w-[260px] bg-base-200 text-primary-content border border-1 border-stone-700" key={serviceCard.title}>
           <div className="card-body items-center gap-5">
             {serviceCard.icon}
             <h3 className="card-title">
@@ -46,7 +45,6 @@ function Services(): JSX.Element {
           </div>
         </div>
       ))}
-
     </div>
   );
 }

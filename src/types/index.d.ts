@@ -27,3 +27,8 @@ export type Song = {
     name: string;
   };
 };
+
+export type LoginInput = {
+  email: String
+  password: String
+};

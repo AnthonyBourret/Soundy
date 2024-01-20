@@ -1,8 +1,36 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLazyQuery } from '@apollo/client';
+// import { useNavigate } from 'react-router-dom';
+import { LoginQuery } from '../../queries';
+import type { LoginInput } from '../../types';
 
 function LoginModal() {
   const { t } = useTranslation();
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  // TODO : Look if it is better to use mutation than a query to login
+  // const { data, loading, error } = useLazyQuery(LoginQuery, {
+  //   variables: {
+  //     // TODO : Find another way to type this and avoid "as"
+  //     input: formData as LoginInput,
+  //   },
+  //   // Skip the query if email or password is not provided
+  //   skip: !formData.email || !formData.password,
+  // });
+
+  const [loginAction, { data, loading, error }] = useLazyQuery(LoginQuery, {
+    variables: {
+      // TODO : Find another way to type this and avoid "as"
+      input: formData as LoginInput,
+    },
+    // Skip the query if email or password is not provided
+    // skip: !formData.email || !formData.password,
+  });
 
   function closeModal() {
     (window as any).login_modal.close();
@@ -12,10 +40,48 @@ function LoginModal() {
     closeModal();
     (window as any).signup_modal.showModal();
   }
+
+  const loginButton = useMemo(() => {
+    const handleSubmit = (e) => {
+      e.preventDefault();
+
+      // Make the query
+      loginAction();
+
+      // Check if the query is loading
+      if (loading) {
+        return;
+      }
+
+      // TODO : Record the login in a redux store
+      // You can access the result of your query in the 'data' variable
+      if (data && data.login) {
+        // eslint-disable-next-line no-console
+        console.log('Login Successful:', data.login);
+      }
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    };
+
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center w-full">
+          <span className="loading loading-spinner loading-lg" />
+        </div>
+      );
+    }
+    return (
+      <button type="submit" className="btn btn-lg my-4" onClick={handleSubmit}>
+        {t('MENU_LOGIN', { ns: 'common' })}
+      </button>
+    );
+  }, [data, error, loading, loginAction, t]);
+
   return (
     <dialog id="login_modal" className="modal">
       <form method="dialog" className="modal-box border-2 border-stone-700">
-
         {/* Close modal button */}
         <button
           type="button"
@@ -25,16 +91,18 @@ function LoginModal() {
           ✕
         </button>
         <h3 className="font-bold text-xl mb-8 text-center">{t('LOGIN_MODAL_TITLE', { ns: 'translation' })}</h3>
-        <form className="w-full flex flex-col items-center gap-4 my-4">
+        <div className="w-full flex flex-col items-center gap-4 my-4">
 
-          {/* Input username */}
-          <label className="form-control w-full max-w-xs" htmlFor="username">
+          {/* Input email */}
+          <label className="form-control w-full max-w-xs" htmlFor="email">
             <div className="label">
-              <span className="label-text font-semibold">{t('LOGIN_MODAL_LABEL_USERNAME', { ns: 'translation' })}</span>
+              <span className="label-text font-semibold">{t('LOGIN_MODAL_LABEL_EMAIL', { ns: 'translation' })}</span>
             </div>
             <input
               type="text"
-              placeholder={t('LOGIN_MODAL_PLACEHOLDER_USERNAME', { ns: 'translation' })}
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              placeholder={t('LOGIN_MODAL_PLACEHOLDER_EMAIL', { ns: 'translation' })}
               className="input input-bordered input-sm w-full max-w-lg"
             />
           </label>
@@ -45,7 +113,9 @@ function LoginModal() {
               <span className="label-text font-semibold">{t('LOGIN_MODAL_LABEL_PASSWORD', { ns: 'translation' })}</span>
             </div>
             <input
-              type="text"
+              type="password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               placeholder={t('LOGIN_MODAL_PLACEHOLDER_PASSWORD', { ns: 'translation' })}
               className="input input-bordered input-sm w-full max-w-xs"
             />
@@ -62,10 +132,8 @@ function LoginModal() {
               {t('LOGIN_MODAL_LINK', { ns: 'translation' })}
             </button>
           </p>
-
-          {/* Submit button */}
-          <button type="submit" className="btn btn-lg my-4">{t('MENU_LOGIN', { ns: 'common' })}</button>
-        </form>
+          {loginButton}
+        </div>
         <p className="pt-2 text-xs text-center">{t('MODAL_TXT_CLOSE', { ns: 'common' })}</p>
       </form>
 

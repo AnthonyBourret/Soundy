@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import PlayIcon from '../../svg/playIcon';
+import { PlayIcon } from '../../svg';
 import type { Song } from '../../types';
 import SongOverviewQuery from '../../queries/SongOverviewQuery';
 

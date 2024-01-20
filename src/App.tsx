@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/homePage/Home';
 import Listen from './components/listenPage/Listen';
@@ -8,8 +8,16 @@ import Create from './components/createPage/Create';
 import Profile from './components/profilePage/Profile';
 
 export default function App() {
-  // State for login status => To delete
+  // TODO : State for login status => To adjust with redux
   const [isLogin, setIsLogin] = useState<boolean>(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('AUTH_TOKEN');
+    if (token) {
+      setIsLogin(true);
+    }
+  }, []);
+
   return (
     <Suspense fallback="...is loading">
       <Background />

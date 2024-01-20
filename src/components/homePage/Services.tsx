@@ -2,8 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ServiceCard } from '../../types';
-import SoundIcon from '../../svg/soundIcon';
-import PlusIcon from '../../svg/plusIcon';
+import { SoundIcon, PlusIcon } from '../../svg';
 
 function Services(): JSX.Element {
   const { t } = useTranslation(['common', 'translation']);

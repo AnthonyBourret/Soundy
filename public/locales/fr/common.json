@@ -28,5 +28,6 @@
   "MENU_LANGUAGE_2": "Anglais",
   "MODAL_TXT_CLOSE": "Appuyez sur ESC ou cliquez sur le bouton ✕ pour fermer cette fenêtre.",
   "NEUTRAL_PLACEHOLDER": "...",
-  "EMAIL_PLACEHOLDER": "@"
+  "EMAIL_PLACEHOLDER": "@",
+  "CLOSE": "Fermer"
 }

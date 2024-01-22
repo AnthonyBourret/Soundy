@@ -27,3 +27,28 @@ export type Song = {
     name: string;
   };
 };
+
+export type CardSong = {
+  id: string;
+  title: string;
+  cover: string;
+  artist: {
+    name: string;
+  };
+  duration: string;
+};
+
+export type CardAlbum = {
+  id: string;
+  title: string;
+  cover: string;
+  artist: {
+    name: string;
+  };
+  release_year: string;
+  songs: {
+    id: string;
+    title: string;
+    duration: string;
+  };
+};

@@ -1,16 +1,17 @@
 import { gql } from '@apollo/client/core';
 
-const SongOverviewQuery = gql`
-  query SongOverviewQuery {
-    songs(limit: 5) {
-      id
-      cover
-      title
-      artist {
-        name
-      }
+const SongListenPageQuery = gql`
+  query SongListenPageQuery {
+  songs(limit: 20) {
+    id
+    title
+    artist {
+      name
     }
+    cover
+    duration
+  }
   }
 `;
 
-export default SongOverviewQuery;
+export default SongListenPageQuery;

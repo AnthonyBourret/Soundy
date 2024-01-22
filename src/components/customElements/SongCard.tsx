@@ -1,14 +1,25 @@
 import React from 'react';
 import PlayIcon from '../../svg/playIcon';
 
-function SongCard() {
+interface SongCardProps {
+  title: string;
+  artist: {
+    name: string;
+  };
+  duration: string;
+  cover: string;
+}
+
+function SongCard({
+  title, artist, duration, cover,
+} : SongCardProps) {
   return (
-    <div className="card flex-row w-[90%] justify-between h-30 min-[425px]:w-[17%] m-2 min-w-[115px] bg-base-200 shadow-xl border border-1 border-stone-700">
-      <div className="flex w-full justify-between items-center p-2 min-[425px]:flex-col min-[425px]:card-body min-[425px]:p-1 gap-1 group relative">
-        <div className="relative sm:mb-2 group w-[30%] min-[425px]:w-full">
+    <div className="card flex-row w-full h-30 p-2 min-[540px]:w-[17%] min-w-[190px] bg-base-200 shadow-xl border border-1 border-stone-700">
+      <div className="flex w-full items-center min-[540px]:flex-col min-[540px]:card-body min-[540px]:justify-around min-[540px]:p-1 gap-1 group relative">
+        <div className="relative sm:mb-2 group w-[30%] min-[540px]:w-full">
           <figure className="aspect-[1/1] overflow-hidden rounded-md m-1">
             <img
-              src="https://picsum.photos/200/300"
+              src={cover}
               alt="img"
               className="object-cover w-full h-full group-hover:blur-[1px] group-hover:scale-105 transition-all duration-200 ease-out"
             />
@@ -19,16 +30,20 @@ function SongCard() {
             </div>
           </div>
         </div>
-        <div className="w-[70%] flex flex-col gap-1 px-2 min-[425px]:w-full min-[425px]:items-center min-[425px]:p-0">
-          <h3 className="font-bold">
-            Song Title
+        <div className="w-[70%] flex flex-col h-full justify-between gap-2 px-3 py-1 min-[540px]:w-full">
+          <h3 className="font-bold text-center">
+            {title}
           </h3>
-          <p>
-            Artist
+          <p className="text-center">
+            {artist.name}
           </p>
-          <div className="flex w-full justify-between  text-xs min-[425px]:justify-around min-[425px]:p-2">
-            <p className="text-left">Année</p>
-            <p className="text-right">Durée</p>
+          <div className="flex w-full justify-between text-xs min-[540px]:justify-around min-[540px]:p-2">
+            <p className="text-left">
+              Année
+            </p>
+            <p className="text-right">
+              {duration}
+            </p>
           </div>
         </div>
       </div>

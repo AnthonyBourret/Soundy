@@ -17,7 +17,7 @@ module.exports = {
   ignorePatterns: ['dist/*'],
   rules: {
     'react/no-unescaped-entities': 0,
-    'no-console': 'off',
+    'no-console': 1,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.tsx'] }],
     'no-underscore-dangle': 'off',
     'react/jsx-pascal-case': [0, { allowAllCaps: true }],

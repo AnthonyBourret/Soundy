@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Logo from '../../svg/logo';
+import { Logo } from '../../svg';
 
 function Hero(): JSX.Element {
   const { t } = useTranslation(['translation']);

@@ -28,6 +28,11 @@ export type Song = {
   };
 };
 
+export type LoginInput = {
+  email: String
+  password: String
+};
+
 export type CardSong = {
   id: string;
   title: string;

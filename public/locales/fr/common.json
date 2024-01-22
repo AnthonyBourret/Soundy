@@ -1,4 +1,19 @@
 {
+  "Home": "Accueil",
+  "Listen": "Écouter",
+  "Favorites": "Favoris",
+  "Create": "Créer",
+  "Login": "Connexion",
+  "Register": "Inscription",
+  "Logout": "Déconnexion",
+  "Order": "Ordre",
+  "ReleasedDate": "Date de sortie",
+  "Title": "Titre",
+  "Titles": "Titres",
+  "Artist": "Artiste",
+  "Album": "Album",
+  "Duration": "Durée",
+  "Style": "Style",
   "MENU_APP_NAME": "Soundy",
   "MENU_HOME": "Accueil",
   "MENU_LISTEN": "Écouter",
@@ -13,11 +28,5 @@
   "MENU_LANGUAGE_2": "Anglais",
   "MODAL_TXT_CLOSE": "Appuyez sur ESC ou cliquez sur le bouton ✕ pour fermer cette fenêtre.",
   "NEUTRAL_PLACEHOLDER": "...",
-  "EMAIL_PLACEHOLDER": "@",
-  "CARD_ARTIST": "Artiste",
-  "CARD_ALBUM": "Album",
-  "CARD_SONG_NUMBER": "#",
-  "CARD_SONG_TITLE": "Titre",
-  "CARD_SONG_DURATION": "Durée",
-  "CARD_RELEASE_DATE": "Année"
+  "EMAIL_PLACEHOLDER": "@"
 }

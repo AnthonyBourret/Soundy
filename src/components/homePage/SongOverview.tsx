@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import PlayIcon from '../../svg/playIcon';
+import { PlayIcon } from '../../svg';
 import type { Song } from '../../types';
 import SongOverviewQuery from '../../queries/SongOverviewQuery';
 
@@ -25,7 +25,7 @@ function SongOverview(): JSX.Element {
 
       <div className="flex flex-wrap gap-5 justify-center xl:justify-between w-full my-7">
         {data && songs.map((song) => (
-          <div className="card w-[17%] min-w-[115px] bg-base-200 shadow-xl border border-1 border-stone-700">
+          <div className="card w-[17%] min-w-[115px] bg-base-200 shadow-xl border border-1 border-stone-700" key={song.id}>
             <div className="card-body px-2 pt-2 pb-3 gap-1 group relative">
               <div className="relative mb-2 group">
                 <figure className="aspect-[3/4] overflow-hidden rounded-md">
@@ -69,7 +69,7 @@ function SongOverview(): JSX.Element {
             type="button"
             className="w-full btn btn-primary"
           >
-            {t('listen', { ns: 'common' })}
+            {t('LISTEN', { ns: 'common' })}
           </button>
         </Link>
       </div>

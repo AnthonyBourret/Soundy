@@ -33,6 +33,10 @@ export type LoginInput = {
   password: String
 };
 
+export type AllSongs = {
+  songs: CardSong[]
+};
+
 export type CardSong = {
   id: string;
   title: string;
@@ -47,13 +51,10 @@ export type CardAlbum = {
   id: string;
   title: string;
   cover: string;
-  artist: {
-    name: string;
-  };
   release_year: string;
-  songs: {
-    id: string;
-    title: string;
-    duration: string;
-  };
+  songs: [
+    id: string,
+    title: string,
+    duration: string,
+  ];
 };

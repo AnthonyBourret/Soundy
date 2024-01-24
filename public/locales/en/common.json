@@ -28,5 +28,8 @@
     "MENU_LANGUAGE_2": "English",
     "MODAL_TXT_CLOSE": "Press ESC key or click on ✕ button to close",
     "NEUTRAL_PLACEHOLDER": "...",
-    "EMAIL_PLACEHOLDER": "@"
+    "EMAIL_PLACEHOLDER": "@",
+    "CARD_SONG_NUMBER": "#",
+    "CARD_SONG_TITLE": "Title",
+    "CARD_SONG_DURATION": "Duration"
 }

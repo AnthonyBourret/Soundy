@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client/core';
 
 const SongListenPageQuery = gql`
-  query SongListenPageQuery {
-  songs(limit: 20) {
+query SongListenPageQuery($limit: Int) {
+  songs(limit: $limit) {
     id
     title
     artist {
@@ -11,7 +11,18 @@ const SongListenPageQuery = gql`
     cover
     duration
   }
+  albums{
+    id
+    title
+    cover
+    release_year
+    songs {
+      id
+      title
+      duration
+    }
   }
+}
 `;
 
 export default SongListenPageQuery;

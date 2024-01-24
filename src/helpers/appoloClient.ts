@@ -7,10 +7,10 @@ const link = createHttpLink({
   credentials: 'same-origin',
 });
 
-const client = new ApolloClient({
+const appoloClient = new ApolloClient({
   cache: new InMemoryCache(),
   // uri: import.meta.env.VITE_APPOLO_URL,
   link,
 });
 
-export default client;
+export default appoloClient;

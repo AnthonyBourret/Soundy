@@ -1,11 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAppDispatch, useAppSelector } from '../../redux';
+import { increment } from '../../redux/reducers/incrementReducer';
 import VisitorMenu from './visitorMenu/VisitorMenu';
-import ConnectedMenu from './connectedMenu/ConnectedMenu';
+import { ConnectedMenu } from './connectedMenu';
 import { MenuButton } from '../../types';
 
 function Header({ isLogin }: { isLogin: boolean }) {
   const { t } = useTranslation();
+
+  const count = useAppSelector((state) => state.increment.value);
+  const dispatch = useAppDispatch();
+
   const menuButton: MenuButton[] = [
     {
       text: t('MENU_HOME', { ns: 'common' }),
@@ -34,6 +40,8 @@ function Header({ isLogin }: { isLogin: boolean }) {
   ];
   return (
     <div className="w-full fixed z-10">
+      <button type="button" onClick={() => dispatch(increment())}>click</button>
+      {count}
       {isLogin
         ? <ConnectedMenu menuButton={menuButton} />
         : <VisitorMenu menuButton={menuButton} />}

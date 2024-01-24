@@ -8,7 +8,9 @@ interface Props {
   menuButton: MenuButton[];
 }
 
-function ConnectedMenuMobile({ menuButton }: Props) {
+function ConnectedMenuMobile(props: Props): JSX.Element {
+  const { menuButton } = props;
+
   return (
     <div className="navbar-end py-4">
       <div className="dropdown dropdown-end lg:hidden">

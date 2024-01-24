@@ -8,7 +8,9 @@ interface Props {
   menuButton: MenuButton[];
 }
 
-function ConnectedMenuDesktop({ menuButton }: Props) {
+function ConnectedMenuDesktop(props: Props): JSX.Element {
+  const { menuButton } = props;
+
   return (
     <div className="navbar-end hidden mr-4 lg:flex">
       <ul className="menu menu-horizontal p-1 items-center flex-nowrap">

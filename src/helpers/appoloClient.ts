@@ -1,8 +1,16 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+
+// WIP following appolo docs
+
+const link = createHttpLink({
+  uri: import.meta.env.VITE_APPOLO_URL,
+  credentials: 'same-origin',
+});
 
 const client = new ApolloClient({
-  uri: import.meta.env.VITE_APPOLO_URL,
   cache: new InMemoryCache(),
+  // uri: import.meta.env.VITE_APPOLO_URL,
+  link,
 });
 
 export default client;

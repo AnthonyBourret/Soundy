@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@apollo/client';
 import { Logo } from '../../svg';
 
 interface Props {
@@ -30,7 +31,7 @@ function SearchBar({ isAlbum, setIsAlbum }: Props) {
           </select>
         </div>
       </div>
-      <button type="button" className="btn btn-lg m-4 py-3">{t('SEARCH_BAR_BTN', { ns: 'common' })}</button>
+      <button type="button" className="btn btn-lg m-4 py-3 border border-stone-700">{t('SEARCH_BAR_BTN', { ns: 'common' })}</button>
     </div>
   );
 }

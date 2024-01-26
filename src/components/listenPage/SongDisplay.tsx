@@ -8,7 +8,7 @@ interface Props {
 
 function SongDisplay({ songs }: Props) {
   return (
-    <div className="flex flex-col min-[540px]:mx-8 pt-24 p-2 gap-4 min-[540px]:flex-row min-[540px]:flex-wrap min-[540px]:justify-around">
+    <div className="flex flex-col min-[540px]:px-12 pt-4 p-2 gap-4 min-[540px]:flex-row min-[540px]:flex-wrap min-[540px]:justify-around">
       {songs && songs.map((song: CardSong) => (
         <SongCard
           key={song.id}

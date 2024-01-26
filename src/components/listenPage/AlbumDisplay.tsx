@@ -8,7 +8,7 @@ interface Props {
 
 function AlbumDisplay({ albums }: Props) {
   return (
-    <div className="flex flex-col items-center w-full pt-24 gap-4">
+    <div className="flex flex-col items-center w-full pt-4 gap-4 px-2">
       {albums && albums.map((album) => (
         <AlbumCard
           key={album.id}

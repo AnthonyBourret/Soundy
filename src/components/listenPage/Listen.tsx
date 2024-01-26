@@ -7,6 +7,7 @@ import SongDisplay from './SongDisplay';
 import AlbumDisplay from './AlbumDisplay';
 import { CardSong, CardAlbum } from '../../types';
 import SearchBar from './SearchBar';
+import SongAndAlbumFilters from '../customElements/SongAndAlbumFilters';
 
 function Listen({ isLogin }: { isLogin: boolean }) {
   const { data, loading, error } = useQuery(SongListenPageQuery, { variables: { limit: 20 } });
@@ -25,6 +26,8 @@ function Listen({ isLogin }: { isLogin: boolean }) {
     <div className="mb-5 flex flex-col items-center w-full min-h-screen">
       <Header isLogin={isLogin} />
       <SearchBar isAlbum={isAlbum} setIsAlbum={setIsAlbum} />
+      <div className="divider py-4 px-48" />
+      <SongAndAlbumFilters />
       {data && !isAlbum && <SongDisplay songs={songs} />}
       {data && isAlbum && <AlbumDisplay albums={albums} />}
       {loading && (

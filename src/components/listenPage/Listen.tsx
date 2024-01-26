@@ -6,6 +6,7 @@ import ScrollToTopButton from '../customElements/ScrollToTopButton';
 import SongDisplay from './SongDisplay';
 import AlbumDisplay from './AlbumDisplay';
 import { CardSong, CardAlbum } from '../../types';
+import SearchBar from './SearchBar';
 
 function Listen({ isLogin }: { isLogin: boolean }) {
   const { data, loading, error } = useQuery(SongListenPageQuery, { variables: { limit: 20 } });
@@ -23,18 +24,7 @@ function Listen({ isLogin }: { isLogin: boolean }) {
   return (
     <div className="mb-5 flex flex-col items-center w-full min-h-screen">
       <Header isLogin={isLogin} />
-      <div className="form-control pt-28">
-        <label htmlFor="login" className="label gap-4">
-          <span className="label-text">{isAlbum ? 'Songs' : 'Albums'}</span>
-          <input
-            name="login"
-            type="checkbox"
-            className="toggle"
-            onChange={() => setIsAlbum(!isAlbum)}
-            checked={isAlbum}
-          />
-        </label>
-      </div>
+      <SearchBar isAlbum={isAlbum} setIsAlbum={setIsAlbum} />
       {data && !isAlbum && <SongDisplay songs={songs} />}
       {data && isAlbum && <AlbumDisplay albums={albums} />}
       {loading && (

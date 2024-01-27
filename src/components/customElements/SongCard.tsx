@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import PlayIcon from '../../svg/PlayIcon';
+import FavCheckBox from './FavCheckBox';
+import { PlayIcon } from '../../svg';
 
 interface SongCardProps {
   title: string;
@@ -14,7 +16,7 @@ function SongCard({
   title, artist, duration, cover,
 } : SongCardProps) {
   return (
-    <div className="card flex-row w-full h-30 p-2 min-[540px]:w-[17%] min-w-[190px] bg-base-200 shadow-xl border border-1 border-stone-700">
+    <div className="card flex-row w-full h-30 p-2 min-[540px]:w-[17%] min-w-[190px] min-[540px]:max-w-[190px] bg-base-200 shadow-xl border border-1 border-stone-700">
       <div className="flex w-full items-center min-[540px]:flex-col min-[540px]:card-body min-[540px]:justify-around min-[540px]:p-1 gap-1 group relative">
         <div className="relative sm:mb-2 group w-[30%] min-[540px]:w-full">
           <figure className="aspect-[1/1] overflow-hidden rounded-md m-1">
@@ -29,19 +31,22 @@ function SongCard({
               <PlayIcon />
             </div>
           </div>
+          <div className="absolute top-0 left-20 min-[540px]:top-36 min-[540px]:left-32">
+            <FavCheckBox />
+          </div>
         </div>
         <div className="w-[70%] flex flex-col h-full justify-between gap-2 px-3 py-1 min-[540px]:w-full">
           <h3 className="font-bold text-center">
             {title}
           </h3>
-          <p className="text-center">
+          <p className="font-semibold text-center">
             {artist.name}
           </p>
           <div className="flex w-full justify-between text-xs min-[540px]:justify-around min-[540px]:p-2">
-            <p className="text-left">
+            <p className="font-semibold text-left">
               Année
             </p>
-            <p className="text-right">
+            <p className="font-semibold text-right">
               {duration}
             </p>
           </div>

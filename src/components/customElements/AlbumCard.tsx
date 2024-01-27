@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import FavCheckBox from './FavCheckBox';
 
 interface AlbumCardProps {
   title: string;
@@ -27,13 +28,16 @@ function AlbumCard({
           className="object-cover rounded-md w-full h-full group-hover:blur-[1px] group-hover:scale-105 transition-all duration-200 ease-out"
         />
       </figure>
+      <div className="absolute top-20 left-20 lg:top-48 lg:left-48">
+        <FavCheckBox />
+      </div>
       <div>
         <div className="pl-[120px] pt-2 lg:px-4 lg:py-2 lg:text-xl">
           <p className="font-bold">{title}</p>
-          <p>Artist</p>
+          <p className="font-semibold">Artist</p>
           <div className="w-full flex flex-col min-[425px]:flex-row min-[425px]:items-center min-[425px]:justify-between min-[425px]:pr-4 lg:pr-0">
-            <p>{year}</p>
-            <p className="text-xs pt-0.5 min-[425px]:pt-0">
+            <p className="font-semibold">{year}</p>
+            <p className="text-xs font-semibold pt-0.5 min-[425px]:pt-0">
               Tracks Number
             </p>
           </div>

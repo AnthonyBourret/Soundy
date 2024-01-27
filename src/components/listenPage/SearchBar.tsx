@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from '@apollo/client';
 import { Logo } from '../../svg';
 
 interface Props {
@@ -17,7 +16,7 @@ function SearchBar({ isAlbum, setIsAlbum }: Props) {
           <Logo />
         </div>
         <h1 className="text-2xl min-[540px]:text-4xl font-bold">{t('MENU_APP_NAME', { ns: 'common' })}</h1>
-        <p className="text-md min-[540px]:text-lg">{t('SEARCH_BAR_TEXT', { ns: 'common' })}</p>
+        <p className="text-md font-semibold min-[540px]:text-lg">{t('SEARCH_BAR_TEXT', { ns: 'common' })}</p>
       </div>
       <div className="flex flex-col">
         <div className="join">
@@ -25,7 +24,7 @@ function SearchBar({ isAlbum, setIsAlbum }: Props) {
           <div className="min-[540px]:tooltip" data-tip={t('SEARCH_BAR_TOOLTIP', { ns: 'common' })}>
             <select
               onChange={() => setIsAlbum(!isAlbum)}
-              className="select select-bordered join-item bg-base-200"
+              className="select select-bordered font-semibold join-item bg-base-200"
             >
               <option selected>{t('SEARCH_BAR_FILTER_SONG', { ns: 'common' })}</option>
               <option value="true">{t('SEARCH_BAR_FILTER_ALBUM', { ns: 'common' })}</option>

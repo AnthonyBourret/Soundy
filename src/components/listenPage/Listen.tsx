@@ -10,7 +10,7 @@ import SearchBar from './SearchBar';
 import SongAndAlbumFilters from '../customElements/SongAndAlbumFilters';
 
 function Listen({ isLogin }: { isLogin: boolean }) {
-  const { data, loading, error } = useQuery(SongListenPageQuery, { variables: { limit: 20 } });
+  const { data, loading, error } = useQuery(SongListenPageQuery, { variables: { limit: 30 } });
   const [songs, setSongs] = useState<CardSong[]>([]);
   const [albums, setAlbums] = useState<CardAlbum[]>([]);
   const [isAlbum, setIsAlbum] = useState(false);

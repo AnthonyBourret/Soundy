@@ -36,5 +36,13 @@
     "SEARCH_BAR_PLACEHOLDER": "Search by...",
     "SEARCH_BAR_FILTER_SONG": "Songs",
     "SEARCH_BAR_FILTER_ALBUM": "Albums",
-    "SEARCH_BAR_BTN": "Search"
+    "SEARCH_BAR_BTN": "Search",
+    "SEARCH_BAR_TOOLTIP": "Chose if you want to search for songs or albums",
+    "FILTER_BAR_TEXT": "Filter by",
+    "FILTER_BAR_YEAR": "Year",
+    "FILTER_BAR_DURATION": "Duration",
+    "FILTER_BAR_ORDER": "Order",
+    "FILTER_BAR_ORDER_ASC": "Asc. ↑",
+    "FILTER_BAR_ORDER_DESC": "Desc. ↓",
+    "FILTER_BAR_RELOAD": "Refresh filters"
 }

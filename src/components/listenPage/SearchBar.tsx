@@ -22,13 +22,15 @@ function SearchBar({ isAlbum, setIsAlbum }: Props) {
       <div className="flex flex-col">
         <div className="join">
           <input className="input w-full input-bordered join-item bg-base-200" placeholder={t('SEARCH_BAR_PLACEHOLDER', { ns: 'common' })} />
-          <select
-            onChange={() => setIsAlbum(!isAlbum)}
-            className="select select-bordered join-item bg-base-200"
-          >
-            <option selected>{t('SEARCH_BAR_FILTER_SONG', { ns: 'common' })}</option>
-            <option value="true">{t('SEARCH_BAR_FILTER_ALBUM', { ns: 'common' })}</option>
-          </select>
+          <div className="min-[540px]:tooltip" data-tip={t('SEARCH_BAR_TOOLTIP', { ns: 'common' })}>
+            <select
+              onChange={() => setIsAlbum(!isAlbum)}
+              className="select select-bordered join-item bg-base-200"
+            >
+              <option selected>{t('SEARCH_BAR_FILTER_SONG', { ns: 'common' })}</option>
+              <option value="true">{t('SEARCH_BAR_FILTER_ALBUM', { ns: 'common' })}</option>
+            </select>
+          </div>
         </div>
       </div>
       <button type="button" className="btn btn-lg m-4 py-3 border border-stone-700">{t('SEARCH_BAR_BTN', { ns: 'common' })}</button>

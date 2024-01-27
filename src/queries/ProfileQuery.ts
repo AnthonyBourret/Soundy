@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client/core';
 
 const ProfileQuery = gql`
-  query ProfileQuery() {
+  query ProfileQuery {
     profile {
       country
       name

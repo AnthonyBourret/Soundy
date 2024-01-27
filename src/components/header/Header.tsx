@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  useAppDispatch, useAppSelector, increment,
+  useAppDispatch, useAppSelector, increment, setToken,
 } from '../../redux';
 import VisitorMenu from './visitorMenu/VisitorMenu';
 import { ConnectedMenu } from './connectedMenu';
@@ -37,17 +37,22 @@ function Header({ isLogin }: { isLogin: boolean }) {
     },
     {
       text: t('MENU_LOGOUT', { ns: 'common' }),
+      onClick: () => {
+        dispatch(setToken(''));
+        localStorage.removeItem('AUTH_TOKEN');
+      },
       link: '/',
     },
   ];
   return (
     <div className="w-full fixed z-10">
-      <button type="button" onClick={() => dispatch(increment())}>click</button>
-      {count}
-      {token ?? 'not again'}
       {isLogin
         ? <ConnectedMenu menuButton={menuButton} />
         : <VisitorMenu menuButton={menuButton} />}
+      <button type="button" onClick={() => dispatch(increment())}>click</button>
+      {count}
+      {token ?? 'not again'}
+      <button type="button" onClick={() => dispatch(setToken(null))}>click</button>
     </div>
   );
 }

@@ -6,7 +6,7 @@ interface UserState {
   email?: string;
   name?: string;
   pictureUrl?: string;
-  token?: string;
+  token?: string | null;
 }
 
 const initialState: UserState = {
@@ -14,7 +14,7 @@ const initialState: UserState = {
   email: undefined,
   name: undefined,
   pictureUrl: undefined,
-  token: undefined,
+  token: localStorage.getItem('AUTH_TOKEN') || undefined,
 };
 
 const userReducer = createSlice({
@@ -33,14 +33,17 @@ const userReducer = createSlice({
     setPictureUrl: (state, action: { payload: string }) => {
       state.pictureUrl = action.payload;
     },
-    setToken: (state, action: { payload: string }) => {
+    setToken: (state, action: { payload: string | null }) => {
       state.token = action.payload;
+      if (action.payload === null) {
+        localStorage.removeItem('AUTH_TOKEN');
+      }
     },
   },
 });
 
 export const {
-  setToken, setName, setPictureUrl, setCountry,
+  setName, setPictureUrl, setCountry, setToken,
 } = userReducer.actions;
 
 export default userReducer.reducer;

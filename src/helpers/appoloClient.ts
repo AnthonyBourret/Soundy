@@ -1,6 +1,18 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
-// WIP following appolo docs
+const authLink = setContext((_, { headers }) => {
+  // Get the authentication token from local storage if it exists
+  const token = localStorage.getItem('authToken');
+
+  // Return the headers to the context so HTTP link can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Authorization ${token}` : '',
+    },
+  };
+});
 
 const link = createHttpLink({
   uri: import.meta.env.VITE_APPOLO_URL,
@@ -10,7 +22,7 @@ const link = createHttpLink({
 const appoloClient = new ApolloClient({
   cache: new InMemoryCache(),
   // uri: import.meta.env.VITE_APPOLO_URL,
-  link,
+  link: authLink.concat(link),
 });
 
 export default appoloClient;

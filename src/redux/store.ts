@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import incrementReducer from './reducers/incrementReducer';
+import { incrementReducer, userReducer } from './reducers';
 
 export const store = configureStore({
   reducer: {
     increment: incrementReducer,
+    user: userReducer,
   },
 });
 

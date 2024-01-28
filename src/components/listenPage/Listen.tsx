@@ -8,6 +8,7 @@ import AlbumDisplay from './AlbumDisplay';
 import { CardSong, CardAlbum } from '../../types';
 import SearchBar from './SearchBar';
 import SongAndAlbumFilters from '../customElements/SongAndAlbumFilters';
+import Spinner from '../customElements/Spinner';
 
 function Listen({ isLogin }: { isLogin: boolean }) {
   const { data, loading, error } = useQuery(SongListenPageQuery, { variables: { limit: 30 } });
@@ -26,14 +27,13 @@ function Listen({ isLogin }: { isLogin: boolean }) {
     <div className="mb-5 flex flex-col items-center w-full min-h-screen">
       <Header isLogin={isLogin} />
       <SearchBar isAlbum={isAlbum} setIsAlbum={setIsAlbum} />
-      <div className="divider py-4 px-48" />
+      <div className="divider py-4 px-8 min-[540px]:px-36" />
       <SongAndAlbumFilters />
-      {data && !isAlbum && <SongDisplay songs={songs} />}
-      {data && isAlbum && <AlbumDisplay albums={albums} />}
+      {/* If albums/songs is selected in the search bar, the display changes. */}
+      {data && !isAlbum && <SongDisplay songs={songs} isLogin={isLogin} />}
+      {data && isAlbum && <AlbumDisplay albums={albums} isLogin={isLogin} />}
       {loading && (
-        <div className="flex items-center justify-center w-full">
-          <span className="loading loading-spinner loading-lg" />
-        </div>
+        <Spinner />
       )}
       {error && (
         <div className="flex items-center justify-center w-full">

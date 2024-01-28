@@ -1,4 +1,11 @@
-const years = [
+export const durations = [
+  '- 1mn',
+  '1 - 3mn',
+  '3 - 5mn',
+  '+ 5mn',
+];
+
+export const years = [
   "1950's",
   "1960's",
   "1970's",
@@ -9,5 +16,3 @@ const years = [
   "2020's",
   '2024',
 ];
-
-export default years;

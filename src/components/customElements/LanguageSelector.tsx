@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 // Language Selector With Dropdown On Burger Menu
 export function LanguageSelectorBurgerMenu() {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('common');
 
   const lngs = {
     fr: { nativeName: t('MENU_LANGUAGE_1', { ns: 'common' }) },

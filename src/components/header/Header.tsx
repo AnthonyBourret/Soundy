@@ -5,30 +5,30 @@ import ConnectedMenu from './connectedMenu/ConnectedMenu';
 import { MenuButton } from '../../types';
 
 function Header({ isLogin }: { isLogin: boolean }) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
   const menuButton: MenuButton[] = [
     {
-      text: t('MENU_HOME', { ns: 'common' }),
+      text: t('MENU_HOME'),
       link: '/',
     },
     {
-      text: t('MENU_LISTEN', { ns: 'common' }),
+      text: t('MENU_LISTEN'),
       link: '/listen',
     },
     {
-      text: t('MENU_CREATE', { ns: 'common' }),
+      text: t('MENU_CREATE'),
       link: '/create',
     },
     {
-      text: t('MENU_FAVORITES', { ns: 'common' }),
+      text: t('MENU_FAVORITES'),
       link: '/favorites',
     },
     {
-      text: t('MENU_PROFILE', { ns: 'common' }),
+      text: t('MENU_PROFILE'),
       link: '/profile',
     },
     {
-      text: t('MENU_LOGOUT', { ns: 'common' }),
+      text: t('MENU_LOGOUT'),
       link: '/',
     },
   ];

@@ -32,6 +32,7 @@
   "CARD_SONG_NUMBER": "#",
   "CARD_SONG_TITLE": "Titre",
   "CARD_SONG_DURATION": "Durée",
+  "CARD_ALBUM_TRACK_NUMBER": "Piste(s)",
   "SEARCH_BAR_TEXT": "Quelle voulez-vous écouter ?",
   "SEARCH_BAR_PLACEHOLDER": "Chercher par...",
   "SEARCH_BAR_FILTER_SONG": "Chansons",

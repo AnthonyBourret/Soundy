@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import { PlayIcon } from '../../svg';
 import type { Song } from '../../types';
 import SongOverviewQuery from '../../queries/SongOverviewQuery';
+import Spinner from '../customElements/Spinner';
 
 function SongOverview(): JSX.Element {
   const { t } = useTranslation(['common', 'translation']);
@@ -51,9 +52,7 @@ function SongOverview(): JSX.Element {
           </div>
         ))}
         {loading && (
-          <div className="flex items-center justify-center w-full">
-            <span className="loading loading-spinner loading-lg" />
-          </div>
+        <Spinner />
         )}
         {error && (
           <div className="flex items-center justify-center w-full">

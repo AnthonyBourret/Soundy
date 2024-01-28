@@ -8,31 +8,31 @@ interface Props {
 }
 
 function SearchBar({ isAlbum, setIsAlbum }: Props) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
   return (
     <div className="w-full min-[540px]:w-1/2 px-4 pt-32 text-center">
       <div className="flex flex-col items-center gap-4 pb-8">
         <div className="w-16 h-16 min-[540px]:w-20 min-[540px]:h-20 rounded-full flex items-center justify-center">
           <Logo />
         </div>
-        <h1 className="text-2xl min-[540px]:text-4xl font-bold">{t('MENU_APP_NAME', { ns: 'common' })}</h1>
-        <p className="text-md font-semibold min-[540px]:text-lg">{t('SEARCH_BAR_TEXT', { ns: 'common' })}</p>
+        <h1 className="text-2xl min-[540px]:text-4xl font-bold">{t('MENU_APP_NAME')}</h1>
+        <p className="text-md font-semibold min-[540px]:text-lg">{t('SEARCH_BAR_TEXT')}</p>
       </div>
       <div className="flex flex-col">
         <div className="join">
-          <input className="input w-full input-bordered join-item bg-base-200" placeholder={t('SEARCH_BAR_PLACEHOLDER', { ns: 'common' })} />
-          <div className="min-[540px]:tooltip" data-tip={t('SEARCH_BAR_TOOLTIP', { ns: 'common' })}>
+          <input className="input w-full input-bordered join-item bg-base-200" placeholder={t('SEARCH_BAR_PLACEHOLDER')} />
+          <div className="min-[540px]:tooltip" data-tip={t('SEARCH_BAR_TOOLTIP')}>
             <select
               onChange={() => setIsAlbum(!isAlbum)}
               className="select select-bordered font-semibold join-item bg-base-200"
             >
-              <option selected>{t('SEARCH_BAR_FILTER_SONG', { ns: 'common' })}</option>
-              <option value="true">{t('SEARCH_BAR_FILTER_ALBUM', { ns: 'common' })}</option>
+              <option selected>{t('SEARCH_BAR_FILTER_SONG')}</option>
+              <option value="true">{t('SEARCH_BAR_FILTER_ALBUM')}</option>
             </select>
           </div>
         </div>
       </div>
-      <button type="button" className="btn btn-lg m-4 py-3 border border-stone-700">{t('SEARCH_BAR_BTN', { ns: 'common' })}</button>
+      <button type="button" className="btn btn-lg m-4 py-3 border border-stone-700">{t('SEARCH_BAR_BTN')}</button>
     </div>
   );
 }

@@ -45,5 +45,6 @@
     "FILTER_BAR_ORDER": "Order",
     "FILTER_BAR_ORDER_ASC": "Asc. ↑",
     "FILTER_BAR_ORDER_DESC": "Desc. ↓",
-    "FILTER_BAR_RELOAD": "Refresh filters"
+    "FILTER_BAR_RELOAD": "Refresh filters",
+    "ADD_TO_FAV_TOOLTIP": "Add to favorites"
 }

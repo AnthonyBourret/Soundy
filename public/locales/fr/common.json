@@ -45,5 +45,6 @@
   "FILTER_BAR_ORDER": "Ordre",
   "FILTER_BAR_ORDER_ASC": "Cro. ↑",
   "FILTER_BAR_ORDER_DESC": "Dec. ↓",
-  "FILTER_BAR_RELOAD": "Recharger les filtres"
+  "FILTER_BAR_RELOAD": "Recharger les filtres",
+  "ADD_TO_FAV_TOOLTIP": "Ajouter aux favoris"
 }

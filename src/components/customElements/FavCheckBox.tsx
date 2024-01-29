@@ -1,18 +1,22 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { AddIconChecked, AddIconUnchecked } from '../../svg';
 
 function FavCheckBox() {
+  const { t } = useTranslation('common');
   return (
-    <label className="swap">
-      <input type="checkbox" />
-      <div className="swap-on">
-        <AddIconChecked width="32px" height="32px" />
-      </div>
-      <div className="swap-off">
-        <AddIconUnchecked width="32px" height="32px" />
-      </div>
-    </label>
+    <div className="min-[540px]:tooltip" data-tip={t('ADD_TO_FAV_TOOLTIP')}>
+      <label className="swap">
+        <input type="checkbox" />
+        <div className="swap-on">
+          <AddIconChecked width="32px" height="32px" />
+        </div>
+        <div className="swap-off">
+          <AddIconUnchecked width="32px" height="32px" />
+        </div>
+      </label>
+    </div>
   );
 }
 

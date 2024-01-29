@@ -10,6 +10,9 @@ query SongListenPageQuery($limit: Int) {
     }
     cover
     duration
+    songOnAlbum {
+      album_id
+    }
   }
   albums{
     id

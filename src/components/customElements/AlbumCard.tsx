@@ -13,15 +13,16 @@ interface AlbumCardProps {
 }
 
 interface SongProps {
+  duration: string;
   id: string;
   title: string;
-  duration: string;
 }
 
 function AlbumCard({
   title, cover, year, songs, isLogin,
 } : AlbumCardProps) {
   const { t } = useTranslation('common');
+
   return (
     <div className="card w-full p-2 sm:w-[70%] lg:pl-[240px] lg:p-4 gap-2 bg-base-200 shadow-xl border border-1 border-stone-700">
       <figure className="aspect-[1/1] max-w-[90px] max-h-[90px] lg:max-w-[200px] lg:max-h-[200px] absolute left-4 top-4">

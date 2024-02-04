@@ -1,12 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLazyQuery } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { LoginQuery } from '../../queries';
 import type { LoginInput } from '../../types';
+import { setToken, useAppDispatch } from '../../redux';
 
 function LoginModal() {
   const { t } = useTranslation();
   const [toastVisible, setToastVisible] = useState(false);
+  const dispatch = useAppDispatch();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -35,6 +38,8 @@ function LoginModal() {
     // TODO : Record the login in a redux store
       if (data) {
         localStorage.setItem('AUTH_TOKEN', data.login.token);
+        dispatch(setToken(data.login.token));
+        setContext(data.login.token);
         closeModal();
       }
 
@@ -50,7 +55,7 @@ function LoginModal() {
       // TODO : Find another way to don't be forced to return an empty function like that
       return () => {};
     },
-    [data, error],
+    [data, dispatch, error],
   );
 
   const connexionInfos = useMemo(

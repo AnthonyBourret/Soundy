@@ -1,11 +1,22 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import {
+  useAppDispatch, setToken,
+} from '../../redux';
 import VisitorMenu from './visitorMenu/VisitorMenu';
-import ConnectedMenu from './connectedMenu/ConnectedMenu';
-import { MenuButton } from '../../types';
+import { ConnectedMenu } from './connectedMenu';
+import type { MenuButton } from '../../types';
 
-function Header({ isLogin }: { isLogin: boolean }) {
+type HeaderProps = {
+  isLogin: boolean;
+};
+
+function Header(props: HeaderProps) {
   const { t } = useTranslation();
+  const { isLogin } = props;
+
+  const dispatch = useAppDispatch();
+
   const menuButton: MenuButton[] = [
     {
       text: t('MENU_HOME', { ns: 'common' }),
@@ -29,6 +40,9 @@ function Header({ isLogin }: { isLogin: boolean }) {
     },
     {
       text: t('MENU_LOGOUT', { ns: 'common' }),
+      onClick: () => {
+        dispatch(setToken(null));
+      },
       link: '/',
     },
   ];

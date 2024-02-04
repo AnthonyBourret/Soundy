@@ -27,5 +27,6 @@ module.exports = {
         ignorePackages: true,
       },
     ],
+    'react/require-default-props': 0,
   },
 };

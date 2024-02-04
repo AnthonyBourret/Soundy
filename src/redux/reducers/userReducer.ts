@@ -7,6 +7,8 @@ interface UserState {
   name?: string;
   pictureUrl?: string;
   token?: string | null;
+  favorite: number[];
+  acceptCookies: boolean;
 }
 
 const initialState: UserState = {
@@ -15,6 +17,8 @@ const initialState: UserState = {
   name: undefined,
   pictureUrl: undefined,
   token: localStorage.getItem('AUTH_TOKEN') || undefined,
+  favorite: [],
+  acceptCookies: false,
 };
 
 const userReducer = createSlice({
@@ -38,6 +42,12 @@ const userReducer = createSlice({
       if (action.payload === null) {
         localStorage.removeItem('AUTH_TOKEN');
       }
+    },
+    setFavorite: (state, action: { payload: number }) => {
+      state.favorite.push(action.payload);
+    },
+    setAcceptCookies: (state, action: { payload: boolean }) => {
+      state.acceptCookies = action.payload;
     },
   },
 });

@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './components/homePage/Home';
 import Listen from './components/listenPage/Listen';
 import Background from './components/Background';
@@ -34,9 +34,32 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home isLogin={isLogin} />} />
         <Route path="/listen" element={<Listen isLogin={isLogin} />} />
-        <Route path="/favorites" element={<Favorites isLogin={isLogin} />} />
-        <Route path="/create" element={<Create isLogin={isLogin} />} />
-        <Route path="/profile" element={<Profile isLogin={isLogin} />} />
+        <Route
+          path="/favorites"
+          element={
+            isLogin
+              ? <Favorites isLogin={isLogin} />
+              : <Home isLogin={isLogin} isRedirected />
+          }
+        />
+        <Route
+          path="create"
+          element={
+            isLogin
+              ? <Create isLogin={isLogin} />
+              : <Home isLogin={isLogin} isRedirected />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            isLogin
+              ? <Profile isLogin={isLogin} />
+              : <Home isLogin={isLogin} isRedirected />
+          }
+        />
+        {/* // TODO Add the 404 error page */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Suspense>
   );

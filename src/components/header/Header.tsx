@@ -1,17 +1,20 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  useAppDispatch, useAppSelector, increment, setToken,
+  useAppDispatch, setToken,
 } from '../../redux';
 import VisitorMenu from './visitorMenu/VisitorMenu';
 import { ConnectedMenu } from './connectedMenu';
-import { MenuButton } from '../../types';
+import type { MenuButton } from '../../types';
 
-function Header({ isLogin }: { isLogin: boolean }) {
+type HeaderProps = {
+  isLogin: boolean;
+};
+
+function Header(props: HeaderProps) {
   const { t } = useTranslation();
+  const { isLogin } = props;
 
-  const count = useAppSelector((state) => state.increment.value);
-  const token = useAppSelector((state) => state.user.token);
   const dispatch = useAppDispatch();
 
   const menuButton: MenuButton[] = [
@@ -38,8 +41,7 @@ function Header({ isLogin }: { isLogin: boolean }) {
     {
       text: t('MENU_LOGOUT', { ns: 'common' }),
       onClick: () => {
-        dispatch(setToken(''));
-        localStorage.removeItem('AUTH_TOKEN');
+        dispatch(setToken(null));
       },
       link: '/',
     },
@@ -49,10 +51,6 @@ function Header({ isLogin }: { isLogin: boolean }) {
       {isLogin
         ? <ConnectedMenu menuButton={menuButton} />
         : <VisitorMenu menuButton={menuButton} />}
-      <button type="button" onClick={() => dispatch(increment())}>click</button>
-      {count}
-      {token ?? 'not again'}
-      <button type="button" onClick={() => dispatch(setToken(null))}>click</button>
     </div>
   );
 }

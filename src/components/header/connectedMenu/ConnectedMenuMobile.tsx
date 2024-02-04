@@ -37,6 +37,7 @@ function ConnectedMenuMobile(props: Props): JSX.Element {
                 link={button.link}
                 title={button.text}
                 buttonStyle={({ isActive }) => (isActive ? 'font-semibold text-secondary' : 'font-semibold')}
+                onClick={button.onClick}
               />
             </li>
           ))}

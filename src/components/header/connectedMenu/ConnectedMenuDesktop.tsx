@@ -21,7 +21,6 @@ function ConnectedMenuDesktop(props: Props): JSX.Element {
               link={button.link}
               title={button.text}
               buttonStyle={({ isActive }) => (isActive ? 'btn btn-ghost text-secondary' : 'btn btn-ghost')}
-              onClick={button.onClick}
             />
           </li>
         ))}
@@ -41,6 +40,7 @@ function ConnectedMenuDesktop(props: Props): JSX.Element {
                   link={button.link}
                   title={button.text}
                   buttonStyle={({ isActive }) => (isActive ? 'font-semibold' : 'font-semibold')}
+                  onClick={button.onClick}
                 />
               </li>
             ))}

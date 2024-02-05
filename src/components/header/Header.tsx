@@ -12,7 +12,7 @@ type HeaderProps = {
 };
 
 function Header(props: HeaderProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
   const { isLogin } = props;
 
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ function Header(props: HeaderProps) {
       link: '/profile',
     },
     {
-      text: t('MENU_LOGOUT', { ns: 'common' }),
+      text: t('MENU_LOGOUT'),
       onClick: () => {
         dispatch(setToken(null));
       },

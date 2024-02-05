@@ -7,7 +7,7 @@ import SongDisplay from './SongDisplay';
 import AlbumDisplay from './AlbumDisplay';
 import { CardSong, CardAlbum } from '../../types';
 import SearchBar from './SearchBar';
-import SongAndAlbumFilters from '../customElements/SongAndAlbumFilters';
+import SongAndAlbumOrder from '../customElements/SongAndAlbumOrder';
 import Spinner from '../customElements/Spinner';
 
 function Listen({ isLogin }: { isLogin: boolean }) {
@@ -28,7 +28,7 @@ function Listen({ isLogin }: { isLogin: boolean }) {
       <Header isLogin={isLogin} />
       <SearchBar isAlbum={isAlbum} setIsAlbum={setIsAlbum} />
       <div className="divider py-4 px-8 min-[540px]:px-36" />
-      <SongAndAlbumFilters />
+      <SongAndAlbumOrder />
       {/* If albums/songs is selected in the search bar, the display changes. */}
       {data && !isAlbum && <SongDisplay songs={songs} isLogin={isLogin} />}
       {data && isAlbum && <AlbumDisplay albums={albums} isLogin={isLogin} />}

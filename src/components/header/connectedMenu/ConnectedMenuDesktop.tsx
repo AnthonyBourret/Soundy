@@ -8,7 +8,9 @@ interface Props {
   menuButton: MenuButton[];
 }
 
-function ConnectedMenuDesktop({ menuButton }: Props) {
+function ConnectedMenuDesktop(props: Props): JSX.Element {
+  const { menuButton } = props;
+
   return (
     <div className="navbar-end hidden mr-4 lg:flex">
       <ul className="menu menu-horizontal p-1 items-center flex-nowrap">
@@ -38,6 +40,7 @@ function ConnectedMenuDesktop({ menuButton }: Props) {
                   link={button.link}
                   title={button.text}
                   buttonStyle={({ isActive }) => (isActive ? 'font-semibold' : 'font-semibold')}
+                  onClick={button.onClick}
                 />
               </li>
             ))}

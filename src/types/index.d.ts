@@ -9,6 +9,7 @@ export type ServiceCard = {
 export type MenuButton = {
   text: string;
   link: string;
+  onClick?: () => void;
 };
 
 export type AvatarProps = {

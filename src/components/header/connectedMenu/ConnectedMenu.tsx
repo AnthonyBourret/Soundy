@@ -8,7 +8,9 @@ interface Props {
   menuButton: MenuButton[];
 }
 
-function ConnectedMenu({ menuButton }: Props) {
+function ConnectedMenu(props: Props): JSX.Element {
+  const { menuButton } = props;
+
   return (
     <div className="navbar bg-base-100 bg-opacity-50 backdrop-blur-[10px] border-b border-stone-700 px-0">
       <HeaderLogo />

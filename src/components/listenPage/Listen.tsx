@@ -15,6 +15,7 @@ function Listen({ isLogin }: { isLogin: boolean }) {
   const [songs, setSongs] = useState<CardSong[]>([]);
   const [albums, setAlbums] = useState<CardAlbum[]>([]);
   const [isAlbum, setIsAlbum] = useState(false);
+  const [sortBy, setSortBy] = useState('none');
 
   useEffect(() => {
     if (data) {
@@ -28,10 +29,12 @@ function Listen({ isLogin }: { isLogin: boolean }) {
       <Header isLogin={isLogin} />
       <SearchBar isAlbum={isAlbum} setIsAlbum={setIsAlbum} />
       <div className="divider py-4 px-8 min-[540px]:px-36" />
-      <SongAndAlbumOrder />
+      <SongAndAlbumOrder setSortBy={setSortBy} />
       {/* If albums/songs is selected in the search bar, the display changes. */}
-      {data && !isAlbum && <SongDisplay songs={songs} isLogin={isLogin} />}
-      {data && isAlbum && <AlbumDisplay albums={albums} isLogin={isLogin} />}
+      {data && !isAlbum
+        && <SongDisplay songs={songs} isLogin={isLogin} sortBy={sortBy} />}
+      {data && isAlbum
+        && <AlbumDisplay albums={albums} isLogin={isLogin} sortBy={sortBy} />}
       {loading && (
         <Spinner />
       )}

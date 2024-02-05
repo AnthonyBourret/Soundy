@@ -49,10 +49,10 @@
     "ORDER_SELECT_PLACEHOLDER": "Pick an order",
     "ORDER_SELECT_NAME_AZ": "Name, A-Z",
     "ORDER_SELECT_NAME_ZA": "Name, Z-A",
-    "ORDER_SELECT_DURATION_ASC": "Duration ↑",
-    "ORDER_SELECT_DURATION_DESC": "Duration ↓",
+    "ORDER_SELECT_DURATION_ASC": "Duration ⇗",
+    "ORDER_SELECT_DURATION_DESC": "Duration ⇘",
     "ORDER_SELECT_LATEST": "Latest",
     "ORDER_SELECT_OLDEST": "Oldest",
-    "ORDER_BAR_RELOAD": "Refresh filters",
+    "ORDER_BAR_RELOAD": "Refresh order",
     "ADD_TO_FAV_TOOLTIP": "Add to favorites"
 }

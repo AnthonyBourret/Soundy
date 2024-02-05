@@ -49,10 +49,10 @@
   "ORDER_SELECT_PLACEHOLDER": "Choisissez un ordre",
   "ORDER_SELECT_NAME_AZ": "Nom, A-Z",
   "ORDER_SELECT_NAME_ZA": "Nom, Z-A",
-  "ORDER_SELECT_DURATION_ASC": "Durée ↑",
-  "ORDER_SELECT_DURATION_DESC": "Durée ↓",
+  "ORDER_SELECT_DURATION_ASC": "Durée ⇗",
+  "ORDER_SELECT_DURATION_DESC": "Durée ⇘",
   "ORDER_SELECT_LATEST": "Plus récent",
   "ORDER_SELECT_OLDEST": "Plus ancien",
-  "ORDER_BAR_RELOAD": "Recharger les filtres",
+  "ORDER_BAR_RELOAD": "Recharger le tri",
   "ADD_TO_FAV_TOOLTIP": "Ajouter aux favoris"
 }

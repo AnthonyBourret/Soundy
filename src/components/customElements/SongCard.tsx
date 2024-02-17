@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import React from 'react';
+import { ar } from 'vitest/dist/reporters-5f784f42';
 import FavCheckBox from './FavCheckBox';
 import { PlayIcon } from '../../svg';
 import secondsToFormatedDuration from '../../utils/SecondsToFormatedDuration';
@@ -18,7 +19,9 @@ interface SongCardProps {
 
 function SongCard({
   title, artist, duration, cover, isLogin,
-} : SongCardProps) {
+}: SongCardProps) {
+  console.log(artist);
+
   return (
     <div className="card flex-row w-full h-30 p-2 min-[540px]:w-[17%] min-w-[190px] min-[540px]:max-w-[190px] bg-base-200 shadow-xl border border-1 border-stone-700">
       <div className="flex w-full items-center min-[540px]:flex-col min-[540px]:card-body min-[540px]:justify-around min-[540px]:p-1 gap-1 group relative">
@@ -47,7 +50,7 @@ function SongCard({
             {title}
           </h3>
           <p className="font-semibold text-center">
-            {artist.name}
+            {artist?.name && artist.name}
           </p>
           <div className="flex w-full justify-between text-xs min-[540px]:justify-around min-[540px]:p-2">
             <p className="font-semibold text-left">

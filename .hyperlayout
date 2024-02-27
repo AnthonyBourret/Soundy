@@ -2,7 +2,7 @@
   "default": [
     [
       [
-        "cd ../lyrics-library && yarn az"
+        "cd ../lyrics-library && yarn dev"
       ],
       [
         "npm run dev"

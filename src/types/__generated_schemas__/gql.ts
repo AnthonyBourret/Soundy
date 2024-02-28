@@ -13,9 +13,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query LoginQuery($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n": types.LoginQueryDocument,
-    "\n  query ProfileQuery {\n    profile {\n      country\n      name\n      picture\n      email\n    }\n  }\n": types.ProfileQueryDocument,
-    "\n  query SongOverviewQuery {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      artist {\n        name\n      }\n    }\n  }\n": types.SongOverviewQueryDocument,
+    "\n  query Login($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n": types.LoginDocument,
+    "\n  query Profile {\n    profile {\n      country\n      name\n      picture\n      email\n    }\n  }\n": types.ProfileDocument,
+    "\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      artist {\n        name\n      }\n    }\n  }\n": types.SongOverviewDocument,
 };
 
 /**
@@ -35,15 +35,15 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query LoginQuery($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n"): (typeof documents)["\n  query LoginQuery($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n"];
+export function gql(source: "\n  query Login($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n"): (typeof documents)["\n  query Login($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query ProfileQuery {\n    profile {\n      country\n      name\n      picture\n      email\n    }\n  }\n"): (typeof documents)["\n  query ProfileQuery {\n    profile {\n      country\n      name\n      picture\n      email\n    }\n  }\n"];
+export function gql(source: "\n  query Profile {\n    profile {\n      country\n      name\n      picture\n      email\n    }\n  }\n"): (typeof documents)["\n  query Profile {\n    profile {\n      country\n      name\n      picture\n      email\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query SongOverviewQuery {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      artist {\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query SongOverviewQuery {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      artist {\n        name\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      artist {\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      artist {\n        name\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

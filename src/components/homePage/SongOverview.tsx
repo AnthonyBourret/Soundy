@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client';
 import { PlayIcon } from '../../svg';
 import type { Song } from '../../types';
 import SongOverviewQuery from '../../queries/SongOverviewQuery';
-import Spinner from '../customElements/Spinner';
+import { Spinner } from '../customElements';
 
 function SongOverview(): JSX.Element {
   const { t } = useTranslation(['common', 'translation']);

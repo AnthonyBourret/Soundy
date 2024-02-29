@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { AddIconChecked, AddIconUnchecked } from '../../svg';
 
-function FavCheckBox() {
+function FavCheckBox(): JSX.Element {
   const { t } = useTranslation('common');
   return (
     <div className="min-[540px]:tooltip" data-tip={t('ADD_TO_FAV_TOOLTIP')}>

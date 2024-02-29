@@ -19,7 +19,7 @@ function Services(): JSX.Element {
       icon: <PlusIcon />,
       title: t('SERVICES_TITLE_CREATE', { ns: 'translation' }),
       text: t('SERVICES_TXT_LISTEN', { ns: 'translation' }),
-      buttonText: t('Create', { ns: 'common' }),
+      buttonText: t('CREATE', { ns: 'common' }),
       link: '/create',
     },
   ];

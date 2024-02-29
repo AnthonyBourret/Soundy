@@ -5,7 +5,7 @@ interface Props {
   labelText: string;
 }
 
-function FilterRadio({ inputId, labelText }: Props) {
+function FilterRadio({ inputId, labelText }: Props): JSX.Element {
   return (
     <div className="form-control">
       <label htmlFor={inputId} className="label cursor-pointer">

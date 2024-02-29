@@ -3,10 +3,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
-  setSortBy: React.Dispatch<React.SetStateAction<string>>;
+  setSortBy: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-function SongAndAlbumOrder({ setSortBy }: Props) {
+function SongAndAlbumOrder({ setSortBy }: Props): JSX.Element {
   const { t } = useTranslation('common');
   return (
     <div className="flex flex-col items-center px-12 gap-2 py-4 min-[540px]:flex-row">
@@ -14,10 +14,10 @@ function SongAndAlbumOrder({ setSortBy }: Props) {
       <div className="join">
         <select
           className="select select-sm select-bordered bg-base-200 w-fit max-w-xs join-item"
-          defaultValue="none"
+          defaultValue=""
           onChange={(e) => { setSortBy(e.target.value); }}
         >
-          <option value="none" disabled selected>{t('ORDER_SELECT_PLACEHOLDER')}</option>
+          <option value="" disabled>{t('ORDER_SELECT_PLACEHOLDER')}</option>
           <option value="ascendingName">{t('ORDER_SELECT_NAME_AZ')}</option>
           <option value="descendingName">{t('ORDER_SELECT_NAME_ZA')}</option>
           <option value="durationAsc">{t('ORDER_SELECT_DURATION_ASC')}</option>
@@ -28,7 +28,7 @@ function SongAndAlbumOrder({ setSortBy }: Props) {
         <div className="tooltip" data-tip={t('ORDER_BAR_RELOAD')}>
           <button
             type="button"
-            onClick={() => setSortBy('none')}
+            onClick={() => setSortBy('')}
             className="btn btn-square btn-sm border border-stone-700 join-item"
           >
             ↺

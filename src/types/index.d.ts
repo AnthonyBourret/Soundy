@@ -61,3 +61,11 @@ export type CardAlbum = {
     },
   ];
 };
+
+export type ChosenDisplay = 'songs' | 'albums';
+
+export type SVGProps = {
+  width: string;
+  height: string;
+  color: string;
+};

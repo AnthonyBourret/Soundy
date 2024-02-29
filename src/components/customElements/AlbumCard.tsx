@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import FavCheckBox from './FavCheckBox';
-import secondsToFormatedDuration from '../../utils/SecondsToFormatedDuration';
-import capitalize from '../../utils/CapitalizeFirstLetter';
+import { secondsToFormatedDuration, capitalizeFirstLetter } from '../../utils';
 
-interface AlbumCardProps {
+interface Props {
   title: string;
   cover: string;
   year: string;
@@ -20,8 +19,16 @@ interface SongProps {
 
 function AlbumCard({
   title, cover, year, songs, isLogin,
-} : AlbumCardProps) {
+} : Props): JSX.Element {
   const { t } = useTranslation('common');
+
+  const songDisplay = useMemo(() => songs && songs.map((song) => (
+    <tr className="hover cursor-pointer" key={song.id}>
+      <th>1</th>
+      <td>{song.title}</td>
+      <td className="text-center">{secondsToFormatedDuration(song.duration)}</td>
+    </tr>
+  )), [songs]);
 
   return (
     <div className="card w-full p-2 sm:w-[70%] lg:pl-[240px] lg:p-4 gap-2 bg-base-200 shadow-xl border border-1 border-stone-700">
@@ -40,7 +47,7 @@ function AlbumCard({
       )}
       <div>
         <div className="pl-[120px] pt-2 lg:px-4 lg:py-2 lg:text-xl">
-          <p className="font-bold">{capitalize(title)}</p>
+          <p className="font-bold">{capitalizeFirstLetter(title)}</p>
           <p className="font-semibold">Artist</p>
           <div className="w-full flex flex-col min-[425px]:flex-row min-[425px]:items-center min-[425px]:justify-between min-[425px]:pr-4 lg:pr-0">
             <p className="font-semibold">{year}</p>
@@ -56,19 +63,13 @@ function AlbumCard({
           <table className="table table-zebra text-xs lg:text-base">
             <thead>
               <tr>
-                <th>{t('CARD_SONG_NUMBER')}</th>
+                <th>#</th>
                 <th>{t('CARD_SONG_TITLE')}</th>
                 <th className="text-center">{t('CARD_SONG_DURATION')}</th>
               </tr>
             </thead>
             <tbody>
-              {songs && songs.map((song) => (
-                <tr className="hover cursor-pointer" key={song.id}>
-                  <th>1</th>
-                  <td>{song.title}</td>
-                  <td className="text-center">{secondsToFormatedDuration(song.duration)}</td>
-                </tr>
-              ))}
+              {songDisplay}
             </tbody>
           </table>
         </div>

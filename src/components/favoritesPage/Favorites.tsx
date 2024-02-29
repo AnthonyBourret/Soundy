@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../header/Header';
-import ScrollToTopButton from '../customElements/ScrollToTopButton';
+import { ScrollToTopButton } from '../customElements';
 
 function Favorites({ isLogin }: { isLogin: boolean }) {
   return (

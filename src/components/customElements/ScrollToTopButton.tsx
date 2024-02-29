@@ -1,20 +1,14 @@
 // Method viewed on https://stackoverflow.com/questions/75004594/show-and-hide-button-on-scroll-up-and-down
 
 import React, { useState, useEffect } from 'react';
+import { scrollToTop } from '../../utils';
 
-function ScrollToTopButton() {
+function ScrollToTopButton(): JSX.Element {
   const [isVisible, setIsVisible] = useState(false);
-
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  }
 
   useEffect(() => {
     const toggleVisibility = () => {
-      const currentScrollPosition = window.pageYOffset;
+      const currentScrollPosition = window.scrollY;
       if (currentScrollPosition > 500) {
         setIsVisible(true);
       } else {

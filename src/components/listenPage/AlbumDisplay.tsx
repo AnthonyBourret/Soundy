@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import AlbumCard from '../customElements/AlbumCard';
+import { AlbumCard } from '../customElements';
 import { CardAlbum } from '../../types';
 
 interface Props {
-  albums: Array<CardAlbum>;
+  albums: CardAlbum[];
   isLogin: boolean;
-  sortBy: string;
+  sortBy: string | null;
 }
 
 function AlbumDisplay({ albums, isLogin, sortBy }: Props) {
@@ -15,7 +15,7 @@ function AlbumDisplay({ albums, isLogin, sortBy }: Props) {
   // This array is sorted based on the value of sortBy.
 
   useEffect(() => {
-    if (sortBy === 'none') {
+    if (sortBy === null) {
       setSortedAlbums(albums);
     }
     if (sortBy === 'ascendingName') {

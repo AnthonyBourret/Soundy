@@ -30,7 +30,7 @@ function SignupModal() {
             </div>
             <input
               type="text"
-              placeholder={t('NEUTRAL_PLACEHOLDER', { ns: 'common' })}
+              placeholder="..."
               className="input input-bordered input-sm w-full max-w-lg"
             />
           </label>
@@ -42,7 +42,7 @@ function SignupModal() {
             </div>
             <input
               type="text"
-              placeholder={t('EMAIL_PLACEHOLDER', { ns: 'common' })}
+              placeholder="@"
               className="input input-bordered input-sm w-full max-w-lg"
             />
           </label>
@@ -54,7 +54,7 @@ function SignupModal() {
             </div>
             <input
               type="text"
-              placeholder={t('NEUTRAL_PLACEHOLDER', { ns: 'common' })}
+              placeholder="..."
               className="input input-bordered input-sm w-full max-w-xs"
             />
           </label>
@@ -66,7 +66,7 @@ function SignupModal() {
             </div>
             <input
               type="text"
-              placeholder={t('NEUTRAL_PLACEHOLDER', { ns: 'common' })}
+              placeholder="..."
               className="input input-bordered input-sm w-full max-w-xs"
             />
           </label>

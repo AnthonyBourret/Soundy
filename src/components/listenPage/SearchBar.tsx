@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Logo } from '../../svg';
-import FilterRadio from '../customElements/FilterRadio';
+import { FilterRadio } from '../customElements';
+import { ChosenDisplay } from '../../types';
 
 interface Props {
-  isAlbum: boolean;
-  setIsAlbum: (isAlbum: boolean) => void;
+  chosenDisplay: string;
+  setChosenDisplay: React.Dispatch<React.SetStateAction<ChosenDisplay>>;
 }
 
-function SearchBar({ isAlbum, setIsAlbum }: Props) {
+function SearchBar({ chosenDisplay, setChosenDisplay }: Props): JSX.Element {
   const { t } = useTranslation('common');
+
+  const songDuration = useMemo(() => {
+    if (chosenDisplay === 'albums') {
+      return (
+        <div className="flex gap-4">
+          <FilterRadio inputId="duration-album-min" labelText="- 30 mn" />
+          <FilterRadio inputId="duration-album-mid" labelText="30 - 60 mn" />
+          <FilterRadio inputId="duration-album-max" labelText="+ 60 mn" />
+        </div>
+      );
+    }
+    return (
+      <div className="flex gap-4">
+        <FilterRadio inputId="duration-song-min" labelText="- 1mn" />
+        <FilterRadio inputId="duration-song-mid" labelText="1 - 5 mn" />
+        <FilterRadio inputId="duration-song-max" labelText="+ 5 mn" />
+      </div>
+    );
+  }, [chosenDisplay]);
+
   return (
     <div className="min-[540px]:w-1/2 pt-32 text-center">
       <div className="flex flex-col items-center gap-4 pb-8">
@@ -32,34 +53,22 @@ function SearchBar({ isAlbum, setIsAlbum }: Props) {
           <div className="font-semibold text-sm pl-3 min-[540px]:text-base">{t('SEARCH_BAR_FILTER_DURATION_TEXT')}</div>
 
           {/* Radio Input Components changing on isAlbum value change */}
-          {!isAlbum ? (
-            <div className="flex gap-4">
-              <FilterRadio inputId="duration-song-min" labelText={t('SEARCH_BAR_SONG_DURATION_MIN')} />
-              <FilterRadio inputId="duration-song-mid" labelText={t('SEARCH_BAR_SONG_DURATION_MID')} />
-              <FilterRadio inputId="duration-song-max" labelText={t('SEARCH_BAR_SONG_DURATION_MAX')} />
-            </div>
-          ) : (
-            <div className="flex gap-4 min-[860px]:gap:0">
-              <FilterRadio inputId="duration-album-min" labelText={t('SEARCH_BAR_ALBUM_DURATION_MIN')} />
-              <FilterRadio inputId="duration-album-mid" labelText={t('SEARCH_BAR_ALBUM_DURATION_MID')} />
-              <FilterRadio inputId="duration-album-max" labelText={t('SEARCH_BAR_ALBUM_DURATION_MAX')} />
-            </div>
-          )}
+          {songDuration}
         </div>
 
         {/* Song or Album filter => Filter on the front */}
         <div>
           <button
             type="button"
-            onClick={() => setIsAlbum(false)}
-            className={`btn btn-sm mx-4 py-3 min-[540px]:btn-md ${!isAlbum ? 'border-primary my-5 border-2' : 'border-stone-700 my-6 border'}`}
+            onClick={() => setChosenDisplay('songs')}
+            className={`btn btn-sm mx-4 py-3 min-[540px]:btn-md ${chosenDisplay === 'songs' ? 'border-primary my-5 border-2' : 'border-stone-700 my-6 border'}`}
           >
             {t('SEARCH_BAR_FILTER_SONG')}
           </button>
           <button
             type="button"
-            onClick={() => setIsAlbum(true)}
-            className={`btn btn-sm mx-4 py-3 min-[540px]:btn-md ${isAlbum ? 'border-primary my-5 border-2' : 'border-stone-700 my-6 border'}`}
+            onClick={() => setChosenDisplay('albums')}
+            className={`btn btn-sm mx-4 py-3 min-[540px]:btn-md ${chosenDisplay === 'albums' ? 'border-primary my-5 border-2' : 'border-stone-700 my-6 border'}`}
           >
             {t('SEARCH_BAR_FILTER_ALBUM')}
           </button>

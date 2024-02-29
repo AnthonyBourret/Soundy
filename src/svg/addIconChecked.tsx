@@ -1,11 +1,7 @@
 import React from 'react';
+import { SVGProps } from '../types';
 
-interface Props {
-  width: string;
-  height: string;
-}
-
-function AddIconChecked({ width, height }: Props): React.JSX.Element {
+function AddIconChecked({ width, height }: SVGProps): JSX.Element {
   return (
     <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#dedede" strokeWidth="0.72">
       <g id="SVGRepo_bgCarrier" strokeWidth="0" />

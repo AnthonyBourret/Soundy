@@ -1,8 +1,6 @@
 import React from 'react';
 import { MenuButton } from '../../../types';
-import { LanguageSelectorBurgerMenu } from '../../customElements/LanguageSelector';
-import CustomButton from '../../customElements/CustomButton';
-import Avatar from '../../customElements/Avatar';
+import { LanguageSelector, CustomButton, Avatar } from '../../customElements';
 
 interface Props {
   menuButton: MenuButton[];
@@ -43,7 +41,7 @@ function ConnectedMenuMobile(props: Props): JSX.Element {
           ))}
           {/* Language Button */}
           <li>
-            <LanguageSelectorBurgerMenu />
+            <LanguageSelector />
           </li>
         </ul>
       </div>

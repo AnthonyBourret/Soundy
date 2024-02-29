@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client/core';
 
 const SongOverviewQuery = gql`
-  query SongOverviewQuery {
+  query SongOverview {
     songs(limit: 5) {
       id
       cover

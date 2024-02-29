@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "All about the sound",
   "scripts": {
-    "init": "concurrently \"npm run lyrics_library_api\" \"npm run dev\"",
-    "dev": "vite --host",
-    "lyrics_library_api": "cd ../lyrics-library && yarn az",
     "build": "vite build",
-    "check": "tsc",
-    "lint": "eslint .",
-    "test": "vitest"
+    "check:full": "npm run typescript && npm run eslint && npm run test",
+    "dev": "vite --host",
+    "eslint": "eslint .",
+    "compile": "graphql-codegen --watch -r dotenv/config",
+    "init": "concurrently \"npm run lyrics_library_api\" \"npm run dev\"",
+    "server": "cd ../lyrics-library && yarn dev",
+    "test": "vitest",
+    "typescript": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
   "license": "MIT",
   "dependencies": {
     "@apollo/client": "^3.8.8",
+    "@graphql-codegen/cli": "^5.0.2",
     "@reduxjs/toolkit": "^2.1.0",
     "@tailwindcss/typography": "^0.5.10",
     "@vitejs/plugin-react": "^4.1.1",
@@ -49,6 +52,8 @@
     "vite": "^4.5.0"
   },
   "devDependencies": {
+    "@graphql-codegen/client-preset": "^4.2.4",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@types/react-redux": "^7.1.33",
@@ -61,7 +66,7 @@
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "typescript": "^5.2.2",
+    "typescript": "^5.3.3",
     "vitest": "^0.34.6"
   }
 }

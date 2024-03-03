@@ -16,6 +16,7 @@ function SearchBar({ chosenDisplay, setChosenDisplay }: Props): JSX.Element {
     if (chosenDisplay === 'albums') {
       return (
         <div className="flex gap-4">
+          <FilterRadio inputId="duration-album-all" labelText="Show all" />
           <FilterRadio inputId="duration-album-min" labelText="- 30 mn" />
           <FilterRadio inputId="duration-album-mid" labelText="30 - 60 mn" />
           <FilterRadio inputId="duration-album-max" labelText="+ 60 mn" />
@@ -24,6 +25,7 @@ function SearchBar({ chosenDisplay, setChosenDisplay }: Props): JSX.Element {
     }
     return (
       <div className="flex gap-4">
+        <FilterRadio inputId="duration-song-all" labelText="Show all" />
         <FilterRadio inputId="duration-song-min" labelText="- 1mn" />
         <FilterRadio inputId="duration-song-mid" labelText="1 - 5 mn" />
         <FilterRadio inputId="duration-song-max" labelText="+ 5 mn" />

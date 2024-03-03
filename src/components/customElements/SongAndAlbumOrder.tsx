@@ -28,7 +28,7 @@ function SongAndAlbumOrder({ setSortBy }: Props): JSX.Element {
         <div className="tooltip" data-tip={t('ORDER_BAR_RELOAD')}>
           <button
             type="button"
-            onClick={() => setSortBy('')}
+            onClick={() => setSortBy(null)}
             className="btn btn-square btn-sm border border-stone-700 join-item"
           >
             ↺

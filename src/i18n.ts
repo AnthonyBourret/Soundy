@@ -9,7 +9,7 @@ i18n
   // use(LanguageDetector) // detect user language
   .use(initReactI18next) // pass the i18n instance to react-i18next.
   .init({
-    debug: true, // set debug to true for development
+    debug: false, // set debug to true for development (logs in console)
     fallbackLng: 'en', // default language is english
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

@@ -67,5 +67,5 @@ export type ChosenDisplay = 'songs' | 'albums';
 export type SVGProps = {
   width: string;
   height: string;
-  color: string;
+  color: string | null;
 };

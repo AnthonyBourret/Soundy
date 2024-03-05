@@ -10,10 +10,10 @@ function FavCheckBox(): JSX.Element {
       <label className="swap">
         <input type="checkbox" />
         <div className="swap-on">
-          <AddIconChecked width="32px" height="32px" />
+          <AddIconChecked width="32px" height="32px" color={null} />
         </div>
         <div className="swap-off">
-          <AddIconUnchecked width="32px" height="32px" />
+          <AddIconUnchecked width="32px" height="32px" color={null} />
         </div>
       </label>
     </div>

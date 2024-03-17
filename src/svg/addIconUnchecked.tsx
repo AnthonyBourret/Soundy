@@ -1,9 +1,10 @@
 import React from 'react';
 import { SVGProps } from '../types';
 
-function AddIconUnchecked({ width, height }: SVGProps) : JSX.Element {
+function AddIconUnchecked(props: SVGProps): JSX.Element {
+  const { width, height, color = '#dedede' } = props;
   return (
-    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#dedede" strokeWidth="0.72">
+    <svg width={width} height={height} stroke={color} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" strokeWidth="0.72">
       <g id="SVGRepo_bgCarrier" strokeWidth="0" />
       <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
       <g id="SVGRepo_iconCarrier">

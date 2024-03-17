@@ -1,8 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { LanguageSelectorBurgerMenu } from '../../customElements/LanguageSelector';
-import CustomButton from '../../customElements/CustomButton';
-import OpenModalButton from '../../customElements/OpenModalButton';
+import { LanguageSelector, CustomButton, OpenModalButton } from '../../customElements';
 import { MenuButton } from '../../../types';
 
 interface Props {
@@ -48,7 +46,7 @@ function VisitorMenuMobile({ menuButton }: Props) {
 
           {/* Language Button */}
           <li>
-            <LanguageSelectorBurgerMenu />
+            <LanguageSelector />
           </li>
         </ul>
       </div>

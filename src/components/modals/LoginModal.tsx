@@ -7,7 +7,7 @@ import type { LoginInput } from '../../types';
 import { setToken, useAppDispatch } from '../../redux';
 
 function LoginModal() {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
   const [toastVisible, setToastVisible] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -84,7 +84,7 @@ function LoginModal() {
     }
     return (
       <button type="submit" className="btn btn-lg my-4" onClick={() => loginAction()}>
-        {t('MENU_LOGIN', { ns: 'common' })}
+        {t('MENU_LOGIN')}
       </button>
     );
   }, [loading, loginAction, t]);
@@ -146,7 +146,7 @@ function LoginModal() {
             </p>
             {loginButton}
           </div>
-          <p className="pt-2 text-xs text-center">{t('MODAL_TXT_CLOSE', { ns: 'common' })}</p>
+          <p className="pt-2 text-xs text-center">{t('MODAL_TXT_CLOSE')}</p>
         </form>
 
         {/* Modal backdrop */}
@@ -154,7 +154,7 @@ function LoginModal() {
           method="dialog"
           className="modal-backdrop"
         >
-          <button type="submit">{t('CLOSE', { ns: 'common' })}</button>
+          <button type="submit">{t('CLOSE')}</button>
         </form>
       </dialog>
     </>

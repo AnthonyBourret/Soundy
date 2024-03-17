@@ -36,6 +36,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "@vitejs/plugin-react": "^4.1.1",
     "autoprefixer": "^10.4.16",
+    "concurrently": "^8.2.2",
     "daisyui": "^4.4.14",
     "graphql": "^16.8.1",
     "i18next": "^23.7.6",

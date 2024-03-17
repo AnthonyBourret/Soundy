@@ -1,8 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { LanguageSelectorButton } from '../../customElements/LanguageSelector';
-import CustomButton from '../../customElements/CustomButton';
-import OpenModalButton from '../../customElements/OpenModalButton';
+import { LanguageSelector, CustomButton, OpenModalButton } from '../../customElements';
 import { MenuButton } from '../../../types';
 
 interface Props {
@@ -41,7 +39,7 @@ function VisitorMenuDesktop({ menuButton }: Props) {
         </li>
         {/* Language Button */}
         <li>
-          <LanguageSelectorButton />
+          <LanguageSelector />
         </li>
       </ul>
     </div>

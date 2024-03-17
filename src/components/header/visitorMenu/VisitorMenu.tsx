@@ -1,9 +1,9 @@
 import React from 'react';
-import HeaderLogo from '../../customElements/HeaderLogo';
 import VisitorMenuDesktop from './VisitorMenuDesktop';
 import VisitorMenuMobile from './VisitorMenuMobile';
 import LoginModal from '../../modals/LoginModal';
 import SignupModal from '../../modals/SignupModal';
+import { LogoWithName } from '../../customElements';
 import { MenuButton } from '../../../types';
 
 interface VisitorMenuProps {
@@ -16,7 +16,7 @@ function VisitorMenu(props: VisitorMenuProps) {
   return (
     <>
       <div className="navbar bg-base-100 bg-opacity-50 backdrop-blur-[10px] border-b border-stone-700 px-0">
-        <HeaderLogo />
+        <LogoWithName />
         <VisitorMenuMobile menuButton={menuButton} />
         <VisitorMenuDesktop menuButton={menuButton} />
       </div>

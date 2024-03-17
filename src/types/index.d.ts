@@ -33,3 +33,39 @@ export type LoginInput = {
   email: String
   password: String
 };
+
+export type AllSongs = {
+  songs: CardSong[]
+};
+
+export type CardSong = {
+  id: string;
+  title: string;
+  cover: string;
+  artist: {
+    name: string;
+  };
+  duration: string;
+};
+
+export type CardAlbum = {
+  id: string;
+  title: string;
+  cover: string;
+  release_year: string;
+  songs: [
+    {
+      id: string;
+      title: string;
+      duration: string;
+    },
+  ];
+};
+
+export type ChosenDisplay = 'songs' | 'albums';
+
+export type SVGProps = {
+  width: string;
+  height: string;
+  color?: string ;
+};

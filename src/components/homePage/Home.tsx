@@ -4,7 +4,7 @@ import Header from '../header/Header';
 import Hero from './Hero';
 import Services from './Services';
 import SongOverview from './SongOverview';
-import ScrollToTopButton from '../customElements/ScrollToTopButton';
+import { ScrollToTopButton } from '../customElements';
 
 type HomeProps = {
   isLogin: boolean;

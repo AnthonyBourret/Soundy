@@ -27,5 +27,9 @@
     "SIGNUP_MODAL_LABEL_PASSWORD": "Password",
     "SIGNUP_MODAL_LABEL_CONFIRM_PASSWORD": "Confirm password",
     "SIGNUP_MODAL_ACCEPT_CGU": "I accept Soundy's CGU",
-    "SIGNUP_MODAL_BTN": "Sign up"
+    "SIGNUP_MODAL_BTN": "Sign up",
+    "COOKIE_BANNER_TITLE": "Can we store cookies ?",
+    "COOKIE_BANNER_TXT": "By continuing to browse this site, you accept the use of cookies to provide you with a better browsing experience. By clicking on \"Accept\", you allow us to store cookies on your device, in order to give you the best possible experience. By clicking on \"Decline\", you refuse the use of cookies. No personal data is stored and cookies are not used for advertising content.",
+    "COOKIE_BANNER_BTN_ACCEPT": "Accept",
+    "COOKIE_BANNER_BTN_DECLINE": "Decline"
 }

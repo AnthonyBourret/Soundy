@@ -2,23 +2,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface UserState {
-  country?: string;
-  email?: string;
-  name?: string;
-  pictureUrl?: string;
-  token?: string | null;
-  favorite: number[];
   acceptCookies: boolean;
+  country?: string | null;
+  email?: string | null;
+  favorite: number[];
+  name?: string | null;
+  picture?: string | null;
+  token?: string | null;
 }
 
 const initialState: UserState = {
-  country: undefined,
-  email: undefined,
-  name: undefined,
-  pictureUrl: undefined,
-  token: localStorage.getItem('AUTH_TOKEN') || undefined,
-  favorite: [],
   acceptCookies: false,
+  country: null,
+  email: null,
+  favorite: [],
+  name: null,
+  picture: null,
+  token: localStorage.getItem('AUTH_TOKEN') || null,
 };
 
 const userReducer = createSlice({
@@ -34,8 +34,8 @@ const userReducer = createSlice({
     setName: (state, action: { payload: string }) => {
       state.name = action.payload;
     },
-    setPictureUrl: (state, action: { payload: string }) => {
-      state.pictureUrl = action.payload;
+    setPicture: (state, action: { payload: string }) => {
+      state.picture = action.payload;
     },
     setToken: (state, action: { payload: string | null }) => {
       state.token = action.payload;
@@ -53,7 +53,13 @@ const userReducer = createSlice({
 });
 
 export const {
-  setName, setPictureUrl, setCountry, setToken,
+  setAcceptCookies,
+  setCountry,
+  setEmail,
+  setFavorite,
+  setName,
+  setPicture,
+  setToken,
 } = userReducer.actions;
 
 export default userReducer.reducer;

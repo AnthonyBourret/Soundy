@@ -4,7 +4,6 @@ import Header from '../header/Header';
 import Hero from './Hero';
 import Services from './Services';
 import SongOverview from './SongOverview';
-import CookiesPopup from '../modals/CookiesPopup';
 import { ScrollToTopButton } from '../customElements';
 
 type HomeProps = {
@@ -57,7 +56,6 @@ function Home(props: HomeProps): JSX.Element {
       <Services />
       <SongOverview />
       <ScrollToTopButton />
-      <CookiesPopup />
     </div>
   );
 }

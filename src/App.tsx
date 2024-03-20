@@ -8,10 +8,13 @@ import Create from './components/createPage/Create';
 import Profile from './components/profilePage/Profile';
 // import getUsersFromToken from './helpers/getUserInfosFromToken';
 import { useAppSelector } from './redux';
+import CookiePopup from './components/modals/CookiesPopup';
 
 export default function App() {
   // TODO : State for login status => To adjust with redux
   const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [isCookieAccepted, setIsCookieAccepted] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
   // const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.user.token);
 
@@ -61,6 +64,13 @@ export default function App() {
         {/* // TODO Add the 404 error page */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      {isVisible
+        && (
+        <CookiePopup
+          setIsCookieAccepted={setIsCookieAccepted}
+          setIsVisible={setIsVisible}
+        />
+        )}
     </Suspense>
   );
 }

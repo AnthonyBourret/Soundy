@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useCookies } from 'react-cookie';
+import { useAppSelector } from '../../redux';
 
 // Language Selector With Dropdown On Burger Menu
 export function LanguageSelector(): JSX.Element {
   const { t, i18n } = useTranslation('common');
+  const [cookies, setCookie] = useCookies(['language']);
+  const cookiesStatus = useAppSelector((state) => state.user.acceptCookies);
 
   const lngs = {
     fr: { nativeName: t('MENU_LANGUAGE_1', { ns: 'common' }) },
@@ -12,7 +16,17 @@ export function LanguageSelector(): JSX.Element {
 
   function handleClick(lng: string) {
     i18n.changeLanguage(lng);
+    if (cookiesStatus) {
+      setCookie('language', lng, { path: '/' });
+    }
   }
+
+  useEffect(() => {
+    if (cookiesStatus) {
+      const lng = i18n.resolvedLanguage;
+      setCookie('language', lng, { path: '/' });
+    }
+  }, [cookiesStatus, i18n.resolvedLanguage, setCookie]);
 
   return (
     <details>

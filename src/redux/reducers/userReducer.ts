@@ -53,7 +53,7 @@ const userReducer = createSlice({
 });
 
 export const {
-  setName, setPictureUrl, setCountry, setToken,
+  setName, setPictureUrl, setCountry, setToken, setAcceptCookies,
 } = userReducer.actions;
 
 export default userReducer.reducer;

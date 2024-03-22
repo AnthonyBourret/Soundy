@@ -1,18 +1,20 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { setAcceptCookies, useAppDispatch } from '../../redux';
 
 interface Props {
-  setIsCookieAccepted: (isAccepted: boolean) => void;
   setIsVisible: (isVisible: boolean) => void;
 }
 
-function CookiesPopup({ setIsCookieAccepted, setIsVisible }: Props) {
+function CookiesPopup({ setIsVisible }: Props) {
+  const dispatch = useAppDispatch();
+
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
     const target = e.target as HTMLButtonElement;
     if (target.value === 'Accept') {
-      setIsCookieAccepted(true);
+      dispatch(setAcceptCookies(true));
     } else {
-      setIsCookieAccepted(false);
+      dispatch(setAcceptCookies(false));
     }
     setIsVisible(false);
   }

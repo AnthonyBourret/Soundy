@@ -25,16 +25,16 @@ const userReducer = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setCountry: (state, action: { payload: string }) => {
+    setCountry: (state, action: { payload: UserState['country'] }) => {
       state.country = action.payload;
     },
-    setEmail: (state, action: { payload: string }) => {
+    setEmail: (state, action: { payload: UserState['email'] }) => {
       state.email = action.payload;
     },
-    setName: (state, action: { payload: string }) => {
+    setName: (state, action: { payload: UserState['name'] }) => {
       state.name = action.payload;
     },
-    setPicture: (state, action: { payload: string }) => {
+    setPicture: (state, action: { payload: UserState['picture'] }) => {
       state.picture = action.payload;
     },
     setToken: (state, action: { payload: string | null }) => {

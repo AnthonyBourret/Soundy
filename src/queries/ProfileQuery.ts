@@ -1,6 +1,6 @@
-import { gql } from '@apollo/client/core';
+import { gql } from '../types/__generated_schemas__/gql';
 
-const ProfileQuery = gql`
+const ProfileQuery = gql(`
   query Profile {
     profile {
       country
@@ -9,6 +9,6 @@ const ProfileQuery = gql`
       email
     }
   }
-`;
+`);
 
 export default ProfileQuery;

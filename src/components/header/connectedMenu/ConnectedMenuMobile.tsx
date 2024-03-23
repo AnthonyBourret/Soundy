@@ -10,7 +10,7 @@ interface Props {
 function ConnectedMenuMobile(props: Props): JSX.Element {
   const { menuButton } = props;
   const userName = useAppSelector((state) => state.user.name);
-  const userPicture = useAppSelector((state) => state.user.pictureUrl);
+  const userPicture = useAppSelector((state) => state.user.picture);
 
   const userNameRender = useMemo((): JSX.Element | null => {
     if (userName) {

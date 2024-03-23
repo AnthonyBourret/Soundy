@@ -10,14 +10,22 @@ interface SongCardProps {
   artist: {
     name: string;
   };
-  duration: string;
+  duration: number;
   cover: string;
   isLogin: boolean;
+  songId: number;
 }
 
-function SongCard({
-  title, artist, duration, cover, isLogin,
-}: SongCardProps) {
+function SongCard(props: SongCardProps) {
+  const {
+    title,
+    artist,
+    duration,
+    cover,
+    isLogin,
+    songId,
+  } = props;
+
   return (
     <div className="card flex-row w-full h-30 p-2 min-[540px]:w-[17%] min-w-[190px] min-[540px]:max-w-[190px] bg-base-200 shadow-xl border border-1 border-stone-700">
       <div className="flex w-full items-center min-[540px]:flex-col min-[540px]:card-body min-[540px]:justify-around min-[540px]:p-1 gap-1 group relative">
@@ -37,7 +45,7 @@ function SongCard({
           {/* The Checkbox is not displayed on the SongCard component if the user is not logged in */}
           {isLogin && (
             <div className="absolute top-0 left-20 min-[540px]:top-36 min-[540px]:left-32">
-              <FavCheckBox />
+              <FavCheckBox songId={songId} />
             </div>
           )}
         </div>

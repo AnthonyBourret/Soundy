@@ -39,7 +39,7 @@ export type AllSongs = {
 };
 
 export type CardSong = {
-  id: string;
+  id: number;
   title: string;
   cover: string;
   artist: {
@@ -68,4 +68,11 @@ export type SVGProps = {
   width: string;
   height: string;
   color?: string ;
+};
+
+export type ProfileJWT = {
+  id: number,
+  ip: string,
+  iat: number,
+  exp: number,
 };

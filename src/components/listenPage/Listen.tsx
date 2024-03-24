@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
-import { SongListenPageQuery } from '../../queries';
+import { SongListenPageQuery } from '../../requests/queries';
 import Header from '../header/Header';
 import SongDisplay from './SongDisplay';
 import AlbumDisplay from './AlbumDisplay';
@@ -43,11 +43,11 @@ function Listen({ isLogin }: { isLogin: boolean }) {
       // if (albums == null) return null;
       // if (albums.length === 0) return null;
       return (
-        <AlbumDisplay albums={albums} isLogin={isLogin} sortBy={sortBy} />
+        <AlbumDisplay albums={albums} sortBy={sortBy} />
       );
     }
     return null;
-  }, [albums, chosenDisplay, isLogin, sortBy]);
+  }, [albums, chosenDisplay, sortBy]);
 
   return (
     <div className="mb-5 flex flex-col items-center w-full min-h-screen">

@@ -4,11 +4,11 @@ import { CardAlbum } from '../../types';
 
 interface Props {
   albums: CardAlbum[];
-  isLogin: boolean;
+  // isLogin: boolean;
   sortBy: string | null;
 }
 
-function AlbumDisplay({ albums, isLogin, sortBy }: Props) {
+function AlbumDisplay({ albums, sortBy }: Props) {
   const [sortedAlbums, setSortedAlbums] = useState<CardAlbum[]>([]);
 
   // The useEffect is used to make a new array of songs based on the sortBy value.
@@ -47,7 +47,7 @@ function AlbumDisplay({ albums, isLogin, sortBy }: Props) {
           cover={album.cover}
           year={album.release_year}
           songs={album.songs}
-          isLogin={isLogin}
+          // isLogin={isLogin}
         />
       ))}
     </div>

@@ -1,4 +1,4 @@
-import { gql } from '../types/__generated_schemas__/gql';
+import { gql } from '../../types/__generated_schemas__/gql';
 
 const LikeSongMutation = gql(`
   mutation Mutation($songId: Int!) {

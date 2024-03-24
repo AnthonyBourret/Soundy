@@ -1,4 +1,4 @@
-import { gql } from '../types/__generated_schemas__/gql';
+import { gql } from '../../types/__generated_schemas__/gql';
 
 const SongListenPageQuery = gql(`
   query SongListenPageQuery($limit: Int) {
@@ -13,10 +13,7 @@ const SongListenPageQuery = gql(`
       songOnAlbum {
         album_id
       }
-      like {
-        artist_id
-        song_id
-      }
+      isLiked
     }
     albums{
       id

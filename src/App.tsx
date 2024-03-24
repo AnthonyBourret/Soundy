@@ -14,7 +14,7 @@ import {
   useAppSelector,
   useAppDispatch,
 } from './redux';
-import ProfileQuery from './queries/ProfileQuery';
+import ProfileQuery from './requests/queries/ProfileQuery';
 
 export default function App() {
   // TODO : State for login status => To adjust with redux

@@ -14,6 +14,7 @@ interface SongCardProps {
   cover: string;
   isLogin: boolean;
   songId: number;
+  isLiked: boolean;
 }
 
 function SongCard(props: SongCardProps) {
@@ -24,6 +25,7 @@ function SongCard(props: SongCardProps) {
     cover,
     isLogin,
     songId,
+    isLiked,
   } = props;
 
   return (
@@ -45,7 +47,7 @@ function SongCard(props: SongCardProps) {
           {/* The Checkbox is not displayed on the SongCard component if the user is not logged in */}
           {isLogin && (
             <div className="absolute top-0 left-20 min-[540px]:top-36 min-[540px]:left-32">
-              <FavCheckBox songId={songId} />
+              <FavCheckBox songId={songId} isLiked={isLiked} />
             </div>
           )}
         </div>

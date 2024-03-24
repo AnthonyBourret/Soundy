@@ -1,54 +1,84 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@apollo/client';
 
 import { AddIconChecked, AddIconUnchecked } from '../../svg';
-import LikeSongMutation from '../../queries/LikeSongMutation';
-import Spinner from './Spinner';
-import getUserIdFromToken from '../../utils/getUserIdFromToken';
+import LikeSongMutation from '../../requests/mutations/LikeSongMutation';
+import UnlikeSongMutation from '../../requests/mutations/UnlikeSongMutation';
 
 type Props = {
+  isLiked: boolean;
   songId: number;
 };
 
 function FavCheckBox(props: Props): JSX.Element {
-  const token = localStorage.getItem('AUTH_TOKEN');
-  const { songId } = props;
+  const { songId, isLiked } = props;
+  // Initial the state from all songs request, if we like or unlike after that
+  // it will be only updated in local
+  const [likeSongState, setLikeSongState] = useState(isLiked);
+
   const { t } = useTranslation('common');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [likeSong, { data, loading }] = useMutation(
+  const [likeSong, { loading: likeSongLoading }] = useMutation(
     LikeSongMutation,
     {
       variables: { songId },
     },
   );
 
-  const icon = useMemo(() => {
-    if (loading) {
-      return <Spinner />;
+  const [unlikeSong, { loading: unlikeSongLoading }] = useMutation(
+    UnlikeSongMutation,
+    {
+      variables: { songId },
+    },
+  );
+
+  const handleClick = useCallback(async (action: 'like' | 'unlike') => {
+    if (action === 'like') {
+      const response = await likeSong();
+
+      if (response) {
+        setLikeSongState(true);
+      }
+    }
+
+    if (action === 'unlike') {
+      const response = await unlikeSong();
+
+      if (response) {
+        setLikeSongState(false);
+      }
+    }
+  }, [likeSong, unlikeSong]);
+
+  const likeButton = useMemo(() => {
+    if (likeSongState) {
+      return (
+        <button
+          type="submit"
+          aria-label="unlike-song"
+          onClick={() => handleClick('unlike')}
+          disabled={unlikeSongLoading}
+        >
+          <AddIconChecked width="32px" height="32px" />
+        </button>
+      );
     }
 
     return (
-      <div className="swap-on">
-        <button type="button" onClick={() => getUserIdFromToken(token ?? '')}>azpaozpaozap</button>
-        <AddIconChecked width="32px" height="32px" />
-      </div>
+      <button
+        type="submit"
+        aria-label="like-song"
+        onClick={() => handleClick('like')}
+        disabled={likeSongLoading}
+      >
+        <AddIconUnchecked width="32px" height="32px" />
+      </button>
     );
-  }, [loading, token]);
+  }, [handleClick, likeSongLoading, likeSongState, unlikeSongLoading]);
 
   return (
     <div className="min-[540px]:tooltip" data-tip={t('ADD_TO_FAV_TOOLTIP')}>
-      <label className="swap">
-        <input type="checkbox" />
-        <div className="swap-on">
-          <AddIconChecked width="32px" height="32px" />
-        </div>
-        <div className="swap-off">
-          <AddIconUnchecked width="32px" height="32px" />
-        </div>
-        {icon}
-      </label>
+      {likeButton}
     </div>
   );
 }

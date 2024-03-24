@@ -21,16 +21,16 @@ function CookiesPopup({ setIsVisible }: Props) {
 
   const { t } = useTranslation('translation');
   return (
-    <div className="fixed bottom-0 bg-neutral p-6 m-2 border border-stone-700 rounded-box md:w-1/3">
-      <div className="flex flex-col gap-6">
-        <h3 className="text-lg font-semibold">{t('COOKIE_BANNER_TITLE')}</h3>
+    <div className="fixed bottom-44 sm:bottom-0 bg-primary px-6 py-10 sm:p-6 m-2 border border-stone-700 rounded-box md:w-2/5">
+      <div className="flex flex-col gap-10 sm:gap-6">
+        <h3 className="text-xl font-semibold">{t('COOKIE_BANNER_TITLE')}</h3>
         <p className="text-sm text-justify">{t('COOKIE_BANNER_TXT')}</p>
         <div className="flex self-center gap-4">
           <button
             onClick={(e) => handleClick(e)}
             type="button"
             value="Accept"
-            className="btn btn-primary"
+            className="btn btn-base-100"
           >
             {t('COOKIE_BANNER_BTN_ACCEPT')}
           </button>
@@ -38,7 +38,7 @@ function CookiesPopup({ setIsVisible }: Props) {
             onClick={(e) => handleClick(e)}
             type="button"
             value="Decline"
-            className="btn btn-primary"
+            className="btn btn-base-100"
           >
             {t('COOKIE_BANNER_BTN_DECLINE')}
           </button>

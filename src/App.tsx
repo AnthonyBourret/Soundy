@@ -1,14 +1,21 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { useQuery } from '@apollo/client';
 import Home from './components/homePage/Home';
 import Listen from './components/listenPage/Listen';
 import Background from './components/Background';
 import Favorites from './components/favoritesPage/Favorites';
 import Create from './components/createPage/Create';
 import Profile from './components/profilePage/Profile';
-// import getUsersFromToken from './helpers/getUserInfosFromToken';
-import { useAppSelector } from './redux';
+import {
+  setCountry,
+  setName,
+  setPicture,
+  useAppSelector,
+  useAppDispatch,
+} from './redux';
+import ProfileQuery from './requests/queries/ProfileQuery';
 import CookiePopup from './components/modals/CookiesPopup';
 
 export default function App() {
@@ -18,22 +25,26 @@ export default function App() {
   // const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.user.token);
   const [cookies] = useCookies(['acceptCookies']);
+  const dispatch = useAppDispatch();
+  const { data } = useQuery(ProfileQuery);
 
   useEffect(() => {
     if (token == null) {
       setIsLogin(false);
     }
-
     if (token) {
       setIsLogin(true);
-      // const userInfos = getUsersFromToken(token);
-      // setName(userInfos);
-      // WIP setup other user infos
+
+      if (data?.profile != null) {
+        dispatch(setName(data.profile.name));
+        dispatch(setCountry(data.profile.country));
+        dispatch(setPicture(data.profile.picture));
+      }
     }
     if (cookies.acceptCookies === true) {
       setIsVisible(false);
     }
-  }, [token, cookies]);
+  }, [data, dispatch, token, cookies]);
 
   return (
     <Suspense fallback="...is loading">

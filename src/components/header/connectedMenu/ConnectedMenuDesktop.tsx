@@ -1,6 +1,7 @@
 import React from 'react';
 import { MenuButton } from '../../../types';
 import { LanguageSelector, CustomButton, Avatar } from '../../customElements';
+import { useAppSelector } from '../../../redux';
 
 interface Props {
   menuButton: MenuButton[];
@@ -8,6 +9,7 @@ interface Props {
 
 function ConnectedMenuDesktop(props: Props): JSX.Element {
   const { menuButton } = props;
+  const userPicture = useAppSelector((state) => state.user.picture);
 
   return (
     <div className="navbar-end hidden mr-4 lg:flex">
@@ -28,7 +30,7 @@ function ConnectedMenuDesktop(props: Props): JSX.Element {
             index={0}
             role="button"
             size="12"
-            img="https://picsum.photos/id/1062/200"
+            img={userPicture || 'https://t4.ftcdn.net/jpg/00/64/67/27/360_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg'}
             alt="user avatar"
           />
           <ul className="dropdown-content z-[1] menu p-2 mt-4 shadow bg-base-200 rounded-box rounded-t-none w-52 border border-stone-700">

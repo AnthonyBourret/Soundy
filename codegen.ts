@@ -2,7 +2,10 @@ import { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
   schema: process.env.LYRICS_DB_API_URL,
-  documents: ['src/queries/*.{ts,tsx}'],
+  documents: [
+    'src/requests/queries/*.{ts,tsx}',
+    'src/requests/mutations/*.{ts,tsx}',
+  ],
   generates: {
     './src/types/__generated_schemas__/': {
       preset: 'client',

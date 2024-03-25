@@ -3,7 +3,7 @@ import { setContext } from '@apollo/client/link/context';
 
 const authLink = setContext((_, { headers }) => {
   // Get the authentication token from local storage if it exists
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem('AUTH_TOKEN');
 
   // Return the headers to the context so HTTP link can read them
   return {

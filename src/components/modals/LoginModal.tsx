@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLazyQuery } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { LoginQuery } from '../../queries';
+import { LoginQuery } from '../../requests/queries';
 import type { LoginInput } from '../../types';
 import { setToken, useAppDispatch } from '../../redux';
 

@@ -1,9 +1,13 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useCookies } from 'react-cookie';
 
 // Language Selector With Dropdown On Burger Menu
 export function LanguageSelector(): JSX.Element {
   const { t, i18n } = useTranslation('common');
+  const [cookies, setCookie] = useCookies(['language', 'acceptCookies']);
 
   const lngs = {
     fr: { nativeName: t('MENU_LANGUAGE_1', { ns: 'common' }) },
@@ -12,7 +16,17 @@ export function LanguageSelector(): JSX.Element {
 
   function handleClick(lng: string) {
     i18n.changeLanguage(lng);
+    if (cookies.acceptCookies === true) {
+      setCookie('language', lng, { path: '/' });
+    }
   }
+
+  useEffect(() => {
+    if (cookies.acceptCookies === true) {
+      const lng = i18n.resolvedLanguage;
+      setCookie('language', lng, { path: '/' });
+    }
+  }, [i18n.resolvedLanguage, setCookie, cookies.acceptCookies]);
 
   return (
     <details>

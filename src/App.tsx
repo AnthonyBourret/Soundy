@@ -1,32 +1,42 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 import Home from './components/homePage/Home';
 import Listen from './components/listenPage/Listen';
 import Background from './components/Background';
 import Favorites from './components/favoritesPage/Favorites';
 import Create from './components/createPage/Create';
 import Profile from './components/profilePage/Profile';
-// import getUsersFromToken from './helpers/getUserInfosFromToken';
-import { useAppSelector } from './redux';
+import {
+  setCountry,
+  setName,
+  setPicture,
+  useAppSelector,
+  useAppDispatch,
+} from './redux';
+import ProfileQuery from './requests/queries/ProfileQuery';
 
 export default function App() {
   // TODO : State for login status => To adjust with redux
   const [isLogin, setIsLogin] = useState<boolean>(false);
-  // const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.user.token);
+  const dispatch = useAppDispatch();
+  const { data } = useQuery(ProfileQuery);
 
   useEffect(() => {
     if (token == null) {
       setIsLogin(false);
     }
-
     if (token) {
       setIsLogin(true);
-      // const userInfos = getUsersFromToken(token);
-      // setName(userInfos);
-      // WIP setup other user infos
+
+      if (data?.profile != null) {
+        dispatch(setName(data.profile.name));
+        dispatch(setCountry(data.profile.country));
+        dispatch(setPicture(data.profile.picture));
+      }
     }
-  }, [token]);
+  }, [data, dispatch, token]);
 
   return (
     <Suspense fallback="...is loading">

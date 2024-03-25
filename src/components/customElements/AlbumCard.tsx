@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import FavCheckBox from './FavCheckBox';
+// import FavCheckBox from './FavCheckBox';
 import { secondsToFormatedDuration, capitalizeFirstLetter } from '../../utils';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   cover: string;
   year: string;
   songs: SongProps[];
-  isLogin: boolean;
+  // isLogin: boolean;
 }
 
 interface SongProps {
@@ -18,7 +18,7 @@ interface SongProps {
 }
 
 function AlbumCard({
-  title, cover, year, songs, isLogin,
+  title, cover, year, songs,
 } : Props): JSX.Element {
   const { t } = useTranslation('common');
 
@@ -26,7 +26,7 @@ function AlbumCard({
     <tr className="hover cursor-pointer" key={song.id}>
       <th>1</th>
       <td>{song.title}</td>
-      <td className="text-center">{secondsToFormatedDuration(song.duration)}</td>
+      <td className="text-center">{secondsToFormatedDuration(Number(song.duration))}</td>
     </tr>
   )), [songs]);
 
@@ -40,11 +40,12 @@ function AlbumCard({
         />
       </figure>
       {/* The Checkbox is not displayed on the SongCard component if the user is not logged in */}
-      {isLogin && (
+      {/* For the moment, albums cannot be liked */}
+      {/* {isLogin && (
         <div className="absolute top-20 left-20 lg:top-48 lg:left-48">
           <FavCheckBox />
         </div>
-      )}
+      )} */}
       <div>
         <div className="pl-[120px] pt-2 lg:px-4 lg:py-2 lg:text-xl">
           <p className="font-bold">{capitalizeFirstLetter(title)}</p>

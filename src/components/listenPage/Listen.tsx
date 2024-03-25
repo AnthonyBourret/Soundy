@@ -1,24 +1,29 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
-import { SongListenPageQuery } from '../../queries';
+import { SongListenPageQuery } from '../../requests/queries';
 import Header from '../header/Header';
 import SongDisplay from './SongDisplay';
 import AlbumDisplay from './AlbumDisplay';
 import { ScrollToTopButton, SongAndAlbumOrder, Spinner } from '../customElements';
-import { CardSong, CardAlbum, ChosenDisplay } from '../../types';
+import { CardAlbum, ChosenDisplay } from '../../types';
 import SearchBar from './SearchBar';
+import { SongListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 function Listen({ isLogin }: { isLogin: boolean }) {
   const { data, loading, error } = useQuery(SongListenPageQuery, { variables: { limit: 30 } });
-  const [songs, setSongs] = useState<CardSong[]>([]);
+  const [songs, setSongs] = useState<SongListenPageQueryQuery['songs']>([]);
   const [albums, setAlbums] = useState<CardAlbum[]>([]);
   const [chosenDisplay, setChosenDisplay] = useState<ChosenDisplay>('songs');
   const [sortBy, setSortBy] = useState<string | null>(null);
 
   useEffect(() => {
-    if (data) {
+    if (data?.songs !== undefined) {
       setSongs(data.songs);
-      setAlbums(data.albums);
+    }
+
+    if (data?.albums !== undefined) {
+      const albumData = data!.albums as unknown as CardAlbum[];
+      setAlbums(albumData);
     }
   }, [data]);
 
@@ -35,12 +40,14 @@ function Listen({ isLogin }: { isLogin: boolean }) {
   // useMemo for the albums
   const albumDisplayed = useMemo(() => {
     if (chosenDisplay === 'albums') {
+      // if (albums == null) return null;
+      // if (albums.length === 0) return null;
       return (
-        <AlbumDisplay albums={albums} isLogin={isLogin} sortBy={sortBy} />
+        <AlbumDisplay albums={albums} sortBy={sortBy} />
       );
     }
     return null;
-  }, [albums, chosenDisplay, isLogin, sortBy]);
+  }, [albums, chosenDisplay, sortBy]);
 
   return (
     <div className="mb-5 flex flex-col items-center w-full min-h-screen">

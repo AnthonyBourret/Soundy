@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { MenuButton } from '../../../types';
 import { LanguageSelector, CustomButton, Avatar } from '../../customElements';
+import { useAppSelector } from '../../../redux';
 
 interface Props {
   menuButton: MenuButton[];
@@ -8,6 +9,16 @@ interface Props {
 
 function ConnectedMenuMobile(props: Props): JSX.Element {
   const { menuButton } = props;
+  const userName = useAppSelector((state) => state.user.name);
+  const userPicture = useAppSelector((state) => state.user.picture);
+
+  const userNameRender = useMemo((): JSX.Element | null => {
+    if (userName) {
+      return <h2 className="text-lg font-bold mr-2">{userName}</h2>;
+    }
+
+    return null;
+  }, [userName]);
 
   return (
     <div className="navbar-end py-4">
@@ -22,10 +33,10 @@ function ConnectedMenuMobile(props: Props): JSX.Element {
               index={0}
               role="button"
               size="16"
-              img="https://picsum.photos/id/1062/200"
+              img={userPicture ?? ''}
               alt="user avatar"
             />
-            <h2 className="text-lg font-bold mr-2">Username</h2>
+            {userNameRender}
           </li>
           <div className="divider divider-secondary m-1 px-1" />
           {/* Nav Button */}

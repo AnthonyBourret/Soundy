@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import Home from './components/homePage/Home';
 import Listen from './components/listenPage/Listen';
 import Background from './components/Background';
@@ -16,6 +17,7 @@ export default function App() {
   const [isVisible, setIsVisible] = useState<boolean>(true);
   // const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.user.token);
+  const [cookies] = useCookies(['acceptCookies']);
 
   useEffect(() => {
     if (token == null) {
@@ -28,7 +30,10 @@ export default function App() {
       // setName(userInfos);
       // WIP setup other user infos
     }
-  }, [token]);
+    if (cookies.acceptCookies === true) {
+      setIsVisible(false);
+    }
+  }, [token, cookies]);
 
   return (
     <Suspense fallback="...is loading">

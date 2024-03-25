@@ -1,27 +1,29 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { setAcceptCookies, useAppDispatch } from '../../redux';
+import { useCookies } from 'react-cookie';
 
 interface Props {
   setIsVisible: (isVisible: boolean) => void;
 }
 
 function CookiesPopup({ setIsVisible }: Props) {
-  const dispatch = useAppDispatch();
+  const [cookies, setCookies] = useCookies(['acceptCookies']);
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
     const target = e.target as HTMLButtonElement;
     if (target.value === 'Accept') {
-      dispatch(setAcceptCookies(true));
+      setCookies('acceptCookies', true, { path: '/' });
     } else {
-      dispatch(setAcceptCookies(false));
+      setCookies('acceptCookies', false, { path: '/' });
     }
     setIsVisible(false);
   }
 
   const { t } = useTranslation('translation');
   return (
-    <div className="fixed bottom-44 sm:bottom-0 bg-primary px-6 py-10 sm:p-6 m-2 border border-stone-700 rounded-box md:w-2/5">
+    <div className="fixed bottom-44 sm:bottom-0 bg-base-100 bg-opacity-90 backdrop-blur-[10px] px-6 py-10 sm:p-6 m-2 border border-stone-700 rounded-box md:w-2/5">
       <div className="flex flex-col gap-10 sm:gap-6">
         <h3 className="text-xl font-semibold">{t('COOKIE_BANNER_TITLE')}</h3>
         <p className="text-sm text-justify">{t('COOKIE_BANNER_TXT')}</p>
@@ -30,7 +32,7 @@ function CookiesPopup({ setIsVisible }: Props) {
             onClick={(e) => handleClick(e)}
             type="button"
             value="Accept"
-            className="btn btn-base-100"
+            className="btn btn-primary"
           >
             {t('COOKIE_BANNER_BTN_ACCEPT')}
           </button>
@@ -38,7 +40,7 @@ function CookiesPopup({ setIsVisible }: Props) {
             onClick={(e) => handleClick(e)}
             type="button"
             value="Decline"
-            className="btn btn-base-100"
+            className="btn btn-primary"
           >
             {t('COOKIE_BANNER_BTN_DECLINE')}
           </button>

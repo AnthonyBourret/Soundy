@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
@@ -9,7 +7,7 @@ interface Props {
 }
 
 function CookiesPopup({ setIsVisible }: Props) {
-  const [cookies, setCookies] = useCookies(['acceptCookies']);
+  const [, setCookies] = useCookies(['acceptCookies']);
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
     const target = e.target as HTMLButtonElement;

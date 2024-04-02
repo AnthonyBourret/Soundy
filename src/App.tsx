@@ -1,5 +1,8 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, {
+  Suspense, useEffect, useState, useMemo,
+} from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import { useQuery } from '@apollo/client';
 import Home from './components/homePage/Home';
 import Listen from './components/listenPage/Listen';
@@ -15,11 +18,13 @@ import {
   useAppDispatch,
 } from './redux';
 import ProfileQuery from './requests/queries/ProfileQuery';
+import CookiePopup from './components/modals/CookiesPopup';
 
 export default function App() {
-  // TODO : State for login status => To adjust with redux
   const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
   const token = useAppSelector((state) => state.user.token);
+  const [cookies, setCookies] = useCookies(['acceptCookies']);
   const dispatch = useAppDispatch();
   const { data } = useQuery(ProfileQuery);
 
@@ -35,8 +40,18 @@ export default function App() {
         dispatch(setCountry(data.profile.country));
         dispatch(setPicture(data.profile.picture));
       }
+
+      setIsVisible(false);
+      setCookies('acceptCookies', true, { path: '/' });
     }
-  }, [data, dispatch, token]);
+    if (cookies.acceptCookies === true) {
+      setIsVisible(false);
+    }
+  }, [data, dispatch, token, cookies, setCookies]);
+
+  const acceptCookie = useMemo(() => isVisible && (
+    <CookiePopup setIsVisible={setIsVisible} />
+  ), [isVisible]);
 
   return (
     <Suspense fallback="...is loading">
@@ -71,6 +86,7 @@ export default function App() {
         {/* // TODO Add the 404 error page */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      {acceptCookie}
     </Suspense>
   );
 }

@@ -282,7 +282,9 @@ export type SongListenPageQueryQueryVariables = Exact<{
 }>;
 
 
-export type SongListenPageQueryQuery = { __typename?: 'Query', songs?: Array<{ __typename?: 'Song', id: number, title: string, cover?: string | null, duration: number, isLiked?: boolean | null, artist?: { __typename?: 'Artist', name: string } | null, songOnAlbum?: Array<{ __typename?: 'SongOnAlbum', album_id: number } | null> | null } | null> | null, albums?: Array<{ __typename?: 'Album', id: number, title: string, cover?: string | null, release_year?: number | null, songs?: Array<{ __typename?: 'Song', id: number, title: string, duration: number } | null> | null } | null> | null };
+export type SongListenPageQueryQuery = { __typename?: 'Query', songs?: Array<{
+  release_year: number; __typename?: 'Song', id: number, title: string, cover?: string | null, duration: number, isLiked?: boolean | null, artist?: { __typename?: 'Artist', name: string } | null, songOnAlbum?: Array<{ __typename?: 'SongOnAlbum', album_id: number } | null> | null 
+} | null> | null, albums?: Array<{ __typename?: 'Album', id: number, title: string, cover?: string | null, release_year?: number | null, songs?: Array<{ __typename?: 'Song', id: number, title: string, duration: number } | null> | null } | null> | null };
 
 export type SongOverviewQueryVariables = Exact<{ [key: string]: never; }>;
 

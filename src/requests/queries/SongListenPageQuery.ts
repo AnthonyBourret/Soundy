@@ -10,9 +10,7 @@ const SongListenPageQuery = gql(`
       }
       cover
       duration
-      songOnAlbum {
-        album_id
-      }
+      release_year
       isLiked
     }
     albums{

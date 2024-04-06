@@ -35,17 +35,15 @@ function SongDisplay({ songs, isLogin, sortBy }: Props) {
       case 'durationDesc':
         sorted.sort((a, b) => (b!.duration) - (a!.duration));
         break;
+      case 'latest':
+        sorted.sort((a, b) => Number(b!.release_year) - Number(a!.release_year));
+        break;
+      case 'oldest':
+        sorted.sort((a, b) => Number(a!.release_year) - Number(b!.release_year));
+        break;
       default:
         break;
     }
-
-    // Standby API => Release years on song albums
-    // if (sortBy === 'latest') {
-    //   setSortedSongs([...songs].sort((a, b) => Number(b.releaseYear) - Number(a.releaseYear)));
-    // }
-    // if (sortBy === 'oldest') {
-    //   setSortedSongs([...songs].sort((a, b) => Number(a.releaseYear) - Number(b.releaseYear)));
-    // }
 
     setSortedSongs(sorted);
   }, [songs, sortBy]);
@@ -60,6 +58,7 @@ function SongDisplay({ songs, isLogin, sortBy }: Props) {
             artist={song!.artist || { name: '' }}
             cover={song!.cover || ''}
             duration={song!.duration}
+            releaseYear={song!.release_year}
             isLogin={isLogin}
             key={song?.id}
             songId={song!.id}

@@ -58,7 +58,7 @@ function SongDisplay({ songs, isLogin, sortBy }: Props) {
             artist={song!.artist || { name: '' }}
             cover={song!.cover || ''}
             duration={song!.duration}
-            releaseYear={song!.release_year}
+            releaseYear={song!.release_year ?? 0}
             isLogin={isLogin}
             key={song?.id}
             songId={song!.id}

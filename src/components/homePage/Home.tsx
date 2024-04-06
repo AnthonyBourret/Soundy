@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Header from '../header/Header';
 import Hero from './Hero';
 import Services from './Services';
@@ -12,6 +13,7 @@ type HomeProps = {
 };
 
 function Home(props: HomeProps): JSX.Element {
+  const { t } = useTranslation();
   const { isLogin, isRedirected = false } = props;
   const [toastVisible, setToastVisible] = useState(false);
   const navigate = useNavigate();
@@ -38,14 +40,14 @@ function Home(props: HomeProps): JSX.Element {
         return (
           <div className="toast z-30">
             <div className="alert alert-info">
-              <span>Vous devez vous connecter pour accéder à cette section</span>
+              <span>{t('CONNECT_TOAST_MESSAGE', { ns: 'common' })}</span>
             </div>
           </div>
         );
       }
       return null;
     },
-    [toastVisible],
+    [toastVisible, t],
   );
 
   return (

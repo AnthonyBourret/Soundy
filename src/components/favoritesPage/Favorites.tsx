@@ -16,7 +16,7 @@ interface Props {
 }
 
 function Favorites({ isLogin }: { isLogin: boolean }) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('translation');
   const { data, loading, error } = useQuery(FavoriteSongsQuery, { variables: { liked: true } });
   const [songs, setSongs] = useState<SongListenPageQueryQuery['songs']>([]);
   const [sortedSongs, setSortedSongs] = useState<Props['songs']>([]);
@@ -66,7 +66,7 @@ function Favorites({ isLogin }: { isLogin: boolean }) {
           <div className="w-16 h-16 min-[540px]:w-20 min-[540px]:h-20 rounded-full flex items-center justify-center">
             <Logo />
           </div>
-          <h1 className="text-2xl min-[540px]:text-4xl font-bold">{t('MENU_APP_NAME')}</h1>
+          <h1 className="text-xl min-[540px]:text-3xl font-bold">{t('FAVORITES_PAGE_TITLE')}</h1>
         </div>
       </div>
       <div className="divider py-4 px-8 min-[540px]:px-36" />

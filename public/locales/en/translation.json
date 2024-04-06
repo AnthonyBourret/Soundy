@@ -31,5 +31,6 @@
     "COOKIE_BANNER_TITLE": "This site uses cookies",
     "COOKIE_BANNER_TXT": "By continuing to browse this site, you accept the use of cookies to provide you with a better browsing experience. By clicking on \"Accept\", you allow us to store optional cookies on your device, in order to give you the best possible experience. By clicking on \"Decline\", you refuse the use of optionnal cookies. No personal data is stored and cookies are not used for advertising content.",
     "COOKIE_BANNER_BTN_ACCEPT": "Accept all",
-    "COOKIE_BANNER_BTN_DECLINE": "Decline"
+    "COOKIE_BANNER_BTN_DECLINE": "Decline",
+    "FAVORITES_PAGE_TITLE": "My Favorite Songs"
 }

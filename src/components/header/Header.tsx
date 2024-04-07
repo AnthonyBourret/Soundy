@@ -43,7 +43,7 @@ function Header(props: HeaderProps) {
       onClick: () => {
         dispatch(setToken(null));
       },
-      link: '/',
+      link: '/logout',
     },
   ];
   return (

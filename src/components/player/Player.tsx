@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PlayerPlayIcon from '../../svg/PlayerPlayIcon';
+import PlayerPrevNextIcon from '../../svg/PlayerPrevNextIcon';
+import { SoundIcon } from '../../svg';
 
-function Player() {
+const Player = () => {
+  const [value, setValue] = useState(40); // State for the first slider
+  const [soundValue, setSoundValue] = useState(50); // State for the second slider
+
   return (
-    <div className="fixed bottom-0 border-t border-stone-700 flex w-full z-50 backdrop-blur-[10px] bg-base-100 bg-opacity-50 justify-between px-5 py-3">
-      <div className="h-[50px] flex gap-3">
+    <footer className="fixed bottom-0 border-t border-stone-700 flex w-full z-50 backdrop-blur-[15px] bg-base-100 bg-opacity-50 justify-between px-5 py-3">
+      <section className="flex gap-3 items-center">
         <img
           alt="album cover"
           src="https://picsum.photos/id/684/1200/630"
@@ -14,22 +19,62 @@ function Player() {
           <h2>Titre album</h2>
           <h3>Titre musique</h3>
         </div>
-      </div>
+      </section>
 
-      <div>
-        <button type="button">prec</button>
-        <button type="button" aria-label="player play icon">
-          <PlayerPlayIcon />
+      <section className="flex gap-3 items-center">
+        <button
+          className="h-6 w-6 rotate-180"
+          type="button"
+          aria-label="player prev icon"
+        >
+          <PlayerPrevNextIcon width="w-fit" height="fit" />
         </button>
-        <button type="button">next</button>
-      </div>
+        <button
+          className="w-10 h-10 rounded-full flex items-center justify-center"
+          type="button"
+          aria-label="player play icon"
+        >
+          <PlayerPlayIcon width="w-fit" height="fit" />
+        </button>
+        <button
+          className="h-6 w-6 md-5"
+          type="button"
+          aria-label="player prev icon"
+        >
+          <PlayerPrevNextIcon width="w-fit" height="fit" />
+        </button>
 
-      <div>
-        <button type="button">sound ic</button>
-        slider
-      </div>
-    </div>
+        <span>00:00</span>
+        <input
+          className="w-[500px] amplitude-song-slider"
+          max="100"
+          min={0}
+          type="range"
+          step=".1"
+          id="song-percentage-played"
+          style={{ backgroundSize: `${value}% 100%` }}
+          value={value}
+          onChange={(e) => setValue(Number(e.target.value))}
+        />
+        <span>03:00</span>
+      </section>
+
+      <section className="flex gap-3 items-center">
+        <button type="button" aria-label="sound icon" className="w-6 h-6">
+          <SoundIcon width="w-6" height="h-6" />
+        </button>
+        <input
+          className="range-primary w-40"
+          max="100"
+          min={0}
+          type="range"
+          value={soundValue}
+          style={{ backgroundSize: `${soundValue}% 100%` }}
+          onChange={(e) => setSoundValue(Number(e.target.value))}
+        />
+      </section>
+    </footer>
   );
-}
+};
 
 export default Player;

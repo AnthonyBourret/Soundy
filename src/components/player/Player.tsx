@@ -1,11 +1,32 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React, { useState } from 'react';
+import ReactAudioPlayer from 'react-audio-player';
 import PlayerPlayIcon from '../../svg/PlayerPlayIcon';
 import PlayerPrevNextIcon from '../../svg/PlayerPrevNextIcon';
 import { SoundIcon } from '../../svg';
 
 const Player = () => {
-  const [value, setValue] = useState(40); // State for the first slider
-  const [soundValue, setSoundValue] = useState(50); // State for the second slider
+  const [value, setValue] = useState(40);
+  const [soundValue, setSoundValue] = useState(50);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  // useEffect(
+  //   () => {
+  //     if (isPlaying) {
+  //       // @ts-ignore
+  //       document.getElementById('audio-element').play();
+  //     }
+  //   },
+  //   [isPlaying],
+  // );
+
+  const handlePlay = () => {
+    setIsPlaying(true);
+  };
+
+  const handlePause = () => {
+    setIsPlaying(false);
+  };
 
   return (
     <footer className="fixed bottom-0 border-t border-stone-700 flex w-full z-50 backdrop-blur-[15px] bg-base-100 bg-opacity-50 justify-between px-5 py-3">
@@ -33,6 +54,10 @@ const Player = () => {
           className="w-10 h-10 rounded-full flex items-center justify-center"
           type="button"
           aria-label="player play icon"
+          onClick={() => {
+            setIsPlaying(!isPlaying);
+            // handlePlay();
+          }}
         >
           <PlayerPlayIcon width="w-fit" height="fit" />
         </button>
@@ -73,6 +98,13 @@ const Player = () => {
           onChange={(e) => setSoundValue(Number(e.target.value))}
         />
       </section>
+      <ReactAudioPlayer
+        src="./audio-element.ogg"
+        autoPlay
+        controls
+        onPlay={handlePlay}
+        onPause={handlePause}
+      />
     </footer>
   );
 };

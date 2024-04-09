@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
-import { SongListenPageQuery } from '../../requests/queries';
+import { ListenPageQuery } from '../../requests/queries';
 import Header from '../header/Header';
 import SongDisplay from './SongDisplay';
 import AlbumDisplay from './AlbumDisplay';
 import { ScrollToTopButton, SongAndAlbumOrder, Spinner } from '../customElements';
 import { CardAlbum, ChosenDisplay } from '../../types';
 import SearchBar from './SearchBar';
-import { SongListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
+import { ListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 function Listen({ isLogin }: { isLogin: boolean }) {
-  const { data, loading, error } = useQuery(SongListenPageQuery, { variables: { limit: 30 } });
-  const [songs, setSongs] = useState<SongListenPageQueryQuery['songs']>([]);
+  const { data, loading, error } = useQuery(ListenPageQuery, { variables: { limit: 30 } });
+  const [songs, setSongs] = useState<ListenPageQueryQuery['songs']>([]);
   const [albums, setAlbums] = useState<CardAlbum[]>([]);
   const [chosenDisplay, setChosenDisplay] = useState<ChosenDisplay>('songs');
   const [sortBy, setSortBy] = useState<string | null>(null);

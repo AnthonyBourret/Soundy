@@ -8,7 +8,7 @@
     "dev": "vite --host",
     "eslint": "eslint .",
     "compile": "graphql-codegen --watch -r dotenv/config",
-    "init": "concurrently \"npm run lyrics_library_api\" \"npm run dev\"",
+    "init": "concurrently \"npm run lyrics-library\" \"npm run dev\"",
     "server": "cd ../lyrics-library && yarn dev",
     "test": "vitest",
     "typescript": "tsc --noEmit"

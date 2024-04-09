@@ -4,8 +4,8 @@ import { CardAlbum } from '../../types';
 
 interface Props {
   albums: CardAlbum[];
-  // isLogin: boolean;
   sortBy: string | null;
+  // isLogin: boolean;
 }
 
 function AlbumDisplay({ albums, sortBy }: Props) {
@@ -17,7 +17,6 @@ function AlbumDisplay({ albums, sortBy }: Props) {
   useEffect(() => {
     if (!albums) {
       setSortedAlbums([]);
-      return;
     }
 
     const sorted = [...albums].filter((song) => song !== null);
@@ -29,7 +28,6 @@ function AlbumDisplay({ albums, sortBy }: Props) {
       case 'descendingName':
         sorted.sort((a, b) => b!.title.localeCompare(a!.title));
         break;
-
       // Todo => Calculate the duration of the album with the songs duration
       // case 'durationAsc':
       //   sorted.sort((a, b) => (a!.duration) - (b!.duration));
@@ -56,6 +54,7 @@ function AlbumDisplay({ albums, sortBy }: Props) {
           key={album.id}
           title={album.title}
           cover={album.cover}
+          artist={album.artist.name}
           year={album.release_year}
           songs={album.songs}
           // isLogin={isLogin}

@@ -5,6 +5,7 @@ import { secondsToFormatedDuration, capitalizeFirstLetter } from '../../utils';
 
 interface Props {
   title: string;
+  artist: string;
   cover: string;
   year: string;
   songs: SongProps[];
@@ -18,7 +19,7 @@ interface SongProps {
 }
 
 function AlbumCard({
-  title, cover, year, songs,
+  title, cover, artist, year, songs,
 } : Props): JSX.Element {
   const { t } = useTranslation('common');
 
@@ -49,7 +50,7 @@ function AlbumCard({
       <div>
         <div className="pl-[120px] pt-2 lg:px-4 lg:py-2 lg:text-xl">
           <p className="font-bold">{capitalizeFirstLetter(title)}</p>
-          <p className="font-semibold">Artist</p>
+          <p className="font-semibold">{artist}</p>
           <div className="w-full flex flex-col min-[425px]:flex-row min-[425px]:items-center min-[425px]:justify-between min-[425px]:pr-4 lg:pr-0">
             <p className="font-semibold">{year}</p>
             <p className="text-xs font-semibold pt-0.5 min-[425px]:pt-0">

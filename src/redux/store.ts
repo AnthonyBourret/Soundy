@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { incrementReducer, userReducer } from './reducers';
+import { playerReducer, userReducer } from './reducers';
 
 export const store = configureStore({
   reducer: {
-    increment: incrementReducer,
+    player: playerReducer,
     user: userReducer,
   },
 });

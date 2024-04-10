@@ -4,9 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import PlayerPlayIcon from '../../svg/PlayerPlayIcon';
 import PlayerPrevNextIcon from '../../svg/PlayerPrevNextIcon';
 import { SoundIcon } from '../../svg';
-
-// import audioSrcMP3 from './audio-element.mp3';
-const audioSrcMP3 = 'https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg';
+import AudioSource from './AudioSource';
 
 const Player = () => {
   const [value, setValue] = useState(40);
@@ -113,12 +111,7 @@ const Player = () => {
         />
       </section>
 
-      <audio ref={audioRef}>
-        <source src={audioSrcMP3} type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
-
-      {/* <ReactPlayer url="https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg" width="100%" height="50px" controls /> */}
+      <AudioSource audioRef={audioRef} />
     </footer>
   );
 };

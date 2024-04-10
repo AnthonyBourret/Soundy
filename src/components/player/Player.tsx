@@ -1,32 +1,47 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useState } from 'react';
-import ReactAudioPlayer from 'react-audio-player';
+import React, { useEffect, useRef, useState } from 'react';
+// import ReactPlayer from 'react-player';
 import PlayerPlayIcon from '../../svg/PlayerPlayIcon';
 import PlayerPrevNextIcon from '../../svg/PlayerPrevNextIcon';
 import { SoundIcon } from '../../svg';
+
+// import audioSrcMP3 from './audio-element.mp3';
+const audioSrcMP3 = 'https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg';
 
 const Player = () => {
   const [value, setValue] = useState(40);
   const [soundValue, setSoundValue] = useState(50);
   const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  // useEffect(
-  //   () => {
-  //     if (isPlaying) {
-  //       // @ts-ignore
-  //       document.getElementById('audio-element').play();
-  //     }
-  //   },
-  //   [isPlaying],
-  // );
-
-  const handlePlay = () => {
-    setIsPlaying(true);
+  const handlePlayPause = () => {
+    if (isPlaying) {
+      audioRef.current!.pause();
+    } else {
+      audioRef.current!.play();
+    }
+    setIsPlaying(!isPlaying);
   };
 
-  const handlePause = () => {
-    setIsPlaying(false);
-  };
+  useEffect(() => {
+    if (audioRef.current) {
+      const updateProgress = () => {
+        if (audioRef.current && audioRef.current.currentTime > 0) {
+          const percentage = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+          setValue(percentage);
+        }
+      };
+      const currentAudioRef = audioRef.current;
+      currentAudioRef.addEventListener('timeupdate', updateProgress);
+
+      return () => {
+        if (currentAudioRef) {
+          currentAudioRef.removeEventListener('timeupdate', updateProgress);
+        }
+      };
+    }
+    return () => {};
+  }, []);
 
   return (
     <footer className="fixed bottom-0 border-t border-stone-700 flex w-full z-50 backdrop-blur-[15px] bg-base-100 bg-opacity-50 justify-between px-5 py-3">
@@ -55,8 +70,7 @@ const Player = () => {
           type="button"
           aria-label="player play icon"
           onClick={() => {
-            setIsPlaying(!isPlaying);
-            // handlePlay();
+            handlePlayPause();
           }}
         >
           <PlayerPlayIcon width="w-fit" height="fit" />
@@ -98,13 +112,13 @@ const Player = () => {
           onChange={(e) => setSoundValue(Number(e.target.value))}
         />
       </section>
-      <ReactAudioPlayer
-        src="./audio-element.ogg"
-        autoPlay
-        controls
-        onPlay={handlePlay}
-        onPause={handlePause}
-      />
+
+      <audio ref={audioRef}>
+        <source src={audioSrcMP3} type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+
+      {/* <ReactPlayer url="https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg" width="100%" height="50px" controls /> */}
     </footer>
   );
 };

@@ -4,8 +4,8 @@ import { SVGProps } from '../types';
 const PlayerPrevNextIcon = (props: SVGProps): JSX.Element => {
   const {
     color: initialColor = '#b63030',
-    height = '42',
-    width = '42',
+    height = 'w-42',
+    width = 'w-42',
   } = props;
 
   const [hovered, setHovered] = useState(false);

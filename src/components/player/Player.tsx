@@ -1,59 +1,72 @@
-/* eslint-disable jsx-a11y/media-has-caption */
-import React, { useEffect, useRef, useState } from 'react';
-// import ReactPlayer from 'react-player';
+import React, { useMemo, useRef, useState } from 'react';
 import PlayerPlayIcon from '../../svg/PlayerPlayIcon';
 import PlayerPrevNextIcon from '../../svg/PlayerPrevNextIcon';
 import { SoundIcon } from '../../svg';
 import AudioSource from './AudioSource';
+import {
+  setIsPlaying, setTime, useAppDispatch, useAppSelector,
+} from '../../redux';
 
 const Player = () => {
-  const [value, setValue] = useState(40);
   const [soundValue, setSoundValue] = useState(50);
-  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const dispatch = useAppDispatch();
+  const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
+  const time = useAppSelector((state) => state.audioPlayer.time);
+  const songTitle = useAppSelector((state) => state.audioPlayer.song.songTitle);
+  const artistName = useAppSelector((state) => state.audioPlayer.artistName);
+  const albumTitle = useAppSelector((state) => state.audioPlayer.album.albumTitle);
+  const albumPicture = useAppSelector((state) => state.audioPlayer.album.albumPicture);
 
   const handlePlayPause = () => {
     if (isPlaying) {
       audioRef.current!.pause();
+      dispatch(setIsPlaying(false));
     } else {
       audioRef.current!.play();
+      dispatch(setIsPlaying(true));
     }
     setIsPlaying(!isPlaying);
   };
 
-  useEffect(() => {
-    if (audioRef.current) {
-      const updateProgress = () => {
-        if (audioRef.current && audioRef.current.currentTime > 0) {
-          const percentage = (audioRef.current.currentTime / audioRef.current.duration) * 100;
-          setValue(percentage);
-        }
-      };
-      const currentAudioRef = audioRef.current;
-      currentAudioRef.addEventListener('timeupdate', updateProgress);
-
-      return () => {
-        if (currentAudioRef) {
-          currentAudioRef.removeEventListener('timeupdate', updateProgress);
-        }
-      };
+  const songPlayingInfos = useMemo(() => {
+    if (albumTitle !== '') {
+      return (
+        <section className="flex gap-3 items-center">
+          <img
+            alt="album cover"
+            src={albumPicture}
+            className="w-12 h-12 object-cover rounded-lg"
+          />
+          <div>
+            <h2>{albumTitle}</h2>
+            <h3>{songTitle}</h3>
+          </div>
+        </section>
+      );
     }
-    return () => {};
-  }, []);
+
+    if (albumTitle === '' && songTitle !== '') {
+      return (
+        <section className="flex gap-3 items-center">
+          <img
+            alt="album cover"
+            src="https://picsum.photos/id/684/1200/630"
+            className="w-12 h-12 object-cover rounded-lg"
+          />
+          <div>
+            <h2>{songTitle}</h2>
+            <h3>{artistName}</h3>
+          </div>
+        </section>
+      );
+    }
+    return <span />;
+  }, [albumPicture, albumTitle, artistName, songTitle]);
 
   return (
     <footer className="fixed bottom-0 border-t border-stone-700 flex w-full z-50 backdrop-blur-[15px] bg-base-100 bg-opacity-50 justify-between px-5 py-3">
-      <section className="flex gap-3 items-center">
-        <img
-          alt="album cover"
-          src="https://picsum.photos/id/684/1200/630"
-          className="w-12 h-12 object-cover rounded-lg"
-        />
-        <div>
-          <h2>Titre album</h2>
-          <h3>Titre musique</h3>
-        </div>
-      </section>
+      {songPlayingInfos}
 
       <section className="flex gap-3 items-center">
         <button
@@ -61,15 +74,13 @@ const Player = () => {
           type="button"
           aria-label="player prev icon"
         >
-          <PlayerPrevNextIcon width="w-fit" height="fit" />
+          <PlayerPrevNextIcon width="fit-content" height="fit" />
         </button>
         <button
           className="w-10 h-10 rounded-full flex items-center justify-center"
           type="button"
           aria-label="player play icon"
-          onClick={() => {
-            handlePlayPause();
-          }}
+          onClick={() => handlePlayPause()}
         >
           <PlayerPlayIcon width="w-fit" height="fit" />
         </button>
@@ -89,9 +100,9 @@ const Player = () => {
           type="range"
           step=".1"
           id="song-percentage-played"
-          style={{ backgroundSize: `${value}% 100%` }}
-          value={value}
-          onChange={(e) => setValue(Number(e.target.value))}
+          style={{ backgroundSize: `${time}% 100%` }}
+          value={time}
+          onChange={(e) => dispatch(setTime(Number(e.target.value)))}
         />
         <span>03:00</span>
       </section>

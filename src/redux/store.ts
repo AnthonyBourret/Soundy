@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { playerReducer, userReducer } from './reducers';
+import { audioPlayerReducer, userReducer } from './reducers';
 
 export const store = configureStore({
   reducer: {
-    player: playerReducer,
+    audioPlayer: audioPlayerReducer,
     user: userReducer,
   },
 });

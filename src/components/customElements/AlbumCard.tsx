@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 // import FavCheckBox from './FavCheckBox';
-import { secondsToFormatedDuration, capitalizeFirstLetter } from '../../utils';
+import { secondsToFormatedDuration, capitalizeFirstLetter, getAlbumDuration } from '../../utils';
 
 interface Props {
   title: string;
@@ -23,9 +23,9 @@ function AlbumCard({
 } : Props): JSX.Element {
   const { t } = useTranslation('common');
 
-  const songDisplay = useMemo(() => songs && songs.map((song) => (
+  const songDisplay = useMemo(() => songs && songs.map((song, i) => (
     <tr className="hover cursor-pointer" key={song.id}>
-      <th>1</th>
+      <th>{i + 1}</th>
       <td>{song.title}</td>
       <td className="text-center">{secondsToFormatedDuration(Number(song.duration))}</td>
     </tr>
@@ -44,7 +44,7 @@ function AlbumCard({
       {/* For the moment, albums cannot be liked */}
       {/* {isLogin && (
         <div className="absolute top-20 left-20 lg:top-48 lg:left-48">
-          <FavCheckBox />
+        <FavCheckBox />
         </div>
       )} */}
       <div>
@@ -57,6 +57,10 @@ function AlbumCard({
               {songs.length}
               {' '}
               {t('CARD_ALBUM_TRACK_NUMBER')}
+              {' '}
+              -
+              {' '}
+              {getAlbumDuration(songs)}
             </p>
           </div>
         </div>

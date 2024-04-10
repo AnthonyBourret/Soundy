@@ -54,7 +54,7 @@ function Listen({ isLogin }: { isLogin: boolean }) {
       <Header isLogin={isLogin} />
       <SearchBar chosenDisplay={chosenDisplay} setChosenDisplay={setChosenDisplay} />
       <div className="divider py-4 px-8 min-[540px]:px-36" />
-      <SongAndAlbumOrder setSortBy={setSortBy} />
+      <SongAndAlbumOrder setSortBy={setSortBy} chosenDisplay={chosenDisplay} />
 
       {/* If albums/songs is selected in the search bar, the display changes. */}
       {songDisplayed}

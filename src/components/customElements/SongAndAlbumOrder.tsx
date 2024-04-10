@@ -4,9 +4,10 @@ import { useTranslation } from 'react-i18next';
 
 interface Props {
   setSortBy: React.Dispatch<React.SetStateAction<string | null>>;
+  chosenDisplay: string;
 }
 
-function SongAndAlbumOrder({ setSortBy }: Props): JSX.Element {
+function SongAndAlbumOrder({ setSortBy, chosenDisplay }: Props): JSX.Element {
   const { t } = useTranslation('common');
   return (
     <div className="flex flex-col items-center px-12 gap-2 py-4 min-[540px]:flex-row">
@@ -20,8 +21,14 @@ function SongAndAlbumOrder({ setSortBy }: Props): JSX.Element {
           <option value="" disabled>{t('ORDER_SELECT_PLACEHOLDER')}</option>
           <option value="ascendingName">{t('ORDER_SELECT_NAME_AZ')}</option>
           <option value="descendingName">{t('ORDER_SELECT_NAME_ZA')}</option>
-          <option value="durationAsc">{t('ORDER_SELECT_DURATION_ASC')}</option>
-          <option value="durationDesc">{t('ORDER_SELECT_DURATION_DESC')}</option>
+          {
+            chosenDisplay === 'songs' && (
+              <>
+                <option value="durationAsc">{t('ORDER_SELECT_DURATION_ASC')}</option>
+                <option value="durationDesc">{t('ORDER_SELECT_DURATION_DESC')}</option>
+              </>
+            )
+          }
           <option value="latest">{t('ORDER_SELECT_LATEST')}</option>
           <option value="oldest">{t('ORDER_SELECT_OLDEST')}</option>
         </select>

@@ -39,7 +39,6 @@ export type AlbumFilterInput = {
 };
 
 export type AlbumUpdateInput = {
-  artist_id?: InputMaybe<Scalars['Int']['input']>;
   cover?: InputMaybe<Scalars['String']['input']>;
   release_year?: InputMaybe<Scalars['Int']['input']>;
   songIds?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
@@ -76,6 +75,7 @@ export type ArtistUser = {
   albums?: Maybe<Array<Maybe<Album>>>;
   country?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   password: Scalars['String']['output'];
   picture?: Maybe<Scalars['String']['output']>;
@@ -110,6 +110,7 @@ export type Mutation = {
   unlikeSong?: Maybe<Scalars['Boolean']['output']>;
   updateAlbum?: Maybe<Album>;
   updateArtist?: Maybe<Artist>;
+  updateSong?: Maybe<Song>;
 };
 
 
@@ -149,13 +150,20 @@ export type MutationUnlikeSongArgs = {
 
 
 export type MutationUpdateAlbumArgs = {
-  id: Scalars['Int']['input'];
+  albumArtistId: Scalars['Int']['input'];
+  albumId: Scalars['Int']['input'];
   input: AlbumUpdateInput;
 };
 
 
 export type MutationUpdateArtistArgs = {
   input: ArtistUpdateInput;
+};
+
+
+export type MutationUpdateSongArgs = {
+  input: SongUpdateInput;
+  songId: Scalars['Int']['input'];
 };
 
 export type Query = {
@@ -213,6 +221,7 @@ export enum ReleaseYear {
 export type Song = {
   __typename?: 'Song';
   artist?: Maybe<Artist>;
+  artist_id?: Maybe<Scalars['Int']['output']>;
   cover?: Maybe<Scalars['String']['output']>;
   /** Duration in second */
   duration: Scalars['Int']['output'];
@@ -227,6 +236,7 @@ export type Song = {
 };
 
 export type SongCreateInput = {
+  artist_id?: InputMaybe<Scalars['Int']['input']>;
   cover?: InputMaybe<Scalars['String']['input']>;
   duration: Scalars['Int']['input'];
   lyrics?: InputMaybe<Scalars['String']['input']>;
@@ -245,6 +255,14 @@ export type SongOnAlbum = {
   album_id: Scalars['Int']['output'];
   position: Scalars['Int']['output'];
   song_id: Scalars['Int']['output'];
+};
+
+export type SongUpdateInput = {
+  cover?: InputMaybe<Scalars['String']['input']>;
+  duration?: InputMaybe<Scalars['Int']['input']>;
+  lyrics?: InputMaybe<Scalars['String']['input']>;
+  release_year?: InputMaybe<Scalars['Int']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationMutationVariables = Exact<{

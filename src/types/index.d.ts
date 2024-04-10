@@ -61,6 +61,9 @@ export type CardAlbum = {
       id: string;
       title: string;
       duration: string;
+      songOnAlbum: {
+        position: number;
+      };
     },
   ];
 };

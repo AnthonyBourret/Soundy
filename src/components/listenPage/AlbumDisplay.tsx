@@ -19,7 +19,7 @@ function AlbumDisplay({ albums, sortBy }: Props) {
       setSortedAlbums([]);
     }
 
-    const sorted = [...albums].filter((song) => song !== null);
+    const sorted = [...albums].filter((album) => album !== null);
 
     switch (sortBy) {
       case 'ascendingName':
@@ -28,13 +28,6 @@ function AlbumDisplay({ albums, sortBy }: Props) {
       case 'descendingName':
         sorted.sort((a, b) => b!.title.localeCompare(a!.title));
         break;
-      // Todo => Calculate the duration of the album with the songs duration
-      // case 'durationAsc':
-      //   sorted.sort((a, b) => (a!.duration) - (b!.duration));
-      //   break;
-      // case 'durationDesc':
-      //   sorted.sort((a, b) => (b!.duration) - (a!.duration));
-      //   break;
       case 'latest':
         sorted.sort((a, b) => Number(b!.release_year) - Number(a!.release_year));
         break;

@@ -1,4 +1,4 @@
-import secondsToFormatedDuration from './SecondsToFormatedDuration';
+import secondsToFormatedDuration from './secondsToFormatedDuration';
 
 interface Props {
   duration: string;

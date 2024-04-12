@@ -1,4 +1,4 @@
-export { default as capitalizeFirstLetter } from './CapitalizeFirstLetter';
-export { default as secondsToFormatedDuration } from './SecondsToFormatedDuration';
-export { default as scrollToTop } from './ScrollToTop';
-export { default as getAlbumDuration } from './GetAlbumDuration';
+export { default as capitalizeFirstLetter } from './capitalizeFirstLetter';
+export { default as secondsToFormatedDuration } from './secondsToFormatedDuration';
+export { default as scrollToTop } from './scrollToTop';
+export { default as getAlbumDuration } from './getAlbumDuration';

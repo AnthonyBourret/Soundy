@@ -3,7 +3,7 @@
 import React from 'react';
 import FavCheckBox from './FavCheckBox';
 import { PlayIcon } from '../../svg';
-import secondsToFormatedDuration from '../../utils/SecondsToFormatedDuration';
+import secondsToFormatedDuration from '../../utils/secondsToFormatedDuration';
 
 interface SongCardProps {
   title: string;

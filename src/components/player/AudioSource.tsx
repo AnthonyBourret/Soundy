@@ -13,6 +13,7 @@ const AudioSource = (props: Props): JSX.Element => {
   const { audioRef } = props;
   const dispatch = useAppDispatch();
   const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
+  const volume = useAppSelector((state) => state.audioPlayer.volume);
 
   useEffect(() => {
     if (isPlaying) {
@@ -21,6 +22,12 @@ const AudioSource = (props: Props): JSX.Element => {
       audioRef.current?.pause();
     }
   }, [audioRef, isPlaying]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume / 100;
+    }
+  }, [audioRef, volume]);
 
   useEffect(() => {
     if (audioRef.current) {

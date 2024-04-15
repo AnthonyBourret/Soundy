@@ -3,10 +3,12 @@
 import React from 'react';
 import FavCheckBox from './FavCheckBox';
 import { PlayIcon } from '../../svg';
-import secondsToFormatedDuration from '../../utils/SecondsToFormatedDuration';
+import secondsToFormatedDuration from '../../utils/secondsToFormatedDuration';
 import {
+  setAlbumPicture,
   setArtistName,
   setIsPlaying,
+  setSongDuration,
   setSongPicture,
   setSongTitle,
   setTime,
@@ -56,11 +58,14 @@ function SongCard(props: SongCardProps) {
             className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 duration-50 hover:cursor-pointer"
             type="button"
             onClick={() => {
-              dispatch(setArtistName(artist.name));
+              dispatch(setArtistName(artist?.name));
               dispatch(setIsPlaying(!isPlaying));
               dispatch(setSongPicture(cover));
               dispatch(setSongTitle(title));
               dispatch(setTime(0));
+              dispatch(setAlbumPicture(null));
+              dispatch(setSongPicture(cover));
+              dispatch(setSongDuration(secondsToFormatedDuration(duration)));
             }}
           >
             <div className="w-16 h-16 rounded-full flex items-center justify-center pl-2 bg-base-200 bg-opacity-30 border border-1 border-primary">

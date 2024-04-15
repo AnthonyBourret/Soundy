@@ -1,22 +1,28 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
+
 import PlayerPlayIcon from '../../svg/PlayerPlayIcon';
 import PlayerPrevNextIcon from '../../svg/PlayerPrevNextIcon';
-import { SoundIcon } from '../../svg';
-import AudioSource from './AudioSource';
+import { PlayerPauseIcon, SoundIcon } from '../../svg';
 import {
-  setIsPlaying, setTime, useAppDispatch, useAppSelector,
+  setIsPlaying,
+  setTime,
+  setVolume,
+  useAppDispatch,
+  useAppSelector,
 } from '../../redux';
 
-const Player = () => {
-  const [soundValue, setSoundValue] = useState(50);
+import AudioSource from './AudioSource';
+import PlayerInfos from './PlayerInfos';
+// import { secondsToFormatedDuration } from '../../utils';
+
+const Player = (): JSX.Element => {
+  // const [soundValue, setSoundValue] = useState(50);
   const audioRef = useRef<HTMLAudioElement>(null);
   const dispatch = useAppDispatch();
   const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
   const time = useAppSelector((state) => state.audioPlayer.time);
-  const songTitle = useAppSelector((state) => state.audioPlayer.song.songTitle);
-  const artistName = useAppSelector((state) => state.audioPlayer.artistName);
-  const albumTitle = useAppSelector((state) => state.audioPlayer.album.albumTitle);
-  const albumPicture = useAppSelector((state) => state.audioPlayer.album.albumPicture);
+  const songDuration = useAppSelector((state) => state.audioPlayer.song.songDuration);
+  const volume = useAppSelector((state) => state.audioPlayer.volume);
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -29,44 +35,23 @@ const Player = () => {
     setIsPlaying(!isPlaying);
   };
 
-  const songPlayingInfos = useMemo(() => {
-    if (albumTitle !== '') {
+  const playPauseIcon = useMemo(() => {
+    if (isPlaying) {
       return (
-        <section className="flex gap-3 items-center">
-          <img
-            alt="album cover"
-            src={albumPicture}
-            className="w-12 h-12 object-cover rounded-lg"
-          />
-          <div>
-            <h2>{albumTitle}</h2>
-            <h3>{songTitle}</h3>
-          </div>
-        </section>
+        <PlayerPauseIcon width="w-fit" height="fit" />
       );
     }
+    return (
+      <PlayerPlayIcon width="w-fit" height="fit" />
+    );
+  }, [isPlaying]);
 
-    if (albumTitle === '' && songTitle !== '') {
-      return (
-        <section className="flex gap-3 items-center">
-          <img
-            alt="album cover"
-            src="https://picsum.photos/id/684/1200/630"
-            className="w-12 h-12 object-cover rounded-lg"
-          />
-          <div>
-            <h2>{songTitle}</h2>
-            <h3>{artistName}</h3>
-          </div>
-        </section>
-      );
-    }
-    return <span />;
-  }, [albumPicture, albumTitle, artistName, songTitle]);
+  // const actualTime = useMemo(() => secondsToFormatedDuration(time), [time]);
+  const songDurationTime = useMemo(() => songDuration, [songDuration]);
 
   return (
     <footer className="fixed bottom-0 border-t border-stone-700 flex w-full z-50 backdrop-blur-[15px] bg-base-100 bg-opacity-50 justify-between px-5 py-3">
-      {songPlayingInfos}
+      <PlayerInfos />
 
       <section className="flex gap-3 items-center">
         <button
@@ -82,7 +67,7 @@ const Player = () => {
           aria-label="player play icon"
           onClick={() => handlePlayPause()}
         >
-          <PlayerPlayIcon width="w-fit" height="fit" />
+          {playPauseIcon}
         </button>
         <button
           className="h-6 w-6 md-5"
@@ -92,19 +77,19 @@ const Player = () => {
           <PlayerPrevNextIcon width="w-fit" height="fit" />
         </button>
 
-        <span>00:00</span>
+        {/* <span>{actualTime}</span> */}
         <input
           className="w-[500px] amplitude-song-slider"
           max="100"
           min={0}
           type="range"
-          step=".1"
+          step="1"
           id="song-percentage-played"
           style={{ backgroundSize: `${time}% 100%` }}
           value={time}
           onChange={(e) => dispatch(setTime(Number(e.target.value)))}
         />
-        <span>03:00</span>
+        <span>{songDurationTime}</span>
       </section>
 
       <section className="flex gap-3 items-center">
@@ -116,9 +101,9 @@ const Player = () => {
           max="100"
           min={0}
           type="range"
-          value={soundValue}
-          style={{ backgroundSize: `${soundValue}% 100%` }}
-          onChange={(e) => setSoundValue(Number(e.target.value))}
+          value={volume}
+          style={{ backgroundSize: `${volume}% 100%` }}
+          onChange={(e) => dispatch(setVolume(Number(e.target.value)))}
         />
       </section>
 

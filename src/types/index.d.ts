@@ -76,3 +76,24 @@ export type ProfileJWT = {
   iat: number,
   exp: number,
 };
+
+export interface AudioPlayerState {
+  album: {
+    /** If we listen to song outside of an album */
+    albumId?: number;
+    albumTitle: string | null;
+    albumPicture: string | null;
+  }
+  isMuted: boolean;
+  isPlaying: boolean;
+  song: {
+    /** Song is null if user enter to our app or refresh */
+    songId: number | null;
+    songTitle: string;
+    songPicture: string;
+    songDuration: string | null;
+  }
+  artistName: string | null;
+  volume: number;
+  time: number;
+}

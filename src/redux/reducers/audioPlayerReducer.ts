@@ -1,30 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface AudioPlayerState {
-  album: {
-    /** If we listen to song outside of an album */
-    albumId?: number;
-    albumTitle: string;
-    albumPicture: string;
-  }
-  isMuted: boolean;
-  isPlaying: boolean;
-  song: {
-    /** Song is null if user enter to our app or refresh */
-    songId: number | null;
-    songTitle: string;
-    songPicture: string;
-  }
-  artistName: string;
-  volume: number;
-  time: number;
-}
+import { type AudioPlayerState } from '../../types';
 
 const initialState: AudioPlayerState = {
   album: {
     albumId: undefined,
-    albumTitle: '',
-    albumPicture: '',
+    albumTitle: null,
+    albumPicture: null,
   },
   isMuted: false,
   isPlaying: false,
@@ -32,10 +14,11 @@ const initialState: AudioPlayerState = {
     songId: null,
     songTitle: '',
     songPicture: '',
+    songDuration: null,
   },
-  volume: 50,
+  volume: 20,
   time: 0,
-  artistName: '',
+  artistName: null,
 };
 
 const audioPlayerReducer = createSlice({
@@ -49,7 +32,7 @@ const audioPlayerReducer = createSlice({
     setAlbumTitle: (state, action: { payload: string }) => (
       { ...state, album: { ...state.album, albumTitle: action.payload } }
     ),
-    setAlbumPicture: (state, action: { payload: string }) => (
+    setAlbumPicture: (state, action: { payload: string | null }) => (
       { ...state, album: { ...state.album, albumPicture: action.payload } }
     ),
     // --- Mute --- //
@@ -70,6 +53,9 @@ const audioPlayerReducer = createSlice({
     setSongPicture: (state, action: { payload: string }) => (
       { ...state, song: { ...state.song, songPicture: action.payload } }
     ),
+    setSongDuration: (state, action: { payload: string }) => (
+      { ...state, song: { ...state.song, songDuration: action.payload } }
+    ),
     // --- Volume --- //
     setVolume: (state, action: { payload: number }) => (
       { ...state, volume: action.payload }
@@ -79,7 +65,7 @@ const audioPlayerReducer = createSlice({
       { ...state, time: action.payload }
     ),
     setArtistName: (state, action: { payload: string }) => (
-      { ...state, artistTitle: action.payload }
+      { ...state, artistName: action.payload }
     ),
   },
 });
@@ -91,6 +77,7 @@ export const {
   setArtistName,
   setIsPlaying,
   setMuted,
+  setSongDuration,
   setSongId,
   setSongPicture,
   setSongTitle,

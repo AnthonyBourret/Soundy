@@ -33,5 +33,6 @@
   "ORDER_SELECT_LATEST": "Plus récent",
   "ORDER_SELECT_OLDEST": "Plus ancien",
   "ORDER_BAR_RELOAD": "Recharger le tri",
-  "ADD_TO_FAV_TOOLTIP": "Ajouter aux favoris"
+  "ADD_TO_FAV_TOOLTIP": "Ajouter aux favoris",
+  "CONNECT_TOAST_MESSAGE": "Vous devez vous connecter pour accéder à cette section"
 }

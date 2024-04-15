@@ -51,6 +51,9 @@ export type CardSong = {
 export type CardAlbum = {
   id: string;
   title: string;
+  artist: {
+    name: string;
+  };
   cover: string;
   release_year: string;
   songs: [
@@ -58,6 +61,9 @@ export type CardAlbum = {
       id: string;
       title: string;
       duration: string;
+      songOnAlbum: {
+        position: number;
+      };
     },
   ];
 };

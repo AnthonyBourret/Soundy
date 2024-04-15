@@ -4,3 +4,4 @@ export { default as PlusIcon } from './PlusIcon';
 export { default as SoundIcon } from './SoundIcon';
 export { default as AddIconChecked } from './AddIconChecked';
 export { default as AddIconUnchecked } from './AddIconUnchecked';
+export { default as ArrowDown } from './ArrowDown';

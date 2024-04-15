@@ -4,8 +4,8 @@ import { CardAlbum } from '../../types';
 
 interface Props {
   albums: CardAlbum[];
-  // isLogin: boolean;
   sortBy: string | null;
+  // isLogin: boolean;
 }
 
 function AlbumDisplay({ albums, sortBy }: Props) {
@@ -15,29 +15,31 @@ function AlbumDisplay({ albums, sortBy }: Props) {
   // This array is sorted based on the value of sortBy.
 
   useEffect(() => {
-    if (sortBy === null) {
-      setSortedAlbums(albums);
+    if (!albums) {
+      setSortedAlbums([]);
     }
-    if (sortBy === 'ascendingName') {
-      setSortedAlbums([...albums].sort((a, b) => a.title.localeCompare(b.title)));
+
+    const sorted = [...albums].filter((album) => album !== null);
+
+    switch (sortBy) {
+      case 'ascendingName':
+        sorted.sort((a, b) => a!.title.localeCompare(b!.title));
+        break;
+      case 'descendingName':
+        sorted.sort((a, b) => b!.title.localeCompare(a!.title));
+        break;
+      case 'latest':
+        sorted.sort((a, b) => Number(b!.release_year) - Number(a!.release_year));
+        break;
+      case 'oldest':
+        sorted.sort((a, b) => Number(a!.release_year) - Number(b!.release_year));
+        break;
+      default:
+        break;
     }
-    if (sortBy === 'descendingName') {
-      setSortedAlbums([...albums].sort((a, b) => b.title.localeCompare(a.title)));
-    }
-    // Standby API => More songs on albums
-    // if (sortBy === 'durationAsc') {
-    //   setSortedAlbums([...albums].sort((a, b) => Number(a.duration) - Number(b.duration)));
-    // }
-    // if (sortBy === 'durationDesc') {
-    //   setSortedAlbums([...albums].sort((a, b) => Number(b.duration) - Number(a.duration)));
-    // }
-    if (sortBy === 'latest') {
-      setSortedAlbums([...albums].sort((a, b) => Number(b.release_year) - Number(a.release_year)));
-    }
-    if (sortBy === 'oldest') {
-      setSortedAlbums([...albums].sort((a, b) => Number(a.release_year) - Number(b.release_year)));
-    }
-  }, [sortBy, albums]);
+
+    setSortedAlbums(sorted);
+  }, [albums, sortBy]);
   return (
     <div className="flex flex-col items-center w-full pt-4 gap-4 px-2">
       {sortedAlbums && sortedAlbums.map((album) => (
@@ -45,6 +47,7 @@ function AlbumDisplay({ albums, sortBy }: Props) {
           key={album.id}
           title={album.title}
           cover={album.cover}
+          artist={album.artist.name}
           year={album.release_year}
           songs={album.songs}
           // isLogin={isLogin}

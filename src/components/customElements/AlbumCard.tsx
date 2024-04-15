@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 // import FavCheckBox from './FavCheckBox';
-import { secondsToFormatedDuration, capitalizeFirstLetter } from '../../utils';
+import { secondsToFormatedDuration, capitalizeFirstLetter, getAlbumDuration } from '../../utils';
 
 interface Props {
   title: string;
+  artist: string;
   cover: string;
   year: string;
   songs: SongProps[];
@@ -18,13 +19,13 @@ interface SongProps {
 }
 
 function AlbumCard({
-  title, cover, year, songs,
+  title, cover, artist, year, songs,
 } : Props): JSX.Element {
   const { t } = useTranslation('common');
 
-  const songDisplay = useMemo(() => songs && songs.map((song) => (
+  const songDisplay = useMemo(() => songs && songs.map((song, i) => (
     <tr className="hover cursor-pointer" key={song.id}>
-      <th>1</th>
+      <th>{i + 1}</th>
       <td>{song.title}</td>
       <td className="text-center">{secondsToFormatedDuration(Number(song.duration))}</td>
     </tr>
@@ -43,19 +44,23 @@ function AlbumCard({
       {/* For the moment, albums cannot be liked */}
       {/* {isLogin && (
         <div className="absolute top-20 left-20 lg:top-48 lg:left-48">
-          <FavCheckBox />
+        <FavCheckBox />
         </div>
       )} */}
       <div>
         <div className="pl-[120px] pt-2 lg:px-4 lg:py-2 lg:text-xl">
           <p className="font-bold">{capitalizeFirstLetter(title)}</p>
-          <p className="font-semibold">Artist</p>
+          <p className="font-semibold">{artist}</p>
           <div className="w-full flex flex-col min-[425px]:flex-row min-[425px]:items-center min-[425px]:justify-between min-[425px]:pr-4 lg:pr-0">
             <p className="font-semibold">{year}</p>
             <p className="text-xs font-semibold pt-0.5 min-[425px]:pt-0">
               {songs.length}
               {' '}
               {t('CARD_ALBUM_TRACK_NUMBER')}
+              {' '}
+              -
+              {' '}
+              {getAlbumDuration(songs)}
             </p>
           </div>
         </div>

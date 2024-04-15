@@ -1,7 +1,17 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-// import FavCheckBox from './FavCheckBox';
 import { secondsToFormatedDuration, capitalizeFirstLetter } from '../../utils';
+import {
+  setAlbumPicture,
+  setArtistName,
+  setIsPlaying,
+  setSongDuration,
+  setSongPicture,
+  setSongTitle,
+  setTime,
+  useAppDispatch,
+  useAppSelector,
+} from '../../redux';
 
 interface Props {
   title: string;
@@ -21,14 +31,28 @@ function AlbumCard({
   title, cover, year, songs,
 } : Props): JSX.Element {
   const { t } = useTranslation('common');
+  const dispatch = useAppDispatch();
+  const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
 
   const songDisplay = useMemo(() => songs && songs.map((song) => (
-    <tr className="hover cursor-pointer" key={song.id}>
+    <tr
+      className="hover cursor-pointer"
+      key={song.id}
+      onClick={() => {
+        dispatch(setArtistName(artist?.name));
+        dispatch(setIsPlaying(!isPlaying));
+        dispatch(setSongTitle(title));
+        dispatch(setTime(0));
+        dispatch(setAlbumPicture(null));
+        dispatch(setSongPicture(cover));
+        dispatch(setSongDuration(secondsToFormatedDuration(duration)));
+      }}
+    >
       <th>1</th>
       <td>{song.title}</td>
       <td className="text-center">{secondsToFormatedDuration(Number(song.duration))}</td>
     </tr>
-  )), [songs]);
+  )), [cover, dispatch, isPlaying, songs, title]);
 
   return (
     <div className="card w-full p-2 sm:w-[70%] lg:pl-[240px] lg:p-4 gap-2 bg-base-200 shadow-xl border border-1 border-stone-700">

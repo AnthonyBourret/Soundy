@@ -60,7 +60,6 @@ function SongCard(props: SongCardProps) {
             onClick={() => {
               dispatch(setArtistName(artist?.name));
               dispatch(setIsPlaying(!isPlaying));
-              dispatch(setSongPicture(cover));
               dispatch(setSongTitle(title));
               dispatch(setTime(0));
               dispatch(setAlbumPicture(null));

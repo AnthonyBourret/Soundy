@@ -19,7 +19,7 @@ const documents = {
     "\n  query Login($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n": types.LoginDocument,
     "\n  query Profile {\n    profile {\n      country\n      name\n      picture\n      email\n    }\n  }\n": types.ProfileDocument,
     "\n  query SongListenPageQuery($limit: Int) {\n    songs(limit: $limit) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      songOnAlbum {\n        album_id\n      }\n      isLiked\n    }\n    albums{\n      id\n      title\n      cover\n      release_year\n      songs {\n        id\n        title\n        duration\n      }\n    }\n  }\n": types.SongListenPageQueryDocument,
-    "\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      artist {\n        name\n      }\n    }\n  }\n": types.SongOverviewDocument,
+    "\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      duration\n      artist {\n        name\n      }\n    }\n  }\n": types.SongOverviewDocument,
 };
 
 /**
@@ -63,7 +63,7 @@ export function gql(source: "\n  query SongListenPageQuery($limit: Int) {\n    s
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      artist {\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      artist {\n        name\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      duration\n      artist {\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      duration\n      artist {\n        name\n      }\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

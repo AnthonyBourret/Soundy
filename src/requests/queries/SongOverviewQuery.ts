@@ -6,6 +6,7 @@ const SongOverviewQuery = gql`
       id
       cover
       title
+      duration
       artist {
         name
       }

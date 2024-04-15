@@ -28,7 +28,6 @@ export type Album = {
 };
 
 export type AlbumCreateInput = {
-  artist_id: Scalars['Int']['input'];
   cover?: InputMaybe<Scalars['String']['input']>;
   release_year?: InputMaybe<Scalars['Int']['input']>;
   songIds: Array<Scalars['Int']['input']>;
@@ -40,7 +39,6 @@ export type AlbumFilterInput = {
 };
 
 export type AlbumUpdateInput = {
-  artist_id?: InputMaybe<Scalars['Int']['input']>;
   cover?: InputMaybe<Scalars['String']['input']>;
   release_year?: InputMaybe<Scalars['Int']['input']>;
   songIds?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
@@ -77,6 +75,7 @@ export type ArtistUser = {
   albums?: Maybe<Array<Maybe<Album>>>;
   country?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   password: Scalars['String']['output'];
   picture?: Maybe<Scalars['String']['output']>;
@@ -111,6 +110,7 @@ export type Mutation = {
   unlikeSong?: Maybe<Scalars['Boolean']['output']>;
   updateAlbum?: Maybe<Album>;
   updateArtist?: Maybe<Artist>;
+  updateSong?: Maybe<Song>;
 };
 
 
@@ -150,14 +150,20 @@ export type MutationUnlikeSongArgs = {
 
 
 export type MutationUpdateAlbumArgs = {
-  id: Scalars['Int']['input'];
+  albumArtistId: Scalars['Int']['input'];
+  albumId: Scalars['Int']['input'];
   input: AlbumUpdateInput;
 };
 
 
 export type MutationUpdateArtistArgs = {
-  id: Scalars['Int']['input'];
   input: ArtistUpdateInput;
+};
+
+
+export type MutationUpdateSongArgs = {
+  input: SongUpdateInput;
+  songId: Scalars['Int']['input'];
 };
 
 export type Query = {
@@ -189,6 +195,12 @@ export type QueryArtistArgs = {
 };
 
 
+export type QueryArtistsArgs = {
+  filter?: InputMaybe<UserFilterInput>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
 export type QueryLoginArgs = {
   input: LoginInput;
 };
@@ -215,6 +227,7 @@ export enum ReleaseYear {
 export type Song = {
   __typename?: 'Song';
   artist?: Maybe<Artist>;
+  artist_id?: Maybe<Scalars['Int']['output']>;
   cover?: Maybe<Scalars['String']['output']>;
   /** Duration in second */
   duration: Scalars['Int']['output'];
@@ -223,20 +236,24 @@ export type Song = {
   like?: Maybe<Array<Maybe<ArtistLikeSong>>>;
   lyrics?: Maybe<Scalars['String']['output']>;
   nbLike?: Maybe<Scalars['Int']['output']>;
+  release_year?: Maybe<Scalars['Int']['output']>;
   songOnAlbum?: Maybe<Array<Maybe<SongOnAlbum>>>;
   title: Scalars['String']['output'];
 };
 
 export type SongCreateInput = {
-  artistId: Scalars['Int']['input'];
+  artist_id?: InputMaybe<Scalars['Int']['input']>;
   cover?: InputMaybe<Scalars['String']['input']>;
   duration: Scalars['Int']['input'];
   lyrics?: InputMaybe<Scalars['String']['input']>;
+  release_year?: InputMaybe<Scalars['Int']['input']>;
   title: Scalars['String']['input'];
 };
 
 export type SongFilterInput = {
   duration_filter?: InputMaybe<DurationRange>;
+  liked?: InputMaybe<Scalars['Boolean']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SongOnAlbum = {
@@ -244,6 +261,18 @@ export type SongOnAlbum = {
   album_id: Scalars['Int']['output'];
   position: Scalars['Int']['output'];
   song_id: Scalars['Int']['output'];
+};
+
+export type SongUpdateInput = {
+  cover?: InputMaybe<Scalars['String']['input']>;
+  duration?: InputMaybe<Scalars['Int']['input']>;
+  lyrics?: InputMaybe<Scalars['String']['input']>;
+  release_year?: InputMaybe<Scalars['Int']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UserFilterInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationMutationVariables = Exact<{
@@ -287,7 +316,7 @@ export type SongListenPageQueryQuery = { __typename?: 'Query', songs?: Array<{ _
 export type SongOverviewQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type SongOverviewQuery = { __typename?: 'Query', songs?: Array<{ __typename?: 'Song', id: number, cover?: string | null, title: string, artist?: { __typename?: 'Artist', name: string } | null } | null> | null };
+export type SongOverviewQuery = { __typename?: 'Query', songs?: Array<{ __typename?: 'Song', id: number, cover?: string | null, title: string, duration: number, artist?: { __typename?: 'Artist', name: string } | null } | null> | null };
 
 
 export const MutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Mutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"songId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"likeSong"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"songId"}}}]}]}}]} as unknown as DocumentNode<MutationMutation, MutationMutationVariables>;
@@ -296,4 +325,4 @@ export const AlbumListenPageQueryDocument = {"kind":"Document","definitions":[{"
 export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"expire_at"}},{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]} as unknown as DocumentNode<LoginQuery, LoginQueryVariables>;
 export const ProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"country"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"picture"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]} as unknown as DocumentNode<ProfileQuery, ProfileQueryVariables>;
 export const SongListenPageQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SongListenPageQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"songs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"artist"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"cover"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"songOnAlbum"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"album_id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"isLiked"}}]}},{"kind":"Field","name":{"kind":"Name","value":"albums"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"cover"}},{"kind":"Field","name":{"kind":"Name","value":"release_year"}},{"kind":"Field","name":{"kind":"Name","value":"songs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}}]}}]}}]}}]} as unknown as DocumentNode<SongListenPageQueryQuery, SongListenPageQueryQueryVariables>;
-export const SongOverviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SongOverview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"songs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"5"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"cover"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"artist"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<SongOverviewQuery, SongOverviewQueryVariables>;
+export const SongOverviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SongOverview"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"songs"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"5"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"cover"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"artist"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<SongOverviewQuery, SongOverviewQueryVariables>;

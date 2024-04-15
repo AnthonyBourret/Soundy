@@ -64,7 +64,7 @@ const audioPlayerReducer = createSlice({
     setTime: (state, action: { payload: number }) => (
       { ...state, time: action.payload }
     ),
-    setArtistName: (state, action: { payload: string }) => (
+    setArtistName: (state, action: { payload: string | null }) => (
       { ...state, artistName: action.payload }
     ),
   },

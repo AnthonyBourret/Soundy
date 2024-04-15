@@ -6,10 +6,24 @@ import React, { useMemo } from 'react';
 import { PlayIcon } from '../../svg';
 import SongOverviewQuery from '../../requests/queries/SongOverviewQuery';
 import type { SongOverviewQuery as SongOverviewQueryType } from '../../types/__generated_schemas__/graphql';
+import {
+  setAlbumPicture,
+  setArtistName,
+  setIsPlaying,
+  setSongDuration,
+  setSongPicture,
+  setSongTitle,
+  setTime,
+  useAppDispatch,
+  useAppSelector,
+} from '../../redux';
+import { secondsToFormatedDuration } from '../../utils';
 
 function SongOverview(): JSX.Element {
   const { t } = useTranslation(['common', 'translation']);
   const { data, loading, error } = useQuery<SongOverviewQueryType>(SongOverviewQuery);
+  const dispatch = useAppDispatch();
+  const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
 
   const songs = useMemo(() => {
     if (loading) {
@@ -47,11 +61,24 @@ function SongOverview(): JSX.Element {
                 className="object-cover w-full h-full group-hover:blur-[1px] group-hover:scale-105 transition-all duration-200 ease-out"
               />
             </figure>
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 duration-50 hover:cursor-pointer">
+            <button
+              onClick={() => {
+                dispatch(setArtistName(song?.artist?.name || null));
+                dispatch(setIsPlaying(!isPlaying));
+                dispatch(setSongPicture(song?.cover || ''));
+                dispatch(setSongTitle(song?.title || ''));
+                dispatch(setTime(0));
+                dispatch(setAlbumPicture(null));
+                dispatch(setSongDuration(secondsToFormatedDuration(song?.duration || 0)));
+              }}
+              aria-label="play"
+              type="button"
+              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 duration-50 hover:cursor-pointer"
+            >
               <div className="w-16 h-16 rounded-full flex items-center justify-center pl-2 bg-base-200 bg-opacity-30 border border-1 border-primary">
                 <PlayIcon />
               </div>
-            </div>
+            </button>
           </div>
           <h3 className="self-center text-center">
             {song?.title}
@@ -62,7 +89,7 @@ function SongOverview(): JSX.Element {
         </div>
       </div>
     ));
-  }, [data, error, loading]);
+  }, [data, dispatch, error, isPlaying, loading]);
 
   return (
     <div className="flex flex-col w-[60%] !items-start mb-[200px]">

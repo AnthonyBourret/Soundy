@@ -13,6 +13,7 @@ import {
 
 import AudioSource from './AudioSource';
 import PlayerInfos from './PlayerInfos';
+import { getPreviousSong } from '../../utils';
 // import { secondsToFormatedDuration } from '../../utils';
 
 const Player = (): JSX.Element => {
@@ -58,8 +59,10 @@ const Player = (): JSX.Element => {
           className="h-6 w-6 rotate-180"
           type="button"
           aria-label="player prev icon"
+          // WIP - go to previous song by a new request with song id
+          onClick={() => getPreviousSong()}
         >
-          <PlayerPrevNextIcon width="fit-content" height="fit" />
+          <PlayerPrevNextIcon width="fit-content" height="fit-content" />
         </button>
         <button
           className="w-10 h-10 rounded-full flex items-center justify-center"
@@ -74,7 +77,7 @@ const Player = (): JSX.Element => {
           type="button"
           aria-label="player prev icon"
         >
-          <PlayerPrevNextIcon width="w-fit" height="fit" />
+          <PlayerPrevNextIcon width="w-fit" height="fit-content" />
         </button>
 
         {/* <span>{actualTime}</span> */}

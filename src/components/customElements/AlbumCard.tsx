@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { secondsToFormatedDuration, capitalizeFirstLetter } from '../../utils';
 import {
   setAlbumPicture,
+  setAlbumSongIds,
+  setAlbumSongPlaying,
   setArtistName,
   setIsPlaying,
   // setSongDuration,
@@ -46,6 +48,8 @@ function AlbumCard({
         dispatch(setTime(0));
         dispatch(setAlbumPicture(null));
         dispatch(setSongPicture(cover));
+        dispatch(setAlbumSongIds(songs.map((s) => Number(s.id))));
+        dispatch(setAlbumSongPlaying(Number(song.id)));
       }}
     >
       <th>1</th>

@@ -7,6 +7,8 @@ const initialState: AudioPlayerState = {
     albumId: undefined,
     albumTitle: null,
     albumPicture: null,
+    songIds: null,
+    songPlaying: null,
   },
   isMuted: false,
   isPlaying: false,
@@ -34,6 +36,12 @@ const audioPlayerReducer = createSlice({
     ),
     setAlbumPicture: (state, action: { payload: string | null }) => (
       { ...state, album: { ...state.album, albumPicture: action.payload } }
+    ),
+    setAlbumSongIds: (state, action: { payload: number[] }) => (
+      { ...state, album: { ...state.album, songIds: action.payload } }
+    ),
+    setAlbumSongPlaying: (state, action: { payload: number }) => (
+      { ...state, album: { ...state.album, songPlaying: action.payload } }
     ),
     // --- Mute --- //
     setMuted: (state, action: { payload: boolean }) => (
@@ -73,6 +81,8 @@ const audioPlayerReducer = createSlice({
 export const {
   setAlbumId,
   setAlbumPicture,
+  setAlbumSongIds,
+  setAlbumSongPlaying,
   setAlbumTitle,
   setArtistName,
   setIsPlaying,

@@ -86,6 +86,8 @@ export interface AudioPlayerState {
     albumId?: number;
     albumTitle: string | null;
     albumPicture: string | null;
+    songIds: number[] | null;
+    songPlaying: number | null;
   }
   isMuted: boolean;
   isPlaying: boolean;

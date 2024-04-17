@@ -53,6 +53,9 @@ export type CardAlbum = {
   title: string;
   cover: string;
   release_year: string;
+  artist: {
+    name: string;
+  };
   songs: [
     {
       id: string;

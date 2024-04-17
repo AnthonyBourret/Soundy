@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { AlbumCard } from '../customElements';
 import { CardAlbum } from '../../types';
+// import { SongListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   albums: CardAlbum[];
+  // albums: SongListenPageQueryQuery['albums'];
   // isLogin: boolean;
   sortBy: string | null;
 }
@@ -47,6 +49,7 @@ function AlbumDisplay({ albums, sortBy }: Props) {
           cover={album.cover}
           year={album.release_year}
           songs={album.songs}
+          artist={album.artist?.name}
           // isLogin={isLogin}
         />
       ))}

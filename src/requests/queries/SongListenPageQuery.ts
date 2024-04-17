@@ -18,6 +18,9 @@ const SongListenPageQuery = gql(`
     albums{
       id
       title
+      artist {
+          name
+      }
       cover
       release_year
       songs {

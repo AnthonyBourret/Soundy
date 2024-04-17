@@ -5,7 +5,7 @@ import {
   setAlbumPicture,
   setArtistName,
   setIsPlaying,
-  setSongDuration,
+  // setSongDuration,
   setSongPicture,
   setSongTitle,
   setTime,
@@ -16,6 +16,7 @@ import {
 interface Props {
   title: string;
   cover: string;
+  artist: string;
   year: string;
   songs: SongProps[];
   // isLogin: boolean;
@@ -28,7 +29,7 @@ interface SongProps {
 }
 
 function AlbumCard({
-  title, cover, year, songs,
+  title, cover, year, songs, artist,
 } : Props): JSX.Element {
   const { t } = useTranslation('common');
   const dispatch = useAppDispatch();
@@ -39,20 +40,19 @@ function AlbumCard({
       className="hover cursor-pointer"
       key={song.id}
       onClick={() => {
-        dispatch(setArtistName(artist?.name));
+        dispatch(setArtistName(artist || null));
         dispatch(setIsPlaying(!isPlaying));
         dispatch(setSongTitle(title));
         dispatch(setTime(0));
         dispatch(setAlbumPicture(null));
         dispatch(setSongPicture(cover));
-        dispatch(setSongDuration(secondsToFormatedDuration(duration)));
       }}
     >
       <th>1</th>
       <td>{song.title}</td>
       <td className="text-center">{secondsToFormatedDuration(Number(song.duration))}</td>
     </tr>
-  )), [cover, dispatch, isPlaying, songs, title]);
+  )), [artist, cover, dispatch, isPlaying, songs, title]);
 
   return (
     <div className="card w-full p-2 sm:w-[70%] lg:pl-[240px] lg:p-4 gap-2 bg-base-200 shadow-xl border border-1 border-stone-700">
@@ -73,7 +73,7 @@ function AlbumCard({
       <div>
         <div className="pl-[120px] pt-2 lg:px-4 lg:py-2 lg:text-xl">
           <p className="font-bold">{capitalizeFirstLetter(title)}</p>
-          <p className="font-semibold">Artist</p>
+          <p className="font-semibold">{artist || '?'}</p>
           <div className="w-full flex flex-col min-[425px]:flex-row min-[425px]:items-center min-[425px]:justify-between min-[425px]:pr-4 lg:pr-0">
             <p className="font-semibold">{year}</p>
             <p className="text-xs font-semibold pt-0.5 min-[425px]:pt-0">

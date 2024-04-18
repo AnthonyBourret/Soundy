@@ -1,8 +1,11 @@
 import React, { useMemo, useRef } from 'react';
 
-import PlayerPlayIcon from '../../svg/PlayerPlayIcon';
-import PlayerPrevNextIcon from '../../svg/PlayerPrevNextIcon';
-import { PlayerPauseIcon, SoundIcon } from '../../svg';
+import {
+  PlayerPrevNextIcon,
+  SoundIcon,
+  PlayerPauseIcon,
+  PlayerPlayIcon,
+} from '../../svg';
 import {
   setIsPlaying,
   setTime,
@@ -10,19 +13,17 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../redux';
+import { getPreviousSong } from '../../utils';
 
 import AudioSource from './AudioSource';
 import PlayerInfos from './PlayerInfos';
-import { getPreviousSong } from '../../utils';
-// import { secondsToFormatedDuration } from '../../utils';
 
 const Player = (): JSX.Element => {
-  // const [soundValue, setSoundValue] = useState(50);
   const audioRef = useRef<HTMLAudioElement>(null);
   const dispatch = useAppDispatch();
   const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
-  const time = useAppSelector((state) => state.audioPlayer.time);
   const songDuration = useAppSelector((state) => state.audioPlayer.song.songDuration);
+  const time = useAppSelector((state) => state.audioPlayer.time);
   const volume = useAppSelector((state) => state.audioPlayer.volume);
 
   const handlePlayPause = () => {
@@ -47,7 +48,6 @@ const Player = (): JSX.Element => {
     );
   }, [isPlaying]);
 
-  // const actualTime = useMemo(() => secondsToFormatedDuration(time), [time]);
   const songDurationTime = useMemo(() => songDuration, [songDuration]);
 
   return (
@@ -59,7 +59,7 @@ const Player = (): JSX.Element => {
           className="h-6 w-6 rotate-180"
           type="button"
           aria-label="player prev icon"
-          // WIP - go to previous song by a new request with song id
+          // TODO - go to previous song by a new request with song id
           onClick={() => getPreviousSong()}
         >
           <PlayerPrevNextIcon width="fit-content" height="fit-content" />
@@ -80,7 +80,6 @@ const Player = (): JSX.Element => {
           <PlayerPrevNextIcon width="w-fit" height="fit-content" />
         </button>
 
-        {/* <span>{actualTime}</span> */}
         <input
           className="w-[500px] amplitude-song-slider"
           max="100"

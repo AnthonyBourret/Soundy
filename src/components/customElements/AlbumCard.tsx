@@ -6,14 +6,12 @@ import {
   setAlbumSongPlaying,
   setArtistName,
   setIsPlaying,
-  // setSongDuration,
   setSongPicture,
   setSongTitle,
   setTime,
   useAppDispatch,
   useAppSelector,
 } from '../../redux';
-// import FavCheckBox from './FavCheckBox';
 import { secondsToFormatedDuration, capitalizeFirstLetter, getAlbumDuration } from '../../utils';
 
 interface Props {
@@ -22,7 +20,6 @@ interface Props {
   cover: string;
   year: string;
   songs: SongProps[];
-  // isLogin: boolean;
 }
 
 interface SongProps {

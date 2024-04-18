@@ -6,7 +6,6 @@ import { CardAlbum } from '../../types';
 interface Props {
   albums: CardAlbum[];
   // albums: SongListenPageQueryQuery['albums'];
-  // isLogin: boolean;
   sortBy: string | null;
 }
 
@@ -52,7 +51,6 @@ function AlbumDisplay({ albums, sortBy }: Props) {
           year={album.release_year}
           songs={album.songs}
           artist={album.artist?.name}
-          // isLogin={isLogin}
         />
       ))}
     </div>

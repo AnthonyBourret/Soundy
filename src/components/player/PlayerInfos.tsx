@@ -3,11 +3,11 @@ import React, { useMemo } from 'react';
 import { useAppSelector } from '../../redux';
 
 const PlayerInfos = (): JSX.Element => {
-  const songTitle = useAppSelector((state) => state.audioPlayer.song.songTitle);
-  const artistName = useAppSelector((state) => state.audioPlayer.artistName);
-  const albumTitle = useAppSelector((state) => state.audioPlayer.album.albumTitle);
   const albumPicture = useAppSelector((state) => state.audioPlayer.album.albumPicture);
+  const albumTitle = useAppSelector((state) => state.audioPlayer.album.albumTitle);
+  const artistName = useAppSelector((state) => state.audioPlayer.artistName);
   const songPicture = useAppSelector((state) => state.audioPlayer.song.songPicture);
+  const songTitle = useAppSelector((state) => state.audioPlayer.song.songTitle);
 
   const cover = useMemo((): JSX.Element | null => {
     if (albumPicture !== '' && albumPicture !== null) {

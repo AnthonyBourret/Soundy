@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { secondsToFormatedDuration, capitalizeFirstLetter } from '../../utils';
 import {
   setAlbumPicture,
   setAlbumSongIds,
@@ -14,11 +13,13 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../redux';
+// import FavCheckBox from './FavCheckBox';
+import { secondsToFormatedDuration, capitalizeFirstLetter, getAlbumDuration } from '../../utils';
 
 interface Props {
   title: string;
-  cover: string;
   artist: string;
+  cover: string;
   year: string;
   songs: SongProps[];
   // isLogin: boolean;
@@ -31,13 +32,13 @@ interface SongProps {
 }
 
 function AlbumCard({
-  title, cover, year, songs, artist,
+  title, cover, artist, year, songs,
 } : Props): JSX.Element {
   const { t } = useTranslation('common');
   const dispatch = useAppDispatch();
   const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
 
-  const songDisplay = useMemo(() => songs && songs.map((song) => (
+  const songDisplay = useMemo(() => songs && songs.map((song, i) => (
     <tr
       className="hover cursor-pointer"
       key={song.id}
@@ -52,7 +53,7 @@ function AlbumCard({
         dispatch(setAlbumSongPlaying(Number(song.id)));
       }}
     >
-      <th>1</th>
+      <th>{i + 1}</th>
       <td>{song.title}</td>
       <td className="text-center">{secondsToFormatedDuration(Number(song.duration))}</td>
     </tr>
@@ -71,7 +72,7 @@ function AlbumCard({
       {/* For the moment, albums cannot be liked */}
       {/* {isLogin && (
         <div className="absolute top-20 left-20 lg:top-48 lg:left-48">
-          <FavCheckBox />
+        <FavCheckBox />
         </div>
       )} */}
       <div>
@@ -84,6 +85,10 @@ function AlbumCard({
               {songs.length}
               {' '}
               {t('CARD_ALBUM_TRACK_NUMBER')}
+              {' '}
+              -
+              {' '}
+              {getAlbumDuration(songs)}
             </p>
           </div>
         </div>

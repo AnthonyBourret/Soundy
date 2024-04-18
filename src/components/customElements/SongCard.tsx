@@ -22,6 +22,7 @@ interface SongCardProps {
     name: string;
   };
   duration: number;
+  releaseYear: number;
   cover: string;
   isLogin: boolean;
   songId: number;
@@ -33,6 +34,7 @@ function SongCard(props: SongCardProps) {
     title,
     artist,
     duration,
+    releaseYear,
     cover,
     isLogin,
     songId,
@@ -87,7 +89,7 @@ function SongCard(props: SongCardProps) {
           </p>
           <div className="flex w-full justify-between text-xs min-[540px]:justify-around min-[540px]:p-2">
             <p className="font-semibold text-left">
-              Année
+              {releaseYear}
             </p>
             <p className="font-semibold text-right">
               {secondsToFormatedDuration(duration)}

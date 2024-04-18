@@ -93,7 +93,7 @@ function SongOverview(): JSX.Element {
 
   return (
     <div className="flex flex-col w-[60%] !items-start mb-[200px]">
-      <h2 className="pl-2">{t('OVERVIEW_TITLE', { ns: 'translation' })}</h2>
+      <h2 className="pl-2 text-xl font-semibold">{t('OVERVIEW_TITLE', { ns: 'translation' })}</h2>
       <div className="divider" />
 
       <div className="flex flex-wrap gap-5 justify-center xl:justify-between w-full my-7">
@@ -101,7 +101,7 @@ function SongOverview(): JSX.Element {
       </div>
 
       <div className="flex self-center mt-10 flex-col gap-5 items-center">
-        <p className="text-center w-[60%]">{t('SERVICES_TXT_1', { ns: 'translation' })}</p>
+        <p className="text-center w-[60%] text-lg font-semibold">{t('SERVICES_TXT_1', { ns: 'translation' })}</p>
         <Link to="/listen" className="w-[40%] flex">
           <button
             type="button"

@@ -30,8 +30,8 @@ export function LanguageSelector(): JSX.Element {
 
   return (
     <details>
-      <summary className="font-semibold lg:my-3">{t('MENU_LANGUAGE', { ns: 'common' })}</summary>
-      <ul className="p-2 lg:bg-base-200 lg:border lg:border-stone-700 lg:rounded-t-none">
+      <summary className="font-semibold">{t('MENU_LANGUAGE', { ns: 'common' })}</summary>
+      <ul className="p-2 lg:bg-base-200">
         {Object.keys(lngs).map((lng) => (
           <li key={lng}>
             <button

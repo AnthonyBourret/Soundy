@@ -1,7 +1,7 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  schema: process.env.LYRICS_DB_API_URL,
+  schema: process.env.VITE_APPOLO_URL,
   documents: [
     'src/requests/queries/*.{ts,tsx}',
     'src/requests/mutations/*.{ts,tsx}',

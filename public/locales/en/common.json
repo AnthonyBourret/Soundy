@@ -33,5 +33,6 @@
     "ORDER_SELECT_LATEST": "Latest",
     "ORDER_SELECT_OLDEST": "Oldest",
     "ORDER_BAR_RELOAD": "Refresh order",
-    "ADD_TO_FAV_TOOLTIP": "Add to favorites"
+    "ADD_TO_FAV_TOOLTIP": "Add to favorites",
+    "CONNECT_TOAST_MESSAGE": "You have to be connected to access this feature"
 }

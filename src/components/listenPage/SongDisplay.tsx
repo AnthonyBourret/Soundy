@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { SongCard } from '../customElements';
-import { SongListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
+import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
-  songs: SongListenPageQueryQuery['songs'];
+  songs: ListenPageSongsQueryQuery['songs'];
   isLogin: boolean;
   sortBy: string | null;
 }

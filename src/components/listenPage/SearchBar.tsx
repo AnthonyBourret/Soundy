@@ -1,16 +1,30 @@
 import React, { useMemo } from 'react';
+import { useLazyQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { Logo } from '../../svg';
 import { FilterRadio } from '../customElements';
 import { ChosenDisplay } from '../../types';
+import { ListenPageAlbumsQuery } from '../../requests/queries';
+import { ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   chosenDisplay: string;
   setChosenDisplay: React.Dispatch<React.SetStateAction<ChosenDisplay>>;
+  setAlbums: React.Dispatch<React.SetStateAction<ListenPageAlbumsQueryQuery['albums']>>;
 }
 
-function SearchBar({ chosenDisplay, setChosenDisplay }: Props): JSX.Element {
+function SearchBar({ chosenDisplay, setChosenDisplay, setAlbums }: Props): JSX.Element {
   const { t } = useTranslation('common');
+
+  const [getAlbums] = useLazyQuery(ListenPageAlbumsQuery, {
+    variables: { limit: 15 },
+    onCompleted: (data) => {
+      if (data.albums) {
+        setAlbums(data.albums);
+        setChosenDisplay('albums');
+      }
+    },
+  });
 
   const songDuration = useMemo(() => {
     if (chosenDisplay === 'albums') {
@@ -69,7 +83,7 @@ function SearchBar({ chosenDisplay, setChosenDisplay }: Props): JSX.Element {
           </button>
           <button
             type="button"
-            onClick={() => setChosenDisplay('albums')}
+            onClick={() => getAlbums({ variables: { limit: 30 } })}
             className={`btn btn-sm mx-4 py-3 min-[540px]:btn-md ${chosenDisplay === 'albums' ? 'border-primary my-5 border-2' : 'border-stone-700 my-6 border'}`}
           >
             {t('SEARCH_BAR_FILTER_ALBUM')}

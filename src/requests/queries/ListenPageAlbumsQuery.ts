@@ -1,18 +1,7 @@
 import { gql } from '../../types/__generated_schemas__/gql';
 
-const ListenPageQuery = gql(`
-  query ListenPageQuery($limit: Int) {
-    songs(limit: $limit) {
-      id
-      title
-      artist {
-        name
-      }
-      cover
-      duration
-      release_year
-      isLiked
-    }
+const ListenPageAlbumsQuery = gql(`
+  query ListenPageAlbumsQuery($limit: Int) {
     albums(limit: $limit){
       id
       title
@@ -30,4 +19,4 @@ const ListenPageQuery = gql(`
   }
 `);
 
-export default ListenPageQuery;
+export default ListenPageAlbumsQuery;

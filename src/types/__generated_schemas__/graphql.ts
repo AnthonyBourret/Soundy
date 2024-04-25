@@ -35,6 +35,7 @@ export type AlbumCreateInput = {
 };
 
 export type AlbumFilterInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
   release_year?: InputMaybe<ReleaseYear>;
 };
 

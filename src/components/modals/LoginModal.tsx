@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useLazyQuery } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { LoginQuery } from '../../requests/queries';
-import type { LoginInput } from '../../types';
 import { setToken, useAppDispatch } from '../../redux';
 
 function LoginModal() {
@@ -16,11 +15,9 @@ function LoginModal() {
     password: '',
   });
 
-  // TODO : Look if it is better to use mutation than a query to login
   const [loginAction, { data, loading, error }] = useLazyQuery(LoginQuery, {
     variables: {
-      // TODO : Find another way to type this and avoid "as"
-      input: formData as LoginInput,
+      input: formData,
     },
   });
 

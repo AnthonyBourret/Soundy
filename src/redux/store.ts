@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { incrementReducer, userReducer } from './reducers';
+import { audioPlayerReducer, userReducer } from './reducers';
 
 export const store = configureStore({
   reducer: {
-    increment: incrementReducer,
+    audioPlayer: audioPlayerReducer,
     user: userReducer,
   },
 });

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { AlbumCard } from '../customElements';
 import { CardAlbum } from '../../types';
+// import { SongListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   albums: CardAlbum[];
+  // albums: SongListenPageQueryQuery['albums'];
   sortBy: string | null;
-  // isLogin: boolean;
 }
 
 function AlbumDisplay({ albums, sortBy }: Props) {
@@ -47,10 +48,9 @@ function AlbumDisplay({ albums, sortBy }: Props) {
           key={album.id}
           title={album.title}
           cover={album.cover}
-          artist={album.artist.name}
           year={album.release_year}
           songs={album.songs}
-          // isLogin={isLogin}
+          artist={album.artist?.name}
         />
       ))}
     </div>

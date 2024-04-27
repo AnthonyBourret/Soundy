@@ -23,7 +23,7 @@ function ScrollToTopButton(): JSX.Element {
     <div>
       {isVisible && (
       <button
-        className="hidden lg:btn lg:btn-primary lg:btn-circle lg:p-2 lg:fixed lg:bottom-6 lg:right-6"
+        className="hidden lg:btn lg:btn-primary lg:btn-circle lg:p-2 lg:fixed lg:bottom-[100px] lg:right-6"
         aria-label="Scroll to top"
         type="button"
         onClick={scrollToTop}

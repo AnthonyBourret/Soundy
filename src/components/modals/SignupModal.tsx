@@ -1,17 +1,20 @@
-/* eslint-disable no-alert */
-import { useMutation } from '@apollo/client';
+import { ApolloError, useMutation } from '@apollo/client';
 import React, {
   FormEvent,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import validator from 'validator';
+
 import { CreateArtistMutation } from '../../requests/mutations';
 
 const SignupModal = (): JSX.Element => {
   const { t } = useTranslation();
+  const [signupError, setSignupError] = useState<string | null>(null);
+  const [toastVisible, setToastVisible] = useState(false);
 
   const [formData, setFormData] = useState({
     username: 'Joliwood',
@@ -34,6 +37,20 @@ const SignupModal = (): JSX.Element => {
     },
   );
 
+  useEffect(() => {
+    if (signupError) {
+      setToastVisible(true);
+
+      const timeoutId = setTimeout(() => {
+        setToastVisible(false);
+      }, 5000);
+
+      return () => clearTimeout(timeoutId);
+    }
+
+    return () => {};
+  }, [createArtist.length, signupError]);
+
   function closeModal() {
     (window as any).signup_modal.close();
   }
@@ -46,18 +63,18 @@ const SignupModal = (): JSX.Element => {
     e.preventDefault();
 
     if (!validator.isEmail(formData.email)) {
-      alert('Please enter a valid email address');
-      return;
+      // eslint-disable-next-line no-console
+      console.error('Please enter a valid email address');
     }
 
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
+      // eslint-disable-next-line no-console
+      console.error('Passwords do not match');
       return;
     }
 
     try {
-      // Call the createArtist mutation
-      await createArtist();
+      const response = await createArtist();
 
       // Reset form data on successful signup
       setFormData({
@@ -68,13 +85,27 @@ const SignupModal = (): JSX.Element => {
         isCguAccepted: false,
       });
 
-      // Show success message or redirect to another page
-      alert('Account created successfully!');
-    } catch (error) {
-      // Handle error response from the mutation
+      if (response) {
+        // TODO - Use the futur toast component
+        // eslint-disable-next-line no-console
+        console.log('Account created successfully');
+        closeModal();
+      }
+    } catch (error: unknown) {
+      if (error instanceof ApolloError) {
+        if (error.graphQLErrors[0].extensions.code === 'ARTIST_NAME_ALREADY_EXISTS') {
+          setSignupError(error.message);
+          return;
+        }
+
+        if (error.graphQLErrors[0].extensions.code === 'ARTIST_EMAIL_ALREADY_EXISTS') {
+          setSignupError(error.message);
+          return;
+        }
+      }
+
       // eslint-disable-next-line no-console
-      console.error('Error creating artist:', error);
-      alert('Error creating artist. Please try again later.');
+      console.error('An unknown error occurred while creating your account');
     }
   };
 
@@ -158,8 +189,25 @@ const SignupModal = (): JSX.Element => {
     );
   }, [createArtistLoading, formData.isCguAccepted, t]);
 
+  const signupInfos = useMemo(
+    () => {
+      if (toastVisible) {
+        return (
+          <div className="toast">
+            <div className="alert alert-warning">
+              <span>{signupError}</span>
+            </div>
+          </div>
+        );
+      }
+      return null;
+    },
+    [signupError, toastVisible],
+  );
+
   return (
     <dialog id="signup_modal" className="modal">
+      {signupInfos}
       <form method="dialog" onSubmit={handleSubmit} className="modal-box border-2 border-stone-700">
 
         {/* Close modal button */}

@@ -10,6 +10,7 @@ import Background from './components/Background';
 import Favorites from './components/favoritesPage/Favorites';
 import Create from './components/createPage/Create';
 import Profile from './components/profilePage/Profile';
+import Player from './components/player/Player';
 import {
   setCountry,
   setName,
@@ -56,6 +57,7 @@ export default function App() {
   return (
     <Suspense fallback="...is loading">
       <Background />
+      <Player />
       <Routes>
         <Route path="/" element={<Home isLogin={isLogin} />} />
         <Route path="/listen" element={<Listen isLogin={isLogin} />} />

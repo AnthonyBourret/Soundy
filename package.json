@@ -5,9 +5,9 @@
   "scripts": {
     "build": "vite build",
     "check:full": "npm run typescript && npm run eslint && npm run test",
+    "compile": "graphql-codegen -r dotenv/config",
     "dev": "vite --host",
     "eslint": "eslint .",
-    "compile": "graphql-codegen -r dotenv/config",
     "init": "concurrently \"npm run lyrics-library\" \"npm run dev\"",
     "server": "cd ../lyrics-library && yarn dev",
     "test": "vitest",

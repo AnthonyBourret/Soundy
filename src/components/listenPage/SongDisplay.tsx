@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SongCard } from '../customElements';
-import { ListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
+import { type ListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   songs: ListenPageQueryQuery['songs'];

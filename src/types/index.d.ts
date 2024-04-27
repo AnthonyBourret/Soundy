@@ -56,6 +56,9 @@ export type CardAlbum = {
   };
   cover: string;
   release_year: string;
+  artist: {
+    name: string;
+  };
   songs: [
     {
       id: string;
@@ -71,8 +74,8 @@ export type CardAlbum = {
 export type ChosenDisplay = 'songs' | 'albums';
 
 export type SVGProps = {
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   color?: string ;
 };
 
@@ -82,3 +85,26 @@ export type ProfileJWT = {
   iat: number,
   exp: number,
 };
+
+export interface AudioPlayerState {
+  album: {
+    /** If we listen to song outside of an album */
+    albumId?: number;
+    albumTitle: string | null;
+    albumPicture: string | null;
+    songIds: number[] | null;
+    songPlaying: number | null;
+  }
+  isMuted: boolean;
+  isPlaying: boolean;
+  song: {
+    /** Song is null if user enter to our app or refresh */
+    songId: number | null;
+    songTitle: string;
+    songPicture: string;
+    songDuration: string | null;
+  }
+  artistName: string | null;
+  volume: number;
+  time: number;
+}

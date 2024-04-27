@@ -5,7 +5,6 @@ import { ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/gr
 interface Props {
   albums: ListenPageAlbumsQueryQuery['albums'];
   sortBy: string | null;
-  // isLogin: boolean;
 }
 
 function AlbumDisplay({ albums, sortBy }: Props) {

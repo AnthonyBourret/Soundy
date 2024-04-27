@@ -1,6 +1,17 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-// import FavCheckBox from './FavCheckBox';
+import {
+  setAlbumPicture,
+  setAlbumSongIds,
+  setAlbumSongPlaying,
+  setArtistName,
+  setIsPlaying,
+  setSongPicture,
+  setSongTitle,
+  setTime,
+  useAppDispatch,
+  useAppSelector,
+} from '../../redux';
 import { secondsToFormatedDuration, capitalizeFirstLetter, getAlbumDuration } from '../../utils';
 
 interface Props {
@@ -9,7 +20,6 @@ interface Props {
   cover: string;
   year: number;
   songs: SongProps[];
-  // isLogin: boolean;
 }
 
 interface SongProps {
@@ -22,14 +32,29 @@ function AlbumCard({
   title, cover, artist, year, songs,
 } : Props): JSX.Element {
   const { t } = useTranslation('common');
+  const dispatch = useAppDispatch();
+  const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
 
   const songDisplay = useMemo(() => songs && songs.map((song, i) => (
-    <tr className="hover cursor-pointer" key={song.id}>
+    <tr
+      className="hover cursor-pointer"
+      key={song.id}
+      onClick={() => {
+        dispatch(setArtistName(artist || null));
+        dispatch(setIsPlaying(!isPlaying));
+        dispatch(setSongTitle(title));
+        dispatch(setTime(0));
+        dispatch(setAlbumPicture(null));
+        dispatch(setSongPicture(cover));
+        dispatch(setAlbumSongIds(songs.map((s) => Number(s.id))));
+        dispatch(setAlbumSongPlaying(Number(song.id)));
+      }}
+    >
       <th>{i + 1}</th>
       <td>{song.title}</td>
       <td className="text-center">{secondsToFormatedDuration(Number(song.duration))}</td>
     </tr>
-  )), [songs]);
+  )), [artist, cover, dispatch, isPlaying, songs, title]);
 
   return (
     <div className="card w-full p-2 sm:w-[70%] lg:pl-[240px] lg:p-4 gap-2 bg-base-200 shadow-xl border border-1 border-stone-700">
@@ -50,7 +75,7 @@ function AlbumCard({
       <div>
         <div className="pl-[120px] pt-2 lg:px-4 lg:py-2 lg:text-xl">
           <p className="font-bold">{capitalizeFirstLetter(title)}</p>
-          <p className="font-semibold">{artist}</p>
+          <p className="font-semibold">{artist || '?'}</p>
           <div className="w-full flex flex-col min-[425px]:flex-row min-[425px]:items-center min-[425px]:justify-between min-[425px]:pr-4 lg:pr-0">
             <p className="font-semibold">{year}</p>
             <p className="text-xs font-semibold pt-0.5 min-[425px]:pt-0">

@@ -31,5 +31,6 @@ module.exports = {
       },
     ],
     'react/require-default-props': 0,
+    'react/function-component-definition': 'off',
   },
 };

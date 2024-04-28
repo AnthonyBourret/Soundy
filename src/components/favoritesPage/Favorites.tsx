@@ -8,10 +8,10 @@ import {
 } from '../customElements';
 import { Logo, ArrowDown } from '../../svg';
 import { FavoriteSongsQuery } from '../../requests/queries';
-import { SongListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
+import { ListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
-  songs: SongListenPageQueryQuery['songs'];
+  songs: ListenPageQueryQuery['songs'];
   isLogin: boolean;
   sortBy: string | null;
 }
@@ -22,7 +22,7 @@ function Favorites({ isLogin }: { isLogin: boolean }) {
     variables: { liked: true },
     fetchPolicy: 'no-cache',
   });
-  const [songs, setSongs] = useState<SongListenPageQueryQuery['songs']>([]);
+  const [songs, setSongs] = useState<ListenPageQueryQuery['songs']>([]);
   const [sortedSongs, setSortedSongs] = useState<Props['songs']>([]);
   const [sortBy, setSortBy] = useState<string | null>(null);
 
@@ -30,7 +30,7 @@ function Favorites({ isLogin }: { isLogin: boolean }) {
     if (sortedSongs !== null && sortedSongs !== undefined && sortedSongs.length !== 0) {
       return (
         <>
-          <SongAndAlbumOrder setSortBy={setSortBy} />
+          <SongAndAlbumOrder chosenDisplay="songs" setSortBy={setSortBy} />
           <div className="flex flex-col min-[540px]:px-12 pt-4 p-2 gap-4 min-[540px]:flex-row min-[540px]:flex-wrap min-[540px]:justify-around">
             {sortedSongs && sortedSongs.map(
               (song) => (

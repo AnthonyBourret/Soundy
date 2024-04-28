@@ -10,7 +10,7 @@
     "eslint": "eslint .",
     "init": "concurrently \"npm run lyrics-library\" \"npm run dev\"",
     "server": "cd ../lyrics-library && yarn dev",
-    "test": "vitest",
+    "test": "vitest --watch=false",
     "typescript": "tsc --noEmit"
   },
   "repository": {

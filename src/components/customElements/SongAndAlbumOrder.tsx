@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 interface Props {
   setSortBy: React.Dispatch<React.SetStateAction<string | null>>;
-  chosenDisplay: string;
+  chosenDisplay?: string;
 }
 
 function SongAndAlbumOrder({ setSortBy, chosenDisplay }: Props): JSX.Element {

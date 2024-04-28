@@ -17,7 +17,7 @@ function Listen({ isLogin }: { isLogin: boolean }) {
   const [sortBy, setSortBy] = useState<string | null>(null);
 
   useEffect(() => {
-    if (data?.songs !== undefined) {
+    if (data !== undefined) {
       setSongs(data.songs);
     }
   }, [data]);

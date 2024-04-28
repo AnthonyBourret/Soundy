@@ -54,7 +54,7 @@ function SongDisplay({ songs, isLogin, sortBy }: Props) {
         (song) => (
           // WIP - Fix the types
           <SongCard
-            isLiked={song!.isLiked || false}
+            isLiked={song?.isLiked ?? false}
             artist={song!.artist || { name: '' }}
             cover={song!.cover || ''}
             duration={song!.duration}

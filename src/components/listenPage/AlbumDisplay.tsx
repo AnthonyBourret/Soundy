@@ -47,7 +47,7 @@ function AlbumDisplay({ albums, sortBy }: Props) {
             key={album.id}
             title={album.title}
             cover={album.cover ?? ''}
-            artist={album.artist.name}
+            artist={album.artist?.name || ''}
             year={album!.release_year ?? 0}
             songs={album.songs as []}
             // isLogin={isLogin}

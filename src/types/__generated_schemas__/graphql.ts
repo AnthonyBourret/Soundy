@@ -57,6 +57,14 @@ export type Artist = {
   songs?: Maybe<Array<Maybe<Song>>>;
 };
 
+export type ArtistCreateInput = {
+  country?: InputMaybe<Scalars['String']['input']>;
+  email: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+  picture?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ArtistFilterInput = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
@@ -107,6 +115,7 @@ export type LoginInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   addAlbum?: Maybe<Album>;
+  addArtist?: Maybe<Artist>;
   addSong?: Maybe<Song>;
   deleteAlbum?: Maybe<Scalars['Boolean']['output']>;
   deleteArtist?: Maybe<Scalars['Boolean']['output']>;
@@ -121,6 +130,11 @@ export type Mutation = {
 
 export type MutationAddAlbumArgs = {
   input: AlbumCreateInput;
+};
+
+
+export type MutationAddArtistArgs = {
+  input: ArtistCreateInput;
 };
 
 
@@ -300,7 +314,7 @@ export type ListenPageAlbumsQueryQueryVariables = Exact<{
 }>;
 
 
-export type ListenPageAlbumsQueryQuery = { __typename?: 'Query', albums?: Array<{ __typename?: 'Album', id: number, title: string, cover?: string | null, release_year?: number | null, artist: { __typename?: 'Artist', name: string }, songs?: Array<{ __typename?: 'Song', id: number, title: string, duration: number } | null> | null } | null> | null };
+export type ListenPageAlbumsQueryQuery = { __typename?: 'Query', albums?: Array<{ __typename?: 'Album', id: number, title: string, cover?: string | null, release_year?: number | null, artist?: { __typename?: 'Artist', name: string } | null, songs?: Array<{ __typename?: 'Song', id: number, title: string, duration: number } | null> | null } | null> | null };
 
 export type ListenPageSongsQueryQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;

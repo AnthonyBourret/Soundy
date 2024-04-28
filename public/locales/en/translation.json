@@ -1,4 +1,11 @@
 {
+    "HOME": "Home",
+    "WELCOME": "Welcome to Soundy",
+    "TEST": "This is a test for the translation",
+    "BUTTON_TEXT": "Let's go",
+    "JOB": "Engineering",
+    "LANGUAGE_1": "English",
+    "LANGUAGE_2": "French",
     "HERO_TXT_1": "Welcome on",
     "HERO_TXT_2": "Listen, create and share...",
     "SERVICES_TITLE_LISTEN": "Listen to a wide variety of sounds !",
@@ -10,9 +17,9 @@
     "LOGIN_MODAL_TITLE": "Welcome to Soundy",
     "LOGIN_MODAL_TXT": "Don't have an account yet ? Create one by cliking ",
     "LOGIN_MODAL_LINK": "here",
-    "LOGIN_MODAL_LABEL_USERNAME": "Username",
+    "LOGIN_MODAL_LABEL_EMAIL": "Email",
     "LOGIN_MODAL_LABEL_PASSWORD": "Password",
-    "LOGIN_MODAL_PLACEHOLDER_USERNAME": "Type your username here...",
+    "LOGIN_MODAL_PLACEHOLDER_EMAIL": "Type your email here...",
     "LOGIN_MODAL_PLACEHOLDER_PASSWORD": "Type your password here...",
     "SIGNUP_MODAL_TITLE": "Create an account on Soundy",
     "SIGNUP_MODAL_LABEL_USERNAME": "Username",
@@ -20,5 +27,11 @@
     "SIGNUP_MODAL_LABEL_PASSWORD": "Password",
     "SIGNUP_MODAL_LABEL_CONFIRM_PASSWORD": "Confirm password",
     "SIGNUP_MODAL_ACCEPT_CGU": "I accept Soundy's CGU",
-    "SIGNUP_MODAL_BTN": "Sign up"
+    "SIGNUP_MODAL_BTN": "Sign up",
+    "COOKIE_BANNER_TITLE": "This site uses cookies",
+    "COOKIE_BANNER_TXT": "By continuing to browse this site, you accept the use of cookies to provide you with a better browsing experience. By clicking on \"Accept\", you allow us to store optional cookies on your device, in order to give you the best possible experience. By clicking on \"Decline\", you refuse the use of optionnal cookies. No personal data is stored and cookies are not used for advertising content.",
+    "COOKIE_BANNER_BTN_ACCEPT": "Accept all",
+    "COOKIE_BANNER_BTN_DECLINE": "Decline",
+    "FAVORITES_PAGE_TITLE": "My Favorite Songs",
+    "FAVORITES_PAGE_EMPTY": "You haven't added songs to your favorites yet, click on the button bellow and start exploring our catalog."
 }

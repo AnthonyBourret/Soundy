@@ -1,0 +1,12 @@
+{
+  "default": [
+    [
+      [
+        "cd ../lyrics-library && yarn dev"
+      ],
+      [
+        "npm run dev"
+      ]
+    ]
+  ]
+}

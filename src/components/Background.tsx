@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Background() {
+function Background(): JSX.Element {
   return (
     <>
       <div className="bg" />

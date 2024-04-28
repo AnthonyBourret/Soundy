@@ -8,18 +8,31 @@ interface ButtonStyleProps {
 interface Props {
   link: string;
   title: string;
+  onClick?: () => void;
   buttonStyle: (props: ButtonStyleProps) => string;
 }
 
-function CustomButton({ link, title, buttonStyle }: Props) {
+function CustomButton(props: Props) {
+  const {
+    link,
+    title,
+    onClick,
+    buttonStyle,
+  } = props;
+
   return (
     <NavLink
       to={link}
       className={buttonStyle}
+      onClick={onClick}
     >
       {title}
     </NavLink>
   );
 }
+
+CustomButton.defaultProps = {
+  onClick: undefined,
+};
 
 export default CustomButton;

@@ -21,7 +21,7 @@ function SignupModal() {
         </button>
 
         <h3 className="font-bold text-xl mb-8 text-center">{t('SIGNUP_MODAL_TITLE', { ns: 'translation' })}</h3>
-        <form className="w-full flex flex-col items-center gap-4 my-4">
+        <div className="w-full flex flex-col items-center gap-4 my-4">
 
           {/* Input username */}
           <label className="form-control w-full max-w-xs" htmlFor="username">
@@ -30,7 +30,7 @@ function SignupModal() {
             </div>
             <input
               type="text"
-              placeholder={t('NEUTRAL_PLACEHOLDER', { ns: 'common' })}
+              placeholder="..."
               className="input input-bordered input-sm w-full max-w-lg"
             />
           </label>
@@ -42,7 +42,7 @@ function SignupModal() {
             </div>
             <input
               type="text"
-              placeholder={t('EMAIL_PLACEHOLDER', { ns: 'common' })}
+              placeholder="@"
               className="input input-bordered input-sm w-full max-w-lg"
             />
           </label>
@@ -54,7 +54,7 @@ function SignupModal() {
             </div>
             <input
               type="text"
-              placeholder={t('NEUTRAL_PLACEHOLDER', { ns: 'common' })}
+              placeholder="..."
               className="input input-bordered input-sm w-full max-w-xs"
             />
           </label>
@@ -66,7 +66,7 @@ function SignupModal() {
             </div>
             <input
               type="text"
-              placeholder={t('NEUTRAL_PLACEHOLDER', { ns: 'common' })}
+              placeholder="..."
               className="input input-bordered input-sm w-full max-w-xs"
             />
           </label>
@@ -81,7 +81,7 @@ function SignupModal() {
 
           {/* Submit button */}
           <button type="submit" className="btn btn-lg my-2">{t('SIGNUP_MODAL_BTN', { ns: 'translation' })}</button>
-        </form>
+        </div>
         <p className="pt-2 text-xs text-center">{t('MODAL_TXT_CLOSE', { ns: 'common' })}</p>
       </form>
 

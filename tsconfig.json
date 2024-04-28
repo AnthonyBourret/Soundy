@@ -13,6 +13,7 @@
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "skipLibCheck": true,
+    "types": ["node"],
   },
   "include": [
     ".eslintrc.js",

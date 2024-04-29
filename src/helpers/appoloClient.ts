@@ -6,10 +6,17 @@ const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('AUTH_TOKEN');
 
   // Return the headers to the context so HTTP link can read them
+  if (token) {
+    return {
+      headers: {
+        ...headers,
+        authorization: `Authorization ${token}`,
+      },
+    };
+  }
   return {
     headers: {
       ...headers,
-      authorization: token ? `Authorization ${token}` : '',
     },
   };
 });

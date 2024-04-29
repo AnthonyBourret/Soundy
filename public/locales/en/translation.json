@@ -33,5 +33,6 @@
     "COOKIE_BANNER_BTN_ACCEPT": "Accept all",
     "COOKIE_BANNER_BTN_DECLINE": "Decline",
     "FAVORITES_PAGE_TITLE": "My Favorite Songs",
-    "FAVORITES_PAGE_EMPTY": "You haven't added songs to your favorites yet, click on the button bellow and start exploring our catalog."
+    "FAVORITES_PAGE_EMPTY": "You haven't added songs to your favorites yet, click on the button bellow and start exploring our catalog.",
+    "SIGNUP_MODAL_SUCCESS": "Your account has been created successfully, you can now log in."
 }

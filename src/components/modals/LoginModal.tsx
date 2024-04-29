@@ -59,7 +59,7 @@ function LoginModal() {
     () => {
       if (toastVisible) {
         return (
-          <div className="toast">
+          <div className="toast z-50 bottom-16">
             <div className="alert alert-info">
               <span>{error?.message}</span>
             </div>

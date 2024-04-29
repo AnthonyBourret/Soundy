@@ -14,6 +14,7 @@ import { CreateArtistMutation } from '../../requests/mutations';
 const SignupModal = (): JSX.Element => {
   const { t } = useTranslation();
   const [signupError, setSignupError] = useState<string | null>(null);
+  const [signupSuccess, setSignupSuccess] = useState<boolean>(false);
   const [toastVisible, setToastVisible] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -24,7 +25,12 @@ const SignupModal = (): JSX.Element => {
     isCguAccepted: false,
   });
 
-  const [createArtist, { loading: createArtistLoading }] = useMutation(
+  const [createArtist, {
+    // TODO - Save the data received in the store
+    // data: createArtistData,
+    error: createArtistError,
+    loading: createArtistLoading,
+  }] = useMutation(
     CreateArtistMutation,
     {
       variables: {
@@ -38,7 +44,7 @@ const SignupModal = (): JSX.Element => {
   );
 
   useEffect(() => {
-    if (signupError) {
+    if (createArtistError || signupSuccess) {
       setToastVisible(true);
 
       const timeoutId = setTimeout(() => {
@@ -48,8 +54,8 @@ const SignupModal = (): JSX.Element => {
       return () => clearTimeout(timeoutId);
     }
 
-    return () => {};
-  }, [createArtist.length, signupError]);
+    return setToastVisible(false);
+  }, [signupSuccess, createArtistError]);
 
   function closeModal() {
     (window as any).signup_modal.close();
@@ -63,11 +69,13 @@ const SignupModal = (): JSX.Element => {
     e.preventDefault();
 
     if (!validator.isEmail(formData.email)) {
+      // TODO - Use futur toast component
       // eslint-disable-next-line no-console
       console.error('Please enter a valid email address');
     }
 
     if (formData.password !== formData.confirmPassword) {
+      // TODO - Use futur toast component
       // eslint-disable-next-line no-console
       console.error('Passwords do not match');
       return;
@@ -87,8 +95,7 @@ const SignupModal = (): JSX.Element => {
 
       if (response) {
         // TODO - Use the futur toast component
-        // eslint-disable-next-line no-console
-        console.log('Account created successfully');
+        setSignupSuccess(true);
         closeModal();
       }
     } catch (error: unknown) {
@@ -191,9 +198,19 @@ const SignupModal = (): JSX.Element => {
 
   const signupInfos = useMemo(
     () => {
+      if (toastVisible && signupSuccess) {
+        return (
+          <div className="toast z-50 bottom-16">
+            <div className="alert alert-success">
+              <span>{t('SIGNUP_MODAL_SUCCESS', { ns: 'translation' })}</span>
+            </div>
+          </div>
+        );
+      }
+
       if (toastVisible) {
         return (
-          <div className="toast">
+          <div className="toast z-50 bottom-16">
             <div className="alert alert-warning">
               <span>{signupError}</span>
             </div>
@@ -202,59 +219,61 @@ const SignupModal = (): JSX.Element => {
       }
       return null;
     },
-    [signupError, toastVisible],
+    [signupSuccess, signupError, t, toastVisible],
   );
 
   return (
-    <dialog id="signup_modal" className="modal">
+    <>
       {signupInfos}
-      <form method="dialog" onSubmit={handleSubmit} className="modal-box border-2 border-stone-700">
+      <dialog id="signup_modal" className="modal">
+        <form method="dialog" onSubmit={handleSubmit} className="modal-box border-2 border-stone-700">
 
-        {/* Close modal button */}
-        <button
-          type="button"
-          onClick={closeModal}
-          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-        >
-          ✕
-        </button>
+          {/* Close modal button */}
+          <button
+            type="button"
+            onClick={closeModal}
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </button>
 
-        <h3 className="font-bold text-xl mb-8 text-center">{t('SIGNUP_MODAL_TITLE', { ns: 'translation' })}</h3>
-        <div className="w-full flex flex-col items-center gap-4 my-4">
+          <h3 className="font-bold text-xl mb-8 text-center">{t('SIGNUP_MODAL_TITLE', { ns: 'translation' })}</h3>
+          <div className="w-full flex flex-col items-center gap-4 my-4">
 
-          {usernameInput}
-          {emailInput}
-          {passwordInput}
-          {confirmPasswordInput}
+            {usernameInput}
+            {emailInput}
+            {passwordInput}
+            {confirmPasswordInput}
 
-          {/* Input checkbox */}
-          <div className="form-control">
-            <label className="label cursor-pointer gap-4" htmlFor="CGU">
-              <input
-                type="checkbox"
-                className="checkbox"
-                checked={formData.isCguAccepted}
-                onChange={() => setFormData(
-                  { ...formData, isCguAccepted: !formData.isCguAccepted },
-                )}
-              />
-              <span className="label-text">{t('SIGNUP_MODAL_ACCEPT_CGU', { ns: 'translation' })}</span>
-            </label>
+            {/* Input checkbox */}
+            <div className="form-control">
+              <label className="label cursor-pointer gap-4" htmlFor="CGU">
+                <input
+                  type="checkbox"
+                  className="checkbox"
+                  checked={formData.isCguAccepted}
+                  onChange={() => setFormData(
+                    { ...formData, isCguAccepted: !formData.isCguAccepted },
+                  )}
+                />
+                <span className="label-text">{t('SIGNUP_MODAL_ACCEPT_CGU', { ns: 'translation' })}</span>
+              </label>
+            </div>
+
+            {signupButton}
           </div>
+          <p className="pt-2 text-xs text-center">{t('MODAL_TXT_CLOSE', { ns: 'common' })}</p>
+        </form>
 
-          {signupButton}
-        </div>
-        <p className="pt-2 text-xs text-center">{t('MODAL_TXT_CLOSE', { ns: 'common' })}</p>
-      </form>
-
-      {/* Modal backdrop */}
-      <form
-        method="dialog"
-        className="modal-backdrop"
-      >
-        <button type="submit">close</button>
-      </form>
-    </dialog>
+        {/* Modal backdrop */}
+        <form
+          method="dialog"
+          className="modal-backdrop"
+        >
+          <button type="submit">close</button>
+        </form>
+      </dialog>
+    </>
   );
 };
 

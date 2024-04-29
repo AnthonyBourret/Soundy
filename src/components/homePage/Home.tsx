@@ -38,7 +38,7 @@ function Home(props: HomeProps): JSX.Element {
     () => {
       if (toastVisible) {
         return (
-          <div className="toast z-30">
+          <div className="toast z-50 bottom-16">
             <div className="alert alert-info">
               <span>{t('CONNECT_TOAST_MESSAGE', { ns: 'common' })}</span>
             </div>

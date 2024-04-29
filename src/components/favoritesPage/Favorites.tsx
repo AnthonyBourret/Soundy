@@ -11,7 +11,7 @@ import { FavoriteSongsQuery } from '../../requests/queries';
 import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
-  songs: ListenPageSongsQueryQuery['songs'];
+  songs: SongListenPageQueryQuery['songs'];
   isLogin: boolean;
   sortBy: string | null;
 }
@@ -30,7 +30,7 @@ function Favorites({ isLogin }: { isLogin: boolean }) {
     if (sortedSongs !== null && sortedSongs !== undefined && sortedSongs.length !== 0) {
       return (
         <>
-          <SongAndAlbumOrder setSortBy={setSortBy} />
+          <SongAndAlbumOrder chosenDisplay="songs" setSortBy={setSortBy} />
           <div className="flex flex-col min-[540px]:px-12 pt-4 p-2 gap-4 min-[540px]:flex-row min-[540px]:flex-wrap min-[540px]:justify-around">
             {sortedSongs && sortedSongs.map(
               (song) => (

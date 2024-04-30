@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useMutation } from '@apollo/client';
 
 import { AddIconChecked, AddIconUnchecked } from '../../svg';
-import LikeSongMutation from '../../requests/mutations/LikeSongMutation';
-import UnlikeSongMutation from '../../requests/mutations/UnlikeSongMutation';
+import { LikeSongMutation, UnlikeSongMutation } from '../../requests/mutations';
 
 type Props = {
   isLiked: boolean;

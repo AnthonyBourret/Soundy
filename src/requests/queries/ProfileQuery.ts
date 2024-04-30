@@ -4,9 +4,9 @@ const ProfileQuery = gql(`
   query Profile {
     profile {
       country
+      email
       name
       picture
-      email
     }
   }
 `);

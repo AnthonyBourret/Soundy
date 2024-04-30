@@ -1,7 +1,7 @@
 import { gql } from '../../types/__generated_schemas__/gql';
 
 const LikeSongMutation = gql(`
-  mutation Mutation($songId: Int!) {
+  mutation LikeSong($songId: Int!) {
     likeSong(id: $songId)
   }
 `);

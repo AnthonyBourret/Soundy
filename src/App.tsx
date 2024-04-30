@@ -18,7 +18,7 @@ import {
   useAppSelector,
   useAppDispatch,
 } from './redux';
-import ProfileQuery from './requests/queries/ProfileQuery';
+import { ProfileQuery } from './requests/queries';
 import CookiePopup from './components/modals/CookiesPopup';
 
 export default function App() {

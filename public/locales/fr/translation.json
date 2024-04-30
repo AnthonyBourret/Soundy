@@ -33,5 +33,6 @@
   "COOKIE_BANNER_BTN_ACCEPT": "Accepter tout",
   "COOKIE_BANNER_BTN_DECLINE": "Refuser",
   "FAVORITES_PAGE_TITLE": "Mes favoris",
-  "FAVORITES_PAGE_EMPTY": "Vous n'avez pas encore ajouté de titres à vos favoris. Cliquez sur le bouton ci-dessous pour commencer à explorer notre catalogue."
+  "FAVORITES_PAGE_EMPTY": "Vous n'avez pas encore ajouté de titres à vos favoris. Cliquez sur le bouton ci-dessous pour commencer à explorer notre catalogue.",
+  "SIGNUP_MODAL_SUCCESS": "Votre compte a bien été créé ! Vous pouvez maintenant vous connecter."
 }

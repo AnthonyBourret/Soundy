@@ -52,7 +52,7 @@ function SongDisplay({ songs, isLogin, sortBy }: Props) {
     <div className="flex flex-col min-[540px]:px-12 pt-4 p-2 gap-4 min-[540px]:flex-row min-[540px]:flex-wrap min-[540px]:justify-around">
       {sortedSongs && sortedSongs.map(
         (song) => (
-          // WIP - Fix the types
+          // TODO - Fix the types
           <SongCard
             isLiked={song!.isLiked || false}
             artist={song!.artist || { name: '' }}

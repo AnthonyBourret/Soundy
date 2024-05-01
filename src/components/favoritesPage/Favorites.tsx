@@ -11,7 +11,7 @@ import { FavoriteSongsQuery } from '../../requests/queries';
 import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
-  songs: SongListenPageQueryQuery['songs'];
+  songs: ListenPageSongsQueryQuery['songs'];
   isLogin: boolean;
   sortBy: string | null;
 }

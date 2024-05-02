@@ -43,14 +43,14 @@ function Create(props: CreateProps) {
       </div>
       <div className="w-full flex gap-2 justify-center sm:gap-8">
         <button
-          className={selectedType === 'song' ? 'btn py-4 btn-primary' : 'btn py-4'}
+          className={selectedType === 'song' ? 'btn py-4 border-2 border-primary' : 'btn py-4 border-2 border-stone-700'}
           type="button"
           onClick={() => setSelectedType('song')}
         >
           {t('CREATE_PAGE_BTN_SONG')}
         </button>
         <button
-          className={selectedType === 'album' ? 'btn py-4 btn-primary' : 'btn py-4'}
+          className={selectedType === 'album' ? 'btn py-4 border-2 border-primary' : 'btn py-4 border-2 border-stone-700'}
           type="button"
           onClick={() => setSelectedType('album')}
         >

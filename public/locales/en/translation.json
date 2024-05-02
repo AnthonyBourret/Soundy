@@ -37,5 +37,14 @@
     "SIGNUP_MODAL_SUCCESS": "Your account has been created successfully, you can now log in.",
     "CREATE_PAGE_TITLE": "Create and upload your music.",
     "CREATE_PAGE_BTN_SONG": "Upload a song",
-    "CREATE_PAGE_BTN_ALBUM": "Create an album"
+    "CREATE_PAGE_BTN_ALBUM": "Create an album",
+    "CREATE_SONG_TITLE_INPUT": "Title :",
+    "CREATE_SONG_FILE_INPUT": "Upload your file :",
+    "CREATE_SONG_FILE_LABEL": "Only .mp3 and .wav files are supported",
+    "CREATE_SONG_COVER_INPUT": "Upload the cover :",
+    "CREATE_SONG_COVER_LABEL_1": "Preview",
+    "CREATE_SONG_COVER_LABEL_2": "Only .jpg, .jpeg and .png files are supported",
+    "CREATE_SONG_LYRICS_INPUT": "Lyrics :",
+    "CREATE_SONG_LYRICS_PLACEHOLDER": "Type or copy/paste the lyrics of your song here...",
+    "CREATE_SONG_BTN": "Add a song"
 }

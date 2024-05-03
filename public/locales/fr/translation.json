@@ -40,10 +40,9 @@
   "CREATE_PAGE_BTN_ALBUM": "Créer un album",
   "CREATE_SONG_TITLE_INPUT": "Titre :",
   "CREATE_SONG_FILE_INPUT": "Télécharger le fichier :",
-  "CREATE_SONG_FILE_LABEL": "Seuls les fichiers .mp3 et .wav sont acceptés",
+  "CREATE_SONG_FILE_LABEL": "* Seuls les fichiers .mp3 et .wav sont acceptés",
   "CREATE_SONG_COVER_INPUT": "Télécharger une illustration :",
-  "CREATE_SONG_COVER_LABEL_1": "Aperçu",
-  "CREATE_SONG_COVER_LABEL_2": "Seuls les fichiers .jpg, .jpeg et .png sont acceptés",
+  "CREATE_SONG_COVER_LABEL": "* Seuls les fichiers .jpg, .jpeg et .png sont acceptés",
   "CREATE_SONG_LYRICS_INPUT": "Paroles :",
   "CREATE_SONG_LYRICS_PLACEHOLDER": "Taper ou copier/coller les paroles de votre chanson ici...",
   "CREATE_SONG_BTN": "Ajouter une chanson"

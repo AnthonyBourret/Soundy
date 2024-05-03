@@ -38,12 +38,14 @@
     "CREATE_PAGE_TITLE": "Create and upload your music.",
     "CREATE_PAGE_BTN_SONG": "Upload a song",
     "CREATE_PAGE_BTN_ALBUM": "Create an album",
+    "CREATE_SONG_HEADER": "Add a new song",
     "CREATE_SONG_TITLE_INPUT": "Title :",
+    "CREATE_SONG_TITLE_PLACEHOLDER": "Type the title of your song here...",
     "CREATE_SONG_FILE_INPUT": "Upload your file :",
     "CREATE_SONG_FILE_LABEL": "* Only .mp3 and .wav files are supported",
     "CREATE_SONG_COVER_INPUT": "Upload the cover :",
     "CREATE_SONG_COVER_LABEL": "* Only .jpg, .jpeg and .png files are supported",
     "CREATE_SONG_LYRICS_INPUT": "Lyrics :",
     "CREATE_SONG_LYRICS_PLACEHOLDER": "Type or copy/paste the lyrics of your song here...",
-    "CREATE_SONG_BTN": "Add a song"
+    "CREATE_SONG_BTN": "Save"
 }

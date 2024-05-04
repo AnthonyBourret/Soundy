@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { useCookies } from 'react-cookie';
 
 interface Props {
-  setIsVisible: (isVisible: boolean) => void;
+  setCookieVisibility: (isVisible: boolean) => void;
 }
 
-function CookiesPopup({ setIsVisible }: Props) {
+function CookiesPopup({ setCookieVisibility }: Props) {
   const [, setCookies] = useCookies(['acceptCookies']);
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
@@ -16,7 +16,7 @@ function CookiesPopup({ setIsVisible }: Props) {
     } else {
       setCookies('acceptCookies', false, { path: '/' });
     }
-    setIsVisible(false);
+    setCookieVisibility(false);
   }
 
   const { t } = useTranslation('translation');

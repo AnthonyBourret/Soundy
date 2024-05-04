@@ -3,7 +3,8 @@ import React, {
 } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
+
 import Home from './components/homePage/Home';
 import Listen from './components/listenPage/Listen';
 import Background from './components/Background';
@@ -23,11 +24,11 @@ import CookiePopup from './components/modals/CookiesPopup';
 
 export default function App() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [cookieVisibility, setCookieVisibility] = useState<boolean>(true);
   const token = useAppSelector((state) => state.user.token);
   const [cookies, setCookies] = useCookies(['acceptCookies']);
   const dispatch = useAppDispatch();
-  const { data } = useQuery(ProfileQuery);
+  const [profileAction, { data: profileData }] = useLazyQuery(ProfileQuery);
 
   useEffect(() => {
     if (token == null) {
@@ -35,24 +36,25 @@ export default function App() {
     }
     if (token) {
       setIsLogin(true);
+      profileAction();
 
-      if (data?.profile != null) {
-        dispatch(setName(data.profile.name));
-        dispatch(setCountry(data.profile.country));
-        dispatch(setPicture(data.profile.picture));
+      if (profileData?.profile != null) {
+        dispatch(setName(profileData.profile.name));
+        dispatch(setCountry(profileData.profile.country));
+        dispatch(setPicture(profileData.profile.picture));
       }
 
-      setIsVisible(false);
+      setCookieVisibility(false);
       setCookies('acceptCookies', true, { path: '/' });
     }
     if (cookies.acceptCookies === true) {
-      setIsVisible(false);
+      setCookieVisibility(false);
     }
-  }, [data, dispatch, token, cookies, setCookies]);
+  }, [profileData, dispatch, token, cookies, setCookies, profileAction]);
 
-  const acceptCookie = useMemo(() => isVisible && (
-    <CookiePopup setIsVisible={setIsVisible} />
-  ), [isVisible]);
+  const acceptCookie = useMemo(() => cookieVisibility && (
+    <CookiePopup setCookieVisibility={setCookieVisibility} />
+  ), [cookieVisibility]);
 
   return (
     <Suspense fallback="...is loading">
@@ -71,11 +73,9 @@ export default function App() {
         />
         <Route
           path="create"
-          element={
-            isLogin
-              ? <Create isLogin={isLogin} />
-              : <Home isLogin={isLogin} isRedirected />
-          }
+          element={isLogin
+            ? <Create isLogin={isLogin} />
+            : <Home isLogin={isLogin} isRedirected />}
         />
         <Route
           path="/profile"

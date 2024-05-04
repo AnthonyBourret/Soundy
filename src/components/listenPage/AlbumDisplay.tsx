@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { AlbumCard } from '../customElements';
-import { CardAlbum } from '../../types';
-// import { SongListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
+import { ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
-  albums: CardAlbum[];
-  // albums: SongListenPageQueryQuery['albums'];
+  albums: ListenPageAlbumsQueryQuery['albums'];
   sortBy: string | null;
 }
 
 function AlbumDisplay({ albums, sortBy }: Props) {
-  const [sortedAlbums, setSortedAlbums] = useState<CardAlbum[]>([]);
+  const [sortedAlbums, setSortedAlbums] = useState<ListenPageAlbumsQueryQuery['albums']>([]);
 
   // The useEffect is used to make a new array of songs based on the sortBy value.
   // This array is sorted based on the value of sortBy.
@@ -20,7 +18,7 @@ function AlbumDisplay({ albums, sortBy }: Props) {
       setSortedAlbums([]);
     }
 
-    const sorted = [...albums].filter((album) => album !== null);
+    const sorted = Array.isArray(albums) ? albums.filter((album) => album !== null) : [];
 
     switch (sortBy) {
       case 'ascendingName':
@@ -44,14 +42,17 @@ function AlbumDisplay({ albums, sortBy }: Props) {
   return (
     <div className="flex flex-col items-center w-full pt-4 gap-4 px-2">
       {sortedAlbums && sortedAlbums.map((album) => (
-        <AlbumCard
-          key={album.id}
-          title={album.title}
-          cover={album.cover}
-          year={album.release_year}
-          songs={album.songs}
-          artist={album.artist?.name}
-        />
+        album && (
+          <AlbumCard
+            key={album.id}
+            title={album.title}
+            cover={album.cover ?? ''}
+            artist={album.artist?.name || ''}
+            year={album!.release_year ?? 0}
+            songs={album.songs as []}
+            // isLogin={isLogin}
+          />
+        )
       ))}
     </div>
   );

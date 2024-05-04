@@ -21,7 +21,7 @@ function CookiesPopup({ setIsVisible }: Props) {
 
   const { t } = useTranslation('translation');
   return (
-    <div className="fixed bottom-44 sm:bottom-0 bg-base-100 bg-opacity-90 backdrop-blur-[10px] px-6 py-10 sm:p-6 m-2 border border-stone-700 rounded-box md:w-2/5">
+    <div className="fixed bottom-44 sm:bottom-0 bg-base-100 bg-opacity-90 backdrop-blur-[10px] px-6 py-10 sm:p-6 m-2 border border-stone-700 rounded-box md:w-2/5 z-50">
       <div className="flex flex-col gap-10 sm:gap-6">
         <h3 className="text-xl font-semibold">{t('COOKIE_BANNER_TITLE')}</h3>
         <p className="text-sm text-justify">{t('COOKIE_BANNER_TXT')}</p>

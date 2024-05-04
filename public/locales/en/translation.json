@@ -10,6 +10,8 @@
     "CREATE_SONG_BTN": "Save",
     "CREATE_SONG_COVER_INPUT": "Upload the cover :",
     "CREATE_SONG_COVER_PLACEHOLDER": "Type the link to the cover here...",
+    "CREATE_SONG_DURATION_INPUT": "Duration :",
+    "CREATE_SONG_DURATION_LABEL": "* Duration in seconds",
     "CREATE_SONG_FILE_INPUT": "Upload your file :",
     "CREATE_SONG_FILE_LABEL": "* Only .mp3 and .wav files are supported",
     "CREATE_SONG_HEADER": "Add a new song",

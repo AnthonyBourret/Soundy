@@ -10,6 +10,8 @@
   "CREATE_SONG_BTN": "Enregistrer",
   "CREATE_SONG_COVER_INPUT": "Télécharger une illustration :",
   "CREATE_SONG_COVER_PLACEHOLDER": "Entrer le lien de l'illustration ici...",
+  "CREATE_SONG_DURATION_INPUT": "Durée :",
+  "CREATE_SONG_DURATION_LABEL": "* Durée en secondes",
   "CREATE_SONG_FILE_INPUT": "Télécharger le fichier :",
   "CREATE_SONG_FILE_LABEL": "* Seuls les fichiers .mp3 et .wav sont acceptés",
   "CREATE_SONG_HEADER": "Ajouter un nouveau titre",

@@ -33,6 +33,7 @@
   "LOGIN_MODAL_PLACEHOLDER_PASSWORD": "Entrez votre mot de passe ici...",
   "LOGIN_MODAL_TITLE": "Bienvenue sur Soundy",
   "LOGIN_MODAL_TXT": "Pas encore de compte ? Créez-en un en cliquant ",
+  "LOGIN_SUCCESS": "Vous êtes maintenant connecté",
   "OVERVIEW_TITLE": "Écoutez les toutes dernières nouveautés musicales",
   "SERVICES_TITLE_CREATE": "Créez vos propres sons !",
   "SERVICES_TITLE_LISTEN": "Écoutez une grande variété de sons !",
@@ -41,13 +42,15 @@
   "SERVICES_TXT_LISTEN": "Venez découvrir toutes les variétés du moment, ou des grands classiques ! Sur Soundy vous trouverez forcément votre bonheur !",
   "SIGNUP_MODAL_ACCEPT_CGU": "J'accepte les CGU de Soundy",
   "SIGNUP_MODAL_BTN": "S'enregistrer",
+  "SIGNUP_MODAL_ERROR": "Une erreur est survenue lors de la création de votre compte. Veuillez réessayer plus tard.",
+  "SIGNUP_MODAL_INVALID_EMAIL": "L'adresse email est invalide",
   "SIGNUP_MODAL_LABEL_CONFIRM_PASSWORD": "Confirmation du mot de passe",
   "SIGNUP_MODAL_LABEL_EMAIL": "E-mail",
   "SIGNUP_MODAL_LABEL_PASSWORD": "Mot de passe",
   "SIGNUP_MODAL_LABEL_USERNAME": "Nom d'utilisateur",
+  "SIGNUP_MODAL_PASSWORDS_DONT_MATCH": "Les mots de passe ne correspondent pas",
   "SIGNUP_MODAL_SUCCESS": "Votre compte a bien été créé ! Vous pouvez maintenant vous connecter.",
   "SIGNUP_MODAL_TITLE": "Créez un compte sur Soundy",
   "TEST": "C'est un test pour la traduction",
-  "WELCOME": "Bienvenue sur Soundy",
-  "aaa": "Anglais"
+  "WELCOME": "Bienvenue sur Soundy"
 }

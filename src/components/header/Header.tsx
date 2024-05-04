@@ -6,6 +6,7 @@ import {
 import VisitorMenu from './visitorMenu/VisitorMenu';
 import { ConnectedMenu } from './connectedMenu';
 import type { MenuButton } from '../../types';
+import { useNewToast } from '../toastContext';
 
 type HeaderProps = {
   isLogin: boolean;
@@ -14,6 +15,7 @@ type HeaderProps = {
 function Header(props: HeaderProps) {
   const { t } = useTranslation('common');
   const { isLogin } = props;
+  const newToast = useNewToast();
 
   const dispatch = useAppDispatch();
 
@@ -42,6 +44,7 @@ function Header(props: HeaderProps) {
       text: t('MENU_LOGOUT'),
       onClick: () => {
         dispatch(setToken(null));
+        newToast('success', t('LOGOUT_TOAST_MESSAGE'));
       },
       link: '/logout',
     },

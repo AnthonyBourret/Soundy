@@ -23,8 +23,8 @@ const Home = (props: HomeProps): JSX.Element => {
 
   useEffect(() => {
     if (isRedirected) {
-      newToast('info', t('CONNECT_TOAST_MESSAGE', { ns: 'common' }));
       navigate('/', { replace: true });
+      newToast('info', t('CONNECT_TOAST_MESSAGE', { ns: 'common' }));
     }
   }, [isRedirected, navigate, newToast, t]);
 

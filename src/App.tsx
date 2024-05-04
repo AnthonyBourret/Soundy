@@ -24,7 +24,7 @@ import CookiePopup from './components/modals/CookiesPopup';
 
 export default function App() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [cookieVisibility, setCookieVisibility] = useState<boolean>(true);
   const token = useAppSelector((state) => state.user.token);
   const [cookies, setCookies] = useCookies(['acceptCookies']);
   const dispatch = useAppDispatch();
@@ -44,17 +44,17 @@ export default function App() {
         dispatch(setPicture(profileData.profile.picture));
       }
 
-      setIsVisible(false);
+      setCookieVisibility(false);
       setCookies('acceptCookies', true, { path: '/' });
     }
     if (cookies.acceptCookies === true) {
-      setIsVisible(false);
+      setCookieVisibility(false);
     }
   }, [profileData, dispatch, token, cookies, setCookies, profileAction]);
 
-  const acceptCookie = useMemo(() => isVisible && (
-    <CookiePopup setIsVisible={setIsVisible} />
-  ), [isVisible]);
+  const acceptCookie = useMemo(() => cookieVisibility && (
+    <CookiePopup setCookieVisibility={setCookieVisibility} />
+  ), [cookieVisibility]);
 
   return (
     <Suspense fallback="...is loading">

@@ -8,10 +8,10 @@ import {
 } from '../customElements';
 import { Logo, ArrowDown } from '../../svg';
 import { FavoriteSongsQuery } from '../../requests/queries';
-import { ListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
+import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
-  songs: ListenPageQueryQuery['songs'];
+  songs: ListenPageSongsQueryQuery['songs'];
   isLogin: boolean;
   sortBy: string | null;
 }
@@ -22,7 +22,7 @@ function Favorites({ isLogin }: { isLogin: boolean }) {
     variables: { liked: true },
     fetchPolicy: 'no-cache',
   });
-  const [songs, setSongs] = useState<ListenPageQueryQuery['songs']>([]);
+  const [songs, setSongs] = useState<ListenPageSongsQueryQuery['songs']>([]);
   const [sortedSongs, setSortedSongs] = useState<Props['songs']>([]);
   const [sortBy, setSortBy] = useState<string | null>(null);
 

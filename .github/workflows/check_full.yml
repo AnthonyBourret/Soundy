@@ -1,4 +1,4 @@
-name: Check:full script
+name: Check full script
 
 on:
   pull_request:

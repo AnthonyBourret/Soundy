@@ -1,29 +1,24 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
-import { ListenPageQuery } from '../../requests/queries';
 import Header from '../header/Header';
 import SongDisplay from './SongDisplay';
 import AlbumDisplay from './AlbumDisplay';
 import { ScrollToTopButton, SongAndAlbumOrder, Spinner } from '../customElements';
-import { CardAlbum, ChosenDisplay } from '../../types';
+import { ChosenDisplay } from '../../types';
 import SearchBar from './SearchBar';
-import { ListenPageQueryQuery } from '../../types/__generated_schemas__/graphql';
+import { ListenPageSongsQuery } from '../../requests/queries';
+import { ListenPageSongsQueryQuery, ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 function Listen({ isLogin }: { isLogin: boolean }) {
-  const { data, loading, error } = useQuery(ListenPageQuery, { variables: { limit: 30 } });
-  const [songs, setSongs] = useState<ListenPageQueryQuery['songs']>([]);
-  const [albums, setAlbums] = useState<CardAlbum[]>([]);
+  const { data, loading, error } = useQuery(ListenPageSongsQuery, { variables: { limit: 30 } });
+  const [songs, setSongs] = useState<ListenPageSongsQueryQuery['songs']>([]);
+  const [albums, setAlbums] = useState<ListenPageAlbumsQueryQuery['albums']>([]);
   const [chosenDisplay, setChosenDisplay] = useState<ChosenDisplay>('songs');
   const [sortBy, setSortBy] = useState<string | null>(null);
 
   useEffect(() => {
     if (data?.songs !== undefined) {
       setSongs(data.songs);
-    }
-
-    if (data?.albums !== undefined) {
-      const albumData = data!.albums as unknown as CardAlbum[];
-      setAlbums(albumData);
     }
   }, [data]);
 
@@ -52,7 +47,11 @@ function Listen({ isLogin }: { isLogin: boolean }) {
   return (
     <div className="mb-5 flex flex-col items-center w-full min-h-screen">
       <Header isLogin={isLogin} />
-      <SearchBar chosenDisplay={chosenDisplay} setChosenDisplay={setChosenDisplay} />
+      <SearchBar
+        chosenDisplay={chosenDisplay}
+        setChosenDisplay={setChosenDisplay}
+        setAlbums={setAlbums}
+      />
       <div className="divider py-4 px-8 min-[540px]:px-36" />
       <SongAndAlbumOrder setSortBy={setSortBy} chosenDisplay={chosenDisplay} />
 

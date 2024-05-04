@@ -34,5 +34,8 @@
     "COOKIE_BANNER_BTN_DECLINE": "Decline",
     "FAVORITES_PAGE_TITLE": "My Favorite Songs",
     "FAVORITES_PAGE_EMPTY": "You haven't added songs to your favorites yet, click on the button bellow and start exploring our catalog.",
-    "SIGNUP_MODAL_SUCCESS": "Your account has been created successfully, you can now log in."
+    "SIGNUP_MODAL_SUCCESS": "Your account has been created successfully, you can now log in.",
+    "SIGNUP_MODAL_INVALID_EMAIL": "This email is invalid",
+    "SIGNUP_MODAL_PASSWORDS_DONT_MATCH": "Passwords don't match",
+    "SIGNUP_MODAL_ERROR": "An error occured, please try again later"
 }

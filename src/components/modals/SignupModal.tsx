@@ -2,7 +2,6 @@ import { ApolloError, useMutation } from '@apollo/client';
 import React, {
   FormEvent,
   useCallback,
-  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -10,12 +9,11 @@ import { useTranslation } from 'react-i18next';
 import validator from 'validator';
 
 import { CreateArtistMutation } from '../../requests/mutations';
+import { useNewToast } from '../toastContext';
 
 const SignupModal = (): JSX.Element => {
   const { t } = useTranslation();
-  const [signupError, setSignupError] = useState<string | null>(null);
-  const [signupSuccess, setSignupSuccess] = useState<boolean>(false);
-  const [toastVisible, setToastVisible] = useState(false);
+  const newToast = useNewToast();
 
   const [formData, setFormData] = useState({
     username: 'Joliwood',
@@ -43,20 +41,6 @@ const SignupModal = (): JSX.Element => {
     },
   );
 
-  useEffect(() => {
-    if (createArtistError || signupSuccess) {
-      setToastVisible(true);
-
-      const timeoutId = setTimeout(() => {
-        setToastVisible(false);
-      }, 5000);
-
-      return () => clearTimeout(timeoutId);
-    }
-
-    return setToastVisible(false);
-  }, [signupSuccess, createArtistError]);
-
   function closeModal() {
     (window as any).signup_modal.close();
   }
@@ -69,15 +53,12 @@ const SignupModal = (): JSX.Element => {
     e.preventDefault();
 
     if (!validator.isEmail(formData.email)) {
-      // TODO - Use futur toast component
-      // eslint-disable-next-line no-console
-      console.error('Please enter a valid email address');
+      newToast('warning', t('SIGNUP_MODAL_INVALID_EMAIL', { ns: 'translation' }));
+      return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      // TODO - Use futur toast component
-      // eslint-disable-next-line no-console
-      console.error('Passwords do not match');
+      newToast('warning', t('SIGNUP_MODAL_PASSWORDS_DONT_MATCH', { ns: 'translation' }));
       return;
     }
 
@@ -94,25 +75,28 @@ const SignupModal = (): JSX.Element => {
       });
 
       if (response) {
-        // TODO - Use the futur toast component
-        setSignupSuccess(true);
+        newToast('success', t('SIGNUP_MODAL_SUCCESS', { ns: 'translation' }));
         closeModal();
       }
     } catch (error: unknown) {
       if (error instanceof ApolloError) {
         if (error.graphQLErrors[0].extensions.code === 'ARTIST_NAME_ALREADY_EXISTS') {
-          setSignupError(error.message);
+          newToast('error', error.message);
           return;
         }
 
         if (error.graphQLErrors[0].extensions.code === 'ARTIST_EMAIL_ALREADY_EXISTS') {
-          setSignupError(error.message);
+          newToast('error', error.message);
           return;
         }
       }
 
-      // eslint-disable-next-line no-console
-      console.error('An unknown error occurred while creating your account');
+      if (createArtistError) {
+        newToast('error', createArtistError.message);
+        return;
+      }
+
+      newToast('error', t('SIGNUP_MODAL_ERROR', { ns: 'translation' }));
     }
   };
 
@@ -196,84 +180,54 @@ const SignupModal = (): JSX.Element => {
     );
   }, [createArtistLoading, formData.isCguAccepted, t]);
 
-  const signupInfos = useMemo(
-    () => {
-      if (toastVisible && signupSuccess) {
-        return (
-          <div className="toast z-50 bottom-16">
-            <div className="alert alert-success">
-              <span>{t('SIGNUP_MODAL_SUCCESS', { ns: 'translation' })}</span>
-            </div>
-          </div>
-        );
-      }
-
-      if (toastVisible) {
-        return (
-          <div className="toast z-50 bottom-16">
-            <div className="alert alert-warning">
-              <span>{signupError}</span>
-            </div>
-          </div>
-        );
-      }
-      return null;
-    },
-    [signupSuccess, signupError, t, toastVisible],
-  );
-
   return (
-    <>
-      {signupInfos}
-      <dialog id="signup_modal" className="modal">
-        <form method="dialog" onSubmit={handleSubmit} className="modal-box border-2 border-stone-700">
-
-          {/* Close modal button */}
-          <button
-            type="button"
-            onClick={closeModal}
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-          >
-            ✕
-          </button>
-
-          <h3 className="font-bold text-xl mb-8 text-center">{t('SIGNUP_MODAL_TITLE', { ns: 'translation' })}</h3>
-          <div className="w-full flex flex-col items-center gap-4 my-4">
-
-            {usernameInput}
-            {emailInput}
-            {passwordInput}
-            {confirmPasswordInput}
-
-            {/* Input checkbox */}
-            <div className="form-control">
-              <label className="label cursor-pointer gap-4" htmlFor="CGU">
-                <input
-                  type="checkbox"
-                  className="checkbox"
-                  checked={formData.isCguAccepted}
-                  onChange={() => setFormData(
-                    { ...formData, isCguAccepted: !formData.isCguAccepted },
-                  )}
-                />
-                <span className="label-text">{t('SIGNUP_MODAL_ACCEPT_CGU', { ns: 'translation' })}</span>
-              </label>
-            </div>
-
-            {signupButton}
-          </div>
-          <p className="pt-2 text-xs text-center">{t('MODAL_TXT_CLOSE', { ns: 'common' })}</p>
-        </form>
-
-        {/* Modal backdrop */}
-        <form
-          method="dialog"
-          className="modal-backdrop"
+    <dialog id="signup_modal" className="modal">
+      <form method="dialog" onSubmit={handleSubmit} className="modal-box border-2 border-stone-700">
+        {/* Close modal button */}
+        <button
+          type="button"
+          onClick={closeModal}
+          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
         >
-          <button type="submit">close</button>
-        </form>
-      </dialog>
-    </>
+          ✕
+        </button>
+
+        <h3 className="font-bold text-xl mb-8 text-center">{t('SIGNUP_MODAL_TITLE', { ns: 'translation' })}</h3>
+        <div className="w-full flex flex-col items-center gap-4 my-4">
+
+          {usernameInput}
+          {emailInput}
+          {passwordInput}
+          {confirmPasswordInput}
+
+          {/* Input checkbox */}
+          <div className="form-control">
+            <label className="label cursor-pointer gap-4" htmlFor="CGU">
+              <input
+                type="checkbox"
+                className="checkbox"
+                checked={formData.isCguAccepted}
+                onChange={() => setFormData(
+                  { ...formData, isCguAccepted: !formData.isCguAccepted },
+                )}
+              />
+              <span className="label-text">{t('SIGNUP_MODAL_ACCEPT_CGU', { ns: 'translation' })}</span>
+            </label>
+          </div>
+
+          {signupButton}
+        </div>
+        <p className="pt-2 text-xs text-center">{t('MODAL_TXT_CLOSE', { ns: 'common' })}</p>
+      </form>
+
+      {/* Modal backdrop */}
+      <form
+        method="dialog"
+        className="modal-backdrop"
+      >
+        <button type="submit">close</button>
+      </form>
+    </dialog>
   );
 };
 

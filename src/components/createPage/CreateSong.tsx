@@ -1,5 +1,5 @@
-// File inputs are disabled because they are not supported by the current version of the library
-// Some random data (same .mp3 link, and a random cover from picsum) will be sent to the server
+// File input is disabled because it is not supported by the current version of the library
+// Some random data (same .mp3 link) will be sent to the server
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -47,17 +47,11 @@ function CreateSong() {
         <figure className="w-1/2 rounded-box overflow-hidden self-center min-[1300px]:w-1/3">
           <img src="/cover-placeholder.png" alt="default_cover" />
         </figure>
-        <div className="flex flex-col">
-          <input
-            type="file"
-            accept=".jpeg, .jpg, .png"
-            className="file-input file-input-bordered input-sm mt-4 w-full"
-            disabled
-          />
-          <div className="label self-center">
-            <span className="label-text-alt">{t('CREATE_SONG_COVER_LABEL')}</span>
-          </div>
-        </div>
+        <input
+          type="text"
+          placeholder={t('CREATE_SONG_COVER_PLACEHOLDER')}
+          className="file-input file-input-bordered input-sm mt-4 w-full"
+        />
       </label>
       {/* Lyrics input */}
       <label htmlFor="lyrics">
@@ -65,7 +59,10 @@ function CreateSong() {
           <span className="label-text text-lg font-semibold">{t('CREATE_SONG_LYRICS_INPUT')}</span>
         </div>
         <div className="divider my-0 mb-4" />
-        <textarea className="textarea textarea-bordered w-full" placeholder={t('CREATE_SONG_LYRICS_PLACEHOLDER')} />
+        <textarea
+          className="textarea textarea-bordered w-full"
+          placeholder={t('CREATE_SONG_LYRICS_PLACEHOLDER')}
+        />
       </label>
       {/* Submit button */}
       <button

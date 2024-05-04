@@ -1,58 +1,35 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
+import { ScrollToTopButton } from '../customElements';
 import Header from '../header/Header';
+import { useNewToast } from '../toastContext';
+
 import Hero from './Hero';
 import Services from './Services';
 import SongOverview from './SongOverview';
-import { ScrollToTopButton } from '../customElements';
 
 type HomeProps = {
   isLogin: boolean;
   isRedirected?: boolean;
 };
 
-function Home(props: HomeProps): JSX.Element {
-  const { t } = useTranslation();
+const Home = (props: HomeProps): JSX.Element => {
   const { isLogin, isRedirected = false } = props;
-  const [toastVisible, setToastVisible] = useState(false);
+  const { t } = useTranslation();
   const navigate = useNavigate();
+  const newToast = useNewToast();
 
-  useEffect(
-    () => {
-      if (isRedirected) {
-        setToastVisible(true);
-        navigate('/', { replace: true });
-      }
-
-      const timeoutId = setTimeout(() => {
-        setToastVisible(false);
-      }, 2000);
-
-      return () => clearTimeout(timeoutId);
-    },
-    [isRedirected, navigate],
-  );
-
-  const connexionRequired = useMemo(
-    () => {
-      if (toastVisible) {
-        return (
-          <div className="toast z-50 bottom-16">
-            <div className="alert alert-info">
-              <span>{t('CONNECT_TOAST_MESSAGE', { ns: 'common' })}</span>
-            </div>
-          </div>
-        );
-      }
-      return null;
-    },
-    [toastVisible, t],
-  );
+  useEffect(() => {
+    if (isRedirected) {
+      newToast('info', t('CONNECT_TOAST_MESSAGE', { ns: 'common' }));
+      navigate('/', { replace: true });
+    }
+  }, [isRedirected, navigate, newToast, t]);
 
   return (
     <div className="mb-5 flex flex-col items-center w-full min-h-screen">
-      {connexionRequired}
       <Header isLogin={isLogin} />
       <Hero />
       <Services />
@@ -60,6 +37,6 @@ function Home(props: HomeProps): JSX.Element {
       <ScrollToTopButton />
     </div>
   );
-}
+};
 
 export default Home;

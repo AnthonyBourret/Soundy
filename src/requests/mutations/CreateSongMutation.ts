@@ -4,9 +4,6 @@ const CreateSongMutation = gql(`
   mutation CreateSong($input: SongCreateInput!) {
     addSong(input: $input) {
       id
-      artist {
-        name
-      }
       title
       cover
       duration

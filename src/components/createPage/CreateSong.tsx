@@ -5,20 +5,17 @@ import React, {
   useState, useCallback, useMemo, FormEvent,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAppSelector } from '../../redux';
+import { useNewToast } from '../toastContext';
 import { CreateSongMutation } from '../../requests/mutations';
+import { Spinner } from '../customElements';
 import { UploadIcon } from '../../svg';
 
 function CreateSong() {
   const { t } = useTranslation('translation');
-  const userName = useAppSelector((state) => state.user.name);
+  const newToast = useNewToast();
 
   const [formData, setFormData] = useState({
     title: '',
-    artist: {
-      id: 1,
-      name: userName,
-    },
     cover: '',
     duration: 0,
     release_year: new Date().getFullYear(),
@@ -32,10 +29,6 @@ function CreateSong() {
     variables: {
       input: {
         title: formData.title,
-        artist: {
-          id: 1,
-          name: userName ?? '',
-        },
         cover: formData.cover,
         duration: formData.duration,
         release_year: formData.release_year,
@@ -50,28 +43,39 @@ function CreateSong() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!formData.title || !formData.cover || !formData.lyrics) {
-      // eslint-disable-next-line no-console
-      console.error('Please fill all the fields');
+    if (!formData.title) {
+      newToast('warning', t('CREATE_SONG_MISSING_TITLE'));
+      return;
+    }
+    if (!formData.duration) {
+      newToast('warning', t('CREATE_SONG_MISSING_DURATION'));
+      return;
+    }
+    if (!formData.title && !formData.duration) {
+      newToast('warning', t('CREATE_SONG_MISSING_FIELDS'));
+      return;
     }
     try {
-      await createSong();
+      const response = await createSong();
       setFormData({
         title: '',
-        artist: {
-          id: 1,
-          name: userName,
-        },
         cover: '',
         duration: 0,
         release_year: new Date().getFullYear(),
         lyrics: '',
       });
+
+      if (response) {
+        newToast('success', t('CREATE_SONG_SUCCESS'));
+      }
     } catch (error: unknown) {
       if (error instanceof ApolloError) {
         // eslint-disable-next-line no-console
-        console.error('An error occurred:', error);
+        newToast('error', error.message);
       }
+    }
+    if (createSongError) {
+      newToast('error', createSongError.message);
     }
   };
 
@@ -95,12 +99,32 @@ function CreateSong() {
     );
   }, [formData.cover]);
 
+  const submitButton = useMemo(() => {
+    if (createSongLoading) {
+      return (
+        <Spinner />
+      );
+    }
+    return (
+      <button
+        type="submit"
+        className="btn btn-primary  self-center py-3 text-lg"
+      >
+        {t('CREATE_SONG_BTN')}
+        <UploadIcon />
+      </button>
+    );
+  }, [createSongLoading, t]);
+
   return (
     <form
       onSubmit={handleSubmit}
       className="flex flex-col gap-14 border border-stone-700 rounded-box bg-neutral mb-24 w-[90%] p-8 py-10 min-[450px]:px-14 min-[450px]:w-[75%] min-[850px]:px-20 min-[850px]:w-[50%] min-[1450px]:px-28 min-[1450px]:w-[35%]"
     >
-      <h1 className="text-2xl font-bold text-center">{t('CREATE_SONG_HEADER')}</h1>
+      <div className="flex flex-col gap-2">
+        <h1 className="text-2xl font-bold text-center">{t('CREATE_SONG_HEADER')}</h1>
+        <p className="text-xs text-center">{t('CREATE_PAGE_REQUIRED_FIELDS')}</p>
+      </div>
       {/* Title input */}
       <label className="form-control" htmlFor="title">
         <div className="label">
@@ -155,7 +179,7 @@ function CreateSong() {
         <div className="divider my-0 mb-4" />
         {coverPicture}
         <input
-          type="text"
+          type="url"
           placeholder={t('CREATE_SONG_COVER_PLACEHOLDER')}
           value={formData.cover}
           onChange={(e) => handleInputChange('cover', e.target.value)}
@@ -175,14 +199,7 @@ function CreateSong() {
           onChange={(e) => handleInputChange('lyrics', e.target.value)}
         />
       </label>
-      {/* Submit button */}
-      <button
-        type="submit"
-        className="btn btn-primary  self-center py-3 text-lg"
-      >
-        {t('CREATE_SONG_BTN')}
-        <UploadIcon />
-      </button>
+      {submitButton}
     </form>
   );
 }

@@ -16,7 +16,7 @@ function CreateAlbumSongsOrder({ selectedSongs, setSelectedSongs }: Props) {
   const { t } = useTranslation('translation');
   return (
     <>
-      <p className="label-text-alt my-4">{t('CREATE_ALBUM_ORDER_LABEL')}</p>
+      <p className="label-text-alt my-4 text-center">{t('CREATE_ALBUM_ORDER_LABEL')}</p>
       <div className="flex flex-col gap-2 border border-stone-700 rounded-md p-2">
         <Reorder.Group values={selectedSongs} onReorder={setSelectedSongs}>
           {selectedSongs.map((song, index) => (

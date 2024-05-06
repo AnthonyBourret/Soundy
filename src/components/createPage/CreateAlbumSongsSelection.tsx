@@ -13,7 +13,7 @@ interface Props {
 function CreateAlbumSongsSelection({ songs, setSelectedSongs }: Props) {
   return (
     <div>
-      <div className="form-control border border-stone-700 rounded-md p-2 gap-2 h-[300px] overflow-y-scroll">
+      <div className="form-control border border-stone-700 rounded-md p-2 gap-2 h-[335px] overflow-y-scroll">
         {songs.map((song) => (
           <label key={song.title} htmlFor="songCheckbox" className="cursor-pointer label border-2 border-stone-700 rounded-md bg-base-100 px-2">
             <input

@@ -82,7 +82,7 @@ function CreateSong() {
   const coverPicture = useMemo(() => {
     if (formData.cover) {
       return (
-        <figure className="w-1/2 object-fill rounded-box overflow-hidden self-center min-[1300px]:w-1/3 min-[1300px]:min-w-[33%]">
+        <figure className="w-1/2 object-fill rounded-box overflow-hidden self-center min-[1300px]:w-1/3">
           <img
             src={formData.cover}
             alt="cover_preview"
@@ -108,7 +108,7 @@ function CreateSong() {
     return (
       <button
         type="submit"
-        className="btn btn-primary  self-center py-3 text-lg"
+        className="btn btn-primary self-center py-3 mt-4 text-lg"
       >
         {t('CREATE_SONG_BTN')}
         <UploadIcon />
@@ -119,86 +119,93 @@ function CreateSong() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-14 border border-stone-700 rounded-box bg-neutral mb-24 w-[90%] p-8 py-10 min-[450px]:px-14 min-[450px]:w-[75%] min-[850px]:px-20 min-[850px]:w-[50%] min-[1450px]:px-28 min-[1450px]:w-[35%]"
+      className="flex flex-col items-center gap-14 border border-stone-700 rounded-box bg-neutral mb-24 w-[90%] p-8 py-10 min-[600px]:w-[80%] min-[1000px]:w-[70%]"
     >
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold text-center">{t('CREATE_SONG_HEADER')}</h1>
         <p className="text-xs text-center">{t('CREATE_PAGE_REQUIRED_FIELDS')}</p>
       </div>
-      {/* Title input */}
-      <label className="form-control" htmlFor="title">
-        <div className="label">
-          <span className="label-text text-lg font-semibold">{t('CREATE_SONG_TITLE_INPUT')}</span>
+      <div className="flex flex-col items-center gap-14 min-[1000px]:flex-row min-[1000px]:w-[80%] min-[1000px]:justify-between">
+        <div className="flex flex-col gap-14 w-full min-[450px]:w-[80%] min-[1000px]:w-[45%]">
+          {/* Title input */}
+          <label className="form-control" htmlFor="title">
+            <div className="label">
+              <span className="label-text text-lg font-semibold">{t('CREATE_SONG_TITLE_INPUT')}</span>
+            </div>
+            <div className="divider my-0 mb-4" />
+            <input
+              type="text"
+              placeholder={t('CREATE_SONG_TITLE_PLACEHOLDER')}
+              value={formData.title}
+              onChange={(e) => handleInputChange('title', e.target.value)}
+              className="input input-bordered input-sm w-full"
+            />
+          </label>
+          {/* File input */}
+          <label className="form-control" htmlFor="file">
+            <div className="label">
+              <span className="label-text text-lg font-semibold">{t('CREATE_SONG_FILE_INPUT')}</span>
+            </div>
+            <div className="divider my-0 mb-4" />
+            <input
+              type="file"
+              accept=".mp3, .wav"
+              className="file-input file-input-bordered input-sm w-full"
+              disabled
+            />
+            <div className="label self-center">
+              <span className="label-text-alt">{t('CREATE_SONG_FILE_LABEL')}</span>
+            </div>
+          </label>
+          {/* Cover Input */}
+          <label className="form-control" htmlFor="cover">
+            <div className="label">
+              <span className="label-text text-lg font-semibold">{t('CREATE_SONG_COVER_INPUT')}</span>
+            </div>
+            <div className="divider my-0 mb-4" />
+            {coverPicture}
+            <input
+              type="url"
+              placeholder={t('CREATE_SONG_COVER_PLACEHOLDER')}
+              value={formData.cover}
+              onChange={(e) => handleInputChange('cover', e.target.value)}
+              className="file-input file-input-bordered input-sm mt-4 w-full"
+            />
+          </label>
         </div>
-        <div className="divider my-0 mb-4" />
-        <input
-          type="text"
-          placeholder={t('CREATE_SONG_TITLE_PLACEHOLDER')}
-          value={formData.title}
-          onChange={(e) => handleInputChange('title', e.target.value)}
-          className="input input-bordered input-sm w-full"
-        />
-      </label>
-      {/* File input */}
-      <label className="form-control" htmlFor="file">
-        <div className="label">
-          <span className="label-text text-lg font-semibold">{t('CREATE_SONG_FILE_INPUT')}</span>
+        <div className="flex flex-col gap-6 w-full min-[450px]:w-[80%] min-[1000px]:w-[45%]">
+          {/* Duration input */}
+          <label className="form-control" htmlFor="duration">
+            <div className="label">
+              <span className="label-text text-lg font-semibold">{t('CREATE_SONG_DURATION_INPUT')}</span>
+            </div>
+            <div className="divider my-0 mb-4" />
+            <input
+              type="number"
+              value={formData.duration}
+              onChange={(e) => handleInputChange('duration', parseInt(e.target.value, 10))}
+              className="input input-bordered input-sm self-center text-center"
+            />
+            <div className="label self-center">
+              <span className="label-text-alt">{t('CREATE_SONG_DURATION_LABEL')}</span>
+            </div>
+          </label>
+          {/* Lyrics Input */}
+          <label htmlFor="lyrics" className="">
+            <div className="label">
+              <span className="label-text text-lg font-semibold">{t('CREATE_SONG_LYRICS_INPUT')}</span>
+            </div>
+            <div className="divider my-0 mb-4" />
+            <textarea
+              className="textarea textarea-bordered w-full h-[370px]"
+              placeholder={t('CREATE_SONG_LYRICS_PLACEHOLDER')}
+              value={formData.lyrics}
+              onChange={(e) => handleInputChange('lyrics', e.target.value)}
+            />
+          </label>
         </div>
-        <div className="divider my-0 mb-4" />
-        <input
-          type="file"
-          accept=".mp3, .wav"
-          className="file-input file-input-bordered input-sm w-full"
-          disabled
-        />
-        <div className="label self-center">
-          <span className="label-text-alt">{t('CREATE_SONG_FILE_LABEL')}</span>
-        </div>
-      </label>
-      {/* Duration Input */}
-      <label className="form-control" htmlFor="duration">
-        <div className="label">
-          <span className="label-text text-lg font-semibold">{t('CREATE_SONG_DURATION_INPUT')}</span>
-        </div>
-        <div className="divider my-0 mb-4" />
-        <input
-          type="number"
-          value={formData.duration}
-          onChange={(e) => handleInputChange('duration', parseInt(e.target.value, 10))}
-          className="input input-bordered input-sm self-center text-center"
-        />
-        <div className="label self-center">
-          <span className="label-text-alt">{t('CREATE_SONG_DURATION_LABEL')}</span>
-        </div>
-      </label>
-      {/* Cover input */}
-      <label className="form-control" htmlFor="cover">
-        <div className="label">
-          <span className="label-text text-lg font-semibold">{t('CREATE_SONG_COVER_INPUT')}</span>
-        </div>
-        <div className="divider my-0 mb-4" />
-        {coverPicture}
-        <input
-          type="url"
-          placeholder={t('CREATE_SONG_COVER_PLACEHOLDER')}
-          value={formData.cover}
-          onChange={(e) => handleInputChange('cover', e.target.value)}
-          className="file-input file-input-bordered input-sm mt-4 w-full"
-        />
-      </label>
+      </div>
       {/* Lyrics input */}
-      <label htmlFor="lyrics">
-        <div className="label">
-          <span className="label-text text-lg font-semibold">{t('CREATE_SONG_LYRICS_INPUT')}</span>
-        </div>
-        <div className="divider my-0 mb-4" />
-        <textarea
-          className="textarea textarea-bordered w-full"
-          placeholder={t('CREATE_SONG_LYRICS_PLACEHOLDER')}
-          value={formData.lyrics}
-          onChange={(e) => handleInputChange('lyrics', e.target.value)}
-        />
-      </label>
       {submitButton}
     </form>
   );

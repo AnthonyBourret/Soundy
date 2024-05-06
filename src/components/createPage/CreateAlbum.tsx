@@ -58,7 +58,7 @@ function CreateAlbum() {
       </div>
 
       <div className="flex flex-col gap-14 items-center min-[1000px]:flex-row min-[1000px]:w-[75%] min-[1000px]:justify-between">
-        <div className="flex flex-col gap-14 w-[80%] min-[1000px]:w-[45%]">
+        <div className="flex flex-col gap-14 w-[85%] min-[1000px]:w-[45%]">
           {/* Title input */}
           <label className="form-control" htmlFor="title">
             <div className="label">
@@ -88,7 +88,7 @@ function CreateAlbum() {
           </label>
         </div>
         {/* Songs selection input */}
-        <label htmlFor="songs" className="w-[80%] min-[1000px]:w-[45%]">
+        <label htmlFor="songs" className="w-[85%] min-[1000px]:w-[45%]">
           <div className="label">
             <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_SONGS_INPUT')}</span>
           </div>
@@ -99,7 +99,7 @@ function CreateAlbum() {
       </div>
 
       {/* Songs order */}
-      <label htmlFor="selected_songs" className="w-[75%]">
+      <label htmlFor="selected_songs" className="w-[85%]">
         <div className="label">
           <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_ORDER_INPUT')}</span>
         </div>

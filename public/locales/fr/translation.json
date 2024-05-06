@@ -63,5 +63,7 @@
   "CREATE_ALBUM_TITLE_INPUT": "Titre de l'album* :",
   "CREATE_ALBUM_TITLE_PLACEHOLDER": "Entrer le titre de l'album ici...",
   "CREATE_ALBUM_ORDER_INPUT": "Ordre* :",
-  "CREATE_ALBUM_ORDER_LABEL": "Vous pouvez choisir l'ordre des chansons en les déplaçant"
+  "CREATE_ALBUM_ORDER_LABEL": "Vous pouvez choisir l'ordre des chansons en les déplaçant",
+  "CREATE_ALBUM_TRACKS_NUMBER": "titres",
+  "CREATE_ALBUM_NO_TRACKS": "Vous n'avez pas encore ajouté de titres à votre album"
 }

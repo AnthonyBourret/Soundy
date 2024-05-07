@@ -117,13 +117,13 @@ function CreateSong() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center gap-14 border border-stone-700 rounded-box bg-neutral mb-24 w-[90%] p-8 py-10 min-[600px]:w-[80%] min-[1000px]:w-[70%]"
+      className="flex flex-col items-center gap-14 border border-stone-700 rounded-box bg-neutral mb-24 w-[90%] px-4 py-10 min-[600px]:w-[80%] min-[1000px]:w-[70%]"
     >
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold text-center">{t('CREATE_SONG_HEADER')}</h1>
         <p className="text-xs text-center">{t('CREATE_PAGE_REQUIRED_FIELDS')}</p>
       </div>
-      <div className="flex flex-col items-center gap-14 min-[1000px]:flex-row min-[1000px]:w-[80%] min-[1000px]:justify-between">
+      <div className="flex flex-col items-center gap-14 w-full min-[1000px]:flex-row min-[1000px]:w-[80%] min-[1000px]:justify-between">
         <div className="flex flex-col gap-14 w-full min-[450px]:w-[80%] min-[1000px]:w-[45%]">
           {/* Title input */}
           <label className="form-control" htmlFor="title">

@@ -3,16 +3,18 @@ import React, {
   useState, useMemo, useCallback, FormEvent,
 } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNewToast } from '../toastContext';
 import { CreateAlbumMutation } from '../../requests/mutations';
 import CreateAlbumSongsSelection from './CreateAlbumSongsSelection';
 import CreateAlbumSongsOrder from './CreateAlbumSongsOrder';
-import { DefaultCover } from '../customElements';
+import { DefaultCover, Spinner } from '../customElements';
 import { secondsToFormatedDuration } from '../../utils';
 import { AllSongs } from '../../types';
 import { UploadIcon } from '../../svg';
 
 function CreateAlbums() {
   const { t } = useTranslation('translation');
+  const newToast = useNewToast();
   // Array of songs, standby API
   const songs = [
     {
@@ -56,8 +58,8 @@ function CreateAlbums() {
   });
 
   const [CreateAlbum, {
-    error: CreateAlbumError,
-    loading: CreateAlbumLoading,
+    error: createAlbumError,
+    loading: createAlbumLoading,
   }] = useMutation(CreateAlbumMutation, {
     variables: {
       input: {
@@ -75,20 +77,41 @@ function CreateAlbums() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await CreateAlbum();
-      setFormData({
-        title: '',
-        cover: '',
-        release_year: new Date().getFullYear(),
-        songIds: Array(selectedSongs.length).fill(null),
-      });
-      if (response) {
-        console.log('Album created successfully');
+    if (selectedSongs.length === 0) {
+      newToast(
+        'warning',
+        t('CREATE_ALBUM_NO_TRACKS_ERROR'),
+      );
+      return;
+    }
+    if (!formData.title) {
+      newToast(
+        'warning',
+        t('CREATE_ALBUM_MISSING_TITLE_ERROR'),
+      );
+      return;
+    }
+    if (selectedSongs.length > 0 && formData.title) {
+      try {
+        const response = await CreateAlbum();
+        setFormData({
+          title: '',
+          cover: '',
+          release_year: new Date().getFullYear(),
+          songIds: Array(selectedSongs.length).fill(null),
+        });
+        if (response) {
+          newToast('success', t('CREATE_ALBUM_SUCCESS'));
+        }
+        setSelectedSongs([]);
+      } catch (error: unknown) {
+        if (error instanceof ApolloError) {
+          newToast('error', error.message);
+        }
       }
-      setSelectedSongs([]);
-    } catch (error) {
-      console.log(error);
+      if (createAlbumError) {
+        newToast('error', createAlbumError.message);
+      }
     }
   };
 
@@ -124,7 +147,41 @@ function CreateAlbums() {
       </div>
     );
   }, [selectedSongs, t]);
-  console.log(formData);
+
+  const coverPicture = useMemo(() => {
+    if (formData.cover) {
+      return (
+        <figure className="w-1/2 object-fill rounded-box overflow-hidden self-center min-[1300px]:w-1/3">
+          <img
+            src={formData.cover}
+            alt="cover_preview"
+            className="aspect-square"
+            width="100%"
+          />
+        </figure>
+      );
+    }
+    return (
+      <DefaultCover />
+    );
+  }, [formData.cover]);
+
+  const submitButton = useMemo(() => {
+    if (createAlbumLoading) {
+      return (
+        <Spinner />
+      );
+    }
+    return (
+      <button
+        type="submit"
+        className="btn btn-primary self-center py-3 mt-4 text-lg"
+      >
+        {t('CREATE_SONG_BTN')}
+        <UploadIcon />
+      </button>
+    );
+  }, [createAlbumLoading, t]);
 
   return (
     <form
@@ -136,7 +193,7 @@ function CreateAlbums() {
         <h1 className="text-2xl font-bold text-center">{t('CREATE_ALBUM_HEADER')}</h1>
         <p className="text-xs text-center">{t('CREATE_PAGE_REQUIRED_FIELDS')}</p>
       </div>
-      <div className="flex flex-col gap-14 items-center min-[1000px]:flex-row min-[1000px]:w-[75%] min-[1000px]:justify-between">
+      <div className="flex flex-col gap-14 items-center w-[95%] min-[1000px]:flex-row min-[1000px]:w-[75%] min-[1000px]:justify-between">
         <div className="flex flex-col gap-14 w-[85%] min-[1000px]:w-[45%]">
           {/* Title input */}
           <label className="form-control" htmlFor="title">
@@ -158,7 +215,7 @@ function CreateAlbums() {
               <span className="label-text text-lg font-semibold">{t('CREATE_SONG_COVER_INPUT')}</span>
             </div>
             <div className="divider my-0 mb-4" />
-            <DefaultCover />
+            {coverPicture}
             <input
               type="url"
               placeholder={t('CREATE_SONG_COVER_PLACEHOLDER')}
@@ -185,13 +242,7 @@ function CreateAlbums() {
       {/* Songs order selection */}
       {trackList}
       {/* Submit button */}
-      <button
-        type="submit"
-        className="btn btn-primary  self-center py-3 text-lg"
-      >
-        {t('CREATE_SONG_BTN')}
-        <UploadIcon />
-      </button>
+      {submitButton}
     </form>
   );
 }

@@ -7,7 +7,7 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { useNewToast } from '../toastContext';
 import { CreateSongMutation } from '../../requests/mutations';
-import { Spinner } from '../customElements';
+import { DefaultCover, Spinner } from '../customElements';
 import { UploadIcon } from '../../svg';
 
 function CreateSong() {
@@ -93,9 +93,7 @@ function CreateSong() {
       );
     }
     return (
-      <figure className="w-1/2 rounded-box overflow-hidden self-center min-[1300px]:w-1/3">
-        <img src="/cover-placeholder.png" alt="default_cover" />
-      </figure>
+      <DefaultCover />
     );
   }, [formData.cover]);
 

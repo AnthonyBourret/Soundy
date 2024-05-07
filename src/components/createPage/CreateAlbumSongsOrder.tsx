@@ -2,14 +2,11 @@ import { Reorder } from 'framer-motion';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { secondsToFormatedDuration } from '../../utils';
+import { AllSongs } from '../../types';
 
 interface Props {
-  selectedSongs:
-  {
-    title: string;
-    duration: number
-  }[],
-  setSelectedSongs: React.Dispatch<React.SetStateAction<{ title: string; duration: number }[]>>
+  selectedSongs: AllSongs['songs'],
+  setSelectedSongs: React.Dispatch<React.SetStateAction<AllSongs['songs']>>
 }
 
 function CreateAlbumSongsOrder({ selectedSongs, setSelectedSongs }: Props) {
@@ -21,7 +18,7 @@ function CreateAlbumSongsOrder({ selectedSongs, setSelectedSongs }: Props) {
         <Reorder.Group values={selectedSongs} onReorder={setSelectedSongs}>
           {selectedSongs.map((song, index) => (
             <Reorder.Item value={song} key={song.title} className="py-1">
-              <div key={song.title} className="label border-2 border-stone-700 rounded-md bg-base-100 px-4 cursor-grab active:cursor-grabbing hover:border-primary">
+              <div key={song.id} className="label border-2 border-stone-700 rounded-md bg-base-100 px-4 cursor-grab active:cursor-grabbing hover:border-primary">
                 <span className="label-text font-semibold">{index + 1}</span>
                 <span className="label-text font-semibold">{song.title}</span>
                 <span className="label-text font-semibold">{secondsToFormatedDuration(song.duration)}</span>

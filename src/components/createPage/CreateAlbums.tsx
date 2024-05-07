@@ -1,27 +1,96 @@
-import React, { useState, useMemo } from 'react';
+import { ApolloError, useMutation } from '@apollo/client';
+import React, {
+  useState, useMemo, useCallback, FormEvent,
+} from 'react';
 import { useTranslation } from 'react-i18next';
+import { CreateAlbumMutation } from '../../requests/mutations';
 import CreateAlbumSongsSelection from './CreateAlbumSongsSelection';
 import CreateAlbumSongsOrder from './CreateAlbumSongsOrder';
 import { DefaultCover } from '../customElements';
 import { secondsToFormatedDuration } from '../../utils';
+import { AllSongs } from '../../types';
 import { UploadIcon } from '../../svg';
 
-function CreateAlbum() {
+function CreateAlbums() {
   const { t } = useTranslation('translation');
   // Array of songs, standby API
   const songs = [
-    { title: 'Song title 1', duration: 135 },
-    { title: 'Song title 2', duration: 445 },
-    { title: 'Song title 3', duration: 45 },
-    { title: 'Song title 4', duration: 89 },
-    { title: 'Song title 5', duration: 78 },
-    { title: 'Song title 6', duration: 94 },
-    { title: 'Song title 7', duration: 256 },
-    { title: 'Song title 8', duration: 485 },
-    { title: 'Song title 9', duration: 457 },
-    { title: 'Song title 10', duration: 94 },
+    {
+      id: 1, title: 'Song title 1', duration: 135, cover: '', artist: { name: '' },
+    },
+    {
+      id: 2, title: 'Song title 2', duration: 445, cover: '', artist: { name: '' },
+    },
+    {
+      id: 3, title: 'Song title 3', duration: 45, cover: '', artist: { name: '' },
+    },
+    {
+      id: 4, title: 'Song title 4', duration: 89, cover: '', artist: { name: '' },
+    },
+    {
+      id: 5, title: 'Song title 5', duration: 78, cover: '', artist: { name: '' },
+    },
+    {
+      id: 6, title: 'Song title 6', duration: 94, cover: '', artist: { name: '' },
+    },
+    {
+      id: 7, title: 'Song title 7', duration: 256, cover: '', artist: { name: '' },
+    },
+    {
+      id: 8, title: 'Song title 8', duration: 485, cover: '', artist: { name: '' },
+    },
+    {
+      id: 9, title: 'Song title 9', duration: 457, cover: '', artist: { name: '' },
+    },
+    {
+      id: 10, title: 'Song title 10', duration: 94, cover: '', artist: { name: '' },
+    },
   ];
-  const [selectedSongs, setSelectedSongs] = useState<{ title: string; duration: number }[]>([]);
+  const [selectedSongs, setSelectedSongs] = useState<AllSongs['songs']>([]);
+
+  const [formData, setFormData] = useState({
+    title: '',
+    cover: '',
+    release_year: new Date().getFullYear(),
+    songIds: Array(selectedSongs.length).fill(null),
+  });
+
+  const [CreateAlbum, {
+    error: CreateAlbumError,
+    loading: CreateAlbumLoading,
+  }] = useMutation(CreateAlbumMutation, {
+    variables: {
+      input: {
+        title: formData.title,
+        cover: formData.cover,
+        release_year: formData.release_year,
+        songIds: selectedSongs.map((song) => song.id),
+      },
+    },
+  });
+
+  const handleInputChange = useCallback((field: string, value: string | number | number[]) => {
+    setFormData({ ...formData, [field]: value });
+  }, [formData, setFormData]);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await CreateAlbum();
+      setFormData({
+        title: '',
+        cover: '',
+        release_year: new Date().getFullYear(),
+        songIds: Array(selectedSongs.length).fill(null),
+      });
+      if (response) {
+        console.log('Album created successfully');
+      }
+      setSelectedSongs([]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const trackList = useMemo(() => {
     if (selectedSongs.length > 0) {
@@ -55,9 +124,11 @@ function CreateAlbum() {
       </div>
     );
   }, [selectedSongs, t]);
+  console.log(formData);
 
   return (
     <form
+      onSubmit={handleSubmit}
       className="flex flex-col items-center gap-14 w-[90%] min-[600px]:w-[80%] border border-stone-700 rounded-box bg-neutral mb-24 py-10 min-[1000px]:w-[70%]"
     >
       {/* Header */}
@@ -77,6 +148,8 @@ function CreateAlbum() {
               type="text"
               placeholder={t('CREATE_ALBUM_TITLE_PLACEHOLDER')}
               className="input input-bordered input-sm w-full"
+              value={formData.title}
+              onChange={(e) => handleInputChange('title', e.target.value)}
             />
           </label>
           {/* Cover input */}
@@ -90,6 +163,8 @@ function CreateAlbum() {
               type="url"
               placeholder={t('CREATE_SONG_COVER_PLACEHOLDER')}
               className="file-input file-input-bordered input-sm mt-4 w-full"
+              value={formData.cover}
+              onChange={(e) => handleInputChange('cover', e.target.value)}
             />
           </label>
         </div>
@@ -99,7 +174,12 @@ function CreateAlbum() {
             <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_SONGS_INPUT')}</span>
           </div>
           <div className="divider my-0 mb-4" />
-          <CreateAlbumSongsSelection songs={songs} setSelectedSongs={setSelectedSongs} />
+          <CreateAlbumSongsSelection
+            songs={songs}
+            selectedSongs={selectedSongs}
+            setSelectedSongs={setSelectedSongs}
+            handleInputChange={handleInputChange}
+          />
         </label>
       </div>
       {/* Songs order selection */}
@@ -116,4 +196,4 @@ function CreateAlbum() {
   );
 }
 
-export default CreateAlbum;
+export default CreateAlbums;

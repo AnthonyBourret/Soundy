@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '../header/Header';
 import { ScrollToTopButton } from '../customElements';
-import CreateAlbum from './CreateAlbum';
+import CreateAlbums from './CreateAlbums';
 import CreateSong from './CreateSong';
 import { Logo } from '../../svg';
 
@@ -25,7 +25,7 @@ function Create(props: CreateProps) {
 
   const addAnAlbum = useMemo(() => {
     if (selectedType === 'album') {
-      return <CreateAlbum />;
+      return <CreateAlbums />;
     }
     return null;
   }, [selectedType]);

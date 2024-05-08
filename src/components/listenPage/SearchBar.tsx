@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import { Logo } from '../../svg';
+
 import { FilterRadio } from '../customElements';
 import { ChosenDisplay } from '../../types';
 import { ListenPageAlbumsQuery } from '../../requests/queries';
 import { ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
+import PageTitle from '../customElements/PageTitle';
 
 interface Props {
   chosenDisplay: string;
@@ -47,15 +48,8 @@ function SearchBar({ chosenDisplay, setChosenDisplay, setAlbums }: Props): JSX.E
     );
   }, [chosenDisplay]);
 
-  return (
-    <div className="min-[540px]:w-1/2 pt-32 text-center">
-      <div className="flex flex-col items-center gap-4 pb-8">
-        <div className="w-16 h-16 min-[540px]:w-20 min-[540px]:h-20 rounded-full flex items-center justify-center">
-          <Logo />
-        </div>
-        <h1 className="text-2xl min-[540px]:text-4xl font-bold">{t('MENU_APP_NAME')}</h1>
-        <p className="text-md font-semibold min-[540px]:text-lg">{t('SEARCH_BAR_TEXT')}</p>
-      </div>
+  const bottomElement = useMemo(() => (
+    <div className="w-full sm:w-[60%]">
       <div className="flex flex-col items-center">
 
         {/* Search input => Filter on the request */}
@@ -91,6 +85,10 @@ function SearchBar({ chosenDisplay, setChosenDisplay, setAlbums }: Props): JSX.E
         </div>
       </div>
     </div>
+  ), [chosenDisplay, getAlbums, setChosenDisplay, songDuration, t]);
+
+  return (
+    <PageTitle title={t('MENU_APP_NAME')} bottomElement={bottomElement} />
   );
 }
 

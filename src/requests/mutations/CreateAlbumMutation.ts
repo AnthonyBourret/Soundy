@@ -9,6 +9,10 @@ const CreateAlbumMutation = gql(`
         release_year
         songs {
             id
+            songOnAlbum {
+                song_id
+                position
+            }
         }
     }
     }

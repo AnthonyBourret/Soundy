@@ -6,7 +6,7 @@ interface Props {
   songs: AllSongs['songs'],
   selectedSongs: AllSongs['songs'],
   setSelectedSongs: React.Dispatch<React.SetStateAction<AllSongs['songs']>>
-  handleInputChange: (field: string, value: string | number | number[]) => void;
+  handleInputChange: (field: string, value: string | number | number[] | Object) => void;
 }
 
 function CreateAlbumSongsSelection({
@@ -14,13 +14,11 @@ function CreateAlbumSongsSelection({
 }: Props) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>, song: AllSongs['songs'][0]) {
     if (e.target.checked) {
-      setSelectedSongs((prev) => [...prev, song]);
-      handleInputChange('songIds', selectedSongs.map((selectedSong) => selectedSong.id).concat(song.id));
+      setSelectedSongs([...selectedSongs, song]);
+      handleInputChange('songIds', [...selectedSongs, song].map((selectedSong) => selectedSong.id));
     } else {
-      setSelectedSongs(
-        (prev) => prev.filter((prevSong) => prevSong.title !== song.title),
-      );
-      handleInputChange('songIds', selectedSongs.map((selectedSong) => selectedSong.id).filter((id) => id !== song.id));
+      setSelectedSongs(selectedSongs.filter((selectedSong) => selectedSong.id !== song.id));
+      handleInputChange('songIds', selectedSongs.filter((selectedSong) => selectedSong.id !== song.id).map((selectedSong) => selectedSong.id));
     }
   }
   return (

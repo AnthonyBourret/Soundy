@@ -55,6 +55,7 @@ function CreateAlbums() {
     cover: '',
     release_year: new Date().getFullYear(),
     songIds: Array(selectedSongs.length).fill(null),
+    songOnAlbum: Array(selectedSongs.length).fill(null),
   });
 
   const [CreateAlbum, {
@@ -67,11 +68,18 @@ function CreateAlbums() {
         cover: formData.cover,
         release_year: formData.release_year,
         songIds: selectedSongs.map((song) => song.id),
+        songOnAlbum: selectedSongs.map((song, index) => ({
+          song_id: song.id,
+          position: index + 1,
+        })),
       },
     },
   });
 
-  const handleInputChange = useCallback((field: string, value: string | number | number[]) => {
+  const handleInputChange = useCallback((
+    field: string,
+    value: string | number,
+  ) => {
     setFormData({ ...formData, [field]: value });
   }, [formData, setFormData]);
 
@@ -99,6 +107,7 @@ function CreateAlbums() {
           cover: '',
           release_year: new Date().getFullYear(),
           songIds: Array(selectedSongs.length).fill(null),
+          songOnAlbum: Array(selectedSongs.length).fill(null),
         });
         if (response) {
           newToast('success', t('CREATE_ALBUM_SUCCESS'));
@@ -126,6 +135,7 @@ function CreateAlbums() {
           <CreateAlbumSongsOrder
             selectedSongs={selectedSongs}
             setSelectedSongs={setSelectedSongs}
+            handleInputChange={handleInputChange}
           />
           <p className="label-text font-semibold mt-4 text-center">
             {selectedSongs.length}
@@ -146,7 +156,7 @@ function CreateAlbums() {
         <p className="mt-4 font-semibold text-center">{t('CREATE_ALBUM_NO_TRACKS')}</p>
       </div>
     );
-  }, [selectedSongs, t]);
+  }, [selectedSongs, t, handleInputChange]);
 
   const coverPicture = useMemo(() => {
     if (formData.cover) {
@@ -182,6 +192,7 @@ function CreateAlbums() {
       </button>
     );
   }, [createAlbumLoading, t]);
+  console.log(formData);
 
   return (
     <form
@@ -239,9 +250,7 @@ function CreateAlbums() {
           />
         </label>
       </div>
-      {/* Songs order selection */}
       {trackList}
-      {/* Submit button */}
       {submitButton}
     </form>
   );

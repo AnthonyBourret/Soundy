@@ -7,15 +7,16 @@ import { AllSongs } from '../../types';
 interface Props {
   selectedSongs: AllSongs['songs'],
   setSelectedSongs: React.Dispatch<React.SetStateAction<AllSongs['songs']>>
-  handleInputChange: (field: string, value: string | number | number[] | Object[]) => void;
 }
 
-function CreateAlbumSongsOrder({ selectedSongs, setSelectedSongs, handleInputChange }: Props) {
+function CreateAlbumSongsOrder({
+  selectedSongs, setSelectedSongs,
+}: Props) {
   const { t } = useTranslation('translation');
   const handlePositionChange = (newOrder: AllSongs['songs']) => {
     setSelectedSongs(newOrder);
-    handleInputChange('songOnAlbum', newOrder.map((song, index) => ({ songId: song.id, position: index + 1 })));
   };
+
   return (
     <>
       <p className="label-text-alt my-4 text-center">{t('CREATE_ALBUM_ORDER_LABEL')}</p>

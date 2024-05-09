@@ -78,13 +78,24 @@ function CreateAlbums() {
 
   const handleInputChange = useCallback((
     field: string,
-    value: string | number,
+    value: string | number | number[] | Object,
   ) => {
     setFormData({ ...formData, [field]: value });
   }, [formData, setFormData]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    const updatedFormData = {
+      ...formData,
+      songOnAlbum: selectedSongs.map((song, index) => ({
+        song_id: song.id,
+        position: index + 1,
+      })),
+    };
+
+    setFormData(updatedFormData);
+    // console.log(formData);
+
     if (selectedSongs.length === 0) {
       newToast(
         'warning',
@@ -135,7 +146,6 @@ function CreateAlbums() {
           <CreateAlbumSongsOrder
             selectedSongs={selectedSongs}
             setSelectedSongs={setSelectedSongs}
-            handleInputChange={handleInputChange}
           />
           <p className="label-text font-semibold mt-4 text-center">
             {selectedSongs.length}
@@ -156,7 +166,7 @@ function CreateAlbums() {
         <p className="mt-4 font-semibold text-center">{t('CREATE_ALBUM_NO_TRACKS')}</p>
       </div>
     );
-  }, [selectedSongs, t, handleInputChange]);
+  }, [selectedSongs, t]);
 
   const coverPicture = useMemo(() => {
     if (formData.cover) {
@@ -192,7 +202,6 @@ function CreateAlbums() {
       </button>
     );
   }, [createAlbumLoading, t]);
-  console.log(formData);
 
   return (
     <form

@@ -46,6 +46,10 @@ export type CardSong = {
     name: string;
   };
   duration: number;
+  songOnAlbum?: {
+    song_id?: number;
+    position?: number;
+  };
 };
 
 export type CardAlbum = {

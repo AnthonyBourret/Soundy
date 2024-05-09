@@ -21,6 +21,7 @@ function CreateAlbumSongsSelection({
       handleInputChange('songIds', selectedSongs.filter((selectedSong) => selectedSong.id !== song.id).map((selectedSong) => selectedSong.id));
     }
   }
+
   return (
     <div>
       <div className="form-control border border-stone-700 rounded-md p-2 gap-2 h-[335px] overflow-y-scroll">

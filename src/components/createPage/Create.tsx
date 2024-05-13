@@ -25,7 +25,7 @@ function Create(props: CreateProps) {
 
   const addAnAlbum = useMemo(() => {
     if (selectedType === 'album') {
-      return <CreateAlbums />;
+      return <CreateAlbums setSelectedType={setSelectedType} />;
     }
     return null;
   }, [selectedType]);

@@ -10,11 +10,19 @@ import { CreateSongMutation } from '../../requests/mutations';
 import { DefaultCover, Spinner } from '../customElements';
 import { UploadIcon } from '../../svg';
 
+interface FormDataProps {
+  title: string;
+  cover: string;
+  duration: number;
+  release_year: number;
+  lyrics: string;
+}
+
 function CreateSong() {
   const { t } = useTranslation('translation');
   const newToast = useNewToast();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormDataProps>({
     title: '',
     cover: '',
     duration: 0,

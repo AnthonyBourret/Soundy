@@ -112,7 +112,7 @@ const Profile = (props: Props): JSX.Element => {
     <div className="mb-36 flex flex-col items-center w-full min-h-screen">
       <Header isLogin={isLogin} />
       <PageTitle title="Profile" />
-      <ProfileRecap />
+      <ProfileRecap mode="view" />
       <div className="divider mb-10 py-10 px-8 w-[300px] mx-auto" />
       {chosenDisplayButtonsJSX}
       <ScrollToTopButton />

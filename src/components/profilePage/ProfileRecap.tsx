@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useAppSelector } from '../../redux';
 
 type Props = {
@@ -9,10 +9,11 @@ type Props = {
 const ProfileRecap = (props: Props) => {
   const { mode } = props;
   const user = useAppSelector((state) => state.user);
+  const [actualMode, setActualMode] = useState(mode);
   const { name, country, picture } = user;
 
   const userInfosJSX = useMemo(() => {
-    if (mode === 'edit') {
+    if (actualMode === 'edit') {
       return (
         <div className="flex flex-col items-end mr-4 gap-2">
           <div className="mb-2 flex items-center gap-2">
@@ -35,6 +36,23 @@ const ProfileRecap = (props: Props) => {
             <label className="text-lg font-bold">Confirm Password:</label>
             <input type="password" className="input" />
           </div>
+
+          {/* Save and Cancel buttons */}
+          <div className="absolute top-0 right-0 mt-4 mr-4 flex gap-2">
+            <button
+              className="btn btn-outline border-stone-700 border"
+              onClick={() => setActualMode('view')}
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              className="btn btn-success"
+              type="button"
+            >
+              Save
+            </button>
+          </div>
         </div>
       );
     }
@@ -56,26 +74,48 @@ const ProfileRecap = (props: Props) => {
           <label className="text-lg font-bold">Password:</label>
           <span>********</span>
         </div>
+
+        {/* Edit button */}
+        <div className="absolute top-0 right-0 mt-4 mr-4">
+          <button
+            type="submit"
+            className="btn btn-outline border-stone-700 border"
+            onClick={() => setActualMode('edit')}
+          >
+            Edit
+          </button>
+        </div>
       </div>
     );
-  }, [country, mode, name, user.email]);
+  }, [country, actualMode, name, user.email]);
 
-  const avatarJSX = useMemo(() => (
-    <div className="flex flex-col items-center ml-4 my-6">
-      <div className="mb-2 rounded-full overflow-hidden">
-        <img src={picture || ''} alt="Profile" className="w-20 h-20 object-cover" />
+  const avatarJSX = useMemo(() => {
+    if (actualMode === 'edit') {
+      return (
+        <div className="flex flex-col items-center mx-4 my-6">
+          <div className="mb-2 rounded-full overflow-hidden">
+            <img src={picture || ''} alt="Profile" className="w-20 h-20 object-cover" />
+          </div>
+          <label htmlFor="fileUpload" className="btn btn-primary mt-2">
+            Upload new avatar
+          </label>
+          <input
+            id="fileUpload"
+            type="file"
+            className="hidden"
+            accept="image/*"
+          />
+        </div>
+      );
+    }
+    return (
+      <div className="flex flex-col items-center mx-4 my-6">
+        <div className="mb-2 rounded-full overflow-hidden">
+          <img src={picture || ''} alt="Profile" className="w-20 h-20 object-cover" />
+        </div>
       </div>
-      <label htmlFor="fileUpload" className="btn btn-primary mt-2">
-        Upload new avatar
-      </label>
-      <input
-        id="fileUpload"
-        type="file"
-        className="hidden"
-        accept="image/*"
-      />
-    </div>
-  ), [picture]);
+    );
+  }, [actualMode, picture]);
 
   return (
     <div className="card flex-row items-center gap-5 justify-center py-6 px-20 bg-base-200 shadow-xl border border-1 border-stone-700">

@@ -54,6 +54,9 @@ function CreateAlbums({ setSelectedType }: Props) {
     },
   ];
   const [selectedSongs, setSelectedSongs] = useState<AllSongs['songs']>([]);
+
+  // The initial form data is stored in a state
+  // The year is automatically set to the current year
   const [formData, setFormData] = useState<AlbumFormData>({
     title: '',
     cover: '',
@@ -62,6 +65,7 @@ function CreateAlbums({ setSelectedType }: Props) {
     songOnAlbum: [],
   });
 
+  // The createAlbum mutation is called when the form is submitted
   const [CreateAlbum, {
     error: createAlbumError,
     loading: createAlbumLoading,
@@ -80,6 +84,7 @@ function CreateAlbums({ setSelectedType }: Props) {
     },
   });
 
+  // The handleInputChange function is called every time the form input changes
   const handleInputChange = useCallback((
     field: string,
     value: string | number | number[] | Object,
@@ -115,6 +120,7 @@ function CreateAlbums({ setSelectedType }: Props) {
     if (selectedSongs.length > 0 && formData.title) {
       try {
         const response = await CreateAlbum();
+        // Reset the form data and selected songs after the album is created
         setSelectedSongs([]);
         setFormData({
           title: '',
@@ -199,6 +205,7 @@ function CreateAlbums({ setSelectedType }: Props) {
   }, [createAlbumLoading, t]);
 
   return (
+    // The form is displayed if the user has already added songs
     songs.length > 0 ? (
       <form
         onSubmit={handleSubmit}
@@ -210,6 +217,7 @@ function CreateAlbums({ setSelectedType }: Props) {
         </div>
         <div className="flex flex-col gap-14 items-center w-[95%] min-[1000px]:flex-row min-[1000px]:w-[75%] min-[1000px]:justify-between">
           <div className="flex flex-col gap-14 w-[85%] min-[1000px]:w-[45%]">
+
             {/* Title input */}
             <label className="form-control" htmlFor="title">
               <div className="label">
@@ -224,6 +232,7 @@ function CreateAlbums({ setSelectedType }: Props) {
                 onChange={(e) => handleInputChange('title', e.target.value)}
               />
             </label>
+
             {/* Cover input */}
             <label className="form-control" htmlFor="cover">
               <div className="label">
@@ -240,6 +249,8 @@ function CreateAlbums({ setSelectedType }: Props) {
               />
             </label>
           </div>
+
+          {/* Songs selection */}
           <label htmlFor="songs" className="w-[85%] min-[1000px]:w-[45%]">
             <div className="label">
               <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_SONGS_INPUT')}</span>

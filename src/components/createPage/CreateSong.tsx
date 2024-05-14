@@ -15,6 +15,8 @@ function CreateSong() {
   const { t } = useTranslation('translation');
   const newToast = useNewToast();
 
+  // The initial form data is stored in a state
+  // The year is automatically set to the current year
   const [formData, setFormData] = useState<SongFormData>({
     title: '',
     cover: '',
@@ -23,6 +25,7 @@ function CreateSong() {
     lyrics: '',
   });
 
+  // The createSong mutation is called when the form is submitted
   const [createSong, {
     error: createSongError,
     loading: createSongLoading,
@@ -38,6 +41,7 @@ function CreateSong() {
     },
   });
 
+  // The handleInputChange function is called every time the form input changes
   const handleInputChange = useCallback((field: string, value: string | number) => {
     setFormData({ ...formData, [field]: value });
   }, [formData, setFormData]);
@@ -71,7 +75,6 @@ function CreateSong() {
       }
     } catch (error: unknown) {
       if (error instanceof ApolloError) {
-        // eslint-disable-next-line no-console
         newToast('error', error.message);
       }
     }
@@ -119,6 +122,7 @@ function CreateSong() {
       </div>
       <div className="flex flex-col items-center gap-14 w-full min-[1000px]:flex-row min-[1000px]:w-[80%] min-[1000px]:justify-between">
         <div className="flex flex-col gap-14 w-full min-[450px]:w-[80%] min-[1000px]:w-[45%]">
+
           {/* Title input */}
           <label className="form-control" htmlFor="title">
             <div className="label">
@@ -149,6 +153,7 @@ function CreateSong() {
               <span className="label-text-alt">{t('CREATE_SONG_FILE_LABEL')}</span>
             </div>
           </label>
+
           {/* Cover Input */}
           <label className="form-control" htmlFor="cover">
             <div className="label">
@@ -166,6 +171,7 @@ function CreateSong() {
           </label>
         </div>
         <div className="flex flex-col gap-6 w-full min-[450px]:w-[80%] min-[1000px]:w-[45%]">
+
           {/* Duration input */}
           <label className="form-control" htmlFor="duration">
             <div className="label">
@@ -182,6 +188,7 @@ function CreateSong() {
               <span className="label-text-alt">{t('CREATE_SONG_DURATION_LABEL')}</span>
             </div>
           </label>
+
           {/* Lyrics Input */}
           <label htmlFor="lyrics" className="">
             <div className="label">
@@ -197,7 +204,6 @@ function CreateSong() {
           </label>
         </div>
       </div>
-      {/* Lyrics input */}
       {submitButton}
     </form>
   );

@@ -13,6 +13,8 @@ function CreateAlbumSongsOrder({
   selectedSongs, setSelectedSongs,
 }: Props) {
   const { t } = useTranslation('translation');
+  // Function to handle the change of position of the songs,
+  // Every time a song is moved, setSelectedSongs is called to update the order of the songs
   const handlePositionChange = (newOrder: AllSongs['songs']) => {
     setSelectedSongs(newOrder);
   };

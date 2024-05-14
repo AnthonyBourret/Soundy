@@ -12,6 +12,7 @@ interface Props {
 function CreateAlbumSongsSelection({
   songs, selectedSongs, setSelectedSongs, handleInputChange,
 }: Props) {
+  // setSelectedSongs is called with the previous selectedSongs array, adding the chosen song.
   function handleChange(e: React.ChangeEvent<HTMLInputElement>, song: AllSongs['songs'][0]) {
     if (e.target.checked) {
       setSelectedSongs([...selectedSongs, song]);

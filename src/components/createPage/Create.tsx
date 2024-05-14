@@ -58,6 +58,8 @@ function Create(props: CreateProps) {
         </button>
       </div>
       <div className="divider py-4 px-8 min-[540px]:px-36" />
+
+      {/* When the selectedType changes, the component will be re-rendered. */}
       {addASong}
       {addAnAlbum}
 

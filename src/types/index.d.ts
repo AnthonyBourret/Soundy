@@ -42,7 +42,7 @@ export type CardSong = {
   id: number;
   title: string;
   cover: string;
-  artist: {
+  artist?: {
     name: string;
   };
   duration: number;
@@ -111,4 +111,23 @@ export interface AudioPlayerState {
   artistName: string | null;
   volume: number;
   time: number;
+}
+
+export interface AlbumFormData {
+  title: string;
+  cover: string;
+  release_year: number;
+  songIds: number[];
+  songOnAlbum: {
+    song_id: number;
+    position: number;
+  }[];
+}
+
+export interface SongFormData {
+  title: string;
+  cover: string;
+  duration: number;
+  release_year: number;
+  lyrics: string;
 }

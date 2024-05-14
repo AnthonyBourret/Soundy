@@ -23,7 +23,7 @@ function CreateAlbumSongsSelection({
   }
 
   return (
-    <div>
+    <form>
       <div className="form-control border border-stone-700 rounded-md p-2 gap-2 h-[335px] overflow-y-scroll">
         {songs.map((song) => (
           <label key={song.id} htmlFor="songCheckbox" className="cursor-pointer label border-2 border-stone-700 rounded-md bg-base-100 px-2">
@@ -37,7 +37,7 @@ function CreateAlbumSongsSelection({
           </label>
         ))}
       </div>
-    </div>
+    </form>
   );
 }
 

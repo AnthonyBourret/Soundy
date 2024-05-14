@@ -1,29 +1,19 @@
 import { ApolloError, useMutation } from '@apollo/client';
 import React, {
-  useState, useMemo, useCallback, FormEvent,
+  useState, useMemo, useCallback, FormEvent, useEffect,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNewToast } from '../toastContext';
 import { CreateAlbumMutation } from '../../requests/mutations';
 import CreateAlbumSongsSelection from './CreateAlbumSongsSelection';
 import CreateAlbumSongsOrder from './CreateAlbumSongsOrder';
-import { DefaultCover, Spinner } from '../customElements';
+import { DefaultCover, CoverPicture, Spinner } from '../customElements';
 import { secondsToFormatedDuration } from '../../utils';
-import { AllSongs } from '../../types';
+import { AllSongs, AlbumFormData } from '../../types';
 import { UploadIcon, ArrowDown } from '../../svg';
 
 interface Props {
   setSelectedType: React.Dispatch<React.SetStateAction<'song' | 'album'>>;
-}
-interface FormDataProps {
-  title: string;
-  cover: string;
-  release_year: number;
-  songIds: number[];
-  songOnAlbum: {
-    song_id: number;
-    position: number;
-  }[];
 }
 
 function CreateAlbums({ setSelectedType }: Props) {
@@ -33,40 +23,40 @@ function CreateAlbums({ setSelectedType }: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const songs = [
     {
-      id: 1, title: 'Song title 1', duration: 135, cover: '', artist: { name: '' },
+      id: 1, title: 'Song title 1', duration: 135, cover: '',
     },
     {
-      id: 2, title: 'Song title 2', duration: 445, cover: '', artist: { name: '' },
+      id: 2, title: 'Song title 2', duration: 445, cover: '',
     },
     {
-      id: 3, title: 'Song title 3', duration: 45, cover: '', artist: { name: '' },
+      id: 3, title: 'Song title 3', duration: 45, cover: '',
     },
     {
-      id: 4, title: 'Song title 4', duration: 89, cover: '', artist: { name: '' },
+      id: 4, title: 'Song title 4', duration: 89, cover: '',
     },
     {
-      id: 5, title: 'Song title 5', duration: 78, cover: '', artist: { name: '' },
+      id: 5, title: 'Song title 5', duration: 78, cover: '',
     },
     {
-      id: 6, title: 'Song title 6', duration: 94, cover: '', artist: { name: '' },
+      id: 6, title: 'Song title 6', duration: 94, cover: '',
     },
     {
-      id: 7, title: 'Song title 7', duration: 256, cover: '', artist: { name: '' },
+      id: 7, title: 'Song title 7', duration: 256, cover: '',
     },
     {
-      id: 8, title: 'Song title 8', duration: 485, cover: '', artist: { name: '' },
+      id: 8, title: 'Song title 8', duration: 485, cover: '',
     },
     {
-      id: 9, title: 'Song title 9', duration: 457, cover: '', artist: { name: '' },
+      id: 9, title: 'Song title 9', duration: 457, cover: '',
     },
     {
-      id: 10, title: 'Song title 10', duration: 94, cover: '', artist: { name: '' },
+      id: 10, title: 'Song title 10', duration: 94, cover: '',
     },
   ];
-
+  const [userSongs, setUserSongs] = useState<AllSongs['songs']>(songs);
   const [selectedSongs, setSelectedSongs] = useState<AllSongs['songs']>([]);
 
-  const [formData, setFormData] = useState<FormDataProps>({
+  const [formData, setFormData] = useState<AlbumFormData>({
     title: '',
     cover: '',
     release_year: new Date().getFullYear(),
@@ -185,14 +175,7 @@ function CreateAlbums({ setSelectedType }: Props) {
   const coverPicture = useMemo(() => {
     if (formData.cover) {
       return (
-        <figure className="w-1/2 object-fill rounded-box overflow-hidden self-center min-[1300px]:w-1/3">
-          <img
-            src={formData.cover}
-            alt="cover_preview"
-            className="aspect-square"
-            width="100%"
-          />
-        </figure>
+        <CoverPicture cover={formData.cover} />
       );
     }
     return (
@@ -219,7 +202,7 @@ function CreateAlbums({ setSelectedType }: Props) {
 
   const createAlbumForm = useMemo(
     () => {
-      if (songs.length > 0) {
+      if (userSongs.length > 0) {
         return (
           <>
             <div className="flex flex-col gap-2">
@@ -264,7 +247,7 @@ function CreateAlbums({ setSelectedType }: Props) {
                 </div>
                 <div className="divider my-0 mb-4" />
                 <CreateAlbumSongsSelection
-                  songs={songs}
+                  songs={userSongs}
                   selectedSongs={selectedSongs}
                   setSelectedSongs={setSelectedSongs}
                   handleInputChange={handleInputChange}
@@ -292,7 +275,7 @@ function CreateAlbums({ setSelectedType }: Props) {
       );
     },
     [
-      songs,
+      userSongs,
       t,
       formData,
       coverPicture,
@@ -302,6 +285,15 @@ function CreateAlbums({ setSelectedType }: Props) {
       trackOrder,
       submitButton,
     ],
+  );
+
+  useEffect(
+    () => {
+      if (userSongs.length > 0) {
+        setUserSongs(songs);
+      }
+    },
+    [songs, userSongs],
   );
 
   return (

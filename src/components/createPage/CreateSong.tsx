@@ -7,22 +7,15 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { useNewToast } from '../toastContext';
 import { CreateSongMutation } from '../../requests/mutations';
-import { DefaultCover, Spinner } from '../customElements';
+import { DefaultCover, CoverPicture, Spinner } from '../customElements';
 import { UploadIcon } from '../../svg';
-
-interface FormDataProps {
-  title: string;
-  cover: string;
-  duration: number;
-  release_year: number;
-  lyrics: string;
-}
+import { SongFormData } from '../../types';
 
 function CreateSong() {
   const { t } = useTranslation('translation');
   const newToast = useNewToast();
 
-  const [formData, setFormData] = useState<FormDataProps>({
+  const [formData, setFormData] = useState<SongFormData>({
     title: '',
     cover: '',
     duration: 0,
@@ -90,14 +83,7 @@ function CreateSong() {
   const coverPicture = useMemo(() => {
     if (formData.cover) {
       return (
-        <figure className="w-1/2 object-fill rounded-box overflow-hidden self-center min-[1300px]:w-1/3">
-          <img
-            src={formData.cover}
-            alt="cover_preview"
-            className="aspect-square"
-            width="100%"
-          />
-        </figure>
+        <CoverPicture cover={formData.cover} />
       );
     }
     return (

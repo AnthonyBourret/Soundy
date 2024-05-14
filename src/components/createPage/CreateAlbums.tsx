@@ -1,6 +1,6 @@
 import { ApolloError, useMutation } from '@apollo/client';
 import React, {
-  useState, useMemo, useCallback, FormEvent, useEffect,
+  useState, useMemo, useCallback, FormEvent,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNewToast } from '../toastContext';
@@ -53,9 +53,7 @@ function CreateAlbums({ setSelectedType }: Props) {
       id: 10, title: 'Song title 10', duration: 94, cover: '',
     },
   ];
-  const [userSongs, setUserSongs] = useState<AllSongs['songs']>(songs);
   const [selectedSongs, setSelectedSongs] = useState<AllSongs['songs']>([]);
-
   const [formData, setFormData] = useState<AlbumFormData>({
     title: '',
     cover: '',
@@ -117,6 +115,7 @@ function CreateAlbums({ setSelectedType }: Props) {
     if (selectedSongs.length > 0 && formData.title) {
       try {
         const response = await CreateAlbum();
+        setSelectedSongs([]);
         setFormData({
           title: '',
           cover: '',
@@ -127,7 +126,6 @@ function CreateAlbums({ setSelectedType }: Props) {
         if (response) {
           newToast('success', t('CREATE_ALBUM_SUCCESS'));
         }
-        setSelectedSongs([]);
       } catch (error: unknown) {
         if (error instanceof ApolloError) {
           newToast('error', error.message);
@@ -200,110 +198,78 @@ function CreateAlbums({ setSelectedType }: Props) {
     );
   }, [createAlbumLoading, t]);
 
-  const createAlbumForm = useMemo(
-    () => {
-      if (userSongs.length > 0) {
-        return (
-          <>
-            <div className="flex flex-col gap-2">
-              <h1 className="text-2xl font-bold text-center">{t('CREATE_ALBUM_HEADER')}</h1>
-              <p className="text-xs text-center">{t('CREATE_PAGE_REQUIRED_FIELDS')}</p>
-            </div>
-            <div className="flex flex-col gap-14 items-center w-[95%] min-[1000px]:flex-row min-[1000px]:w-[75%] min-[1000px]:justify-between">
-              <div className="flex flex-col gap-14 w-[85%] min-[1000px]:w-[45%]">
-                {/* Title input */}
-                <label className="form-control" htmlFor="title">
-                  <div className="label">
-                    <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_TITLE_INPUT')}</span>
-                  </div>
-                  <div className="divider my-0 mb-4" />
-                  <input
-                    type="text"
-                    placeholder={t('CREATE_ALBUM_TITLE_PLACEHOLDER')}
-                    className="input input-bordered input-sm w-full"
-                    value={formData.title}
-                    onChange={(e) => handleInputChange('title', e.target.value)}
-                  />
-                </label>
-                {/* Cover input */}
-                <label className="form-control" htmlFor="cover">
-                  <div className="label">
-                    <span className="label-text text-lg font-semibold">{t('CREATE_SONG_COVER_INPUT')}</span>
-                  </div>
-                  <div className="divider my-0 mb-4" />
-                  {coverPicture}
-                  <input
-                    type="url"
-                    placeholder={t('CREATE_SONG_COVER_PLACEHOLDER')}
-                    className="file-input file-input-bordered input-sm mt-4 w-full"
-                    value={formData.cover}
-                    onChange={(e) => handleInputChange('cover', e.target.value)}
-                  />
-                </label>
-              </div>
-              <label htmlFor="songs" className="w-[85%] min-[1000px]:w-[45%]">
-                <div className="label">
-                  <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_SONGS_INPUT')}</span>
-                </div>
-                <div className="divider my-0 mb-4" />
-                <CreateAlbumSongsSelection
-                  songs={userSongs}
-                  selectedSongs={selectedSongs}
-                  setSelectedSongs={setSelectedSongs}
-                  handleInputChange={handleInputChange}
-                />
-              </label>
-            </div>
-            {trackOrder}
-            {submitButton}
-          </>
-        );
-      }
-      return (
-        <>
-          <div className="flex flex-col gap-2">
-            <h1 className="text-2xl font-bold text-center">{t('CREATE_ALBUM_HEADER')}</h1>
-          </div>
-          <p className="w-[85%] min-[1000px]:w-[45%] font-semibold text-center">{t('CREATE_ALBUM_NO_TRACKS_ADDED')}</p>
-          <div className="flex flex-col items-center gap-2">
-            <ArrowDown />
-            <button type="button" className="btn btn-primary py-4" onClick={() => setSelectedType('song')}>
-              {t('CREATE_PAGE_BTN_SONG')}
-            </button>
-          </div>
-        </>
-      );
-    },
-    [
-      userSongs,
-      t,
-      formData,
-      coverPicture,
-      selectedSongs,
-      setSelectedType,
-      handleInputChange,
-      trackOrder,
-      submitButton,
-    ],
-  );
-
-  useEffect(
-    () => {
-      if (userSongs.length > 0) {
-        setUserSongs(songs);
-      }
-    },
-    [songs, userSongs],
-  );
-
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col items-center gap-14 w-[90%] min-[600px]:w-[80%] border border-stone-700 rounded-box bg-neutral mb-24 py-10 min-[1000px]:w-[70%]"
-    >
-      {createAlbumForm}
-    </form>
-  );
+    songs.length > 0 ? (
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center gap-14 w-[90%] min-[600px]:w-[80%] border border-stone-700 rounded-box bg-neutral mb-24 py-10 min-[1000px]:w-[70%]"
+      >
+        <div className="flex flex-col gap-2">
+          <h1 className="text-2xl font-bold text-center">{t('CREATE_ALBUM_HEADER')}</h1>
+          <p className="text-xs text-center">{t('CREATE_PAGE_REQUIRED_FIELDS')}</p>
+        </div>
+        <div className="flex flex-col gap-14 items-center w-[95%] min-[1000px]:flex-row min-[1000px]:w-[75%] min-[1000px]:justify-between">
+          <div className="flex flex-col gap-14 w-[85%] min-[1000px]:w-[45%]">
+            {/* Title input */}
+            <label className="form-control" htmlFor="title">
+              <div className="label">
+                <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_TITLE_INPUT')}</span>
+              </div>
+              <div className="divider my-0 mb-4" />
+              <input
+                type="text"
+                placeholder={t('CREATE_ALBUM_TITLE_PLACEHOLDER')}
+                className="input input-bordered input-sm w-full"
+                value={formData.title}
+                onChange={(e) => handleInputChange('title', e.target.value)}
+              />
+            </label>
+            {/* Cover input */}
+            <label className="form-control" htmlFor="cover">
+              <div className="label">
+                <span className="label-text text-lg font-semibold">{t('CREATE_SONG_COVER_INPUT')}</span>
+              </div>
+              <div className="divider my-0 mb-4" />
+              {coverPicture}
+              <input
+                type="url"
+                placeholder={t('CREATE_SONG_COVER_PLACEHOLDER')}
+                className="file-input file-input-bordered input-sm mt-4 w-full"
+                value={formData.cover}
+                onChange={(e) => handleInputChange('cover', e.target.value)}
+              />
+            </label>
+          </div>
+          <label htmlFor="songs" className="w-[85%] min-[1000px]:w-[45%]">
+            <div className="label">
+              <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_SONGS_INPUT')}</span>
+            </div>
+            <div className="divider my-0 mb-4" />
+            <CreateAlbumSongsSelection
+              songs={songs}
+              selectedSongs={selectedSongs}
+              setSelectedSongs={setSelectedSongs}
+              handleInputChange={handleInputChange}
+            />
+          </label>
+        </div>
+        {trackOrder}
+        {submitButton}
+      </form>
+    ) : (
+      <div className="flex flex-col items-center gap-14 w-[90%] min-[600px]:w-[80%] border border-stone-700 rounded-box bg-neutral mb-24 py-10 min-[1000px]:w-[70%]">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-2xl font-bold text-center">{t('CREATE_ALBUM_HEADER')}</h1>
+        </div>
+        <p className="w-[85%] min-[1000px]:w-[45%] font-semibold text-center">{t('CREATE_ALBUM_NO_TRACKS_ADDED')}</p>
+        <div className="flex flex-col items-center gap-2">
+          <ArrowDown />
+          <button type="button" className="btn btn-primary py-4" onClick={() => setSelectedType('song')}>
+            {t('CREATE_PAGE_BTN_SONG')}
+          </button>
+        </div>
+      </div>
+    ));
 }
 
 export default CreateAlbums;

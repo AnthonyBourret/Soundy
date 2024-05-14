@@ -29,6 +29,7 @@ function CreateAlbumSongsSelection({
           <label key={song.id} htmlFor="songCheckbox" className="cursor-pointer label border-2 border-stone-700 rounded-md bg-base-100 px-2">
             <input
               type="checkbox"
+              checked={selectedSongs.some((selectedSong) => selectedSong.id === song.id)}
               className="checkbox checkbox-sm border-2 border-red-500 [--chkbg:theme(colors.red.500)]"
               onChange={(e) => handleChange(e, song)}
             />

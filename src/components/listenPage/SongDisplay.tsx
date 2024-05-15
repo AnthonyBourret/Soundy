@@ -49,7 +49,7 @@ function SongDisplay({ songs, isLogin, sortBy }: Props) {
   }, [songs, sortBy]);
 
   return (
-    <div className="flex flex-col min-[540px]:px-12 pt-4 p-2 gap-4 min-[540px]:flex-row min-[540px]:flex-wrap min-[540px]:justify-around">
+    <div className="flex flex-col min-[540px]:px-12 pt-4 p-2 gap-4 min-[540px]:flex-row min-[540px]:flex-wrap min-[540px]:justify-around pb-24">
       {sortedSongs && sortedSongs.map(
         (song) => (
           // TODO - Fix the types

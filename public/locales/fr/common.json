@@ -32,8 +32,10 @@
   "ORDER_SELECT_TEXT": "Trier par :",
   "SEARCH_BAR_BTN": "Chercher",
   "SEARCH_BAR_FILTER_ALBUM": "Albums",
-  "SEARCH_BAR_FILTER_DURATION_TEXT": "Durée",
+  "SEARCH_BAR_FILTER_DURATION_TEXT": "Durée :",
+  "SEARCH_BAR_FILTER_RELEASE_TEXT": "Années :",
   "SEARCH_BAR_FILTER_SONG": "Chansons",
   "SEARCH_BAR_PLACEHOLDER": "Chercher par...",
-  "SEARCH_BAR_TEXT": "Quelle voulez-vous écouter ?"
+  "SEARCH_BAR_TEXT": "Quelle voulez-vous écouter ?",
+  "SEARCH_RADIO_INPUT_TEXT": "Voir tout"
 }

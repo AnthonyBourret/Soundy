@@ -40,7 +40,7 @@ function AlbumDisplay({ albums, sortBy }: Props) {
     setSortedAlbums(sorted);
   }, [albums, sortBy]);
   return (
-    <div className="flex flex-col items-center w-full pt-4 gap-4 px-2">
+    <div className="flex flex-col items-center w-full pt-4 gap-4 px-2 pb-24">
       {sortedAlbums && sortedAlbums.map((album) => (
         album && (
           <AlbumCard

@@ -37,5 +37,6 @@
   "SEARCH_BAR_FILTER_SONG": "Chansons",
   "SEARCH_BAR_PLACEHOLDER": "Chercher par...",
   "SEARCH_BAR_TEXT": "Quelle voulez-vous écouter ?",
-  "SEARCH_RADIO_INPUT_TEXT": "Voir tout"
+  "SEARCH_RADIO_INPUT_TEXT": "Voir tout",
+  "SEARCH_RESULT_NULL": "Aucun résultat trouvé"
 }

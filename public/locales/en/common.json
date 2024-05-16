@@ -37,5 +37,6 @@
     "SEARCH_BAR_FILTER_SONG": "Songs",
     "SEARCH_BAR_PLACEHOLDER": "Search by...",
     "SEARCH_BAR_TEXT": "What would you like to listen to ?",
-    "SEARCH_RADIO_INPUT_TEXT": "Show all"
+    "SEARCH_RADIO_INPUT_TEXT": "Show all",
+    "SEARCH_RESULT_NULL": "No result found"
 }

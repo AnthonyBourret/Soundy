@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AlbumCard } from '../customElements';
 import { ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
@@ -9,6 +10,7 @@ interface Props {
 
 function AlbumDisplay({ albums, sortBy }: Props) {
   const [sortedAlbums, setSortedAlbums] = useState<ListenPageAlbumsQueryQuery['albums']>([]);
+  const { t } = useTranslation('common');
 
   // The useEffect is used to make a new array of songs based on the sortBy value.
   // This array is sorted based on the value of sortBy.
@@ -39,21 +41,36 @@ function AlbumDisplay({ albums, sortBy }: Props) {
 
     setSortedAlbums(sorted);
   }, [albums, sortBy]);
+
+  const albumDisplayed = useMemo(
+    () => {
+      if (sortedAlbums && sortedAlbums.length > 0) {
+        return (
+          <div className="flex flex-col items-center w-full pt-4 gap-4 px-2 pb-24">
+            {sortedAlbums.map((album) => (
+              album && (
+              <AlbumCard
+                key={album.id}
+                title={album.title}
+                cover={album.cover ?? ''}
+                artist={album.artist?.name || ''}
+                year={album!.release_year ?? 0}
+                songs={album.songs as []}
+              />
+              )
+            ))}
+          </div>
+        );
+      }
+      return (
+        <p className="font-semibold p-24 mb-24 text-center text-xl">{t('SEARCH_RESULT_NULL')}</p>
+      );
+    },
+    [sortedAlbums, t],
+  );
   return (
-    <div className="flex flex-col items-center w-full pt-4 gap-4 px-2 pb-24">
-      {sortedAlbums && sortedAlbums.map((album) => (
-        album && (
-          <AlbumCard
-            key={album.id}
-            title={album.title}
-            cover={album.cover ?? ''}
-            artist={album.artist?.name || ''}
-            year={album!.release_year ?? 0}
-            songs={album.songs as []}
-            // isLogin={isLogin}
-          />
-        )
-      ))}
+    <div className="w-full">
+      {albumDisplayed}
     </div>
   );
 }

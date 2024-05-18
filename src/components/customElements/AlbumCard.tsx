@@ -18,7 +18,7 @@ interface Props {
   title: string;
   artist: string;
   cover: string;
-  year: string;
+  year: number;
   songs: SongProps[];
 }
 

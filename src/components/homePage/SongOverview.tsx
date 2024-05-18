@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import React, { useMemo } from 'react';
 
 import { PlayIcon } from '../../svg';
-import SongOverviewQuery from '../../requests/queries/SongOverviewQuery';
+import { SongOverviewQuery } from '../../requests/queries';
 import type { SongOverviewQuery as SongOverviewQueryType } from '../../types/__generated_schemas__/graphql';
 import {
   setAlbumPicture,

@@ -7,9 +7,15 @@ interface Props {
   songs: ListenPageSongsQueryQuery['songs'];
   isLogin: boolean;
   sortBy: string | null;
+  likable?: boolean;
 }
 
-function SongDisplay({ songs, isLogin, sortBy }: Props) {
+function SongDisplay({
+  isLogin,
+  likable = false,
+  songs,
+  sortBy,
+}: Props) {
   const [sortedSongs, setSortedSongs] = useState<Props['songs']>([]);
 
   // The useEffect is used to make a new array of songs based on the sortBy value.
@@ -64,6 +70,7 @@ function SongDisplay({ songs, isLogin, sortBy }: Props) {
             key={song?.id}
             songId={song!.id}
             title={song!.title}
+            likable={likable}
           />
         ),
       )}

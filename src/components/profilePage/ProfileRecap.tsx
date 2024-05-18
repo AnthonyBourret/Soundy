@@ -15,24 +15,24 @@ const ProfileRecap = (props: Props) => {
   const userInfosJSX = useMemo(() => {
     if (actualMode === 'edit') {
       return (
-        <div className="flex flex-col items-end mr-4 gap-2">
-          <div className="mb-2 flex items-center gap-2">
+        <div className="flex flex-col items-end mr-4 gap-4 sm:gap-2">
+          <div className="mb-2 flex flex-col sm:flex-row items-center gap-2">
             <label className="text-lg font-bold">Name:</label>
             <input type="text" className="input" value={name || ''} readOnly />
           </div>
-          <div className="mb-2 flex items-center gap-2">
+          <div className="mb-2 flex flex-col sm:flex-row items-center gap-2">
             <label className="text-lg font-bold">Country:</label>
             <input type="text" className="input" value={country || ''} readOnly />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="mb-2 flex flex-col sm:flex-row items-center gap-2">
             <label className="text-lg font-bold">Email:</label>
             <input type="text" className="input" value={user.email || 'unknown email'} readOnly />
           </div>
-          <div className="mb-2 flex items-center gap-2">
+          <div className="mb-2 flex flex-col sm:flex-row items-center gap-2">
             <label className="text-lg font-bold">Password:</label>
             <input type="password" className="input" />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-center gap-2">
             <label className="text-lg font-bold">Confirm Password:</label>
             <input type="password" className="input" />
           </div>
@@ -118,7 +118,9 @@ const ProfileRecap = (props: Props) => {
   }, [actualMode, picture]);
 
   return (
-    <div className="card flex-row items-center gap-5 justify-center py-6 px-20 bg-base-200 shadow-xl border border-1 border-stone-700">
+    <div className="card flex-col-reverse sm:flex-row items-center gap-5
+    justify-center py-12 sm:py-6 px-20 bg-base-200 shadow-xl border border-1 border-stone-700"
+    >
       {userInfosJSX}
       {avatarJSX}
     </div>

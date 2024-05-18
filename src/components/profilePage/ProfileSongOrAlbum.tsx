@@ -33,7 +33,7 @@ const ProfileSongOrAlbum = (props: Props): JSX.Element => {
     }
 
     return (
-      <SongDisplay songs={songs} isLogin sortBy={null} />
+      <SongDisplay songs={songs} isLogin sortBy={null} likable={false} />
     );
   }, [albums, chosenDisplay, loading, songs]);
 

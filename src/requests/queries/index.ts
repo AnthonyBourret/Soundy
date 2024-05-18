@@ -4,3 +4,4 @@ export { default as FavoriteSongsQuery } from './FavoriteSongsQuery';
 export { default as ListenPageSongsQuery } from './ListenPageSongsQuery';
 export { default as ListenPageAlbumsQuery } from './ListenPageAlbumsQuery';
 export { default as ProfileQuery } from './ProfileQuery';
+export { default as UserSongsQuery } from './UserSongsQuery';

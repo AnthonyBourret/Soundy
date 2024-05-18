@@ -24,6 +24,7 @@ const documents = {
     "\n  query Login($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n": types.LoginDocument,
     "\n  query Profile {\n    profile {\n      country\n      email\n      name\n      picture\n    }\n  }\n": types.ProfileDocument,
     "\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      duration\n      artist {\n        name\n      }\n    }\n  }\n": types.SongOverviewDocument,
+    "\n  query UserSongsQuery {\n    songs(filter: { createdByUser: true}) {\n      id\n      title\n      cover\n      duration\n    }\n  }\n": types.UserSongsQueryDocument,
 };
 
 /**
@@ -84,6 +85,10 @@ export function gql(source: "\n  query Profile {\n    profile {\n      country\n
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      duration\n      artist {\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      duration\n      artist {\n        name\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query UserSongsQuery {\n    songs(filter: { createdByUser: true}) {\n      id\n      title\n      cover\n      duration\n    }\n  }\n"): (typeof documents)["\n  query UserSongsQuery {\n    songs(filter: { createdByUser: true}) {\n      id\n      title\n      cover\n      duration\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

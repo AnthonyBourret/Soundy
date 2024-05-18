@@ -1,9 +1,10 @@
-import { ApolloError, useMutation } from '@apollo/client';
+import { ApolloError, useMutation, useQuery } from '@apollo/client';
 import React, {
-  useState, useMemo, useCallback, FormEvent,
+  useState, useMemo, useEffect, useCallback, FormEvent,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNewToast } from '../toastContext';
+import { UserSongsQuery } from '../../requests/queries';
 import { CreateAlbumMutation } from '../../requests/mutations';
 import CreateAlbumSongsSelection from './CreateAlbumSongsSelection';
 import CreateAlbumSongsOrder from './CreateAlbumSongsOrder';
@@ -11,6 +12,7 @@ import { DefaultCover, CoverPicture, Spinner } from '../customElements';
 import { secondsToFormatedDuration } from '../../utils';
 import { AllSongs, AlbumFormData } from '../../types';
 import { UploadIcon, ArrowDown } from '../../svg';
+import { UserSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   setSelectedType: React.Dispatch<React.SetStateAction<'song' | 'album'>>;
@@ -19,41 +21,20 @@ interface Props {
 function CreateAlbums({ setSelectedType }: Props) {
   const { t } = useTranslation('translation');
   const newToast = useNewToast();
-  // Array of songs, standby API
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const songs = [
-    {
-      id: 1, title: 'Song title 1', duration: 135, cover: '',
-    },
-    {
-      id: 2, title: 'Song title 2', duration: 445, cover: '',
-    },
-    {
-      id: 3, title: 'Song title 3', duration: 45, cover: '',
-    },
-    {
-      id: 4, title: 'Song title 4', duration: 89, cover: '',
-    },
-    {
-      id: 5, title: 'Song title 5', duration: 78, cover: '',
-    },
-    {
-      id: 6, title: 'Song title 6', duration: 94, cover: '',
-    },
-    {
-      id: 7, title: 'Song title 7', duration: 256, cover: '',
-    },
-    {
-      id: 8, title: 'Song title 8', duration: 485, cover: '',
-    },
-    {
-      id: 9, title: 'Song title 9', duration: 457, cover: '',
-    },
-    {
-      id: 10, title: 'Song title 10', duration: 94, cover: '',
-    },
-  ];
+
+  const { data } = useQuery(UserSongsQuery, {
+    variables: { createdByUser: true },
+    fetchPolicy: 'no-cache',
+  });
+
+  const [songs, setSongs] = useState<UserSongsQueryQuery['songs']>([]);
   const [selectedSongs, setSelectedSongs] = useState<AllSongs['songs']>([]);
+
+  useEffect(() => {
+    if (data?.songs !== undefined) {
+      setSongs(data.songs);
+    }
+  }, [data]);
 
   // The initial form data is stored in a state
   // The year is automatically set to the current year
@@ -132,7 +113,7 @@ function CreateAlbums({ setSelectedType }: Props) {
         if (response) {
           newToast('success', t('CREATE_ALBUM_SUCCESS'));
         }
-      } catch (error: unknown) {
+      } catch (error) {
         if (error instanceof ApolloError) {
           newToast('error', error.message);
         }
@@ -206,7 +187,7 @@ function CreateAlbums({ setSelectedType }: Props) {
 
   return (
     // The form is displayed if the user has already added songs
-    songs.length > 0 ? (
+    songs && songs.length > 0 ? (
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center gap-14 w-[90%] min-[600px]:w-[80%] border border-stone-700 rounded-box bg-neutral mb-24 py-10 min-[1000px]:w-[70%]"

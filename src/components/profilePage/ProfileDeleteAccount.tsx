@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ApolloError, useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 
 import { useNewToast } from '../toastContext';
 import { DeleteArtistMutation } from '../../requests/mutations';
+import { setToken, useAppDispatch } from '../../redux';
 
 const ProfileDeleteAccount = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +14,8 @@ const ProfileDeleteAccount = () => {
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
   const modalId = 'delete_artist_modal';
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const [deleteAccountAction, {
     loading: deleteAccountLoading,
@@ -19,9 +23,7 @@ const ProfileDeleteAccount = () => {
   }] = useMutation(DeleteArtistMutation);
 
   useEffect(() => {
-    if (deleteAccountLoading) {
-      // Show loading spinner or any indicator
-    } else if (deleteAccountError) {
+    if (deleteAccountError) {
       newToast('error', deleteAccountError.message);
     }
   }, [newToast, deleteAccountLoading, deleteAccountError]);
@@ -32,10 +34,10 @@ const ProfileDeleteAccount = () => {
 
       if (response) {
         newToast('success', t('DELETE_ACCOUNT_SUCCESS', { ns: 'translation' }));
+        navigate('/logout', { replace: true });
+        dispatch(setToken(null));
         closeModal();
       }
-      // Perform deletion logic here, like making a mutation
-      // WIP - Make actions here
     } catch (error) {
       if (error instanceof ApolloError) {
         if (error.graphQLErrors[0].extensions?.code === 'ARTIST_NAME_ALREADY_EXISTS') {

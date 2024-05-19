@@ -77,17 +77,17 @@ const ProfileDeleteAccount = () => {
         <dialog id={modalId} className="modal" open>
           <form method="dialog" className="modal-box border-2 border-stone-700">
             <p>{t('DELETE_ACCOUNT_CONFIRM', { ns: 'translation' })}</p>
-            <div className="flex justify-end mt-4">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:justify-end mt-4">
               <button
                 type="button"
-                className="btn btn-outline border-stone-700 border mr-2"
+                className="btn btn-outline border-stone-700 border mr-2 w-full sm:w-auto"
                 onClick={closeModal}
               >
                 {t('CANCEL', { ns: 'common' })}
               </button>
               <button
                 type="button"
-                className="btn btn-error"
+                className="btn btn-error w-full sm:w-auto"
                 onClick={handleDelete}
               >
                 {t('CONFIRM', { ns: 'common' })}
@@ -96,7 +96,7 @@ const ProfileDeleteAccount = () => {
           </form>
 
           {/* Modal backdrop */}
-          <form method="dialog" className="modal-backdrop">
+          <form method="dialog" className="modal-backdrop backdrop-brightness-50 backdrop-blur-[1px]">
             <button type="submit">{t('CLOSE')}</button>
           </form>
         </dialog>

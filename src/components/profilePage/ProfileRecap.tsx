@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useMemo, useState } from 'react';
 import { useAppSelector } from '../../redux';
+import ProfileDeleteAccount from './ProfileDeleteAccount';
 
 type Props = {
   mode: 'edit' | 'view';
@@ -117,12 +118,20 @@ const ProfileRecap = (props: Props) => {
     );
   }, [actualMode, picture]);
 
+  const profileDeleteAccountJSX = useMemo(() => {
+    if (actualMode === 'edit') {
+      return <ProfileDeleteAccount />;
+    }
+    return null;
+  }, [actualMode]);
+
   return (
     <div className="card flex-col-reverse sm:flex-row items-center gap-5
     justify-center py-12 sm:py-6 px-20 bg-base-200 shadow-xl border border-1 border-stone-700"
     >
       {userInfosJSX}
       {avatarJSX}
+      {profileDeleteAccountJSX}
     </div>
   );
 };

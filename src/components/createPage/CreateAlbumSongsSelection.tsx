@@ -1,11 +1,11 @@
 import React from 'react';
 import { secondsToFormatedDuration } from '../../utils';
-import { AllSongs } from '../../types';
+import { Song } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
-  songs: AllSongs['songs'],
-  selectedSongs: AllSongs['songs'],
-  setSelectedSongs: React.Dispatch<React.SetStateAction<AllSongs['songs']>>
+  songs: Song[],
+  selectedSongs: Song[],
+  setSelectedSongs: React.Dispatch<React.SetStateAction<Song[]>>
   handleInputChange: (field: string, value: string | number | number[] | Object) => void;
 }
 
@@ -13,7 +13,7 @@ function CreateAlbumSongsSelection({
   songs, selectedSongs, setSelectedSongs, handleInputChange,
 }: Props) {
   // setSelectedSongs is called with the previous selectedSongs array, adding the chosen song.
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>, song: AllSongs['songs'][0]) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>, song: Song[][0]) {
     if (e.target.checked) {
       setSelectedSongs([...selectedSongs, song]);
       handleInputChange('songIds', [...selectedSongs, song].map((selectedSong) => selectedSong.id));

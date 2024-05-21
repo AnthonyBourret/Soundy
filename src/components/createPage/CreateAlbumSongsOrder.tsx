@@ -2,11 +2,11 @@ import { Reorder } from 'framer-motion';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { secondsToFormatedDuration } from '../../utils';
-import { AllSongs } from '../../types';
+import { Song } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
-  selectedSongs: AllSongs['songs'],
-  setSelectedSongs: React.Dispatch<React.SetStateAction<AllSongs['songs']>>
+  selectedSongs: Song[],
+  setSelectedSongs: React.Dispatch<React.SetStateAction<Song[]>>
 }
 
 function CreateAlbumSongsOrder({
@@ -15,7 +15,7 @@ function CreateAlbumSongsOrder({
   const { t } = useTranslation('translation');
   // Function to handle the change of position of the songs,
   // Every time a song is moved, setSelectedSongs is called to update the order of the songs
-  const handlePositionChange = (newOrder: AllSongs['songs']) => {
+  const handlePositionChange = (newOrder: Song[]) => {
     setSelectedSongs(newOrder);
   };
 

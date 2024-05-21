@@ -10,9 +10,9 @@ import CreateAlbumSongsSelection from './CreateAlbumSongsSelection';
 import CreateAlbumSongsOrder from './CreateAlbumSongsOrder';
 import { DefaultCover, CoverPicture, Spinner } from '../customElements';
 import { secondsToFormatedDuration } from '../../utils';
-import { AllSongs, AlbumFormData } from '../../types';
+import { AlbumFormData } from '../../types';
 import { UploadIcon, ArrowDown } from '../../svg';
-import { UserSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
+import { UserSongsQueryQuery, UserSongsQueryQueryVariables, Song } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   setSelectedType: React.Dispatch<React.SetStateAction<'song' | 'album'>>;
@@ -22,13 +22,13 @@ function CreateAlbums({ setSelectedType }: Props) {
   const { t } = useTranslation('translation');
   const newToast = useNewToast();
 
-  const { data } = useQuery(UserSongsQuery, {
+  const { data } = useQuery<UserSongsQueryQuery, UserSongsQueryQueryVariables>(UserSongsQuery, {
     variables: { createdByUser: true },
     fetchPolicy: 'no-cache',
   });
 
   const [songs, setSongs] = useState<UserSongsQueryQuery['songs']>([]);
-  const [selectedSongs, setSelectedSongs] = useState<AllSongs['songs']>([]);
+  const [selectedSongs, setSelectedSongs] = useState<Song[]>([]);
 
   useEffect(() => {
     if (data?.songs !== undefined) {
@@ -238,7 +238,7 @@ function CreateAlbums({ setSelectedType }: Props) {
             </div>
             <div className="divider my-0 mb-4" />
             <CreateAlbumSongsSelection
-              songs={songs}
+              songs={songs as Song[]} // Add type assertion here
               selectedSongs={selectedSongs}
               setSelectedSongs={setSelectedSongs}
               handleInputChange={handleInputChange}

@@ -1,8 +1,8 @@
 import { gql } from '../../types/__generated_schemas__/gql';
 
 const UserSongsQuery = gql(`
-  query UserSongsQuery {
-    songs(filter: { createdByUser: true}) {
+  query UserSongsQuery($createdByUser: Boolean!) {
+    songs(filter: { createdByUser: $createdByUser}) {
       id
       title
       cover

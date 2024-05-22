@@ -126,7 +126,7 @@ const ProfileRecap = (props: Props) => {
   }, [actualMode]);
 
   return (
-    <div className="card flex-col-reverse sm:flex-row items-center gap-5
+    <div className="card flex-col-reverse sm:flex-row items-center gap-5 max-w-[90%] overflow-hidden
     justify-center py-12 sm:py-6 px-20 bg-base-200 shadow-xl border border-1 border-stone-700"
     >
       {userInfosJSX}

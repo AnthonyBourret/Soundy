@@ -3,7 +3,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { SongCard } from '../customElements';
 import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
-import PencilIcon from '../../svg/PencilIcon';
+// import PencilIcon from '../../svg/PencilIcon';
+import ProfileUpdateSong from '../profilePage/ProfileUpdateSong';
 
 interface Props {
   fromProfilePage?: boolean;
@@ -68,16 +69,7 @@ function SongDisplay({
       return sortedSongs.map(
         (song) => (
           <div className="indicator">
-            <div className="indicator-item indicator-top">
-              <button
-                type="button"
-                className="absolute right-[-7px] top-[-7px] btn btn-outline
-                aspect-square px-0 rounded-full bg-base-200 border border-1
-                border-stone-700"
-              >
-                <PencilIcon />
-              </button>
-            </div>
+            <ProfileUpdateSong />
             <SongCard
               isLiked={song!.isLiked || false}
               artist={song!.artist || { name: '' }}

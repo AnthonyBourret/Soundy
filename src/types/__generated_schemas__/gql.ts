@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  mutation CreateArtist($input: ArtistCreateInput!) {\n    addArtist(input: $input) {\n      country\n      id\n      name\n      picture\n    }\n  }\n": types.CreateArtistDocument,
+    "\n  mutation Mutation {\n    deleteArtist\n  }\n": types.MutationDocument,
     "\n  mutation LikeSong($songId: Int!) {\n    likeSong(id: $songId)\n  }\n": types.LikeSongDocument,
     "\n  mutation UnlikeSong($songId: Int!) {\n    unlikeSong(id: $songId)\n  }\n": types.UnlikeSongDocument,
     "\nquery FavoriteSongsQuery {\n    songs(filter: { liked: true }) {\n        cover\n        duration\n        id\n        lyrics\n        title\n        isLiked\n        release_year\n        artist {\n            name\n        }\n    }\n}\n": types.FavoriteSongsQueryDocument,
@@ -44,6 +45,10 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation CreateArtist($input: ArtistCreateInput!) {\n    addArtist(input: $input) {\n      country\n      id\n      name\n      picture\n    }\n  }\n"): (typeof documents)["\n  mutation CreateArtist($input: ArtistCreateInput!) {\n    addArtist(input: $input) {\n      country\n      id\n      name\n      picture\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation Mutation {\n    deleteArtist\n  }\n"): (typeof documents)["\n  mutation Mutation {\n    deleteArtist\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

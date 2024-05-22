@@ -2,13 +2,15 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
+
 import Header from '../header/Header';
 import {
   SongCard, ScrollToTopButton, SongAndAlbumOrder, Spinner,
 } from '../customElements';
-import { Logo, ArrowDown } from '../../svg';
+import { ArrowDown } from '../../svg';
 import { FavoriteSongsQuery } from '../../requests/queries';
 import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
+import PageTitle from '../customElements/PageTitle';
 
 interface Props {
   songs: ListenPageSongsQueryQuery['songs'];
@@ -106,18 +108,9 @@ function Favorites({ isLogin }: { isLogin: boolean }) {
   return (
     <div className="mb-5 flex flex-col items-center w-full min-h-screen">
       <Header isLogin={isLogin} />
-      <div className="pt-32">
-        <div className="flex flex-col items-center gap-4 pb-8">
-          <div className="w-16 h-16 min-[540px]:w-20 min-[540px]:h-20 rounded-full flex items-center justify-center">
-            <Logo />
-          </div>
-          <h1 className="text-xl min-[540px]:text-3xl font-bold">{t('FAVORITES_PAGE_TITLE')}</h1>
-        </div>
-      </div>
-      <div className="divider py-4 px-8 min-[540px]:px-36" />
+      <PageTitle title={t('FAVORITES_PAGE_TITLE')} />
 
       {favoriteSongs}
-
       {loading && <Spinner />}
 
       {error && (

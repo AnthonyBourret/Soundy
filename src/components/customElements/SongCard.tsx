@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import FavCheckBox from './FavCheckBox';
 import { PlayIcon } from '../../svg';
 import secondsToFormatedDuration from '../../utils/secondsToFormatedDuration';
@@ -27,6 +27,7 @@ interface SongCardProps {
   isLogin: boolean;
   songId: number;
   isLiked: boolean;
+  likable?: boolean;
 }
 
 function SongCard(props: SongCardProps) {
@@ -39,10 +40,22 @@ function SongCard(props: SongCardProps) {
     isLogin,
     songId,
     isLiked,
+    likable = false,
   } = props;
 
   const dispatch = useAppDispatch();
   const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
+
+  const favCheckBoxJSX = useMemo(() => {
+    if (isLogin && likable) {
+      return (
+        <div className="absolute top-0 left-20 min-[540px]:top-36 min-[540px]:left-32">
+          <FavCheckBox songId={songId} isLiked={isLiked} />
+        </div>
+      );
+    }
+    return null;
+  }, [isLiked, isLogin, likable, songId]);
 
   return (
     <div className="card flex-row w-full h-30 p-2 min-[540px]:w-[17%] min-w-[190px] min-[540px]:max-w-[190px] bg-base-200 shadow-xl border border-1 border-stone-700">
@@ -74,11 +87,7 @@ function SongCard(props: SongCardProps) {
             </div>
           </button>
           {/* The Checkbox is not displayed on the SongCard component if the user is not logged in */}
-          {isLogin && (
-            <div className="absolute top-0 left-20 min-[540px]:top-36 min-[540px]:left-32">
-              <FavCheckBox songId={songId} isLiked={isLiked} />
-            </div>
-          )}
+          {favCheckBoxJSX}
         </div>
         <div className="w-[70%] flex flex-col h-full justify-between gap-2 px-3 py-1 min-[540px]:w-full">
           <h3 className="font-bold text-center">

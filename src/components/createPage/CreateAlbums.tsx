@@ -43,7 +43,6 @@ function CreateAlbums({ setSelectedType }: Props) {
     cover: '',
     release_year: new Date().getFullYear(),
     songIds: [],
-    songOnAlbum: [],
   });
 
   // The createAlbum mutation is called when the form is submitted
@@ -57,10 +56,6 @@ function CreateAlbums({ setSelectedType }: Props) {
         cover: formData.cover,
         release_year: formData.release_year,
         songIds: selectedSongs.map((song) => song.id),
-        songOnAlbum: selectedSongs.map((song, index) => ({
-          song_id: song.id,
-          position: index + 1,
-        })),
       },
     },
   });
@@ -108,7 +103,6 @@ function CreateAlbums({ setSelectedType }: Props) {
           cover: '',
           release_year: new Date().getFullYear(),
           songIds: [],
-          songOnAlbum: [],
         });
         if (response) {
           newToast('success', t('CREATE_ALBUM_SUCCESS'));

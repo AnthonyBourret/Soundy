@@ -27,14 +27,14 @@ function CreateAlbumSongsSelection({
     <form>
       <div className="form-control border border-stone-700 rounded-md p-2 gap-2 h-[335px] overflow-y-scroll">
         {songs.map((song) => (
-          <label key={song.id} htmlFor="songCheckbox" className="cursor-pointer label border-2 border-stone-700 rounded-md bg-base-100 px-2">
+          <label key={song.id} htmlFor="songCheckbox" className="cursor-pointer gap-4 label border-2 border-stone-700 rounded-md bg-base-100 px-2">
             <input
               type="checkbox"
               checked={selectedSongs.some((selectedSong) => selectedSong.id === song.id)}
               className="checkbox checkbox-sm border-2 border-red-500 [--chkbg:theme(colors.red.500)]"
               onChange={(e) => handleChange(e, song)}
             />
-            <span className="label-text font-semibold">{song.title}</span>
+            <span className="label-text font-semibold truncate">{song.title}</span>
             <span className="label-text font-semibold">{secondsToFormatedDuration(song.duration)}</span>
           </label>
         ))}

@@ -118,10 +118,6 @@ export interface AlbumFormData {
   cover: string;
   release_year: number;
   songIds: number[];
-  songOnAlbum: {
-    song_id: number;
-    position: number;
-  }[];
 }
 
 export interface SongFormData {

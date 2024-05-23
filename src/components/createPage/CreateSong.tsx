@@ -20,7 +20,7 @@ function CreateSong() {
   const [formData, setFormData] = useState<SongFormData>({
     title: '',
     cover: '',
-    duration: 0,
+    duration: Math.floor(Math.random() * 1000) + 1,
     release_year: new Date().getFullYear(),
     lyrics: '',
   });
@@ -65,7 +65,7 @@ function CreateSong() {
       setFormData({
         title: '',
         cover: '',
-        duration: 0,
+        duration: Math.floor(Math.random() * 1000) + 1,
         release_year: new Date().getFullYear(),
         lyrics: '',
       });
@@ -121,7 +121,7 @@ function CreateSong() {
         <p className="text-xs text-center">{t('CREATE_PAGE_REQUIRED_FIELDS')}</p>
       </div>
       <div className="flex flex-col items-center gap-14 w-full min-[1000px]:flex-row min-[1000px]:w-[80%] min-[1000px]:justify-between">
-        <div className="flex flex-col gap-14 w-full min-[450px]:w-[80%] min-[1000px]:w-[45%]">
+        <div className="flex flex-col min-[1000px]:self-start gap-14 w-full min-[450px]:w-[80%] min-[1000px]:w-[45%]">
 
           {/* Title input */}
           <label className="form-control" htmlFor="title">
@@ -137,23 +137,6 @@ function CreateSong() {
               className="input input-bordered input-sm w-full"
             />
           </label>
-          {/* File input */}
-          <label className="form-control" htmlFor="file">
-            <div className="label">
-              <span className="label-text text-lg font-semibold">{t('CREATE_SONG_FILE_INPUT')}</span>
-            </div>
-            <div className="divider my-0 mb-4" />
-            <input
-              type="file"
-              accept=".mp3, .wav"
-              className="file-input file-input-bordered input-sm w-full"
-              disabled
-            />
-            <div className="label self-center">
-              <span className="label-text-alt">{t('CREATE_SONG_FILE_LABEL')}</span>
-            </div>
-          </label>
-
           {/* Cover Input */}
           <label className="form-control" htmlFor="cover">
             <div className="label">
@@ -170,25 +153,22 @@ function CreateSong() {
             />
           </label>
         </div>
-        <div className="flex flex-col gap-6 w-full min-[450px]:w-[80%] min-[1000px]:w-[45%]">
-
-          {/* Duration input */}
-          <label className="form-control" htmlFor="duration">
+        <div className="flex flex-col gap-6 w-full min-[450px]:w-[80%] min-[1000px]:w-[45%] min-[1000px]:self-start">
+          <label className="form-control" htmlFor="file">
             <div className="label">
-              <span className="label-text text-lg font-semibold">{t('CREATE_SONG_DURATION_INPUT')}</span>
+              <span className="label-text text-lg font-semibold">{t('CREATE_SONG_FILE_INPUT')}</span>
             </div>
             <div className="divider my-0 mb-4" />
             <input
-              type="number"
-              value={formData.duration}
-              onChange={(e) => handleInputChange('duration', parseInt(e.target.value, 10))}
-              className="input input-bordered input-sm self-center text-center"
+              type="file"
+              accept=".mp3, .wav"
+              className="file-input file-input-bordered input-sm w-full"
+              disabled
             />
             <div className="label self-center">
-              <span className="label-text-alt">{t('CREATE_SONG_DURATION_LABEL')}</span>
+              <span className="label-text-alt">{t('CREATE_SONG_FILE_LABEL')}</span>
             </div>
           </label>
-
           {/* Lyrics Input */}
           <label htmlFor="lyrics" className="">
             <div className="label">
@@ -196,7 +176,7 @@ function CreateSong() {
             </div>
             <div className="divider my-0 mb-4" />
             <textarea
-              className="textarea textarea-bordered w-full h-[370px]"
+              className="textarea textarea-bordered w-full min-h-[175px] text-ellipsis"
               placeholder={t('CREATE_SONG_LYRICS_PLACEHOLDER')}
               value={formData.lyrics}
               onChange={(e) => handleInputChange('lyrics', e.target.value)}

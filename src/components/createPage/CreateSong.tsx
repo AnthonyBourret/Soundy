@@ -52,14 +52,6 @@ function CreateSong() {
       newToast('warning', t('CREATE_SONG_MISSING_TITLE'));
       return;
     }
-    if (!formData.duration) {
-      newToast('warning', t('CREATE_SONG_MISSING_DURATION'));
-      return;
-    }
-    if (!formData.title && !formData.duration) {
-      newToast('warning', t('CREATE_SONG_MISSING_FIELDS'));
-      return;
-    }
     try {
       const response = await createSong();
       setFormData({

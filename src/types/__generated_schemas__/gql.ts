@@ -16,6 +16,7 @@ const documents = {
     "\n  mutation CreateAlbum($input: AlbumCreateInput!) {\n    addAlbum(input: $input) {\n        id\n        title\n        cover\n        release_year\n        songs {\n            id\n        }\n    }\n    }\n": types.CreateAlbumDocument,
     "\n  mutation CreateArtist($input: ArtistCreateInput!) {\n    addArtist(input: $input) {\n      country\n      id\n      name\n      picture\n    }\n  }\n": types.CreateArtistDocument,
     "\n  mutation CreateSong($input: SongCreateInput!) {\n    addSong(input: $input) {\n      id\n      title\n      cover\n      duration\n      release_year\n      lyrics\n    }\n  }\n": types.CreateSongDocument,
+    "\n  mutation Mutation {\n    deleteArtist\n  }\n": types.MutationDocument,
     "\n  mutation LikeSong($songId: Int!) {\n    likeSong(id: $songId)\n  }\n": types.LikeSongDocument,
     "\n  mutation UnlikeSong($songId: Int!) {\n    unlikeSong(id: $songId)\n  }\n": types.UnlikeSongDocument,
     "\nquery FavoriteSongsQuery {\n    songs(filter: { liked: true }) {\n        cover\n        duration\n        id\n        lyrics\n        title\n        isLiked\n        release_year\n        artist {\n            name\n        }\n    }\n}\n": types.FavoriteSongsQueryDocument,
@@ -55,6 +56,10 @@ export function gql(source: "\n  mutation CreateArtist($input: ArtistCreateInput
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation CreateSong($input: SongCreateInput!) {\n    addSong(input: $input) {\n      id\n      title\n      cover\n      duration\n      release_year\n      lyrics\n    }\n  }\n"): (typeof documents)["\n  mutation CreateSong($input: SongCreateInput!) {\n    addSong(input: $input) {\n      id\n      title\n      cover\n      duration\n      release_year\n      lyrics\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation Mutation {\n    deleteArtist\n  }\n"): (typeof documents)["\n  mutation Mutation {\n    deleteArtist\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -16,8 +16,8 @@ const SignupModal = (): JSX.Element => {
   const newToast = useNewToast();
 
   const [formData, setFormData] = useState({
-    username: 'Joliwood',
-    email: 'joliboisgui@gmail.com',
+    username: '',
+    email: '',
     password: '',
     confirmPassword: '',
     isCguAccepted: false,

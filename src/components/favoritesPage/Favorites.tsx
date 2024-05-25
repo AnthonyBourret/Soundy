@@ -21,7 +21,6 @@ interface Props {
 function Favorites({ isLogin }: { isLogin: boolean }) {
   const { t } = useTranslation('translation');
   const { data, loading, error } = useQuery(FavoriteSongsQuery, {
-    variables: { liked: true },
     fetchPolicy: 'no-cache',
   });
   const [songs, setSongs] = useState<ListenPageSongsQueryQuery['songs']>([]);

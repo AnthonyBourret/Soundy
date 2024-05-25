@@ -14,10 +14,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  mutation CreateArtist($input: ArtistCreateInput!) {\n    addArtist(input: $input) {\n      country\n      id\n      name\n      picture\n    }\n  }\n": types.CreateArtistDocument,
-    "\n  mutation Mutation {\n    deleteArtist\n  }\n": types.MutationDocument,
+    "\n  mutation DeleteArtist {\n    deleteArtist\n  }\n": types.DeleteArtistDocument,
+    "\n  mutation DeleteSongs($songIds: [Int!]!) {\n    deleteSongs(ids: $songIds)\n  }\n": types.DeleteSongsDocument,
     "\n  mutation LikeSong($songId: Int!) {\n    likeSong(id: $songId)\n  }\n": types.LikeSongDocument,
     "\n  mutation UnlikeSong($songId: Int!) {\n    unlikeSong(id: $songId)\n  }\n": types.UnlikeSongDocument,
-    "\nquery FavoriteSongsQuery {\n    songs(filter: { liked: true }) {\n        cover\n        duration\n        id\n        lyrics\n        title\n        isLiked\n        release_year\n        artist {\n            name\n        }\n    }\n}\n": types.FavoriteSongsQueryDocument,
+    "\n    query FavoriteSongsQuery {\n        songs(filter: { liked: true }) {\n            cover\n            duration\n            id\n            lyrics\n            title\n            isLiked\n            release_year\n            artist {\n                name\n            }\n        }\n    }\n": types.FavoriteSongsQueryDocument,
     "\n  query ListenPageAlbumsQuery($limit: Int) {\n    albums(limit: $limit){\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      release_year\n      songs {\n        id\n        title\n        duration\n      }\n    }\n  }\n": types.ListenPageAlbumsQueryDocument,
     "\n  query ListenPageSongsQuery($limit: Int) {\n    songs(limit: $limit) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n": types.ListenPageSongsQueryDocument,
     "\n  query Login($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n": types.LoginDocument,
@@ -48,7 +49,11 @@ export function gql(source: "\n  mutation CreateArtist($input: ArtistCreateInput
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation Mutation {\n    deleteArtist\n  }\n"): (typeof documents)["\n  mutation Mutation {\n    deleteArtist\n  }\n"];
+export function gql(source: "\n  mutation DeleteArtist {\n    deleteArtist\n  }\n"): (typeof documents)["\n  mutation DeleteArtist {\n    deleteArtist\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation DeleteSongs($songIds: [Int!]!) {\n    deleteSongs(ids: $songIds)\n  }\n"): (typeof documents)["\n  mutation DeleteSongs($songIds: [Int!]!) {\n    deleteSongs(ids: $songIds)\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -60,7 +65,7 @@ export function gql(source: "\n  mutation UnlikeSong($songId: Int!) {\n    unlik
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\nquery FavoriteSongsQuery {\n    songs(filter: { liked: true }) {\n        cover\n        duration\n        id\n        lyrics\n        title\n        isLiked\n        release_year\n        artist {\n            name\n        }\n    }\n}\n"): (typeof documents)["\nquery FavoriteSongsQuery {\n    songs(filter: { liked: true }) {\n        cover\n        duration\n        id\n        lyrics\n        title\n        isLiked\n        release_year\n        artist {\n            name\n        }\n    }\n}\n"];
+export function gql(source: "\n    query FavoriteSongsQuery {\n        songs(filter: { liked: true }) {\n            cover\n            duration\n            id\n            lyrics\n            title\n            isLiked\n            release_year\n            artist {\n                name\n            }\n        }\n    }\n"): (typeof documents)["\n    query FavoriteSongsQuery {\n        songs(filter: { liked: true }) {\n            cover\n            duration\n            id\n            lyrics\n            title\n            isLiked\n            release_year\n            artist {\n                name\n            }\n        }\n    }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

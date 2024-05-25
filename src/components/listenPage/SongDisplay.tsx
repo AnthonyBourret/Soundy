@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { SongCard } from '../customElements';
 import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
-// import PencilIcon from '../../svg/PencilIcon';
 import ProfileUpdateSong from '../profilePage/ProfileUpdateSong';
 
 interface Props {
@@ -67,23 +66,29 @@ function SongDisplay({
 
     if (fromProfilePage) {
       return sortedSongs.map(
-        (song) => (
-          <div className="indicator">
-            <ProfileUpdateSong />
-            <SongCard
-              isLiked={song!.isLiked || false}
-              artist={song!.artist || { name: '' }}
-              cover={song!.cover || ''}
-              duration={song!.duration}
-              releaseYear={song!.release_year ?? 0}
-              isLogin={isLogin}
-              key={song?.id}
-              songId={song!.id}
-              title={song!.title}
-              likable={likable}
-            />
-          </div>
-        ),
+        (song) => {
+          if (!song) {
+            return null;
+          }
+
+          return (
+            <div className="indicator w-full">
+              <ProfileUpdateSong songId={song.id} />
+              <SongCard
+                isLiked={song!.isLiked || false}
+                artist={song!.artist || { name: '' }}
+                cover={song!.cover || ''}
+                duration={song!.duration}
+                releaseYear={song!.release_year ?? 0}
+                isLogin={isLogin}
+                key={song?.id}
+                songId={song!.id}
+                title={song!.title}
+                likable={likable}
+              />
+            </div>
+          );
+        },
       );
     }
 

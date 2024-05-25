@@ -9,6 +9,8 @@
   "DELETE_ACCOUNT_CONFIRM": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.",
   "DELETE_ACCOUNT_ERROR": "Une erreur est survenue lors de la suppression de votre compte. Veuillez réessayer plus tard.",
   "DELETE_ACCOUNT_SUCCESS": "Votre compte a bien été supprimé",
+  "DELETE_SONG_ERROR": "Une erreur est survenue lors de la suppression du son. Veuillez réessayer plus tard.",
+  "DELETE_SONG_SUCCESS": "Le son a bien été supprimé",
   "FAVORITES_PAGE_EMPTY": "Vous n'avez pas encore ajouté de titres à vos favoris. Cliquez sur le bouton ci-dessous pour commencer à explorer notre catalogue.",
   "FAVORITES_PAGE_TITLE": "Mes favoris",
   "HERO_TXT_1": "Bienvenu sur",

@@ -2,7 +2,7 @@ import { Reorder } from 'framer-motion';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { secondsToFormatedDuration } from '../../utils';
-import { Song } from '../../types/__generated_schemas__/graphql';
+import type { Song } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   selectedSongs: Song[],

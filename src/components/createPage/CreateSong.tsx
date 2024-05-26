@@ -7,17 +7,23 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { useNewToast } from '../toastContext';
 import { CreateSongMutation } from '../../requests/mutations';
-import { DefaultCover, CoverPicture, Spinner } from '../customElements';
+import { Cover, Spinner } from '../customElements';
 import { UploadIcon } from '../../svg';
-import { SongFormData } from '../../types';
+import { SongCreateInput } from '../../types/__generated_schemas__/graphql';
 
 function CreateSong() {
   const { t } = useTranslation('translation');
   const newToast = useNewToast();
 
-  // The initial form data is stored in a state
-  // The year is automatically set to the current year
-  const [formData, setFormData] = useState<SongFormData>({
+  /**  The initial formData is stored in a state
+   * @param {string} title - The title of the album
+   * @param {string} cover - The cover of the album
+   * @param {number} duration - The duration of the song
+   * @param {number} release_year - The release year of the album
+   * @param {string} lyrics - The lyrics of the song
+   */
+
+  const [formData, setFormData] = useState<SongCreateInput>({
     title: '',
     cover: '',
     duration: Math.floor(Math.random() * 1000) + 1,
@@ -75,17 +81,6 @@ function CreateSong() {
     }
   };
 
-  const coverPicture = useMemo(() => {
-    if (formData.cover) {
-      return (
-        <CoverPicture cover={formData.cover} />
-      );
-    }
-    return (
-      <DefaultCover />
-    );
-  }, [formData.cover]);
-
   const submitButton = useMemo(() => {
     if (createSongLoading) {
       return (
@@ -135,11 +130,11 @@ function CreateSong() {
               <span className="label-text text-lg font-semibold">{t('CREATE_SONG_COVER_INPUT')}</span>
             </div>
             <div className="divider my-0 mb-4" />
-            {coverPicture}
+            <Cover cover={formData.cover ?? ''} />
             <input
               type="url"
               placeholder={t('CREATE_SONG_COVER_PLACEHOLDER')}
-              value={formData.cover}
+              value={formData.cover ?? ''}
               onChange={(e) => handleInputChange('cover', e.target.value)}
               className="file-input file-input-bordered input-sm mt-4 w-full"
             />
@@ -170,7 +165,7 @@ function CreateSong() {
             <textarea
               className="textarea textarea-bordered w-full min-h-[175px] text-ellipsis"
               placeholder={t('CREATE_SONG_LYRICS_PLACEHOLDER')}
-              value={formData.lyrics}
+              value={formData.lyrics ?? ''}
               onChange={(e) => handleInputChange('lyrics', e.target.value)}
             />
           </label>

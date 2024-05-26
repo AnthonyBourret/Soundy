@@ -8,11 +8,12 @@ import { UserSongsQuery } from '../../requests/queries';
 import { CreateAlbumMutation } from '../../requests/mutations';
 import CreateAlbumSongsSelection from './CreateAlbumSongsSelection';
 import CreateAlbumSongsOrder from './CreateAlbumSongsOrder';
-import { DefaultCover, CoverPicture, Spinner } from '../customElements';
+import { Cover, Spinner } from '../customElements';
 import { secondsToFormatedDuration } from '../../utils';
-import { AlbumFormData } from '../../types';
 import { UploadIcon, ArrowDown } from '../../svg';
-import { UserSongsQueryQuery, UserSongsQueryQueryVariables, Song } from '../../types/__generated_schemas__/graphql';
+import {
+  UserSongsQueryQuery, UserSongsQueryQueryVariables, Song, AlbumCreateInput,
+} from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   setSelectedType: React.Dispatch<React.SetStateAction<'song' | 'album'>>;
@@ -22,10 +23,13 @@ function CreateAlbums({ setSelectedType }: Props) {
   const { t } = useTranslation('translation');
   const newToast = useNewToast();
 
-  const { data } = useQuery<UserSongsQueryQuery, UserSongsQueryQueryVariables>(UserSongsQuery, {
-    variables: { createdByUser: true },
-    fetchPolicy: 'no-cache',
-  });
+  const { data, loading } = useQuery<UserSongsQueryQuery, UserSongsQueryQueryVariables>(
+    UserSongsQuery,
+    {
+      variables: { createdByUser: true },
+      fetchPolicy: 'no-cache',
+    },
+  );
 
   const [songs, setSongs] = useState<UserSongsQueryQuery['songs']>([]);
   const [selectedSongs, setSelectedSongs] = useState<Song[]>([]);
@@ -36,9 +40,13 @@ function CreateAlbums({ setSelectedType }: Props) {
     }
   }, [data]);
 
-  // The initial form data is stored in a state
-  // The year is automatically set to the current year
-  const [formData, setFormData] = useState<AlbumFormData>({
+  /**  The initial formData is stored in a state
+   * @param {string} title - The title of the album
+   * @param {string} cover - The cover of the album
+   * @param {number} release_year - The release year of the album
+   * @param {number[]} songIds - The ids of the songs on the album
+   */
+  const [formData, setFormData] = useState<AlbumCreateInput>({
     title: '',
     cover: '',
     release_year: new Date().getFullYear(),
@@ -151,17 +159,6 @@ function CreateAlbums({ setSelectedType }: Props) {
     );
   }, [selectedSongs, t]);
 
-  const coverPicture = useMemo(() => {
-    if (formData.cover) {
-      return (
-        <CoverPicture cover={formData.cover} />
-      );
-    }
-    return (
-      <DefaultCover />
-    );
-  }, [formData.cover]);
-
   const submitButton = useMemo(() => {
     if (createAlbumLoading) {
       return (
@@ -180,8 +177,8 @@ function CreateAlbums({ setSelectedType }: Props) {
   }, [createAlbumLoading, t]);
 
   return (
-    // The form is displayed if the user has already added songs
-    songs && songs.length > 0 ? (
+    <>
+      {songs && songs.length > 0 && (
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center gap-14 w-[90%] min-[600px]:w-[80%] border border-stone-700 rounded-box bg-neutral mb-24 py-10 min-[1000px]:w-[70%]"
@@ -214,12 +211,12 @@ function CreateAlbums({ setSelectedType }: Props) {
                 <span className="label-text text-lg font-semibold">{t('CREATE_SONG_COVER_INPUT')}</span>
               </div>
               <div className="divider my-0 mb-4" />
-              {coverPicture}
+              <Cover cover={formData.cover ?? ''} />
               <input
                 type="url"
                 placeholder={t('CREATE_SONG_COVER_PLACEHOLDER')}
                 className="file-input file-input-bordered input-sm mt-4 w-full"
-                value={formData.cover}
+                value={formData.cover ?? ''}
                 onChange={(e) => handleInputChange('cover', e.target.value)}
               />
             </label>
@@ -242,7 +239,8 @@ function CreateAlbums({ setSelectedType }: Props) {
         {trackOrder}
         {submitButton}
       </form>
-    ) : (
+      )}
+      {songs && songs.length === 0 && !loading && (
       <div className="flex flex-col items-center gap-14 w-[90%] min-[600px]:w-[80%] border border-stone-700 rounded-box bg-neutral mb-24 py-10 min-[1000px]:w-[70%]">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold text-center">{t('CREATE_ALBUM_HEADER')}</h1>
@@ -255,7 +253,12 @@ function CreateAlbums({ setSelectedType }: Props) {
           </button>
         </div>
       </div>
-    ));
+      )}
+      {loading && (
+        <Spinner />
+      )}
+    </>
+  );
 }
 
 export default CreateAlbums;

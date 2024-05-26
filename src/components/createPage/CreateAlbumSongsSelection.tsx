@@ -1,6 +1,6 @@
 import React from 'react';
 import { secondsToFormatedDuration } from '../../utils';
-import { Song } from '../../types/__generated_schemas__/graphql';
+import type { Song } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   songs: Song[],
@@ -12,7 +12,22 @@ interface Props {
 function CreateAlbumSongsSelection({
   songs, selectedSongs, setSelectedSongs, handleInputChange,
 }: Props) {
-  // setSelectedSongs is called with the previous selectedSongs array, adding the chosen song.
+  /**
+   * When the checkbox is checked :
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The event of the checkbox
+   * @param {Song} song - The song that is checked
+   *
+   * setSelectedSongs is called with the previous selectedSongs array, adding the chosen song.
+   *
+   * handleInputChange is called with the new array of song ids.
+   *
+   * When the checkbox is unchecked :
+   *
+   * The song is removed from the selectedSongs array.
+   *
+   * handleInputChange is called with a new filtered array of song ids, removing the unchecked song.
+  */
   function handleChange(e: React.ChangeEvent<HTMLInputElement>, song: Song[][0]) {
     if (e.target.checked) {
       setSelectedSongs([...selectedSongs, song]);

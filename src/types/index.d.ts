@@ -112,18 +112,3 @@ export interface AudioPlayerState {
   volume: number;
   time: number;
 }
-
-export interface AlbumFormData {
-  title: string;
-  cover: string;
-  release_year: number;
-  songIds: number[];
-}
-
-export interface SongFormData {
-  title: string;
-  cover: string;
-  duration: number;
-  release_year: number;
-  lyrics: string;
-}

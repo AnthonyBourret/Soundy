@@ -11,5 +11,4 @@ export { default as ScrollToTopButton } from './ScrollToTopButton';
 export { default as SongAndAlbumOrder } from './SongAndAlbumOrder';
 export { default as SongCard } from './SongCard';
 export { default as Spinner } from './Spinner';
-export { default as DefaultCover } from './DefaultCover';
-export { default as CoverPicture } from './CoverPicture';
+export { default as Cover } from './Cover';

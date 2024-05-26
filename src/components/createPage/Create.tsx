@@ -16,18 +16,11 @@ function Create(props: CreateProps) {
 
   const [selectedType, setSelectedType] = useState<'song' | 'album'>('song');
 
-  const addASong = useMemo(() => {
-    if (selectedType === 'song') {
-      return <CreateSong />;
-    }
-    return null;
-  }, [selectedType]);
-
-  const addAnAlbum = useMemo(() => {
+  const createSongOrAlbum = useMemo(() => {
     if (selectedType === 'album') {
       return <CreateAlbums setSelectedType={setSelectedType} />;
     }
-    return null;
+    return <CreateSong />;
   }, [selectedType]);
 
   return (
@@ -58,11 +51,7 @@ function Create(props: CreateProps) {
         </button>
       </div>
       <div className="divider py-4 px-8 min-[540px]:px-36" />
-
-      {/* When the selectedType changes, the component will be re-rendered. */}
-      {addASong}
-      {addAnAlbum}
-
+      {createSongOrAlbum}
       <ScrollToTopButton />
     </div>
   );

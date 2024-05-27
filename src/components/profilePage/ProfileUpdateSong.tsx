@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PencilIcon from '../../svg/PencilIcon';
 import ProfileDeleteSong from './ProfileDeleteSong';
+import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 type Props = {
   songId: number;
+  song: ArrayElement<ListenPageSongsQueryQuery['songs']>;
 };
 
 const ProfileUpdateSong = (props: Props) => {

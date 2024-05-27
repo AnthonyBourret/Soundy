@@ -73,7 +73,7 @@ function SongDisplay({
 
           return (
             <div className="indicator w-full sm:w-auto">
-              <ProfileUpdateSong songId={song.id} />
+              <ProfileUpdateSong song={song} songId={song.id} />
               <SongCard
                 isLiked={song!.isLiked || false}
                 artist={song!.artist || { name: '' }}

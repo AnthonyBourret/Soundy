@@ -67,13 +67,13 @@ function SongDisplay({
     if (fromProfilePage) {
       return sortedSongs.map(
         (song) => {
-          if (!song) {
+          if (song == null) {
             return null;
           }
 
           return (
             <div className="indicator w-full sm:w-auto">
-              <ProfileUpdateSong song={song} songId={song.id} />
+              <ProfileUpdateSong song={song} />
               <SongCard
                 isLiked={song!.isLiked || false}
                 artist={song!.artist || { name: '' }}

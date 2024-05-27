@@ -46,5 +46,6 @@
     "SIGNUP_MODAL_SUCCESS": "Your account has been created successfully, you can now log in.",
     "SIGNUP_MODAL_TITLE": "Create an account on Soundy",
     "TEST": "This is a test for the translation",
+    "UPDATE_SONG_SUCCESS": "The song has been updated successfully",
     "WELCOME": "Welcome to Soundy"
 }

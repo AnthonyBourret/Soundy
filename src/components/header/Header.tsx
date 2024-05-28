@@ -16,7 +16,6 @@ function Header(props: HeaderProps) {
   const { t } = useTranslation('common');
   const { isLogin } = props;
   const newToast = useNewToast();
-
   const dispatch = useAppDispatch();
 
   const menuButton: MenuButton[] = [

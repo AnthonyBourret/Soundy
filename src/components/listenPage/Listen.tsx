@@ -26,30 +26,19 @@ function Listen({ isLogin }: { isLogin: boolean }) {
     }
   }, [data]);
 
-  // useMemo for the songs
-  const songDisplayed = useMemo(() => {
-    if (chosenDisplay === 'songs') {
-      return (
-        <SongDisplay songs={songs} isLogin={isLogin} sortBy={sortBy} />
-      );
-    }
-    return null;
-  }, [chosenDisplay, songs, isLogin, sortBy]);
-
-  // useMemo for the albums
-  const albumDisplayed = useMemo(() => {
+  const songOrAlbum = useMemo(() => {
     if (chosenDisplay === 'albums') {
-      // if (albums == null) return null;
-      // if (albums.length === 0) return null;
       return (
         <AlbumDisplay albums={albums} sortBy={sortBy} />
       );
     }
-    return null;
-  }, [albums, chosenDisplay, sortBy]);
+    return (
+      <SongDisplay songs={songs} isLogin={isLogin} sortBy={sortBy} />
+    );
+  }, [albums, chosenDisplay, isLogin, songs, sortBy]);
 
   return (
-    <div className="mb-5 flex flex-col items-center w-full min-h-screen">
+    <div className="mb-36 flex flex-col items-center w-full min-h-screen">
       <Header isLogin={isLogin} />
       <SearchBar
         chosenDisplay={chosenDisplay}
@@ -61,12 +50,9 @@ function Listen({ isLogin }: { isLogin: boolean }) {
         yearFilter={yearFilter}
         durationFilter={durationFilter}
       />
-      <div className="divider py-4 px-8 min-[540px]:px-36" />
       <SongAndAlbumOrder setSortBy={setSortBy} chosenDisplay={chosenDisplay} />
 
-      {/* If albums/songs is selected in the search bar, the display changes. */}
-      {songDisplayed}
-      {albumDisplayed}
+      {songOrAlbum}
 
       {loading && (
         <Spinner />

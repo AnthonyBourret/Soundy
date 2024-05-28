@@ -7,9 +7,15 @@ interface Props {
   songs: ListenPageSongsQueryQuery['songs'];
   isLogin: boolean;
   sortBy: string | null;
+  likable?: boolean;
 }
 
-function SongDisplay({ songs, isLogin, sortBy }: Props) {
+function SongDisplay({
+  isLogin,
+  likable = false,
+  songs,
+  sortBy,
+}: Props) {
   const [sortedSongs, setSortedSongs] = useState<Props['songs']>([]);
   const { t } = useTranslation('common');
 

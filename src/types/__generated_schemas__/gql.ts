@@ -16,6 +16,7 @@ const documents = {
     "\n  mutation CreateAlbum($input: AlbumCreateInput!) {\n    addAlbum(input: $input) {\n        id\n        title\n        cover\n        release_year\n        songs {\n            id\n        }\n    }\n    }\n": types.CreateAlbumDocument,
     "\n  mutation CreateArtist($input: ArtistCreateInput!) {\n    addArtist(input: $input) {\n      country\n      id\n      name\n      picture\n    }\n  }\n": types.CreateArtistDocument,
     "\n  mutation CreateSong($input: SongCreateInput!) {\n    addSong(input: $input) {\n      id\n      title\n      cover\n      duration\n      release_year\n      lyrics\n    }\n  }\n": types.CreateSongDocument,
+    "\n  mutation DeleteAlbum($albumId: Int!) {\n    deleteAlbum(id: $albumId)\n  }\n": types.DeleteAlbumDocument,
     "\n  mutation DeleteArtist {\n    deleteArtist\n  }\n": types.DeleteArtistDocument,
     "\n  mutation DeleteSongs($songIds: [Int!]!) {\n    deleteSongs(ids: $songIds)\n  }\n": types.DeleteSongsDocument,
     "\n  mutation LikeSong($songId: Int!) {\n    likeSong(id: $songId)\n  }\n": types.LikeSongDocument,
@@ -59,6 +60,10 @@ export function gql(source: "\n  mutation CreateArtist($input: ArtistCreateInput
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation CreateSong($input: SongCreateInput!) {\n    addSong(input: $input) {\n      id\n      title\n      cover\n      duration\n      release_year\n      lyrics\n    }\n  }\n"): (typeof documents)["\n  mutation CreateSong($input: SongCreateInput!) {\n    addSong(input: $input) {\n      id\n      title\n      cover\n      duration\n      release_year\n      lyrics\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation DeleteAlbum($albumId: Int!) {\n    deleteAlbum(id: $albumId)\n  }\n"): (typeof documents)["\n  mutation DeleteAlbum($albumId: Int!) {\n    deleteAlbum(id: $albumId)\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

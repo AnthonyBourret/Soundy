@@ -1,20 +1,31 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, {
-  useCallback, useEffect, useMemo, useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ApolloError, useMutation } from '@apollo/client';
+import { ApolloError, useMutation, useQuery } from '@apollo/client';
 
 import { PencilIcon } from '../../svg';
-import { AlbumUpdateInput, ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
+import {
+  AlbumUpdateInput,
+  ListenPageAlbumsQueryQuery,
+  Song,
+  UserSongsQueryQuery,
+  UserSongsQueryQueryVariables,
+} from '../../types/__generated_schemas__/graphql';
 import { ArrayElementType } from '../../types';
-import UpdateSongMutation from '../../requests/mutations/UpdateSongMutation';
 import { useNewToast } from '../toastContext';
 import { Spinner } from '../customElements';
+import { CreateAlbumSongsOrder, CreateAlbumSongsSelection } from '../createPage';
+import { UserSongsQuery } from '../../requests/queries';
+import { secondsToFormatedDuration } from '../../utils';
+import { UpdateAlbumMutation } from '../../requests/mutations';
 
-// WIP
-// import ProfileDeleteAlbum from './ProfileDeleteAlbum';
+import ProfileDeleteAlbum from './ProfileDeleteAlbum';
 
 type Props = {
   album: NonNullable<ArrayElementType<ListenPageAlbumsQueryQuery['albums']>>;
@@ -32,55 +43,74 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
   const [releaseYear, setReleaseYear] = useState<AlbumUpdateInput['release_year']>(
     album.release_year,
   );
-  const [songIds, setSongIds] = useState<AlbumUpdateInput['songIds']>(album.songs?.map((song) => song!.id) ?? []);
-  // const newToast = useNewToast();
+  const [songsUserHas, setSongsUserHas] = useState<UserSongsQueryQuery['songs']>(album.songs ?? []);
+  const songsAlbumHas = album.songs;
+  const [selectedSongs, setSelectedSongs] = useState<Song[]>(songsAlbumHas as Song[] ?? []);
+  const newToast = useNewToast();
 
-  // const [updateSongAction, {
-  //   loading: updateSongLoading,
-  //   error: updateSongError,
-  // }] = useMutation(
-  //   UpdateSongMutation,
-  //   {
-  //     variables: {
-  //       songId: song.id,
-  //       input: {
-  //         title,
-  //         cover,
-  //         release_year: releaseYear,
-  //       },
-  //     },
-  //   },
-  // );
+  const { data, loading } = useQuery<UserSongsQueryQuery, UserSongsQueryQueryVariables>(
+    UserSongsQuery,
+    {
+      variables: { createdByUser: true },
+      fetchPolicy: 'no-cache',
+    },
+  );
 
-  // const handleSave = useCallback(async () => {
-  //   try {
-  //     const response = await updateSongAction();
+  // WIP - Il reste le tri avec le drag and drop
 
-  //     if (response) {
-  //       newToast('success', t('UPDATE_SONG_SUCCESS', { ns: 'translation' }));
-  //       closeModal();
-  //     }
-  //   } catch (error) {
-  //     if (error instanceof ApolloError) {
-  //       if (error.graphQLErrors[0].extensions?.code === 'ARTIST_NAME_ALREADY_EXISTS') {
-  //         newToast('error', error.message);
-  //         return;
-  //       }
+  useEffect(() => {
+    if (data?.songs != null) {
+      setSongsUserHas(data.songs);
+    }
+  }, [data]);
 
-  //       if (error.graphQLErrors[0].extensions?.code === 'ARTIST_EMAIL_ALREADY_EXISTS') {
-  //         newToast('error', error.message);
-  //         return;
-  //       }
-  //     }
+  const [updateAlbumAction, {
+    loading: updateAlbumLoading,
+    error: updateAlbumError,
+  }] = useMutation(
+    UpdateAlbumMutation,
+    {
+      variables: {
+        albumId: album.id,
+        input: {
+          songIds: selectedSongs.map((song) => song.id),
+          title,
+          cover,
+          release_year: releaseYear,
+        },
+      },
+    },
+  );
 
-  //     if (updateSongError) {
-  //       newToast('error', updateSongError.message);
-  //       return;
-  //     }
+  const handleSave = useCallback(async () => {
+    try {
+      const response = await updateAlbumAction();
 
-  //     newToast('error', t('DELETE_ACCOUNT_ERROR', { ns: 'translation' }));
-  //   }
-  // }, [updateSongAction, newToast, t, updateSongError]);
+      if (response) {
+        newToast('success', t('UPDATE_SONG_SUCCESS', { ns: 'translation' }));
+        closeModal();
+      }
+    } catch (error) {
+      if (error instanceof ApolloError) {
+        if (error.graphQLErrors[0].extensions?.code === 'ARTIST_NAME_ALREADY_EXISTS') {
+          newToast('error', error.message);
+          return;
+        }
+
+        if (error.graphQLErrors[0].extensions?.code === 'ARTIST_EMAIL_ALREADY_EXISTS') {
+          newToast('error', error.message);
+          return;
+        }
+      }
+
+      if (updateAlbumError) {
+        newToast('error', updateAlbumError.message);
+        return;
+      }
+
+      newToast('error', t('DELETE_ACCOUNT_ERROR', { ns: 'translation' }));
+    }
+  }, [updateAlbumAction, newToast, t, updateAlbumError]);
 
   const albumTitleInputJSX = useMemo(() => (
     <input
@@ -115,21 +145,79 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
     />
   ), [releaseYear, album.release_year]);
 
-  // const saveButtonJSX = useMemo(() => {
-  //   if (updateSongLoading) {
-  //     return <Spinner />;
-  //   }
+  const saveButtonJSX = useMemo(() => {
+    if (updateAlbumLoading) {
+      return <Spinner />;
+    }
 
-  //   return (
-  //     <button
-  //       type="button"
-  //       className="btn btn-success"
-  //       onClick={handleSave}
-  //     >
-  //       Save
-  //     </button>
-  //   );
-  // }, [updateSongLoading, handleSave]);
+    return (
+      <button
+        type="button"
+        className="btn btn-success"
+        onClick={handleSave}
+      >
+        Save
+      </button>
+    );
+  }, [updateAlbumLoading, handleSave]);
+
+  const songSelectionJSX = useMemo(() => {
+    if (loading) {
+      return <Spinner />;
+    }
+
+    if (songsUserHas == null) {
+      return null;
+    }
+
+    return (
+      <label htmlFor="songs" className="mb-5">
+        <div className="label">
+          <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_SONGS_INPUT')}</span>
+        </div>
+        <div className="divider my-0 mb-4" />
+        <CreateAlbumSongsSelection
+          songs={songsUserHas as Song[]}
+          selectedSongs={selectedSongs}
+          setSelectedSongs={setSelectedSongs}
+          handleInputChange={() => {}}
+        />
+      </label>
+    );
+  }, [loading, songsUserHas, t, selectedSongs]);
+
+  const trackOrder = useMemo(() => {
+    if (selectedSongs.length > 0 || (songsAlbumHas != null && songsAlbumHas.length > 0)) {
+      return (
+        <label htmlFor="selected_songs" className="">
+          <div className="label">
+            <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_ORDER_INPUT')}</span>
+          </div>
+          <div className="divider my-0 mb-4" />
+          <CreateAlbumSongsOrder
+            selectedSongs={selectedSongs}
+            setSelectedSongs={setSelectedSongs}
+          />
+          <p className="label-text font-semibold mt-4 text-center">
+            {selectedSongs.length}
+            {' '}
+            {t('CREATE_ALBUM_TRACKS_NUMBER')}
+            {' - '}
+            {secondsToFormatedDuration(selectedSongs.reduce((acc, song) => acc + song.duration, 0))}
+          </p>
+        </label>
+      );
+    }
+    return (
+      <div className="">
+        <div className="label">
+          <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_ORDER_INPUT')}</span>
+        </div>
+        <div className="divider my-0 mb-4" />
+        <p className="mt-4 font-semibold text-center">{t('CREATE_ALBUM_NO_TRACKS')}</p>
+      </div>
+    );
+  }, [selectedSongs, songsAlbumHas, t]);
 
   return (
     <>
@@ -147,42 +235,47 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
 
       {isOpen && (
         <dialog id={modalId} className="modal" open>
-          <form method="dialog" className="modal-box border-2 border-stone-700 py-16">
+          <form method="dialog" className="modal-box border-2 border-stone-700">
+            <div className="flex flex-col w-full py-16 relative">
 
-            <div className="form-control mb-4">
-              <label className="label" htmlFor="title">
-                <span className="label-text">Title</span>
-              </label>
-              {albumTitleInputJSX}
+              <div className="form-control mb-4">
+                <label className="label" htmlFor="title">
+                  <span className="label-text">Title</span>
+                </label>
+                {albumTitleInputJSX}
+              </div>
+
+              <div className="form-control mb-4">
+                <label className="label" htmlFor="cover">
+                  <span className="label-text">Cover URL</span>
+                </label>
+                {albumCoverInputJSX}
+              </div>
+
+              <div className="form-control mb-4">
+                <label className="label" htmlFor="releaseYear">
+                  <span className="label-text">Release Year</span>
+                </label>
+                {albumReleaseYearInputJSX}
+              </div>
+
+              <div className="absolute top-0 right-0 mt-4 mr-4 flex gap-2">
+                <button
+                  className="btn btn-outline border-stone-700 border"
+                  onClick={closeModal}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                {saveButtonJSX}
+              </div>
+
+              {/* Songs selection */}
+              {trackOrder}
+              {songSelectionJSX}
+
+              <ProfileDeleteAlbum closeParentModal={closeModal} albumId={album.id} />
             </div>
-
-            <div className="form-control mb-4">
-              <label className="label" htmlFor="cover">
-                <span className="label-text">Cover URL</span>
-              </label>
-              {albumCoverInputJSX}
-            </div>
-
-            <div className="form-control mb-4">
-              <label className="label" htmlFor="releaseYear">
-                <span className="label-text">Release Year</span>
-              </label>
-              {albumReleaseYearInputJSX}
-            </div>
-
-            <div className="absolute top-0 right-0 mt-4 mr-4 flex gap-2">
-              <button
-                className="btn btn-outline border-stone-700 border"
-                onClick={closeModal}
-                type="button"
-              >
-                Cancel
-              </button>
-              {/* {saveButtonJSX} */}
-            </div>
-
-            {/* WIP - Create that */}
-            {/* <ProfileDeleteAlbum closeParentModal={closeModal} songId={song.id} /> */}
           </form>
 
           {/* Modal backdrop */}

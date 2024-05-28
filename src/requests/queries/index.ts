@@ -6,3 +6,4 @@ export { default as ProfileAlbums } from './ProfileAlbums';
 export { default as ProfileQuery } from './ProfileQuery';
 export { default as ProfileSongs } from './ProfileSongs';
 export { default as SongOverviewQuery } from './SongOverviewQuery';
+export { default as UserSongsQuery } from './UserSongsQuery';

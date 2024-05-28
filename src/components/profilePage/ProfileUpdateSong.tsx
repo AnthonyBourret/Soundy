@@ -2,16 +2,16 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { ApolloError, useMutation } from '@apollo/client';
-import PencilIcon from '../../svg/PencilIcon';
-import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
-import { ArrayElementType } from '../../types';
 
-import ProfileDeleteSong from './ProfileDeleteSong';
+import { PencilIcon } from '../../svg';
+import { ListenPageSongsQueryQuery, SongUpdateInput } from '../../types/__generated_schemas__/graphql';
+import { ArrayElementType } from '../../types';
 import UpdateSongMutation from '../../requests/mutations/UpdateSongMutation';
 import { useNewToast } from '../toastContext';
 import { Spinner } from '../customElements';
+
+import ProfileDeleteSong from './ProfileDeleteSong';
 
 type Props = {
   song: NonNullable<ArrayElementType<ListenPageSongsQueryQuery['songs']>>;
@@ -24,9 +24,9 @@ const ProfileUpdateSong = (props: Props): JSX.Element => {
   const openModal = () => setIsOpen(true);
   const modalId = 'update_song_modal';
   const { song } = props;
-  const [title, setTitle] = useState<typeof song.title>(song.title);
-  const [cover, setCover] = useState<typeof song.cover>(song.cover);
-  const [releaseYear, setReleaseYear] = useState<typeof song.release_year | null>(
+  const [title, setTitle] = useState<SongUpdateInput['title']>(song.title);
+  const [cover, setCover] = useState<SongUpdateInput['cover']>(song.cover);
+  const [releaseYear, setReleaseYear] = useState<SongUpdateInput['release_year']>(
     song.release_year,
   );
   const newToast = useNewToast();
@@ -129,7 +129,6 @@ const ProfileUpdateSong = (props: Props): JSX.Element => {
 
   return (
     <>
-      {/* Delete Account Button */}
       <div className="indicator-item indicator-top">
         <button
           type="button"

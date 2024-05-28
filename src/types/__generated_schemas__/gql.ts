@@ -18,6 +18,7 @@ const documents = {
     "\n  mutation DeleteSongs($songIds: [Int!]!) {\n    deleteSongs(ids: $songIds)\n  }\n": types.DeleteSongsDocument,
     "\n  mutation LikeSong($songId: Int!) {\n    likeSong(id: $songId)\n  }\n": types.LikeSongDocument,
     "\n  mutation UnlikeSong($songId: Int!) {\n    unlikeSong(id: $songId)\n  }\n": types.UnlikeSongDocument,
+    "\n  mutation UpdateAlbum(\n    $albumId: Int!,\n    $input: AlbumUpdateInput!\n  ) {\n    updateAlbum(\n      albumId: $albumId,\n      input: $input\n    ) {\n      title\n      cover\n      release_year\n    }\n  }\n": types.UpdateAlbumDocument,
     "\n  mutation UpdateSong(\n    $songId: Int!,\n    $input: SongUpdateInput!\n  ) {\n    updateSong(\n      songId: $songId,\n      input: $input\n    ) {\n      title\n      cover\n      release_year\n    }\n  }\n": types.UpdateSongDocument,
     "\n    query FavoriteSongsQuery {\n        songs(filter: { liked: true }) {\n            cover\n            duration\n            id\n            lyrics\n            title\n            isLiked\n            release_year\n            artist {\n                name\n            }\n        }\n    }\n": types.FavoriteSongsQueryDocument,
     "\n  query ListenPageAlbumsQuery($limit: Int) {\n    albums(limit: $limit){\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      release_year\n      songs {\n        id\n        title\n        duration\n      }\n    }\n  }\n": types.ListenPageAlbumsQueryDocument,
@@ -63,6 +64,10 @@ export function gql(source: "\n  mutation LikeSong($songId: Int!) {\n    likeSon
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation UnlikeSong($songId: Int!) {\n    unlikeSong(id: $songId)\n  }\n"): (typeof documents)["\n  mutation UnlikeSong($songId: Int!) {\n    unlikeSong(id: $songId)\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation UpdateAlbum(\n    $albumId: Int!,\n    $input: AlbumUpdateInput!\n  ) {\n    updateAlbum(\n      albumId: $albumId,\n      input: $input\n    ) {\n      title\n      cover\n      release_year\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateAlbum(\n    $albumId: Int!,\n    $input: AlbumUpdateInput!\n  ) {\n    updateAlbum(\n      albumId: $albumId,\n      input: $input\n    ) {\n      title\n      cover\n      release_year\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

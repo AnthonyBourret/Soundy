@@ -22,7 +22,11 @@ const ProfileSongOrAlbum = (props: Props): JSX.Element => {
   const songOrAlbum = useMemo(() => {
     if (chosenDisplay === 'albums') {
       return (
-        <AlbumDisplay albums={albums} sortBy={null} />
+        <AlbumDisplay
+          albums={albums}
+          fromProfilePage
+          sortBy={null}
+        />
       );
     }
 

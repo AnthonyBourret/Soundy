@@ -42,10 +42,14 @@ export type CardSong = {
   id: number;
   title: string;
   cover: string;
-  artist: {
+  artist?: {
     name: string;
   };
-  duration: string;
+  duration: number;
+  songOnAlbum?: {
+    song_id?: number;
+    position?: number;
+  };
 };
 
 export type CardAlbum = {

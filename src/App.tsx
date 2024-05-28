@@ -12,6 +12,7 @@ import Favorites from './components/favoritesPage/Favorites';
 import Create from './components/createPage/Create';
 import Profile from './components/profilePage/Profile';
 import Player from './components/player/Player';
+import { Spinner } from './components/customElements';
 import {
   setCountry,
   setName,
@@ -57,7 +58,7 @@ export default function App() {
   ), [cookieVisibility]);
 
   return (
-    <Suspense fallback="...is loading">
+    <Suspense fallback={<Spinner />}>
       <Background />
       <Player />
       <Routes>

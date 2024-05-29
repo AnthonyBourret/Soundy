@@ -30,6 +30,8 @@ const documents = {
     "\n  query ProfileAlbums($filter: AlbumFilterInput) {\n    albums(filter: $filter){\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      release_year\n      songs {\n        id\n        title\n        duration\n      }\n    }\n  }\n": types.ProfileAlbumsDocument,
     "\n  query Profile {\n    profile {\n      country\n      email\n      name\n      picture\n    }\n  }\n": types.ProfileDocument,
     "\n  query ProfileSongs($filter: SongFilterInput) {\n    songs(filter: $filter) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n": types.ProfileSongsDocument,
+    "\n  query SearchAlbumsQuery($limit: Int, $filter: AlbumFilterInput) {\n    albums(limit: $limit, filter: $filter) {\n      id\n      title\n      artist {\n          name\n      }\n      cover\n      release_year\n      songs {\n          id\n          title\n          duration\n      }\n    }\n  }\n": types.SearchAlbumsQueryDocument,
+    "\n  query SearchSongsQuery($limit: Int, $filter: SongFilterInput) {\n    songs(limit: $limit, filter: $filter) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n": types.SearchSongsQueryDocument,
     "\n  query SongOverview {\n    songs(limit: 5) {\n      id\n      cover\n      title\n      duration\n      artist {\n        name\n      }\n    }\n  }\n": types.SongOverviewDocument,
     "\n  query UserSongsQuery($createdByUser: Boolean!) {\n    songs(filter: { createdByUser: $createdByUser}) {\n      id\n      title\n      cover\n      duration\n    }\n  }\n": types.UserSongsQueryDocument,
 };
@@ -116,6 +118,14 @@ export function gql(source: "\n  query Profile {\n    profile {\n      country\n
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query ProfileSongs($filter: SongFilterInput) {\n    songs(filter: $filter) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n"): (typeof documents)["\n  query ProfileSongs($filter: SongFilterInput) {\n    songs(filter: $filter) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query SearchAlbumsQuery($limit: Int, $filter: AlbumFilterInput) {\n    albums(limit: $limit, filter: $filter) {\n      id\n      title\n      artist {\n          name\n      }\n      cover\n      release_year\n      songs {\n          id\n          title\n          duration\n      }\n    }\n  }\n"): (typeof documents)["\n  query SearchAlbumsQuery($limit: Int, $filter: AlbumFilterInput) {\n    albums(limit: $limit, filter: $filter) {\n      id\n      title\n      artist {\n          name\n      }\n      cover\n      release_year\n      songs {\n          id\n          title\n          duration\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query SearchSongsQuery($limit: Int, $filter: SongFilterInput) {\n    songs(limit: $limit, filter: $filter) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n"): (typeof documents)["\n  query SearchSongsQuery($limit: Int, $filter: SongFilterInput) {\n    songs(limit: $limit, filter: $filter) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

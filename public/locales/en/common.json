@@ -33,7 +33,10 @@
     "SEARCH_BAR_BTN": "Search",
     "SEARCH_BAR_FILTER_ALBUM": "Albums",
     "SEARCH_BAR_FILTER_DURATION_TEXT": "Duration :",
+    "SEARCH_BAR_FILTER_RELEASE_TEXT": "Years :",
     "SEARCH_BAR_FILTER_SONG": "Songs",
     "SEARCH_BAR_PLACEHOLDER": "Search by...",
-    "SEARCH_BAR_TEXT": "What would you like to listen to ?"
+    "SEARCH_BAR_TEXT": "What would you like to listen to ?",
+    "SEARCH_RADIO_INPUT_TEXT": "Show all",
+    "SEARCH_RESULT_NULL": "No result found"
 }

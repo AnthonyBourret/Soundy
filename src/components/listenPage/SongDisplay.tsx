@@ -16,7 +16,7 @@ interface Props {
 function SongDisplay({
   fromProfilePage = false,
   isLogin,
-  likable = false,
+  likable = true,
   songs,
   sortBy,
 }: Props) {

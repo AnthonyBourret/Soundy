@@ -8,7 +8,10 @@ import { ChosenDisplay } from '../../types';
 import SearchBar from './SearchBar';
 import { ListenPageSongsQuery } from '../../requests/queries';
 import {
-  ListenPageSongsQueryQuery, ListenPageAlbumsQueryQuery, DurationRange, ReleaseYear,
+  type ListenPageSongsQueryQuery,
+  type ListenPageAlbumsQueryQuery,
+  type DurationRange,
+  type ReleaseYear,
 } from '../../types/__generated_schemas__/graphql';
 
 function Listen({ isLogin }: { isLogin: boolean }) {

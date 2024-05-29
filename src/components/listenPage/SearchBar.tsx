@@ -6,7 +6,10 @@ import { FilterRadio } from '../customElements';
 import { ChosenDisplay } from '../../types';
 import { ListenPageAlbumsQuery, SearchAlbumsQuery, SearchSongsQuery } from '../../requests/queries';
 import {
-  ListenPageAlbumsQueryQuery, ListenPageSongsQueryQuery, ReleaseYear, DurationRange,
+  type ListenPageAlbumsQueryQuery,
+  type ListenPageSongsQueryQuery,
+  ReleaseYear,
+  DurationRange,
 } from '../../types/__generated_schemas__/graphql';
 
 interface Props {

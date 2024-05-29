@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AlbumCard } from '../customElements';
-import { type ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
+import type { ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   albums: ListenPageAlbumsQueryQuery['albums'];

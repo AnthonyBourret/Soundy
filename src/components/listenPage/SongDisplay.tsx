@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { SongCard } from '../customElements';
-import { type ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
+import type { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
 import ProfileUpdateSong from '../profilePage/ProfileUpdateSong';
 
 interface Props {

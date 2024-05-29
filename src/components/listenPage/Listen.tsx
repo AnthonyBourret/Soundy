@@ -7,11 +7,11 @@ import { ScrollToTopButton, SongAndAlbumOrder, Spinner } from '../customElements
 import { ChosenDisplay } from '../../types';
 import SearchBar from './SearchBar';
 import { ListenPageSongsQuery } from '../../requests/queries';
-import {
-  type ListenPageSongsQueryQuery,
-  type ListenPageAlbumsQueryQuery,
-  type DurationRange,
-  type ReleaseYear,
+import type {
+  ListenPageSongsQueryQuery,
+  ListenPageAlbumsQueryQuery,
+  DurationRange,
+  ReleaseYear,
 } from '../../types/__generated_schemas__/graphql';
 
 function Listen({ isLogin }: { isLogin: boolean }) {

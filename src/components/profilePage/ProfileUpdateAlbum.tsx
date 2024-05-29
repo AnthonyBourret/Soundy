@@ -45,7 +45,7 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
   );
   const [songsUserHas, setSongsUserHas] = useState<UserSongsQueryQuery['songs']>(album.songs ?? []);
   const songsAlbumHas = album.songs;
-  const [selectedSongs, setSelectedSongs] = useState<Song[]>(songsAlbumHas as Song[] ?? []);
+  const [selectedSongs, setSelectedSongs] = useState<Song[]>(songsAlbumHas as Song[]);
   const newToast = useNewToast();
 
   const { data, loading } = useQuery<UserSongsQueryQuery, UserSongsQueryQueryVariables>(

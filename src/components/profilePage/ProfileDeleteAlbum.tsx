@@ -39,7 +39,7 @@ const ProfileDeleteSong = (props: Props) => {
       const response = await DeleteAlbumAction();
 
       if (response) {
-        newToast('success', t('DELETE_SONG_SUCCESS', { ns: 'translation' }));
+        newToast('success', t('DELETE_ALBUM_SUCCESS', { ns: 'translation' }));
         closeModal();
       }
     } catch (error) {
@@ -60,7 +60,7 @@ const ProfileDeleteSong = (props: Props) => {
         return;
       }
 
-      newToast('error', t('DELETE_SONG_ERROR', { ns: 'translation' }));
+      newToast('error', t('DELETE_ALBUM_ERROR', { ns: 'translation' }));
     }
   }, [DeleteAlbumAction, closeModal, deleteAlbumError, newToast, t]);
 

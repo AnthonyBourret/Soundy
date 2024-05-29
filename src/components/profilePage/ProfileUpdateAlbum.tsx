@@ -56,8 +56,6 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
     },
   );
 
-  // WIP - Il reste le tri avec le drag and drop
-
   useEffect(() => {
     if (data?.songs != null) {
       setSongsUserHas(data.songs);
@@ -87,7 +85,7 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
       const response = await updateAlbumAction();
 
       if (response) {
-        newToast('success', t('UPDATE_SONG_SUCCESS', { ns: 'translation' }));
+        newToast('success', t('UPDATE_ALBUM_SUCCESS', { ns: 'translation' }));
         closeModal();
       }
     } catch (error) {
@@ -108,7 +106,7 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
         return;
       }
 
-      newToast('error', t('DELETE_ACCOUNT_ERROR', { ns: 'translation' }));
+      newToast('error', t('UPDATE_ALBUM_ERROR', { ns: 'translation' }));
     }
   }, [updateAlbumAction, newToast, t, updateAlbumError]);
 
@@ -173,7 +171,7 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
     return (
       <label htmlFor="songs" className="mb-5">
         <div className="label">
-          <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_SONGS_INPUT')}</span>
+          <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_SONGS_INPUT', { ns: 'translation' })}</span>
         </div>
         <div className="divider my-0 mb-4" />
         <CreateAlbumSongsSelection
@@ -191,7 +189,7 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
       return (
         <label htmlFor="selected_songs" className="">
           <div className="label">
-            <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_ORDER_INPUT')}</span>
+            <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_ORDER_INPUT', { ns: 'translation' })}</span>
           </div>
           <div className="divider my-0 mb-4" />
           <CreateAlbumSongsOrder
@@ -201,7 +199,7 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
           <p className="label-text font-semibold mt-4 text-center">
             {selectedSongs.length}
             {' '}
-            {t('CREATE_ALBUM_TRACKS_NUMBER')}
+            {t('CREATE_ALBUM_TRACKS_NUMBER', { ns: 'translation' })}
             {' - '}
             {secondsToFormatedDuration(selectedSongs.reduce((acc, song) => acc + song.duration, 0))}
           </p>
@@ -211,10 +209,10 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
     return (
       <div className="">
         <div className="label">
-          <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_ORDER_INPUT')}</span>
+          <span className="label-text text-lg font-semibold">{t('CREATE_ALBUM_ORDER_INPUT', { ns: 'translation' })}</span>
         </div>
         <div className="divider my-0 mb-4" />
-        <p className="mt-4 font-semibold text-center">{t('CREATE_ALBUM_NO_TRACKS')}</p>
+        <p className="mt-4 font-semibold text-center">{t('CREATE_ALBUM_NO_TRACKS', { ns: 'translation' })}</p>
       </div>
     );
   }, [selectedSongs, songsAlbumHas, t]);

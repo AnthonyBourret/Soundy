@@ -1,23 +1,26 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import React, { useEffect, useMemo, useState } from 'react';
+
 import { SongCard } from '../customElements';
 import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
+import ProfileUpdateSong from '../profilePage/ProfileUpdateSong';
 
 interface Props {
-  songs: ListenPageSongsQueryQuery['songs'];
+  fromProfilePage?: boolean;
   isLogin: boolean;
-  sortBy: string | null;
   likable?: boolean;
+  songs: ListenPageSongsQueryQuery['songs'];
+  sortBy: string | null;
 }
 
 function SongDisplay({
+  fromProfilePage = false,
   isLogin,
-  likable = false,
+  likable = true,
   songs,
   sortBy,
 }: Props) {
   const [sortedSongs, setSortedSongs] = useState<Props['songs']>([]);
-  const { t } = useTranslation('common');
 
   // The useEffect is used to make a new array of songs based on the sortBy value.
   // This array is sorted based on the value of sortBy.
@@ -56,39 +59,60 @@ function SongDisplay({
     setSortedSongs(sorted);
   }, [songs, sortBy]);
 
-  const songDisplayed = useMemo(
-    () => {
-      if (sortedSongs && sortedSongs.length > 0) {
-        return (
-          <div className="flex flex-col min-[540px]:px-12 pt-4 p-2 gap-4 min-[540px]:flex-row min-[540px]:flex-wrap min-[540px]:justify-around pb-24">
-            {sortedSongs.map(
-              (song) => (
-                // TODO - Fix the types
-                <SongCard
-                  isLiked={song!.isLiked || false}
-                  artist={song!.artist || { name: '' }}
-                  cover={song!.cover || ''}
-                  duration={song!.duration}
-                  releaseYear={song!.release_year ?? 0}
-                  isLogin={isLogin}
-                  key={song?.id}
-                  songId={song!.id}
-                  title={song!.title}
-                />
-              ),
-            )}
-          </div>
-        );
-      }
-      return (
-        <p className="font-semibold p-24 mb-24 text-center text-xl">{t('SEARCH_RESULT_NULL')}</p>
+  const songCardsJSX = useMemo(() => {
+    if (!sortedSongs) {
+      return null;
+    }
+
+    if (fromProfilePage) {
+      return sortedSongs.map(
+        (song) => {
+          if (!song) {
+            return null;
+          }
+
+          return (
+            <div className="indicator w-full sm:w-auto">
+              <ProfileUpdateSong songId={song.id} />
+              <SongCard
+                isLiked={song!.isLiked || false}
+                artist={song!.artist || { name: '' }}
+                cover={song!.cover || ''}
+                duration={song!.duration}
+                releaseYear={song!.release_year ?? 0}
+                isLogin={isLogin}
+                key={song?.id}
+                songId={song!.id}
+                title={song!.title}
+                likable={likable}
+              />
+            </div>
+          );
+        },
       );
-    },
-    [sortedSongs, isLogin, t],
-  );
+    }
+
+    return sortedSongs.map(
+      (song) => (
+        <SongCard
+          isLiked={song!.isLiked || false}
+          artist={song!.artist || { name: '' }}
+          cover={song!.cover || ''}
+          duration={song!.duration}
+          releaseYear={song!.release_year ?? 0}
+          isLogin={isLogin}
+          key={song?.id}
+          songId={song!.id}
+          title={song!.title}
+          likable={likable}
+        />
+      ),
+    );
+  }, [fromProfilePage, isLogin, likable, sortedSongs]);
+
   return (
-    <div className="w-full">
-      {songDisplayed}
+    <div className="flex flex-col sm:flex-row sm:flex-wrap justify-around pt-4 p-2 gap-4">
+      {songCardsJSX}
     </div>
   );
 }

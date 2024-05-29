@@ -97,7 +97,12 @@ const ProfileDeleteAccount = () => {
 
           {/* Modal backdrop */}
           <form method="dialog" className="modal-backdrop backdrop-brightness-50 backdrop-blur-[1px]">
-            <button type="submit">{t('CLOSE')}</button>
+            <button
+              onClick={closeModal}
+              type="submit"
+            >
+              {t('CLOSE')}
+            </button>
           </form>
         </dialog>
       )}

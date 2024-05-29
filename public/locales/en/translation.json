@@ -37,6 +37,8 @@
     "DELETE_ACCOUNT_CONFIRM": "Are you sure you want to delete your account ? This action is irreversible.",
     "DELETE_ACCOUNT_ERROR": "An error occured, please try again later",
     "DELETE_ACCOUNT_SUCCESS": "Your account has been deleted successfully",
+    "DELETE_SONG_ERROR": "An error occured, please try again later",
+    "DELETE_SONG_SUCCESS": "The song has been deleted successfully",
     "FAVORITES_PAGE_EMPTY": "You haven't added songs to your favorites yet, click on the button bellow and start exploring our catalog.",
     "FAVORITES_PAGE_TITLE": "My Favorite Songs",
     "HERO_TXT_1": "Welcome on",

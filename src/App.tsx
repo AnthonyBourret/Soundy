@@ -41,10 +41,10 @@ export default function App() {
       profileAction();
 
       if (profileData?.profile != null) {
-        dispatch(setName(profileData.profile.name));
         dispatch(setCountry(profileData.profile.country));
-        dispatch(setPicture(profileData.profile.picture));
         dispatch(setEmail(profileData.profile.email));
+        dispatch(setName(profileData.profile.name));
+        dispatch(setPicture(profileData.profile.picture));
       }
 
       setCookieVisibility(false);

@@ -4,7 +4,7 @@ import { ReleaseYear, DurationRange } from '../../types/__generated_schemas__/gr
 interface Props {
   inputId: string;
   labelText: string;
-  value?: ReleaseYear | DurationRange | undefined;
+  value?: ReleaseYear | DurationRange;
   setFilter: React.Dispatch<React.SetStateAction<any>>;
 }
 

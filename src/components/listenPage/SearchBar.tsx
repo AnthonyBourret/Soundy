@@ -10,7 +10,7 @@ import {
 } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
-  chosenDisplay: string;
+  chosenDisplay: 'songs' | 'albums';
   setChosenDisplay: React.Dispatch<React.SetStateAction<ChosenDisplay>>;
   setAlbums: React.Dispatch<React.SetStateAction<ListenPageAlbumsQueryQuery['albums']>>;
   setSongs: React.Dispatch<React.SetStateAction<ListenPageSongsQueryQuery['songs']>>;

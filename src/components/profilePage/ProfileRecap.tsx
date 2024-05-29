@@ -59,6 +59,7 @@ const ProfileRecap = (props: Props) => {
   const handleSave = useCallback(async () => {
     if (password !== confirmPassword) {
       newToast('error', t('PASSWORDS_DO_NOT_MATCH', { ns: 'translation' }));
+      setActualMode('view');
       return;
     }
 

@@ -2,44 +2,44 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ApolloError, useMutation } from '@apollo/client';
-import { DeleteSongsMutation } from '../../requests/mutations';
+import { DeleteAlbumMutation } from '../../requests/mutations';
 
 import { useNewToast } from '../toastContext';
 import { Spinner } from '../customElements';
 
 type Props = {
   closeParentModal: () => void;
-  songId: number;
+  albumId: number;
 };
 
 const ProfileDeleteSong = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation(['common', 'translation']);
   const newToast = useNewToast();
-  const { closeParentModal, songId } = props;
+  const { closeParentModal, albumId } = props;
   const openModal = () => setIsOpen(true);
-  const modalId = 'delete_song_modal';
+  const modalId = 'delete_album_modal';
 
   const closeModal = useCallback(() => {
     setIsOpen(false);
     closeParentModal();
   }, [closeParentModal]);
 
-  const [DeleteSongsAction, {
-    loading: deleteSongsLoading,
-    error: deleteSongsError,
-  }] = useMutation(DeleteSongsMutation, {
+  const [DeleteAlbumAction, {
+    loading: deleteAlbumLoading,
+    error: deleteAlbumError,
+  }] = useMutation(DeleteAlbumMutation, {
     variables: {
-      songIds: [songId],
+      albumId,
     },
   });
 
   const handleDelete = useCallback(async () => {
     try {
-      const response = await DeleteSongsAction();
+      const response = await DeleteAlbumAction();
 
       if (response) {
-        newToast('success', t('DELETE_SONG_SUCCESS', { ns: 'translation' }));
+        newToast('success', t('DELETE_ALBUM_SUCCESS', { ns: 'translation' }));
         closeModal();
       }
     } catch (error) {
@@ -55,17 +55,17 @@ const ProfileDeleteSong = (props: Props) => {
         }
       }
 
-      if (deleteSongsError) {
-        newToast('error', deleteSongsError.message);
+      if (deleteAlbumError) {
+        newToast('error', deleteAlbumError.message);
         return;
       }
 
-      newToast('error', t('DELETE_SONG_ERROR', { ns: 'translation' }));
+      newToast('error', t('DELETE_ALBUM_ERROR', { ns: 'translation' }));
     }
-  }, [DeleteSongsAction, closeModal, deleteSongsError, newToast, t]);
+  }, [DeleteAlbumAction, closeModal, deleteAlbumError, newToast, t]);
 
   const deleteButtonJSX = useMemo(() => {
-    if (deleteSongsLoading) {
+    if (deleteAlbumLoading) {
       return (
         <button type="button" className="btn btn-error w-full sm:w-auto" disabled>
           <Spinner />
@@ -82,7 +82,7 @@ const ProfileDeleteSong = (props: Props) => {
         {t('CONFIRM', { ns: 'common' })}
       </button>
     );
-  }, [deleteSongsLoading, handleDelete, t]);
+  }, [deleteAlbumLoading, handleDelete, t]);
 
   return (
     <>
@@ -93,7 +93,7 @@ const ProfileDeleteSong = (props: Props) => {
           className="btn border-stone-700 border hover:btn-error"
           onClick={openModal}
         >
-          Delete the song
+          Delete the album
         </button>
       </div>
 
@@ -118,12 +118,7 @@ const ProfileDeleteSong = (props: Props) => {
             method="dialog"
             className="modal-backdrop backdrop-brightness-50 backdrop-blur-[1px]"
           >
-            <button
-              onClick={closeParentModal}
-              type="submit"
-            >
-              {t('CLOSE')}
-            </button>
+            <button type="submit" onClick={closeParentModal}>{t('CLOSE')}</button>
           </form>
         </dialog>
       )}

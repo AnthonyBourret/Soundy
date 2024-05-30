@@ -112,3 +112,5 @@ export interface AudioPlayerState {
   volume: number;
   time: number;
 }
+
+export type ArrayElementType<T> = T extends (infer U)[] ? U : never;

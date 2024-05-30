@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { SongCard } from '../customElements';
-import type { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
+import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
 import ProfileUpdateSong from '../profilePage/ProfileUpdateSong';
 
 interface Props {
@@ -67,13 +67,13 @@ function SongDisplay({
     if (fromProfilePage) {
       return sortedSongs.map(
         (song) => {
-          if (!song) {
+          if (song == null) {
             return null;
           }
 
           return (
             <div className="indicator w-full sm:w-auto">
-              <ProfileUpdateSong songId={song.id} />
+              <ProfileUpdateSong song={song} />
               <SongCard
                 isLiked={song!.isLiked || false}
                 artist={song!.artist || { name: '' }}

@@ -37,6 +37,8 @@
     "DELETE_ACCOUNT_CONFIRM": "Are you sure you want to delete your account ? This action is irreversible.",
     "DELETE_ACCOUNT_ERROR": "An error occured, please try again later",
     "DELETE_ACCOUNT_SUCCESS": "Your account has been deleted successfully",
+    "DELETE_ALBUM_ERROR": "An error occured, please try again later",
+    "DELETE_ALBUM_SUCCESS": "The album has been deleted successfully",
     "DELETE_SONG_ERROR": "An error occured, please try again later",
     "DELETE_SONG_SUCCESS": "The song has been deleted successfully",
     "FAVORITES_PAGE_EMPTY": "You haven't added songs to your favorites yet, click on the button bellow and start exploring our catalog.",
@@ -73,6 +75,9 @@
     "SIGNUP_MODAL_SUCCESS": "Your account has been created successfully, you can now log in.",
     "SIGNUP_MODAL_TITLE": "Create an account on Soundy",
     "TEST": "This is a test for the translation",
+    "UPDATE_ALBUM_ERROR": "An error occured, please try again later",
+    "UPDATE_ALBUM_SUCCESS": "The album has been updated successfully",
+    "UPDATE_SONG_SUCCESS": "The song has been updated successfully",
     "UPDATE_PROFILE_ERROR": "An error occured, please try again later",
     "UPDATE_PROFILE_SUCCESS": "Your profile has been updated successfully",
     "WELCOME": "Welcome to Soundy"

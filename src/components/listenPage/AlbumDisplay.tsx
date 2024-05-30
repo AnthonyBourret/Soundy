@@ -1,14 +1,21 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import ProfileUpdateAlbum from '../profilePage/ProfileUpdateAlbum';
 import { AlbumCard } from '../customElements';
 import type { ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   albums: ListenPageAlbumsQueryQuery['albums'];
+  fromProfilePage?: boolean;
   sortBy: string | null;
 }
 
-function AlbumDisplay({ albums, sortBy }: Props) {
+function AlbumDisplay({
+  albums,
+  fromProfilePage = false,
+  sortBy,
+}: Props) {
   const [sortedAlbums, setSortedAlbums] = useState<ListenPageAlbumsQueryQuery['albums']>([]);
   const { t } = useTranslation('common');
 
@@ -42,35 +49,50 @@ function AlbumDisplay({ albums, sortBy }: Props) {
     setSortedAlbums(sorted);
   }, [albums, sortBy]);
 
-  const albumDisplayed = useMemo(
-    () => {
-      if (sortedAlbums && sortedAlbums.length > 0) {
+  const albumCardsJSX = useMemo(() => {
+    if (!sortedAlbums) {
+      return null;
+    }
+
+    if (fromProfilePage) {
+      return sortedAlbums.map((album) => {
+        if (album == null) {
+          return null;
+        }
+
         return (
-          <div className="flex flex-col items-center w-full pt-4 gap-4 px-2 pb-24">
-            {sortedAlbums.map((album) => (
-              album && (
-              <AlbumCard
-                key={album.id}
-                title={album.title}
-                cover={album.cover ?? ''}
-                artist={album.artist?.name || ''}
-                year={album!.release_year ?? 0}
-                songs={album.songs as []}
-              />
-              )
-            ))}
+          <div className="indicator w-full flex justify-center">
+            <ProfileUpdateAlbum album={album} />
+            <AlbumCard
+              key={album.id}
+              title={album.title}
+              cover={album.cover ?? ''}
+              artist={album.artist?.name || ''}
+              year={album!.release_year ?? 0}
+              songs={album.songs as []}
+            />
           </div>
         );
-      }
-      return (
-        <p className="font-semibold p-24 mb-24 text-center text-xl">{t('SEARCH_RESULT_NULL')}</p>
-      );
-    },
-    [sortedAlbums, t],
-  );
+      });
+    }
+    return sortedAlbums.map((album) => (
+      album && (
+        <AlbumCard
+          key={album.id}
+          title={album.title}
+          cover={album.cover ?? ''}
+          artist={album.artist?.name || ''}
+          year={album!.release_year ?? 0}
+          songs={album.songs as []}
+          // isLogin={isLogin}
+        />
+      )
+    ));
+  }, [fromProfilePage, sortedAlbums]);
+
   return (
-    <div className="w-full">
-      {albumDisplayed}
+    <div className="flex flex-col items-center w-full pt-4 gap-4 px-2">
+      {albumCardsJSX}
     </div>
   );
 }

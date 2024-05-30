@@ -1,10 +1,13 @@
 import React, {
   Suspense, useEffect, useState, useMemo,
 } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import {
+  Routes, Route, Navigate, useLocation,
+} from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useLazyQuery } from '@apollo/client';
 
+import { useTranslation } from 'react-i18next';
 import Home from './components/homePage/Home';
 import Listen from './components/listenPage/Listen';
 import Background from './components/Background';
@@ -23,6 +26,7 @@ import {
 } from './redux';
 import { ProfileQuery } from './requests/queries';
 import CookiePopup from './components/modals/CookiesPopup';
+import { useNewToast } from './components';
 
 export default function App() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
@@ -31,6 +35,9 @@ export default function App() {
   const [cookies, setCookies] = useCookies(['acceptCookies']);
   const dispatch = useAppDispatch();
   const [profileAction, { data: profileData }] = useLazyQuery(ProfileQuery);
+  const location = useLocation();
+  const { t } = useTranslation('common');
+  const newToast = useNewToast();
 
   useEffect(() => {
     if (token == null) {
@@ -55,6 +62,12 @@ export default function App() {
     }
   }, [profileData, dispatch, token, cookies, setCookies, profileAction]);
 
+  useEffect(() => {
+    if (!isLogin && location.state && location.state.fromProtected) {
+      newToast('warning', t('CONNECT_TOAST_MESSAGE'));
+    }
+  }, [isLogin, location.state, newToast, t]);
+
   const acceptCookie = useMemo(() => cookieVisibility && (
     <CookiePopup setCookieVisibility={setCookieVisibility} />
   ), [cookieVisibility]);
@@ -71,21 +84,21 @@ export default function App() {
           element={
             isLogin
               ? <Favorites isLogin={isLogin} />
-              : <Home isLogin={isLogin} isRedirected />
+              : <Navigate to="/" state={{ fromProtected: true }} />
           }
         />
         <Route
           path="create"
           element={isLogin
             ? <Create isLogin={isLogin} />
-            : <Home isLogin={isLogin} isRedirected />}
+            : <Navigate to="/" state={{ fromProtected: true }} />}
         />
         <Route
           path="/profile"
           element={
             isLogin
               ? <Profile isLogin={isLogin} />
-              : <Home isLogin={isLogin} isRedirected />
+              : <Navigate to="/" state={{ fromProtected: true }} />
           }
         />
         {/* // TODO Add the 404 error page */}

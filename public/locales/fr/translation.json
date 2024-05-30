@@ -57,6 +57,7 @@
   "LOGIN_MODAL_TXT": "Pas encore de compte ? Créez-en un en cliquant ",
   "LOGIN_SUCCESS": "Vous êtes maintenant connecté",
   "OVERVIEW_TITLE": "Écoutez les toutes dernières nouveautés musicales",
+  "PASSWORDS_DO_NOT_MATCH": "Les mots de passe ne correspondent pas",
   "PROFILE_MY_ALBUMS": "Mes albums",
   "PROFILE_MY_SONGS": "Mes musiques",
   "SERVICES_TITLE_CREATE": "Créez vos propres sons !",
@@ -79,5 +80,7 @@
   "UPDATE_ALBUM_ERROR": "Une erreur est survenue lors de la mise à jour de l'album. Veuillez réessayer plus tard.",
   "UPDATE_ALBUM_SUCCESS": "L'album a bien été mis à jour",
   "UPDATE_SONG_SUCCESS": "Le son a bien été mis à jour",
+  "UPDATE_PROFILE_ERROR": "Une erreur est survenue lors de la mise à jour de votre profil. Veuillez réessayer plus tard.",
+  "UPDATE_PROFILE_SUCCESS": "Votre profil a bien été mis à jour",
   "WELCOME": "Bienvenue sur Soundy"
 }

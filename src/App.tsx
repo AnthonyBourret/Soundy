@@ -15,10 +15,11 @@ import Player from './components/player/Player';
 import { Spinner } from './components/customElements';
 import {
   setCountry,
+  setEmail,
   setName,
   setPicture,
-  useAppSelector,
   useAppDispatch,
+  useAppSelector,
 } from './redux';
 import { ProfileQuery } from './requests/queries';
 import CookiePopup from './components/modals/CookiesPopup';
@@ -40,8 +41,9 @@ export default function App() {
       profileAction();
 
       if (profileData?.profile != null) {
-        dispatch(setName(profileData.profile.name));
         dispatch(setCountry(profileData.profile.country));
+        dispatch(setEmail(profileData.profile.email));
+        dispatch(setName(profileData.profile.name));
         dispatch(setPicture(profileData.profile.picture));
       }
 

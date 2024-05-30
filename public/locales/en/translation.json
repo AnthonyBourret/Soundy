@@ -58,6 +58,7 @@
     "LOGIN_MODAL_TXT": "Don't have an account yet ? Create one by cliking ",
     "LOGIN_SUCCESS": "You are now logged in",
     "OVERVIEW_TITLE": "Listen to the latest music",
+    "PASSWORDS_DO_NOT_MATCH": "Passwords do not match",
     "PROFILE_MY_ALBUMS": "My albums",
     "PROFILE_MY_SONGS": "My songs",
     "SERVICES_TITLE_CREATE": "Create your own sounds !",
@@ -77,5 +78,7 @@
     "UPDATE_ALBUM_ERROR": "An error occured, please try again later",
     "UPDATE_ALBUM_SUCCESS": "The album has been updated successfully",
     "UPDATE_SONG_SUCCESS": "The song has been updated successfully",
+    "UPDATE_PROFILE_ERROR": "An error occured, please try again later",
+    "UPDATE_PROFILE_SUCCESS": "Your profile has been updated successfully",
     "WELCOME": "Welcome to Soundy"
 }

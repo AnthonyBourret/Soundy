@@ -6,9 +6,9 @@
   "COOKIE_BANNER_TXT": "Nous utilisons des cookies pour vous offrir la meilleure expérience possible lors de votre visite sur notre site Internet. En cliquant sur \"Accepter\", vous nous autorisez à stocker des cookies supplémentaires sur votre navigateur afin de rendre votre expérience plus agréable. En cliquant sur \"Refuser\", vous n'utiliserez pas de cookies optionnels. Aucune données personnelles n'est stockées et ces cookies ne sont pas utilisés à des fins publicitaires",
   "CREATE_ALBUM_HEADER": "Créer un album",
   "CREATE_ALBUM_MISSING_TITLE_ERROR": "Titre d'album requis.",
-  "CREATE_ALBUM_NO_TRACKS": "Vous n'avez pas encore ajouté de titres à votre album",
   "CREATE_ALBUM_NO_TRACKS_ADDED": "Vous n'avez pas encore ajouté de chansons. Veuillez en ajouter une au minimum pour pouvoir créer votre premier album.",
   "CREATE_ALBUM_NO_TRACKS_ERROR": "Ajoutez au moins un titre à votre album",
+  "CREATE_ALBUM_NO_TRACKS": "Vous n'avez pas encore ajouté de titres à votre album",
   "CREATE_ALBUM_ORDER_INPUT": "Ordre :",
   "CREATE_ALBUM_ORDER_LABEL": "Vous pouvez choisir l'ordre des chansons en les déplaçant",
   "CREATE_ALBUM_SONGS_INPUT": "Sélection des titres* :",
@@ -55,6 +55,7 @@
   "LOGIN_MODAL_TXT": "Pas encore de compte ? Créez-en un en cliquant ",
   "LOGIN_SUCCESS": "Vous êtes maintenant connecté",
   "OVERVIEW_TITLE": "Écoutez les toutes dernières nouveautés musicales",
+  "PASSWORDS_DO_NOT_MATCH": "Les mots de passe ne correspondent pas",
   "PROFILE_MY_ALBUMS": "Mes albums",
   "PROFILE_MY_SONGS": "Mes musiques",
   "SERVICES_TITLE_CREATE": "Créez vos propres sons !",
@@ -74,5 +75,7 @@
   "SIGNUP_MODAL_SUCCESS": "Votre compte a bien été créé ! Vous pouvez maintenant vous connecter.",
   "SIGNUP_MODAL_TITLE": "Créez un compte sur Soundy",
   "TEST": "C'est un test pour la traduction",
+  "UPDATE_PROFILE_ERROR": "Une erreur est survenue lors de la mise à jour de votre profil. Veuillez réessayer plus tard.",
+  "UPDATE_PROFILE_SUCCESS": "Votre profil a bien été mis à jour",
   "WELCOME": "Bienvenue sur Soundy"
 }

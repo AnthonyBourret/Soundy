@@ -6,9 +6,9 @@
     "COOKIE_BANNER_TXT": "By continuing to browse this site, you accept the use of cookies to provide you with a better browsing experience. By clicking on \"Accept\", you allow us to store optional cookies on your device, in order to give you the best possible experience. By clicking on \"Decline\", you refuse the use of optionnal cookies. No personal data is stored and cookies are not used for advertising content.",
     "CREATE_ALBUM_HEADER": "Create an album",
     "CREATE_ALBUM_MISSING_TITLE_ERROR": "Enter an album title.",
-    "CREATE_ALBUM_NO_TRACKS": "You don't have any songs in your album yet.",
     "CREATE_ALBUM_NO_TRACKS_ADDED": "You haven't added any songs yet. To create your first album you need to upload at least one song.",
     "CREATE_ALBUM_NO_TRACKS_ERROR": "Add at least one song to your album.",
+    "CREATE_ALBUM_NO_TRACKS": "You don't have any songs in your album yet.",
     "CREATE_ALBUM_ORDER_INPUT": "Order :",
     "CREATE_ALBUM_ORDER_LABEL": "You can change the order of the songs by dragging and dropping them",
     "CREATE_ALBUM_SONGS_INPUT": "Songs selection* :",
@@ -56,6 +56,7 @@
     "LOGIN_MODAL_TXT": "Don't have an account yet ? Create one by cliking ",
     "LOGIN_SUCCESS": "You are now logged in",
     "OVERVIEW_TITLE": "Listen to the latest music",
+    "PASSWORDS_DO_NOT_MATCH": "Passwords do not match",
     "PROFILE_MY_ALBUMS": "My albums",
     "PROFILE_MY_SONGS": "My songs",
     "SERVICES_TITLE_CREATE": "Create your own sounds !",
@@ -72,5 +73,7 @@
     "SIGNUP_MODAL_SUCCESS": "Your account has been created successfully, you can now log in.",
     "SIGNUP_MODAL_TITLE": "Create an account on Soundy",
     "TEST": "This is a test for the translation",
+    "UPDATE_PROFILE_ERROR": "An error occured, please try again later",
+    "UPDATE_PROFILE_SUCCESS": "Your profile has been updated successfully",
     "WELCOME": "Welcome to Soundy"
 }

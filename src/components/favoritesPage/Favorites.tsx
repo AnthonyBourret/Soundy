@@ -11,6 +11,7 @@ import { ArrowDown } from '../../svg';
 import { FavoriteSongsQuery } from '../../requests/queries';
 import { ListenPageSongsQueryQuery } from '../../types/__generated_schemas__/graphql';
 import PageTitle from '../customElements/PageTitle';
+import { useNewToast } from '../toastContext';
 
 interface Props {
   songs: ListenPageSongsQueryQuery['songs'];
@@ -26,6 +27,13 @@ function Favorites({ isLogin }: { isLogin: boolean }) {
   const [songs, setSongs] = useState<ListenPageSongsQueryQuery['songs']>([]);
   const [sortedSongs, setSortedSongs] = useState<Props['songs']>([]);
   const [sortBy, setSortBy] = useState<string | null>(null);
+  const newToast = useNewToast();
+
+  useEffect(() => {
+    if (error) {
+      newToast('error', t('ERROR_TO_FETCH_FAVORITES'));
+    }
+  }, [error, newToast, t]);
 
   const favoriteSongs = useMemo(() => {
     if (sortedSongs !== null && sortedSongs !== undefined && sortedSongs.length !== 0) {

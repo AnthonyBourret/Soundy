@@ -41,6 +41,7 @@
     "DELETE_ALBUM_SUCCESS": "The album has been deleted successfully",
     "DELETE_SONG_ERROR": "An error occured, please try again later",
     "DELETE_SONG_SUCCESS": "The song has been deleted successfully",
+    "ERROR_TO_FETCH_FAVORITES": "An error occured while fetching your favorites",
     "FAVORITES_PAGE_EMPTY": "You haven't added songs to your favorites yet, click on the button bellow and start exploring our catalog.",
     "FAVORITES_PAGE_TITLE": "My Favorite Songs",
     "HERO_TXT_1": "Welcome on",
@@ -61,6 +62,7 @@
     "PASSWORDS_DO_NOT_MATCH": "Passwords do not match",
     "PROFILE_MY_ALBUMS": "My albums",
     "PROFILE_MY_SONGS": "My songs",
+    "SERVER_AWAKEN": "The server is starting, we are using Render.com so it may take up to 2 min to start...",
     "SERVICES_TITLE_CREATE": "Create your own sounds !",
     "SERVICES_TITLE_LISTEN": "Listen to a wide variety of sounds !",
     "SERVICES_TXT_1": "Discover even more by browsing our sound catalog !",
@@ -75,10 +77,11 @@
     "SIGNUP_MODAL_SUCCESS": "Your account has been created successfully, you can now log in.",
     "SIGNUP_MODAL_TITLE": "Create an account on Soundy",
     "TEST": "This is a test for the translation",
+    "TROUBLE_TO_CONNECT_TO_SERVER": "We are experiencing problems connecting to the server",
     "UPDATE_ALBUM_ERROR": "An error occured, please try again later",
     "UPDATE_ALBUM_SUCCESS": "The album has been updated successfully",
-    "UPDATE_SONG_SUCCESS": "The song has been updated successfully",
     "UPDATE_PROFILE_ERROR": "An error occured, please try again later",
     "UPDATE_PROFILE_SUCCESS": "Your profile has been updated successfully",
+    "UPDATE_SONG_SUCCESS": "The song has been updated successfully",
     "WELCOME": "Welcome to Soundy"
 }

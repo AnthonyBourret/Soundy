@@ -57,8 +57,8 @@ function AlbumCard({
   )), [artist, cover, dispatch, isPlaying, songs, title]);
 
   return (
-    <div className="card w-full p-2 sm:w-[70%] lg:pl-[240px] lg:p-4 gap-2 bg-base-200 shadow-xl border border-1 border-stone-700">
-      <figure className="aspect-[1/1] max-w-[90px] max-h-[90px] lg:max-w-[200px] lg:max-h-[200px] absolute left-4 top-4">
+    <div className="card flex flex-row w-full p-2 sm:w-[70%] lg:p-4 gap-2 bg-base-200 shadow-xl border border-1 border-stone-700">
+      <figure className="aspect-[1/1] max-w-[90px] max-h-[90px] lg:max-w-[200px] lg:max-h-[200px] left-4 top-4">
         <img
           src={cover}
           alt={`cover of ${title}`}
@@ -72,8 +72,8 @@ function AlbumCard({
         <FavCheckBox />
         </div>
       )} */}
-      <div>
-        <div className="pl-[120px] pt-2 lg:px-4 lg:py-2 lg:text-xl">
+      <div className="flex flex-col flex-1">
+        <div className="pt-2 lg:px-4 lg:py-2 lg:text-xl">
           <p className="font-bold">{capitalizeFirstLetter(title)}</p>
           <p className="font-semibold">{artist || '?'}</p>
           <div className="w-full flex flex-col min-[425px]:flex-row min-[425px]:items-center min-[425px]:justify-between min-[425px]:pr-4 lg:pr-0">

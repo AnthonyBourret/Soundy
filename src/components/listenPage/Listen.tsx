@@ -15,13 +15,20 @@ import type {
 } from '../../types/__generated_schemas__/graphql';
 
 function Listen({ isLogin }: { isLogin: boolean }) {
-  const { data, loading, error } = useQuery(ListenPageSongsQuery, { variables: { limit: 30 } });
   const [songs, setSongs] = useState<ListenPageSongsQueryQuery['songs']>([]);
   const [albums, setAlbums] = useState<ListenPageAlbumsQueryQuery['albums']>([]);
   const [chosenDisplay, setChosenDisplay] = useState<ChosenDisplay>('songs');
   const [sortBy, setSortBy] = useState<string | null>(null);
   const [durationFilter, setDurationFilter] = useState<DurationRange>();
   const [yearFilter, setYearFilter] = useState<ReleaseYear>();
+
+  const { data, loading, error } = useQuery(
+    ListenPageSongsQuery,
+    {
+      variables: { limit: 30 },
+      fetchPolicy: 'network-only',
+    },
+  );
 
   useEffect(() => {
     if (data?.songs !== undefined) {

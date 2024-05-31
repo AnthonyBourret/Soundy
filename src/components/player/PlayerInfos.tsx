@@ -30,7 +30,11 @@ const PlayerInfos = (): JSX.Element => {
       );
     }
 
-    return null;
+    return (
+      <div
+        className="w-12 h-12 object-cover rounded-lg"
+      />
+    );
   }, [albumPicture, songPicture]);
 
   const topInfo = useMemo((): string | null => {
@@ -58,9 +62,9 @@ const PlayerInfos = (): JSX.Element => {
   }, [albumTitle, artistName, songTitle]);
 
   return (
-    <section className="flex items-center gap-3 min-[900px]:w-[15%] max-w-[50%] self-start">
+    <section className="flex items-center gap-3 min-[800px]:w-60 self-start">
       {cover}
-      <div className="truncate">
+      <div className="hidden min-[800px]:block truncate">
         <h2 className="truncate">{topInfo}</h2>
         <h3 className="truncate">{bottomInfo}</h3>
       </div>

@@ -33,12 +33,12 @@ function LoginModal() {
   }, [formData, loginAction]);
 
   function closeModal() {
-    (window as any).login_modal.close();
+    (window as any).login_modal.classList.remove('modal-open');
   }
 
   function openSignupModal() {
     closeModal();
-    (window as any).signup_modal.showModal();
+    (window as any).signup_modal.classList.add('modal-open');
   }
 
   useEffect(
@@ -137,7 +137,7 @@ function LoginModal() {
         method="dialog"
         className="modal-backdrop"
       >
-        <button type="submit">{t('CLOSE')}</button>
+        <button onClick={closeModal} type="submit">{t('CLOSE')}</button>
       </form>
     </dialog>
   );

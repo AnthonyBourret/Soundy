@@ -4,14 +4,17 @@ interface OpenModalButtonProps {
   buttonStyle: string;
   title: string;
   modalId: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 function OpenModalButton({
   buttonStyle, title, modalId, onClick,
 }: OpenModalButtonProps) {
   const handleClick = () => {
-    onClick(); // Close the dropdown menu
+    if (onClick != null) {
+      onClick();
+    }
+
     const modalElement = document.getElementById(modalId) as HTMLDialogElement;
     if (modalElement) {
       modalElement.classList.add('modal-open');

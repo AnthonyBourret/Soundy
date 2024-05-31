@@ -1,6 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-
 import ProfileUpdateAlbum from '../profilePage/ProfileUpdateAlbum';
 import { AlbumCard } from '../customElements';
 import type { ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';

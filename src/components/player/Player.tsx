@@ -59,10 +59,10 @@ const Player = (): JSX.Element => {
   const songDurationTime = useMemo(() => songDuration, [songDuration]);
 
   return (
-    <footer className="fixed bottom-0 border-t border-stone-700 flex w-full z-50 backdrop-blur-[15px] bg-base-100 bg-opacity-50 justify-between px-5 py-3">
+    <footer className="fixed bottom-0 border-t border-stone-700 flex justify-between w-full z-50 backdrop-blur-[15px] bg-base-100 bg-opacity-50 py-3 px-5">
       <PlayerInfos />
 
-      <section className="flex gap-3 items-center">
+      <section className="flex gap-3 items-center w-fit">
         <button
           className="h-6 w-6 rotate-180"
           type="button"
@@ -89,7 +89,7 @@ const Player = (): JSX.Element => {
         </button>
 
         <input
-          className="w-[500px] amplitude-song-slider"
+          className="hidden min-[900px]:block amplitude-song-slider w-44"
           max="100"
           min={0}
           type="range"
@@ -99,10 +99,10 @@ const Player = (): JSX.Element => {
           value={time}
           onChange={(e) => dispatch(setTime(Number(e.target.value)))}
         />
-        <span>{songDurationTime}</span>
+        <span className="hidden min-[900px]:block">{songDurationTime}</span>
       </section>
 
-      <section className="flex gap-3 items-center">
+      <section className="hidden gap-3 items-center justify-center w-fit min-[900px]:flex">
         <button
           type="button"
           aria-label="sound icon"

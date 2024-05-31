@@ -58,11 +58,11 @@ const PlayerInfos = (): JSX.Element => {
   }, [albumTitle, artistName, songTitle]);
 
   return (
-    <section className="flex gap-3 items-center">
+    <section className="flex items-center gap-3 min-[900px]:w-[15%] max-w-[50%] self-start">
       {cover}
-      <div>
-        <h2>{topInfo}</h2>
-        <h3>{bottomInfo}</h3>
+      <div className="truncate">
+        <h2 className="truncate">{topInfo}</h2>
+        <h3 className="truncate">{bottomInfo}</h3>
       </div>
     </section>
   );

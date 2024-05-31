@@ -4,6 +4,7 @@ import React, {
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useLazyQuery } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 
 import Home from './components/homePage/Home';
 import Listen from './components/listenPage/Listen';
@@ -23,6 +24,7 @@ import {
 } from './redux';
 import { ProfileQuery } from './requests/queries';
 import CookiePopup from './components/modals/CookiesPopup';
+import { useNewToast } from './components';
 
 export default function App() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
@@ -30,9 +32,22 @@ export default function App() {
   const token = useAppSelector((state) => state.user.token);
   const [cookies, setCookies] = useCookies(['acceptCookies']);
   const dispatch = useAppDispatch();
-  const [profileAction, { data: profileData }] = useLazyQuery(ProfileQuery);
+  const [profileAction, { data: profileData, error: profileError }] = useLazyQuery(ProfileQuery);
+  const newToast = useNewToast();
+  const { t } = useTranslation('translation');
 
   useEffect(() => {
+    if (profileError) {
+      newToast(
+        'warning',
+        t('TROUBLE_TO_CONNECT_TO_SERVER'),
+      );
+    }
+  }, [profileError, profileAction, newToast, t]);
+
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+
     if (token == null) {
       setIsLogin(false);
     }
@@ -40,7 +55,12 @@ export default function App() {
       setIsLogin(true);
       profileAction();
 
+      timeoutId = setTimeout(() => {
+        newToast('info', t('SERVER_AWAKEN'));
+      }, 5000);
+
       if (profileData?.profile != null) {
+        clearTimeout(timeoutId);
         dispatch(setCountry(profileData.profile.country));
         dispatch(setEmail(profileData.profile.email));
         dispatch(setName(profileData.profile.name));
@@ -53,7 +73,11 @@ export default function App() {
     if (cookies.acceptCookies === true) {
       setCookieVisibility(false);
     }
-  }, [profileData, dispatch, token, cookies, setCookies, profileAction]);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [profileData, dispatch, token, cookies, setCookies, profileAction, newToast, t]);
 
   const acceptCookie = useMemo(() => cookieVisibility && (
     <CookiePopup setCookieVisibility={setCookieVisibility} />

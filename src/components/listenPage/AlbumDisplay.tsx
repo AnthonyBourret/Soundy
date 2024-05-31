@@ -1,6 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-
 import ProfileUpdateAlbum from '../profilePage/ProfileUpdateAlbum';
 import { AlbumCard } from '../customElements';
 import type { ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
@@ -17,7 +15,6 @@ function AlbumDisplay({
   sortBy,
 }: Props) {
   const [sortedAlbums, setSortedAlbums] = useState<ListenPageAlbumsQueryQuery['albums']>([]);
-  const { t } = useTranslation('common');
 
   // The useEffect is used to make a new array of songs based on the sortBy value.
   // This array is sorted based on the value of sortBy.

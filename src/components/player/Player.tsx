@@ -37,6 +37,14 @@ const Player = (): JSX.Element => {
     setIsPlaying(!isPlaying);
   };
 
+  const handleMute = () => {
+    if (volume === 0) {
+      dispatch(setVolume(50));
+    } else {
+      dispatch(setVolume(0));
+    }
+  };
+
   const playPauseIcon = useMemo(() => {
     if (isPlaying) {
       return (
@@ -95,7 +103,12 @@ const Player = (): JSX.Element => {
       </section>
 
       <section className="flex gap-3 items-center">
-        <button type="button" aria-label="sound icon" className="w-6 h-6">
+        <button
+          type="button"
+          aria-label="sound icon"
+          className="w-6 h-6"
+          onClick={() => handleMute()}
+        >
           <SoundIcon width="w-6" height="h-6" />
         </button>
         <input

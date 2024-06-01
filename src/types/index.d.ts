@@ -42,10 +42,14 @@ export type CardSong = {
   id: number;
   title: string;
   cover: string;
-  artist: {
+  artist?: {
     name: string;
   };
-  duration: string;
+  duration: number;
+  songOnAlbum?: {
+    song_id?: number;
+    position?: number;
+  };
 };
 
 export type CardAlbum = {
@@ -108,3 +112,5 @@ export interface AudioPlayerState {
   volume: number;
   time: number;
 }
+
+export type ArrayElementType<T> = T extends (infer U)[] ? U : never;

@@ -1,4 +1,4 @@
-{
+  {
   "ADD_TO_FAV_TOOLTIP": "Ajouter aux favoris",
   "CARD_ALBUM_TRACK_NUMBER": "Piste(s)",
   "CARD_SONG_DURATION": "Durée",
@@ -7,14 +7,13 @@
   "CONNECT_TOAST_MESSAGE": "Vous devez vous connecter pour accéder à cette section",
   "CREATE": "Créer",
   "LISTEN": "Écouter",
-  "LOGOUT_TOAST_MESSAGE": "Vous avez été déconnecté",
   "MENU_APP_NAME": "Soundy",
   "MENU_CREATE": "Créer",
   "MENU_FAVORITES": "Favoris",
   "MENU_HOME": "Accueil",
+  "MENU_LANGUAGE": "Langue",
   "MENU_LANGUAGE_1": "Français",
   "MENU_LANGUAGE_2": "Anglais",
-  "MENU_LANGUAGE": "Langue",
   "MENU_LISTEN": "Écouter",
   "MENU_LOGIN": "Connexion",
   "MENU_LOGOUT": "Déconnexion",
@@ -32,8 +31,11 @@
   "ORDER_SELECT_TEXT": "Trier par :",
   "SEARCH_BAR_BTN": "Chercher",
   "SEARCH_BAR_FILTER_ALBUM": "Albums",
-  "SEARCH_BAR_FILTER_DURATION_TEXT": "Durée",
+  "SEARCH_BAR_FILTER_DURATION_TEXT": "Durée :",
+  "SEARCH_BAR_FILTER_RELEASE_TEXT": "Années :",
   "SEARCH_BAR_FILTER_SONG": "Chansons",
   "SEARCH_BAR_PLACEHOLDER": "Chercher par...",
-  "SEARCH_BAR_TEXT": "Quelle voulez-vous écouter ?"
+  "SEARCH_BAR_TEXT": "Quelle voulez-vous écouter ?",
+  "SEARCH_RADIO_INPUT_TEXT": "Voir tout",
+  "SEARCH_RESULT_NULL": "Aucun résultat trouvé"
 }

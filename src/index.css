@@ -72,4 +72,23 @@ input[type="range"]::-ms-thumb:hover {
   background: #ef4444;
 }
 
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1c1917;
+  border-radius: 5px;
+  margin: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #af373b;
+}
 

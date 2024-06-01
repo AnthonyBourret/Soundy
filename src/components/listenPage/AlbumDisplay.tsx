@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import ProfileUpdateAlbum from '../profilePage/ProfileUpdateAlbum';
 import { AlbumCard } from '../customElements';
-import { ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
+import type { ListenPageAlbumsQueryQuery } from '../../types/__generated_schemas__/graphql';
 
 interface Props {
   albums: ListenPageAlbumsQueryQuery['albums'];
+  fromProfilePage?: boolean;
   sortBy: string | null;
 }
 
-function AlbumDisplay({ albums, sortBy }: Props) {
+function AlbumDisplay({
+  albums,
+  fromProfilePage = false,
+  sortBy,
+}: Props) {
   const [sortedAlbums, setSortedAlbums] = useState<ListenPageAlbumsQueryQuery['albums']>([]);
 
   // The useEffect is used to make a new array of songs based on the sortBy value.
@@ -39,21 +45,51 @@ function AlbumDisplay({ albums, sortBy }: Props) {
 
     setSortedAlbums(sorted);
   }, [albums, sortBy]);
+
+  const albumCardsJSX = useMemo(() => {
+    if (!sortedAlbums) {
+      return null;
+    }
+
+    if (fromProfilePage) {
+      return sortedAlbums.map((album) => {
+        if (album == null) {
+          return null;
+        }
+
+        return (
+          <div className="indicator w-full flex justify-center">
+            <ProfileUpdateAlbum album={album} />
+            <AlbumCard
+              key={album.id}
+              title={album.title}
+              cover={album.cover ?? ''}
+              artist={album.artist?.name || ''}
+              year={album!.release_year ?? 0}
+              songs={album.songs as []}
+            />
+          </div>
+        );
+      });
+    }
+    return sortedAlbums.map((album) => (
+      album && (
+        <AlbumCard
+          key={album.id}
+          title={album.title}
+          cover={album.cover ?? ''}
+          artist={album.artist?.name || ''}
+          year={album!.release_year ?? 0}
+          songs={album.songs as []}
+          // isLogin={isLogin}
+        />
+      )
+    ));
+  }, [fromProfilePage, sortedAlbums]);
+
   return (
     <div className="flex flex-col items-center w-full pt-4 gap-4 px-2">
-      {sortedAlbums && sortedAlbums.map((album) => (
-        album && (
-          <AlbumCard
-            key={album.id}
-            title={album.title}
-            cover={album.cover ?? ''}
-            artist={album.artist?.name || ''}
-            year={album!.release_year ?? 0}
-            songs={album.songs as []}
-            // isLogin={isLogin}
-          />
-        )
-      ))}
+      {albumCardsJSX}
     </div>
   );
 }

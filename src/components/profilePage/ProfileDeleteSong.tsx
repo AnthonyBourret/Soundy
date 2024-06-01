@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ApolloError, useMutation } from '@apollo/client';
+import { ApolloError, useApolloClient, useMutation } from '@apollo/client';
 import { DeleteSongsMutation } from '../../requests/mutations';
 
 import { useNewToast } from '../toastContext';
 import { Spinner } from '../customElements';
+import { resetQueryCache } from '../../utils';
 
 type Props = {
   closeParentModal: () => void;
@@ -19,6 +20,7 @@ const ProfileDeleteSong = (props: Props) => {
   const { closeParentModal, songId } = props;
   const openModal = () => setIsOpen(true);
   const modalId = 'delete_song_modal';
+  const client = useApolloClient();
 
   const closeModal = useCallback(() => {
     setIsOpen(false);
@@ -39,6 +41,10 @@ const ProfileDeleteSong = (props: Props) => {
       const response = await DeleteSongsAction();
 
       if (response) {
+        resetQueryCache({
+          client,
+          queryNames: ['songs'],
+        });
         newToast('success', t('DELETE_SONG_SUCCESS', { ns: 'translation' }));
         closeModal();
       }
@@ -62,7 +68,7 @@ const ProfileDeleteSong = (props: Props) => {
 
       newToast('error', t('DELETE_SONG_ERROR', { ns: 'translation' }));
     }
-  }, [DeleteSongsAction, closeModal, deleteSongsError, newToast, t]);
+  }, [DeleteSongsAction, client, closeModal, deleteSongsError, newToast, t]);
 
   const deleteButtonJSX = useMemo(() => {
     if (deleteSongsLoading) {

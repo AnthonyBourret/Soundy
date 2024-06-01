@@ -1,8 +1,9 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import {
   PlayerPrevNextIcon,
   SoundIcon,
+  MuteIcon,
   PlayerPauseIcon,
   PlayerPlayIcon,
 } from '../../svg';
@@ -25,6 +26,7 @@ const Player = (): JSX.Element => {
   const songDuration = useAppSelector((state) => state.audioPlayer.song.songDuration);
   const time = useAppSelector((state) => state.audioPlayer.time);
   const volume = useAppSelector((state) => state.audioPlayer.volume);
+  const [isMuted, setIsMuted] = useState(false);
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -40,8 +42,10 @@ const Player = (): JSX.Element => {
   const handleMute = () => {
     if (volume === 0) {
       dispatch(setVolume(50));
+      setIsMuted(false);
     } else {
       dispatch(setVolume(0));
+      setIsMuted(true);
     }
   };
 
@@ -59,7 +63,7 @@ const Player = (): JSX.Element => {
   const songDurationTime = useMemo(() => songDuration, [songDuration]);
 
   return (
-    <footer className="fixed bottom-0 border-t border-stone-700 flex justify-between min-[900px]:gap-0 w-full z-50 backdrop-blur-[15px] bg-base-100 bg-opacity-50 py-3 px-5">
+    <footer className="fixed bottom-0 border-t border-stone-700 flex justify-between min-[900px]:gap-0 w-full z-50 backdrop-blur-[15px] bg-base-100 bg-opacity-50 py-3 pt-4 min-[900px]:pt-3 px-5">
       <PlayerInfos />
 
       <section className="flex gap-3 items-center w-fit">
@@ -89,7 +93,7 @@ const Player = (): JSX.Element => {
         </button>
 
         <input
-          className="hidden min-[900px]:block amplitude-song-slider w-44"
+          className="amplitude-song-slider absolute top-0 left-0 w-full self-start min-[900px]:self-center min-[900px]:static min-[900px]:block min-[900px]:w-44"
           max="100"
           min={0}
           type="range"
@@ -102,14 +106,18 @@ const Player = (): JSX.Element => {
         <span className="hidden min-[900px]:block">{songDurationTime}</span>
       </section>
 
-      <section className="flex gap-3 items-center justify-center min-[800px]:w-60 w-fit">
+      <section className="flex gap-3 items-center justify-center min-[800px]:w-60 w-12">
         <button
           type="button"
           aria-label="sound icon"
-          className="w-12 h-6"
+          className="w-8 h-8"
           onClick={() => handleMute()}
         >
-          <SoundIcon width="w-6" height="h-6" />
+          {
+            isMuted
+              ? <MuteIcon width="30px" height="25px" />
+              : <SoundIcon width="30px" height="25px" />
+          }
         </button>
         <input
           className="range-primary w-40 hidden min-[800px]:block"

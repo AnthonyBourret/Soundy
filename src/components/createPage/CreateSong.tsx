@@ -1,6 +1,6 @@
 // File input is disabled because it is not supported by the current version of the library
 // Some random data (same .mp3 link) will be sent to the server
-import { ApolloError, useMutation } from '@apollo/client';
+import { ApolloError, useApolloClient, useMutation } from '@apollo/client';
 import React, {
   useState, useCallback, useMemo, FormEvent,
 } from 'react';
@@ -10,10 +10,12 @@ import { CreateSongMutation } from '../../requests/mutations';
 import { Cover, Spinner } from '../customElements';
 import { UploadIcon } from '../../svg';
 import { SongCreateInput } from '../../types/__generated_schemas__/graphql';
+import { resetQueryCache } from '../../utils';
 
 function CreateSong() {
   const { t } = useTranslation('translation');
   const newToast = useNewToast();
+  const client = useApolloClient();
 
   /**  The initial formData is stored in a state
    * @param {string} title - The title of the album
@@ -69,6 +71,10 @@ function CreateSong() {
       });
 
       if (response) {
+        resetQueryCache({
+          client,
+          queryNames: ['songs'],
+        });
         newToast('success', t('CREATE_SONG_SUCCESS'));
       }
     } catch (error: unknown) {

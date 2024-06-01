@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ApolloError, useMutation } from '@apollo/client';
+import { ApolloError, useApolloClient, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 
 import { useNewToast } from '../toastContext';
 import { DeleteArtistMutation } from '../../requests/mutations';
-import { setToken, useAppDispatch } from '../../redux';
+import { useAppDispatch } from '../../redux';
+import { resetProfile } from '../../utils';
 
 const ProfileDeleteAccount = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,7 @@ const ProfileDeleteAccount = () => {
   const modalId = 'delete_artist_modal';
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const client = useApolloClient();
 
   const [deleteAccountAction, {
     loading: deleteAccountLoading,
@@ -33,9 +35,14 @@ const ProfileDeleteAccount = () => {
       const response = await deleteAccountAction();
 
       if (response) {
-        newToast('success', t('DELETE_ACCOUNT_SUCCESS', { ns: 'translation' }));
+        resetProfile({
+          client,
+          dispatch,
+          newToast,
+          successMessage: t('DELETE_ACCOUNT_SUCCESS'),
+        });
+
         navigate('/logout', { replace: true });
-        dispatch(setToken(null));
         closeModal();
       }
     } catch (error) {

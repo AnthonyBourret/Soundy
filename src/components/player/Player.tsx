@@ -1,4 +1,6 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, {
+  useMemo, useEffect, useRef, useState,
+} from 'react';
 
 import {
   PlayerPrevNextIcon,
@@ -26,6 +28,28 @@ const Player = (): JSX.Element => {
   const volume = useAppSelector((state) => state.audioPlayer.volume);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+
+  useEffect(() => {
+    const audioElement = audioRef.current;
+
+    const handleTimeUpdate = () => {
+      setCurrentTime(audioElement!.currentTime);
+    };
+
+    audioElement?.addEventListener('timeupdate', handleTimeUpdate);
+
+    return () => {
+      audioElement?.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, []);
+
+  const progressStyle = useMemo(() => {
+    if (audioRef.current?.duration) {
+      const progress = (currentTime / audioRef.current.duration) * 100;
+      return { backgroundSize: `${progress}% 100%` };
+    }
+    return { backgroundSize: '0% 100%' };
+  }, [currentTime]);
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -93,12 +117,12 @@ const Player = (): JSX.Element => {
 
         <input
           className="amplitude-song-slider absolute top-0 left-0 w-full self-start min-[900px]:self-center min-[900px]:static min-[900px]:block min-[900px]:w-44"
-          max="100"
+          max={audioRef.current?.duration}
           min={0}
           type="range"
           step="1"
           id="song-percentage-played"
-          style={{ backgroundSize: `${currentTime}% 100%` }}
+          style={progressStyle}
           value={currentTime}
           onChange={(e) => { audioRef.current!.currentTime = Number(e.target.value); }}
         />

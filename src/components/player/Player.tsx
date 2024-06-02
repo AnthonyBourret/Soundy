@@ -43,13 +43,11 @@ const Player = (): JSX.Element => {
     };
   }, []);
 
-  const progressStyle = useMemo(() => {
-    if (audioRef.current?.duration) {
-      const progress = (currentTime / audioRef.current.duration) * 100;
-      return { backgroundSize: `${progress}% 100%` };
+  const handlePreviousSong = () => {
+    if (audioRef.current && audioRef.current?.currentTime > 1) {
+      audioRef.current!.currentTime = 0;
     }
-    return { backgroundSize: '0% 100%' };
-  }, [currentTime]);
+  };
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -71,6 +69,14 @@ const Player = (): JSX.Element => {
       setIsMuted(true);
     }
   };
+
+  const progressStyle = useMemo(() => {
+    if (audioRef.current?.duration) {
+      const progress = (currentTime / audioRef.current.duration) * 100;
+      return { backgroundSize: `${progress}% 100%` };
+    }
+    return { backgroundSize: '0% 100%' };
+  }, [currentTime]);
 
   const playPauseIcon = useMemo(() => {
     if (isPlaying) {
@@ -95,7 +101,7 @@ const Player = (): JSX.Element => {
           type="button"
           aria-label="player prev icon"
           // TODO - go to previous song by a new request with song id
-          onClick={() => getPreviousSong()}
+          onClick={() => handlePreviousSong()}
         >
           <PlayerPrevNextIcon width="fit-content" height="fit-content" />
         </button>

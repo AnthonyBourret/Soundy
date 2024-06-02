@@ -47,6 +47,9 @@ const Player = (): JSX.Element => {
     if (audioRef.current && audioRef.current?.currentTime > 1) {
       audioRef.current!.currentTime = 0;
     }
+    if (audioRef.current && audioRef.current?.currentTime < 1) {
+      const previousSong = getPreviousSong();
+    }
   };
 
   const handlePlayPause = () => {

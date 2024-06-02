@@ -3,15 +3,15 @@ import React, {
   useEffect,
 } from 'react';
 import { AUDIO_SOURCE_MP3 } from '../../utils';
-import { setTime, useAppDispatch, useAppSelector } from '../../redux';
+import { useAppSelector } from '../../redux';
 
 type Props = {
   audioRef: RefObject<HTMLAudioElement>;
+  setCurrentTime: (time: number) => void;
 };
 
 const AudioSource = (props: Props): JSX.Element => {
-  const { audioRef } = props;
-  const dispatch = useAppDispatch();
+  const { audioRef, setCurrentTime } = props;
   const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
   const volume = useAppSelector((state) => state.audioPlayer.volume);
 
@@ -29,29 +29,9 @@ const AudioSource = (props: Props): JSX.Element => {
     }
   }, [audioRef, volume]);
 
-  useEffect(() => {
-    if (audioRef.current) {
-      const updateProgress = () => {
-        if (audioRef.current && audioRef.current.currentTime > 0) {
-          const percentage = (audioRef.current.currentTime / audioRef.current.duration) * 100;
-          dispatch(setTime(percentage));
-        }
-      };
-      const currentAudioRef = audioRef.current;
-      currentAudioRef.addEventListener('timeupdate', updateProgress);
-
-      return () => {
-        if (currentAudioRef) {
-          currentAudioRef.removeEventListener('timeupdate', updateProgress);
-        }
-      };
-    }
-    return () => {};
-  }, [audioRef, dispatch]);
-
   return (
     // eslint-disable-next-line jsx-a11y/media-has-caption
-    <audio ref={audioRef}>
+    <audio ref={audioRef} onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}>
       <source src={AUDIO_SOURCE_MP3} type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>

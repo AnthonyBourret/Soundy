@@ -9,7 +9,6 @@ import {
 } from '../../svg';
 import {
   setIsPlaying,
-  setTime,
   setVolume,
   useAppDispatch,
   useAppSelector,
@@ -24,9 +23,9 @@ const Player = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
   const songDuration = useAppSelector((state) => state.audioPlayer.song.songDuration);
-  const time = useAppSelector((state) => state.audioPlayer.time);
   const volume = useAppSelector((state) => state.audioPlayer.volume);
   const [isMuted, setIsMuted] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -99,9 +98,9 @@ const Player = (): JSX.Element => {
           type="range"
           step="1"
           id="song-percentage-played"
-          style={{ backgroundSize: `${time}% 100%` }}
-          value={time}
-          onChange={(e) => dispatch(setTime(Number(e.target.value)))}
+          style={{ backgroundSize: `${currentTime}% 100%` }}
+          value={currentTime}
+          onChange={(e) => { audioRef.current!.currentTime = Number(e.target.value); }}
         />
         <span className="hidden min-[900px]:block">{songDurationTime}</span>
       </section>
@@ -130,7 +129,7 @@ const Player = (): JSX.Element => {
         />
       </section>
 
-      <AudioSource audioRef={audioRef} />
+      <AudioSource audioRef={audioRef} setCurrentTime={setCurrentTime} />
     </footer>
   );
 };

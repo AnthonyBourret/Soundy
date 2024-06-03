@@ -7,6 +7,7 @@ import {
   setAlbumTitle,
   setArtistName,
   setIsPlaying,
+  setSongDuration,
   setSongPicture,
   setSongTitle,
   setTime,
@@ -50,6 +51,7 @@ function AlbumCard({
         dispatch(setSongPicture(cover));
         dispatch(setAlbumSongIds(songs.map((s) => Number(s.id))));
         dispatch(setAlbumSongPlaying(Number(song.id)));
+        dispatch(setSongDuration(secondsToFormatedDuration(Number(song.duration))));
       }}
     >
       <th>{i + 1}</th>

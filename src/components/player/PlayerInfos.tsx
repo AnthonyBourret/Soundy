@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 
 import { useAppSelector } from '../../redux';
-import { capitalizeFirstLetter } from '../../utils';
 
 const PlayerInfos = (): JSX.Element => {
   const albumPicture = useAppSelector((state) => state.audioPlayer.album.albumPicture);
@@ -40,7 +39,7 @@ const PlayerInfos = (): JSX.Element => {
 
   const topInfo = useMemo((): string | null => {
     if (albumTitle != null) {
-      return capitalizeFirstLetter(albumTitle);
+      return albumTitle;
     }
 
     if (songTitle != null) {

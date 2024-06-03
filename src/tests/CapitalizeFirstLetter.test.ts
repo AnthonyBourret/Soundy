@@ -2,7 +2,7 @@ import {
   test, expect,
 } from 'vitest';
 
-import { capitalizeFirstLetter } from '../utils';
+import capitalizeFirstLetter from '../utils/capitalizeFirstLetter';
 
 test('capitalize should return the string with the first letter capitalized', async () => {
   const result = capitalizeFirstLetter('hello');

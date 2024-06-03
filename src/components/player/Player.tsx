@@ -33,7 +33,7 @@ const Player = (): JSX.Element => {
   const songDuration = useAppSelector((state) => state.audioPlayer.song.songDuration);
   const volume = useAppSelector((state) => state.audioPlayer.volume);
   const songPlayingId = useAppSelector((state) => state.audioPlayer.album.songPlaying);
-  const albumSongsIds = useAppSelector((state) => state.audioPlayer.album.songIds);
+  const albumSongIds = useAppSelector((state) => state.audioPlayer.album.songIds);
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [currentSongId, setCurrentSongId] = useState<number>(songPlayingId!);
@@ -63,17 +63,17 @@ const Player = (): JSX.Element => {
   }, [songPlayingId]);
 
   const handlePreviousSong = async () => {
-    if (albumSongsIds?.length === 0) return;
+    if (albumSongIds?.length === 0) return;
 
-    if (albumSongsIds && currentSongId && albumSongsIds?.length > 1) {
+    if (albumSongIds && currentSongId && albumSongIds?.length > 1) {
       if (audioRef.current && audioRef.current?.currentTime > 1) {
         audioRef.current!.currentTime = 0;
       } else {
-        const currentSongIndex = albumSongsIds.indexOf(songPlayingId!);
+        const currentSongIndex = albumSongIds.indexOf(songPlayingId!);
         if (currentSongIndex === 0) return;
         setCurrentSongId(songPlayingId!);
         const previousSongIndex = currentSongIndex - 1;
-        const previousSongId = albumSongsIds[previousSongIndex];
+        const previousSongId = albumSongIds[previousSongIndex];
         const song = await getSong({ variables: { songId: previousSongId } });
         if (song.data?.song) {
           audioRef.current!.currentTime = 0;
@@ -88,14 +88,14 @@ const Player = (): JSX.Element => {
   };
 
   const handleNextSong = async () => {
-    if (albumSongsIds?.length === 0) return;
+    if (albumSongIds?.length === 0) return;
 
-    if (albumSongsIds && currentSongId) {
-      const currentSongIndex = albumSongsIds.indexOf(songPlayingId!);
-      if (currentSongIndex === albumSongsIds.length - 1) return;
+    if (albumSongIds && currentSongId && albumSongIds?.length > 1) {
+      const currentSongIndex = albumSongIds.indexOf(songPlayingId!);
+      if (currentSongIndex === albumSongIds.length - 1) return;
       setCurrentSongId(songPlayingId!);
       const nextSongIndex = currentSongIndex + 1;
-      const nextSongId = albumSongsIds[nextSongIndex];
+      const nextSongId = albumSongIds[nextSongIndex];
       const song = await getSong({ variables: { songId: nextSongId } });
       if (song.data?.song) {
         audioRef.current!.currentTime = 0;
@@ -218,7 +218,12 @@ const Player = (): JSX.Element => {
         />
       </section>
 
-      <AudioSource audioRef={audioRef} setCurrentTime={setCurrentTime} />
+      <AudioSource
+        audioRef={audioRef}
+        setCurrentTime={setCurrentTime}
+        setCurrentSongId={setCurrentTime}
+        getSong={getSong}
+      />
     </footer>
   );
 };

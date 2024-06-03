@@ -30,6 +30,7 @@
     "ORDER_SELECT_OLDEST": "Oldest",
     "ORDER_SELECT_PLACEHOLDER": "Pick an order",
     "ORDER_SELECT_TEXT": "Order by :",
+    "PLAYER_ERROR": "Your browser does not support the audio element.",
     "SEARCH_BAR_BTN": "Search",
     "SEARCH_BAR_FILTER_ALBUM": "Albums",
     "SEARCH_BAR_FILTER_DURATION_TEXT": "Duration :",

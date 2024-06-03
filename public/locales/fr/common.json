@@ -29,6 +29,7 @@
   "ORDER_SELECT_OLDEST": "Plus ancien",
   "ORDER_SELECT_PLACEHOLDER": "Choisissez un ordre",
   "ORDER_SELECT_TEXT": "Trier par :",
+  "PLAYER_ERROR": "Votre navigateur ne prend pas en charge le format audio.",
   "SEARCH_BAR_BTN": "Chercher",
   "SEARCH_BAR_FILTER_ALBUM": "Albums",
   "SEARCH_BAR_FILTER_DURATION_TEXT": "Durée :",

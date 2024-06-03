@@ -98,16 +98,6 @@ function SearchBar({
     }
   };
 
-  const [getAlbums] = useLazyQuery(ListenPageAlbumsQuery, {
-    variables: { limit: 15 },
-    onCompleted: (data) => {
-      if (data.albums) {
-        setAlbums(data.albums);
-        setChosenDisplay('albums');
-      }
-    },
-  });
-
   const songDuration = useMemo(() => {
     if (chosenDisplay === 'albums') {
       return (

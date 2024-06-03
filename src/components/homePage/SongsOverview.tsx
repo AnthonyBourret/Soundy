@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import fakeSongs from './fakeSongs';
-import PlayIcon from '../../svg/playIcon';
+import { PlayIcon } from '../../svg';
 
 function OverviewSongs() {
   const { t } = useTranslation(['common', 'translation']);

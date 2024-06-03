@@ -30,13 +30,31 @@ function Listen({ isLogin }: { isLogin: boolean }) {
     },
   );
 
+  const resetFilters = () => {
+    setSortBy(null);
+    setDurationFilter(undefined);
+    setYearFilter(undefined);
+  };
+
   useEffect(() => {
     if (data?.songs !== undefined) {
       setSongs(data.songs);
     }
   }, [data]);
 
-  const songOrAlbum = useMemo(() => {
+  const songOrAlbumJSX = useMemo(() => {
+    if (loading) {
+      return <Spinner />;
+    }
+
+    if (error) {
+      return (
+        <div className="flex items-center justify-center w-full">
+          <p>{error.message}</p>
+        </div>
+      );
+    }
+
     if (chosenDisplay === 'albums') {
       return (
         <AlbumDisplay albums={albums} sortBy={sortBy} />
@@ -45,7 +63,7 @@ function Listen({ isLogin }: { isLogin: boolean }) {
     return (
       <SongDisplay songs={songs} isLogin={isLogin} sortBy={sortBy} />
     );
-  }, [albums, chosenDisplay, isLogin, songs, sortBy]);
+  }, [albums, chosenDisplay, error, isLogin, loading, songs, sortBy]);
 
   return (
     <div className="mb-36 flex flex-col items-center w-full min-h-screen">
@@ -59,19 +77,12 @@ function Listen({ isLogin }: { isLogin: boolean }) {
         setDurationFilter={setDurationFilter}
         yearFilter={yearFilter}
         durationFilter={durationFilter}
+        resetFilters={resetFilters}
       />
-      <SongAndAlbumOrder setSortBy={setSortBy} chosenDisplay={chosenDisplay} />
+      <SongAndAlbumOrder sortBy={sortBy} setSortBy={setSortBy} chosenDisplay={chosenDisplay} />
 
-      {songOrAlbum}
+      {songOrAlbumJSX}
 
-      {loading && (
-        <Spinner />
-      )}
-      {error && (
-        <div className="flex items-center justify-center w-full">
-          <p>{error.message}</p>
-        </div>
-      )}
       <ScrollToTopButton />
     </div>
   );

@@ -47,7 +47,7 @@ function AlbumCard({
         dispatch(setSongTitle(song.title));
         dispatch(setTime(0));
         dispatch(setAlbumPicture(null));
-        dispatch(setAlbumTitle(title));
+        dispatch(setAlbumTitle(capitalizeFirstLetter(title)));
         dispatch(setSongPicture(cover));
         dispatch(setAlbumSongIds(songs.map((s) => Number(s.id))));
         dispatch(setAlbumSongPlaying(Number(song.id)));

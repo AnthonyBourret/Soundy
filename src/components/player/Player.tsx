@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { ApolloError, useLazyQuery } from '@apollo/client';
 import { OneSongPlayerQuery } from '../../requests/queries';
+import { useNewToast } from '../toastContext';
 import {
   PlayerPrevNextIcon,
   SoundIcon,
@@ -31,33 +32,23 @@ const Player = (): JSX.Element => {
   const isPlaying = useAppSelector((state) => state.audioPlayer.isPlaying);
   const songDuration = useAppSelector((state) => state.audioPlayer.song.songDuration);
   const volume = useAppSelector((state) => state.audioPlayer.volume);
-  const songPlayedId = useAppSelector((state) => state.audioPlayer.album.songPlaying);
-  const albumSongsId = useAppSelector((state) => state.audioPlayer.album.songIds);
-  const songTitle = useAppSelector((state) => state.audioPlayer.song.songTitle);
+  const songPlayingId = useAppSelector((state) => state.audioPlayer.album.songPlaying);
+  const albumSongsIds = useAppSelector((state) => state.audioPlayer.album.songIds);
   const [isMuted, setIsMuted] = useState<boolean>(false);
-  const [currentTime, setCurrentTime] = useState<number | null>(0);
-  const [currentSongId, setCurrentSongId] = useState<number>(0);
-  const [previousSongId, setPreviousSongId] = useState<number>(0);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [currentSongId, setCurrentSongId] = useState<number>(songPlayingId!);
+  const newToast = useNewToast();
 
   const [getSong] = useLazyQuery(OneSongPlayerQuery, {
-    variables: { songId: previousSongId },
     onError: (error: ApolloError) => {
-      console.error(error);
-    },
-    onCompleted: (data) => {
-      if (data.song) {
-        console.log('songplayed', songPlayedId);
-        setSongDuration(secondsToFormatedDuration(data.song.duration));
-        setSongTitle(data.song.title);
-        console.log(songTitle, data);
-      }
-      setAlbumSongPlaying(currentSongId);
-      console.log('currentSongId', currentSongId);
+      newToast('error', error.message);
     },
   });
-  console.log(songTitle);
 
   useEffect(() => {
+    if (songPlayingId) {
+      setCurrentSongId(songPlayingId);
+    }
     const audioElement = audioRef.current;
 
     const handleTimeUpdate = () => {
@@ -69,20 +60,50 @@ const Player = (): JSX.Element => {
     return () => {
       audioElement?.removeEventListener('timeupdate', handleTimeUpdate);
     };
-  }, []);
+  }, [songPlayingId]);
 
-  const handlePreviousSong = () => {
-    if (albumSongsId?.length === 0) return;
+  const handlePreviousSong = async () => {
+    if (albumSongsIds?.length === 0) return;
 
-    if (albumSongsId && albumSongsId?.length > 1) {
+    if (albumSongsIds && currentSongId && albumSongsIds?.length > 1) {
       if (audioRef.current && audioRef.current?.currentTime > 1) {
         audioRef.current!.currentTime = 0;
       } else {
-        const currentSongIndex = albumSongsId.indexOf(songPlayedId!);
+        const currentSongIndex = albumSongsIds.indexOf(songPlayingId!);
+        if (currentSongIndex === 0) return;
+        setCurrentSongId(songPlayingId!);
         const previousSongIndex = currentSongIndex - 1;
-        setPreviousSongId(albumSongsId[previousSongIndex]);
-        setCurrentSongId(albumSongsId[currentSongIndex]);
-        getSong();
+        const previousSongId = albumSongsIds[previousSongIndex];
+        const song = await getSong({ variables: { songId: previousSongId } });
+        if (song.data?.song) {
+          audioRef.current!.currentTime = 0;
+          dispatch(setSongTitle(song.data.song.title));
+          dispatch(setAlbumSongPlaying(previousSongId));
+          dispatch(setSongDuration(secondsToFormatedDuration(song.data.song.duration)));
+          setCurrentSongId(previousSongId);
+          audioRef.current!.play();
+        }
+      }
+    }
+  };
+
+  const handleNextSong = async () => {
+    if (albumSongsIds?.length === 0) return;
+
+    if (albumSongsIds && currentSongId) {
+      const currentSongIndex = albumSongsIds.indexOf(songPlayingId!);
+      if (currentSongIndex === albumSongsIds.length - 1) return;
+      setCurrentSongId(songPlayingId!);
+      const nextSongIndex = currentSongIndex + 1;
+      const nextSongId = albumSongsIds[nextSongIndex];
+      const song = await getSong({ variables: { songId: nextSongId } });
+      if (song.data?.song) {
+        audioRef.current!.currentTime = 0;
+        dispatch(setSongTitle(song.data.song.title));
+        dispatch(setAlbumSongPlaying(nextSongId));
+        dispatch(setSongDuration(secondsToFormatedDuration(song.data.song.duration)));
+        setCurrentSongId(nextSongId);
+        audioRef.current!.play();
       }
     }
   };
@@ -138,7 +159,6 @@ const Player = (): JSX.Element => {
           className="h-6 w-6 rotate-180"
           type="button"
           aria-label="player prev icon"
-          // TODO - go to previous song by a new request with song id
           onClick={() => handlePreviousSong()}
         >
           <PlayerPrevNextIcon width="fit-content" height="fit-content" />
@@ -155,7 +175,7 @@ const Player = (): JSX.Element => {
           className="h-6 w-6 md-5"
           type="button"
           aria-label="player next icon"
-          disabled={albumSongsId?.length === 0}
+          onClick={() => handleNextSong()}
         >
           <PlayerPrevNextIcon width="w-fit" height="fit-content" />
         </button>

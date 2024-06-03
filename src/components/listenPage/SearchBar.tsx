@@ -34,7 +34,7 @@ function SearchBar({
   durationFilter,
 }: Props): JSX.Element {
   const { t } = useTranslation('common');
-  const [nameFilter, setNameFilter] = useState('');
+  const [nameFilter, setNameFilter] = useState<string>('');
 
   const [getAlbums] = useLazyQuery(ListenPageAlbumsQuery, {
     variables: { limit: 15 },

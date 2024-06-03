@@ -4,6 +4,7 @@
   "COOKIE_BANNER_BTN_DECLINE": "Refuser",
   "COOKIE_BANNER_TITLE": "Ce site utilise des cookies",
   "COOKIE_BANNER_TXT": "Nous utilisons des cookies pour vous offrir la meilleure expérience possible lors de votre visite sur notre site Internet. En cliquant sur \"Accepter\", vous nous autorisez à stocker des cookies supplémentaires sur votre navigateur afin de rendre votre expérience plus agréable. En cliquant sur \"Refuser\", vous n'utiliserez pas de cookies optionnels. Aucune données personnelles n'est stockées et ces cookies ne sont pas utilisés à des fins publicitaires",
+  "COVER_URL": "Lien de l'illustration",
   "CREATE_ALBUM_HEADER": "Créer un album",
   "CREATE_ALBUM_MISSING_TITLE_ERROR": "Titre d'album requis.",
   "CREATE_ALBUM_NO_TRACKS_ADDED": "Vous n'avez pas encore ajouté de chansons. Veuillez en ajouter une au minimum pour pouvoir créer votre premier album.",
@@ -20,7 +21,6 @@
   "CREATE_PAGE_BTN_SONG": "Ajouter un titre",
   "CREATE_PAGE_REQUIRED_FIELDS": "Les champs avec * sont obligatoires",
   "CREATE_PAGE_TITLE": "Créer et partager votre musique",
-  "CREATE_SONG_BTN": "Enregistrer",
   "CREATE_SONG_COVER_INPUT": "Télécharger une illustration :",
   "CREATE_SONG_COVER_PLACEHOLDER": "Entrer le lien de l'illustration ici...",
   "CREATE_SONG_FILE_INPUT": "Télécharger le fichier :",
@@ -60,6 +60,7 @@
   "PASSWORDS_DO_NOT_MATCH": "Les mots de passe ne correspondent pas",
   "PROFILE_MY_ALBUMS": "Mes albums",
   "PROFILE_MY_SONGS": "Mes musiques",
+  "RELEASE_YEAR": "Année de sortie",
   "SERVICES_TITLE_CREATE": "Créez vos propres sons !",
   "SERVICES_TITLE_LISTEN": "Écoutez une grande variété de sons !",
   "SERVICES_TXT_1": "Découvrez plus encore en parcourant notre catalogue de sons !",
@@ -79,8 +80,8 @@
   "TEST": "C'est un test pour la traduction",
   "UPDATE_ALBUM_ERROR": "Une erreur est survenue lors de la mise à jour de l'album. Veuillez réessayer plus tard.",
   "UPDATE_ALBUM_SUCCESS": "L'album a bien été mis à jour",
-  "UPDATE_SONG_SUCCESS": "Le son a bien été mis à jour",
   "UPDATE_PROFILE_ERROR": "Une erreur est survenue lors de la mise à jour de votre profil. Veuillez réessayer plus tard.",
   "UPDATE_PROFILE_SUCCESS": "Votre profil a bien été mis à jour",
+  "UPDATE_SONG_SUCCESS": "Le son a bien été mis à jour",
   "WELCOME": "Bienvenue sur Soundy"
 }

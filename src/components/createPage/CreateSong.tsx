@@ -13,7 +13,7 @@ import { SongCreateInput } from '../../types/__generated_schemas__/graphql';
 import { resetQueryCache } from '../../utils';
 
 function CreateSong() {
-  const { t } = useTranslation('translation');
+  const { t } = useTranslation(['translation', 'common']);
   const newToast = useNewToast();
   const client = useApolloClient();
 
@@ -98,7 +98,7 @@ function CreateSong() {
         type="submit"
         className="btn btn-primary self-center py-3 mt-4 text-lg"
       >
-        {t('CREATE_SONG_BTN')}
+        {t('SAVE', { ns: 'common' })}
         <UploadIcon />
       </button>
     );

@@ -32,24 +32,38 @@ const AudioSource = (props: Props): JSX.Element => {
   const songPlayingId = useAppSelector((state) => state.audioPlayer.album.songPlaying);
 
   const handleSongEnd = async () => {
-    if (albumSongIds && albumSongIds.length === 0) {
-      audioRef.current!.currentTime = 0;
-      dispatch(setIsPlaying(false));
-    }
-    if (albumSongIds && albumSongIds.length > 1 && songPlayingId) {
+    if (albumSongIds) {
       const currentSongIndex = albumSongIds.indexOf(songPlayingId!);
-      if (currentSongIndex === albumSongIds.length - 1) return;
-      setCurrentSongId(songPlayingId!);
-      const nextSongIndex = currentSongIndex + 1;
-      const nextSongId = albumSongIds[nextSongIndex];
-      const song = await getSong({ variables: { songId: nextSongId } });
-      if (song.data?.song) {
+      // If it's not an album we rewind the song to the beginning
+      if (albumSongIds && albumSongIds.length === 0) {
         audioRef.current!.currentTime = 0;
-        dispatch(setSongTitle(song.data.song.title));
-        dispatch(setAlbumSongPlaying(nextSongId));
-        dispatch(setSongDuration(secondsToFormatedDuration(song.data.song.duration)));
-        setCurrentSongId(nextSongId);
-        audioRef.current!.play();
+        dispatch(setIsPlaying(false));
+      }
+      // If it's an album we play the next song, after finding it
+      if (albumSongIds && albumSongIds.length > 1 && songPlayingId) {
+        setCurrentSongId(songPlayingId!);
+        const nextSongIndex = currentSongIndex + 1;
+        const nextSongId = albumSongIds[nextSongIndex];
+        const song = await getSong({ variables: { songId: nextSongId } });
+        if (song.data?.song) {
+          audioRef.current!.currentTime = 0;
+          dispatch(setSongTitle(song.data.song.title));
+          dispatch(setAlbumSongPlaying(nextSongId));
+          dispatch(setSongDuration(secondsToFormatedDuration(song.data.song.duration)));
+          setCurrentSongId(nextSongId);
+          audioRef.current!.play();
+        }
+      }
+      if (albumSongIds && currentSongIndex === albumSongIds.length - 1) {
+        const firstSongId = albumSongIds[0];
+        const song = await getSong({ variables: { songId: firstSongId } });
+        if (song.data?.song) {
+          audioRef.current!.currentTime = 0;
+          dispatch(setSongTitle(song.data.song.title));
+          dispatch(setAlbumSongPlaying(firstSongId));
+          dispatch(setSongDuration(secondsToFormatedDuration(song.data.song.duration)));
+          setCurrentSongId(firstSongId);
+        }
       }
     }
   };

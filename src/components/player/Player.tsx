@@ -1,9 +1,8 @@
 import React, {
   useMemo, useEffect, useRef, useState,
 } from 'react';
-import { ApolloError, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { OneSongPlayerQuery } from '../../requests/queries';
-import { useNewToast } from '../toastContext';
 import {
   PlayerPrevNextIcon,
   SoundIcon,
@@ -37,15 +36,12 @@ const Player = (): JSX.Element => {
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [currentSongId, setCurrentSongId] = useState<number>(songPlayingId!);
-  const newToast = useNewToast();
 
-  const [getSong] = useLazyQuery(OneSongPlayerQuery, {
-    onError: (error: ApolloError) => {
-      newToast('error', error.message);
-    },
-  });
+  const [getSong] = useLazyQuery(OneSongPlayerQuery);
 
   useEffect(() => {
+    // If a song is playing, we set the currentSongId which will be used
+    // to find the previous and the next songs
     if (songPlayingId) {
       setCurrentSongId(songPlayingId);
     }
@@ -63,9 +59,13 @@ const Player = (): JSX.Element => {
   }, [songPlayingId]);
 
   const handlePreviousSong = async () => {
+    // If the length of the albumSongsId is equal to 0, return
     if (albumSongIds?.length === 0) return;
-
+    // If the lenght of the albumSongIds is greater than 1, then we can go to the previous song
     if (albumSongIds && currentSongId && albumSongIds?.length > 1) {
+      //  If the current time of the audio is greater than 1 second
+      //  then we want to reset the audio to 0
+      //  Else we can play the previous song
       if (audioRef.current && audioRef.current?.currentTime > 1) {
         audioRef.current!.currentTime = 0;
       } else {
@@ -89,7 +89,7 @@ const Player = (): JSX.Element => {
 
   const handleNextSong = async () => {
     if (albumSongIds?.length === 0) return;
-
+    // Same logic as the previous song minus the check for the current time
     if (albumSongIds && currentSongId && albumSongIds?.length > 1) {
       const currentSongIndex = albumSongIds.indexOf(songPlayingId!);
       if (currentSongIndex === albumSongIds.length - 1) return;

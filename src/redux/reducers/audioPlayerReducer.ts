@@ -21,6 +21,8 @@ const initialState: AudioPlayerState = {
   volume: 20,
   time: 0,
   artistName: null,
+  previousSongId: null,
+  nextSongId: null,
 };
 
 const audioPlayerReducer = createSlice({
@@ -75,6 +77,14 @@ const audioPlayerReducer = createSlice({
     setArtistName: (state, action: { payload: string | null }) => (
       { ...state, artistName: action.payload }
     ),
+    // --- Previous song to play when an album is playing--- //
+    setPreviousSongId: (state, action: { payload: number }) => (
+      { ...state, previousSongId: action.payload }
+    ),
+    // --- Next song top play when an album is playing --- //
+    setNextSongId: (state, action: { payload: number }) => (
+      { ...state, nextSongId: action.payload }
+    ),
   },
 });
 
@@ -93,6 +103,8 @@ export const {
   setSongTitle,
   setTime,
   setVolume,
+  setPreviousSongId,
+  setNextSongId,
 } = audioPlayerReducer.actions;
 
 export default audioPlayerReducer.reducer;

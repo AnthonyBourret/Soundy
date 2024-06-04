@@ -59,8 +59,10 @@ const Player = (): JSX.Element => {
   }, [songPlayingId]);
 
   const handlePreviousSong = async () => {
-    // If the length of the albumSongsId is equal to 0, return
-    if (albumSongIds?.length === 0) return;
+    // If the length of the albumSongsId is equal to 0, we reset the time to 0
+    if (audioRef.current && albumSongIds?.length === 0) {
+      audioRef.current.currentTime = 0;
+    }
     // If the lenght of the albumSongIds is greater than 1, then we can go to the previous song
     if (albumSongIds && currentSongId && albumSongIds?.length > 1) {
       //  If the current time of the audio is greater than 1 second

@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+html {
+  overflow-x: hidden;
+}
+
 .bg {
   animation:slide 15s ease-in-out infinite alternate;
   background-image: linear-gradient(-60deg, #161614 30%, #44403c 70%, #af373b 0%);

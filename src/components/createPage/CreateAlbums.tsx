@@ -20,7 +20,7 @@ interface Props {
 }
 
 function CreateAlbums({ setSelectedType }: Props) {
-  const { t } = useTranslation('translation');
+  const { t } = useTranslation(['translation', 'common']);
   const newToast = useNewToast();
 
   const { data, loading } = useQuery<UserSongsQueryQuery, UserSongsQueryQueryVariables>(
@@ -170,7 +170,7 @@ function CreateAlbums({ setSelectedType }: Props) {
         type="submit"
         className="btn btn-primary self-center py-3 mt-4 text-lg"
       >
-        {t('CREATE_SONG_BTN')}
+        {t('SAVE', { ns: 'common' })}
         <UploadIcon />
       </button>
     );

@@ -11,6 +11,7 @@ import { appoloClient } from './helpers';
 import './index.css';
 import './i18n';
 import { ToastProvider } from './components';
+import ScrollToTop from './components/ScrollToTop';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Provider store={store}>
           <BrowserRouter>
             <ToastProvider>
+              <ScrollToTop />
               <App />
             </ToastProvider>
           </BrowserRouter>

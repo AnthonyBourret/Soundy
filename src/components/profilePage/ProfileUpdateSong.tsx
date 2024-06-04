@@ -122,10 +122,10 @@ const ProfileUpdateSong = (props: Props): JSX.Element => {
         className="btn btn-success"
         onClick={handleSave}
       >
-        Save
+        {t('SAVE', { ns: 'common' })}
       </button>
     );
-  }, [updateSongLoading, handleSave]);
+  }, [updateSongLoading, handleSave, t]);
 
   return (
     <>
@@ -147,21 +147,27 @@ const ProfileUpdateSong = (props: Props): JSX.Element => {
 
             <div className="form-control mb-4">
               <label className="label" htmlFor="title">
-                <span className="label-text">Title</span>
+                <span className="label-text">
+                  {t('CARD_SONG_TITLE', { ns: 'common' })}
+                </span>
               </label>
               {songTitleInputJSX}
             </div>
 
             <div className="form-control mb-4">
               <label className="label" htmlFor="cover">
-                <span className="label-text">Cover URL</span>
+                <span className="label-text">
+                  {t('COVER_URL', { ns: 'translation' })}
+                </span>
               </label>
               {songCoverInputJSX}
             </div>
 
             <div className="form-control mb-4">
               <label className="label" htmlFor="releaseYear">
-                <span className="label-text">Release Year</span>
+                <span className="label-text">
+                  {t('RELEASE_YEAR', { ns: 'translation' })}
+                </span>
               </label>
               {songReleaseYearInputJSX}
             </div>
@@ -172,7 +178,7 @@ const ProfileUpdateSong = (props: Props): JSX.Element => {
                 onClick={closeModal}
                 type="button"
               >
-                Cancel
+                {t('CANCEL', { ns: 'common' })}
               </button>
               {saveButtonJSX}
             </div>

@@ -93,7 +93,7 @@ const ProfileDeleteSong = (props: Props) => {
           className="btn border-stone-700 border hover:btn-error"
           onClick={openModal}
         >
-          Delete the album
+          {t('DELETE', { ns: 'common' })}
         </button>
       </div>
 

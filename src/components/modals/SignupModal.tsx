@@ -42,7 +42,7 @@ const SignupModal = (): JSX.Element => {
   );
 
   function closeModal() {
-    (window as any).signup_modal.close();
+    (window as any).signup_modal.classList.remove('modal-open');
   }
 
   const handleInputChange = useCallback((field: string, value: string) => {
@@ -225,7 +225,7 @@ const SignupModal = (): JSX.Element => {
         method="dialog"
         className="modal-backdrop"
       >
-        <button type="submit">close</button>
+        <button onClick={closeModal} type="submit">close</button>
       </form>
     </dialog>
   );

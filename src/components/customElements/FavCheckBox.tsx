@@ -15,13 +15,14 @@ function FavCheckBox(props: Props): JSX.Element {
   // Initial the state from all songs request, if we like or unlike after that
   // it will be only updated in local
   const [likeSongState, setLikeSongState] = useState(isLiked);
-
   const { t } = useTranslation('common');
+
   const [likeSong, { loading: likeSongLoading }] = useMutation(
     LikeSongMutation,
     {
       variables: { songId },
     },
+
   );
 
   const [unlikeSong, { loading: unlikeSongLoading }] = useMutation(

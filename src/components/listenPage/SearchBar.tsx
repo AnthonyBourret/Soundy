@@ -21,6 +21,7 @@ interface Props {
   setDurationFilter: React.Dispatch<React.SetStateAction<DurationRange | undefined>>;
   yearFilter?: ReleaseYear;
   durationFilter?: DurationRange;
+  resetFilters: () => void;
 }
 
 function SearchBar({
@@ -32,6 +33,7 @@ function SearchBar({
   setYearFilter,
   yearFilter,
   durationFilter,
+  resetFilters,
 }: Props): JSX.Element {
   const { t } = useTranslation('common');
   const [nameFilter, setNameFilter] = useState<string>('');
@@ -85,10 +87,15 @@ function SearchBar({
 
   // Function to change the display between songs and albums and reload the data without filters
   const handleDisplayChanges = (display: ChosenDisplay) => {
+    resetFilters();
     setChosenDisplay(display);
     setNameFilter('');
-    if (display === 'albums') getAlbums({ variables: { limit: 15 } });
-    if (display === 'songs') getFilteredSongs({ variables: { limit: 30 } });
+    if (display === 'albums') {
+      getAlbums({ variables: { limit: 15 } });
+    }
+    if (display === 'songs') {
+      getFilteredSongs({ variables: { limit: 30 } });
+    }
   };
 
   const songDuration = useMemo(() => {
@@ -97,12 +104,12 @@ function SearchBar({
         <div className="flex flex-col gap-4">
           <div className="font-semibold text-sm pl-3 min-[540px]:text-base">{t('SEARCH_BAR_FILTER_RELEASE_TEXT')}</div>
           <div className="flex gap-4 flex-wrap justify-center">
-            <FilterRadio inputId="release-album-all" labelText={t('SEARCH_RADIO_INPUT_TEXT')} setFilter={setYearFilter} />
-            <FilterRadio inputId="release-album-min" labelText="70's" value={ReleaseYear.Year_70} setFilter={setYearFilter} />
-            <FilterRadio inputId="release-album-mid" labelText="80's" value={ReleaseYear.Year_80} setFilter={setYearFilter} />
-            <FilterRadio inputId="release-album-max" labelText="90's" value={ReleaseYear.Year_90} setFilter={setYearFilter} />
-            <FilterRadio inputId="release-album-mid" labelText="2000's" value={ReleaseYear.Year_2000} setFilter={setYearFilter} />
-            <FilterRadio inputId="release-album-max" labelText="2010's" value={ReleaseYear.Year_2010} setFilter={setYearFilter} />
+            <FilterRadio inputId="release-album-all" labelText={t('SEARCH_RADIO_INPUT_TEXT')} setFilter={setYearFilter} yearFilter={yearFilter} />
+            <FilterRadio inputId="release-album-min" labelText="70's" value={ReleaseYear.Year_70} setFilter={setYearFilter} yearFilter={yearFilter} />
+            <FilterRadio inputId="release-album-mid" labelText="80's" value={ReleaseYear.Year_80} setFilter={setYearFilter} yearFilter={yearFilter} />
+            <FilterRadio inputId="release-album-max" labelText="90's" value={ReleaseYear.Year_90} setFilter={setYearFilter} yearFilter={yearFilter} />
+            <FilterRadio inputId="release-album-mid" labelText="2000's" value={ReleaseYear.Year_2000} setFilter={setYearFilter} yearFilter={yearFilter} />
+            <FilterRadio inputId="release-album-max" labelText="2010's" value={ReleaseYear.Year_2010} setFilter={setYearFilter} yearFilter={yearFilter} />
           </div>
         </div>
       );
@@ -111,15 +118,15 @@ function SearchBar({
       <div className="flex flex-col gap-4">
         <div className="font-semibold text-sm pl-3 min-[540px]:text-base">{t('SEARCH_BAR_FILTER_DURATION_TEXT')}</div>
         <div className="flex gap-4 flex-wrap justify-center">
-          <FilterRadio inputId="duration-song-all" labelText={t('SEARCH_RADIO_INPUT_TEXT')} setFilter={setDurationFilter} />
-          <FilterRadio inputId="duration-song-min" labelText="- 1mn" value={DurationRange.OneMinute} setFilter={setDurationFilter} />
-          <FilterRadio inputId="duration-song-mid" labelText="1 - 3 mn" value={DurationRange.OneToThreeMinutes} setFilter={setDurationFilter} />
-          <FilterRadio inputId="duration-song-mid" labelText="3 - 5 mn" value={DurationRange.ThreeToFiveMinutes} setFilter={setDurationFilter} />
-          <FilterRadio inputId="duration-song-max" labelText="+ 5 mn" value={DurationRange.MoreThanFiveMinutes} setFilter={setDurationFilter} />
+          <FilterRadio inputId="duration-song-all" labelText={t('SEARCH_RADIO_INPUT_TEXT')} setFilter={setDurationFilter} durationFilter={durationFilter} />
+          <FilterRadio inputId="duration-song-min" labelText="- 1mn" value={DurationRange.OneMinute} setFilter={setDurationFilter} durationFilter={durationFilter} />
+          <FilterRadio inputId="duration-song-mid" labelText="1 - 3 mn" value={DurationRange.OneToThreeMinutes} setFilter={setDurationFilter} durationFilter={durationFilter} />
+          <FilterRadio inputId="duration-song-mid" labelText="3 - 5 mn" value={DurationRange.ThreeToFiveMinutes} setFilter={setDurationFilter} durationFilter={durationFilter} />
+          <FilterRadio inputId="duration-song-max" labelText="+ 5 mn" value={DurationRange.MoreThanFiveMinutes} setFilter={setDurationFilter} durationFilter={durationFilter} />
         </div>
       </div>
     );
-  }, [chosenDisplay, t, setDurationFilter, setYearFilter]);
+  }, [chosenDisplay, t, setDurationFilter, durationFilter, setYearFilter, yearFilter]);
 
   return (
     <div className="min-[540px]:w-1/2 pt-32 text-center">
@@ -159,14 +166,14 @@ function SearchBar({
         <div>
           <button
             type="button"
-            onClick={handleDisplayChanges.bind(null, 'songs')}
+            onClick={() => handleDisplayChanges('songs')}
             className={`btn btn-sm mx-4 py-3 min-[540px]:btn-md ${chosenDisplay === 'songs' ? 'border-primary my-5 border-2' : 'border-stone-700 my-6 border'}`}
           >
             {t('SEARCH_BAR_FILTER_SONG')}
           </button>
           <button
             type="button"
-            onClick={handleDisplayChanges.bind(null, 'albums')}
+            onClick={() => handleDisplayChanges('albums')}
             className={`btn btn-sm mx-4 py-3 min-[540px]:btn-md ${chosenDisplay === 'albums' ? 'border-primary my-5 border-2' : 'border-stone-700 my-6 border'}`}
           >
             {t('SEARCH_BAR_FILTER_ALBUM')}

@@ -1,22 +1,27 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { useApolloClient } from '@apollo/client';
 import {
-  useAppDispatch, setToken,
+  useAppDispatch,
 } from '../../redux';
-import VisitorMenu from './visitorMenu/VisitorMenu';
-import { ConnectedMenu } from './connectedMenu';
 import type { MenuButton } from '../../types';
 import { useNewToast } from '../toastContext';
+
+import VisitorMenu from './visitorMenu/VisitorMenu';
+import { ConnectedMenu } from './connectedMenu';
+import { resetProfile } from '../../utils';
 
 type HeaderProps = {
   isLogin: boolean;
 };
 
 function Header(props: HeaderProps) {
-  const { t } = useTranslation('common');
   const { isLogin } = props;
-  const newToast = useNewToast();
+  const { t } = useTranslation('common');
+  const client = useApolloClient();
   const dispatch = useAppDispatch();
+  const newToast = useNewToast();
 
   const menuButton: MenuButton[] = [
     {
@@ -41,10 +46,12 @@ function Header(props: HeaderProps) {
     },
     {
       text: t('MENU_LOGOUT'),
-      onClick: () => {
-        dispatch(setToken(null));
-        newToast('success', t('LOGOUT_TOAST_MESSAGE'));
-      },
+      onClick: () => resetProfile({
+        client,
+        dispatch,
+        newToast,
+        successMessage: t('LOGOUT_TOAST_MESSAGE'),
+      }),
       link: '/logout',
     },
   ];

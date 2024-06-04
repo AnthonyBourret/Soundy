@@ -9,7 +9,7 @@ interface Props {
   link: string;
   title: string;
   onClick?: () => void;
-  buttonStyle: (props: ButtonStyleProps) => string;
+  buttonStyle?: (props: ButtonStyleProps) => string;
 }
 
 function CustomButton(props: Props) {

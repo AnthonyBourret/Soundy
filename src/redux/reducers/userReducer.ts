@@ -18,7 +18,7 @@ const initialState: UserState = {
   favorite: [],
   name: null,
   picture: null,
-  token: localStorage.getItem('AUTH_TOKEN') || null,
+  token: localStorage.getItem('AUTH_TOKEN') ?? null,
 };
 
 const userReducer = createSlice({

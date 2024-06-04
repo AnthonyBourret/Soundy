@@ -1,16 +1,17 @@
 import React from 'react';
+
+import { LoginModal, SignupModal } from '../../modals';
+import { LogoWithName } from '../../customElements';
+import { type MenuButton } from '../../../types';
+
 import VisitorMenuDesktop from './VisitorMenuDesktop';
 import VisitorMenuMobile from './VisitorMenuMobile';
-import LoginModal from '../../modals/LoginModal';
-import SignupModal from '../../modals/SignupModal';
-import { LogoWithName } from '../../customElements';
-import { MenuButton } from '../../../types';
 
 interface VisitorMenuProps {
   menuButton: MenuButton[];
 }
 
-function VisitorMenu(props: VisitorMenuProps) {
+function VisitorMenu(props: VisitorMenuProps): JSX.Element {
   const { menuButton } = props;
 
   return (

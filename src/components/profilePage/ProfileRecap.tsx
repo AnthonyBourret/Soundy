@@ -103,12 +103,12 @@ const ProfileRecap = (props: Props) => {
           type="button"
           onClick={handleSave}
         >
-          Save
+          {t('SAVE', { ns: 'common' })}
         </button>
       );
     }
     return null;
-  }, [actualMode, handleSave, updateProfileLoading]);
+  }, [actualMode, handleSave, t, updateProfileLoading]);
 
   const userInfosJSX = useMemo(() => {
     if (actualMode === 'edit') {
@@ -176,7 +176,7 @@ const ProfileRecap = (props: Props) => {
               onClick={() => setActualMode('view')}
               type="button"
             >
-              Cancel
+              {t('CANCEL', { ns: 'common' })}
             </button>
             {saveButtonJSX}
           </div>
@@ -223,6 +223,7 @@ const ProfileRecap = (props: Props) => {
     password,
     picture,
     saveButtonJSX,
+    t,
     user.email,
   ]);
 

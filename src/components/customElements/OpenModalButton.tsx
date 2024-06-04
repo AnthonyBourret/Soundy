@@ -4,18 +4,28 @@ interface OpenModalButtonProps {
   buttonStyle: string;
   title: string;
   modalId: string;
+  onClick?: () => void;
 }
 
-function OpenModalButton({ buttonStyle, title, modalId }: OpenModalButtonProps) {
+function OpenModalButton({
+  buttonStyle, title, modalId, onClick,
+}: OpenModalButtonProps) {
+  const handleClick = () => {
+    if (onClick != null) {
+      onClick();
+    }
+
+    const modalElement = document.getElementById(modalId) as HTMLDialogElement;
+    if (modalElement) {
+      modalElement.classList.add('modal-open');
+    }
+  };
+
   return (
     <button
       type="button"
       className={buttonStyle}
-      onClick={() => {
-        if (document) {
-          (document.getElementById(modalId) as HTMLDialogElement).showModal();
-        }
-      }}
+      onClick={handleClick}
     >
       {title}
     </button>

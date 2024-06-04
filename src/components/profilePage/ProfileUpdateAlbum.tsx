@@ -154,10 +154,10 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
         className="btn btn-success"
         onClick={handleSave}
       >
-        Save
+        {t('SAVE', { ns: 'common' })}
       </button>
     );
-  }, [updateAlbumLoading, handleSave]);
+  }, [updateAlbumLoading, handleSave, t]);
 
   const songSelectionJSX = useMemo(() => {
     if (loading) {
@@ -238,14 +238,18 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
 
               <div className="form-control mb-4">
                 <label className="label" htmlFor="title">
-                  <span className="label-text">Title</span>
+                  <span className="label-text">
+                    {t('CARD_SONG_TITLE', { ns: 'common' })}
+                  </span>
                 </label>
                 {albumTitleInputJSX}
               </div>
 
               <div className="form-control mb-4">
                 <label className="label" htmlFor="cover">
-                  <span className="label-text">Cover URL</span>
+                  <span className="label-text">
+                    {t('COVER_URL', { ns: 'translation' })}
+                  </span>
                 </label>
                 {albumCoverInputJSX}
               </div>
@@ -263,7 +267,7 @@ const ProfileUpdateAlbum = (props: Props): JSX.Element => {
                   onClick={closeModal}
                   type="button"
                 >
-                  Cancel
+                  {t('CANCEL', { ns: 'common' })}
                 </button>
                 {saveButtonJSX}
               </div>

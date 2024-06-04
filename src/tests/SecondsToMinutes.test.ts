@@ -2,7 +2,7 @@ import {
   test, expect,
 } from 'vitest';
 
-import { secondsToFormatedDuration } from '../utils';
+import secondsToFormatedDuration from '../utils/secondsToFormatedDuration';
 
 test('secondsToFormatedDuration should convert seconds to minutes', async () => {
   const result = secondsToFormatedDuration(60);

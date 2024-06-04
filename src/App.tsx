@@ -1,11 +1,13 @@
 import React, {
   Suspense, useEffect, useState, useMemo,
 } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import {
+  Routes, Route, Navigate, useLocation,
+} from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useLazyQuery } from '@apollo/client';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'react-i18next';
 import Home from './components/homePage/Home';
 import Listen from './components/listenPage/Listen';
 import Background from './components/Background';
@@ -32,22 +34,12 @@ export default function App() {
   const token = useAppSelector((state) => state.user.token);
   const [cookies, setCookies] = useCookies(['acceptCookies']);
   const dispatch = useAppDispatch();
-  const [profileAction, { data: profileData, error: profileError }] = useLazyQuery(ProfileQuery);
+  const [profileAction, { data: profileData }] = useLazyQuery(ProfileQuery);
+  const location = useLocation();
+  const { t } = useTranslation('common');
   const newToast = useNewToast();
-  const { t } = useTranslation('translation');
 
   useEffect(() => {
-    if (profileError) {
-      newToast(
-        'warning',
-        t('TROUBLE_TO_CONNECT_TO_SERVER'),
-      );
-    }
-  }, [profileError, profileAction, newToast, t]);
-
-  useEffect(() => {
-    let timeoutId: ReturnType<typeof setTimeout>;
-
     if (token == null) {
       setIsLogin(false);
     }
@@ -55,12 +47,7 @@ export default function App() {
       setIsLogin(true);
       profileAction();
 
-      timeoutId = setTimeout(() => {
-        newToast('info', t('SERVER_AWAKEN'));
-      }, 5000);
-
       if (profileData?.profile != null) {
-        clearTimeout(timeoutId);
         dispatch(setCountry(profileData.profile.country));
         dispatch(setEmail(profileData.profile.email));
         dispatch(setName(profileData.profile.name));
@@ -73,11 +60,13 @@ export default function App() {
     if (cookies.acceptCookies === true) {
       setCookieVisibility(false);
     }
+  }, [profileData, dispatch, token, cookies, setCookies, profileAction]);
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [profileData, dispatch, token, cookies, setCookies, profileAction, newToast, t]);
+  useEffect(() => {
+    if (!isLogin && location.state && location.state.fromProtected) {
+      newToast('warning', t('CONNECT_TOAST_MESSAGE'));
+    }
+  }, [isLogin, location.state, newToast, t]);
 
   const acceptCookie = useMemo(() => cookieVisibility && (
     <CookiePopup setCookieVisibility={setCookieVisibility} />
@@ -95,21 +84,21 @@ export default function App() {
           element={
             isLogin
               ? <Favorites isLogin={isLogin} />
-              : <Home isLogin={isLogin} isRedirected />
+              : <Navigate to="/" state={{ fromProtected: true }} />
           }
         />
         <Route
           path="create"
           element={isLogin
             ? <Create isLogin={isLogin} />
-            : <Home isLogin={isLogin} isRedirected />}
+            : <Navigate to="/" state={{ fromProtected: true }} />}
         />
         <Route
           path="/profile"
           element={
             isLogin
               ? <Profile isLogin={isLogin} />
-              : <Home isLogin={isLogin} isRedirected />
+              : <Navigate to="/" state={{ fromProtected: true }} />
           }
         />
         {/* // TODO Add the 404 error page */}

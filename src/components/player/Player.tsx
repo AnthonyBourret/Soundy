@@ -131,6 +131,16 @@ const Player = (): JSX.Element => {
     }
   };
 
+  const handleSelectedVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setVolume(Number(e.target.value)));
+    if (isMuted) {
+      setIsMuted(false);
+    }
+    if (e.target.value === '0') {
+      setIsMuted(true);
+    }
+  };
+
   const progressStyle = useMemo(() => {
     if (audioRef.current?.duration && currentTime) {
       const progress = (currentTime / audioRef.current.duration) * 100;
@@ -216,7 +226,7 @@ const Player = (): JSX.Element => {
           type="range"
           value={volume}
           style={{ backgroundSize: `${volume}% 100%` }}
-          onChange={(e) => dispatch(setVolume(Number(e.target.value)))}
+          onChange={handleSelectedVolume}
         />
       </section>
 

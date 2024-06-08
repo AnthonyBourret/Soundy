@@ -111,7 +111,7 @@ function SongDisplay({
   }, [fromProfilePage, isLogin, likable, sortedSongs]);
 
   return (
-    <div className="flex flex-col sm:flex-row sm:flex-wrap justify-around pt-4 p-2 gap-4">
+    <div className="flex flex-col min-[540px]:px-12 pt-4 p-2 gap-4 min-[540px]:flex-row min-[540px]:flex-wrap min-[540px]:justify-around">
       {songCardsJSX}
     </div>
   );

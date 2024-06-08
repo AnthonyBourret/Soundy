@@ -6,6 +6,7 @@ import { PlayIcon } from '../../svg';
 import secondsToFormatedDuration from '../../utils/secondsToFormatedDuration';
 import {
   setAlbumPicture,
+  setAlbumSongIds,
   setArtistName,
   setIsPlaying,
   setSongDuration,
@@ -78,6 +79,7 @@ function SongCard(props: SongCardProps) {
               dispatch(setSongTitle(title));
               dispatch(setTime(0));
               dispatch(setAlbumPicture(null));
+              dispatch(setAlbumSongIds([]));
               dispatch(setSongPicture(cover));
               dispatch(setSongDuration(secondsToFormatedDuration(duration)));
             }}

@@ -4,8 +4,10 @@ import {
   setAlbumPicture,
   setAlbumSongIds,
   setAlbumSongPlaying,
+  setAlbumTitle,
   setArtistName,
   setIsPlaying,
+  setSongDuration,
   setSongPicture,
   setSongTitle,
   setTime,
@@ -42,19 +44,21 @@ function AlbumCard({
       onClick={() => {
         dispatch(setArtistName(artist || null));
         dispatch(setIsPlaying(!isPlaying));
-        dispatch(setSongTitle(title));
+        dispatch(setSongTitle(song.title));
         dispatch(setTime(0));
         dispatch(setAlbumPicture(null));
+        dispatch(setAlbumTitle(capitalizeFirstLetter(title)));
         dispatch(setSongPicture(cover));
         dispatch(setAlbumSongIds(songs.map((s) => Number(s.id))));
         dispatch(setAlbumSongPlaying(Number(song.id)));
+        dispatch(setSongDuration(secondsToFormatedDuration(Number(song.duration))));
       }}
     >
       <th>{i + 1}</th>
       <td>{song.title}</td>
       <td className="text-center">{secondsToFormatedDuration(Number(song.duration))}</td>
     </tr>
-  )), [artist, cover, dispatch, isPlaying, songs, title]);
+  )), [artist, cover, title, dispatch, isPlaying, songs]);
 
   return (
     <div className="card flex flex-row w-full p-2 sm:w-[70%] lg:p-4 gap-2 bg-base-200 shadow-xl border border-1 border-stone-700">

@@ -111,6 +111,8 @@ export interface AudioPlayerState {
   artistName: string | null;
   volume: number;
   time: number;
+  previousSongId: number | null;
+  nextSongId: number | null;
 }
 
 export type ArrayElementType<T> = T extends (infer U)[] ? U : never;

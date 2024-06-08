@@ -28,6 +28,7 @@ const documents = {
     "\n  query ListenPageAlbumsQuery($limit: Int) {\n    albums(limit: $limit){\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      release_year\n      songs {\n        id\n        title\n        duration\n      }\n    }\n  }\n": types.ListenPageAlbumsQueryDocument,
     "\n  query ListenPageSongsQuery($limit: Int) {\n    songs(limit: $limit) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n": types.ListenPageSongsQueryDocument,
     "\n  query Login($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n": types.LoginDocument,
+    "\n  query OneSongPlayerQuery($songId: Int!) {\n    song(id: $songId) {\n      title\n      duration\n    }\n  }\n": types.OneSongPlayerQueryDocument,
     "\n  query ProfileAlbums($filter: AlbumFilterInput) {\n    albums(filter: $filter){\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      release_year\n      songs {\n        id\n        title\n        duration\n      }\n    }\n  }\n": types.ProfileAlbumsDocument,
     "\n  query Profile {\n    profile {\n      country\n      email\n      name\n      picture\n    }\n  }\n": types.ProfileDocument,
     "\n  query ProfileSongs($filter: SongFilterInput) {\n    songs(filter: $filter) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n": types.ProfileSongsDocument,
@@ -111,6 +112,10 @@ export function gql(source: "\n  query ListenPageSongsQuery($limit: Int) {\n    
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query Login($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n"): (typeof documents)["\n  query Login($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query OneSongPlayerQuery($songId: Int!) {\n    song(id: $songId) {\n      title\n      duration\n    }\n  }\n"): (typeof documents)["\n  query OneSongPlayerQuery($songId: Int!) {\n    song(id: $songId) {\n      title\n      duration\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

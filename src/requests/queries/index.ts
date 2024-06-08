@@ -9,3 +9,4 @@ export { default as SearchAlbumsQuery } from './SearchAlbumsQuery';
 export { default as ProfileSongs } from './ProfileSongs';
 export { default as SongOverviewQuery } from './SongOverviewQuery';
 export { default as UserSongsQuery } from './UserSongsQuery';
+export { default as OneSongPlayerQuery } from './OneSongPlayerQuery';

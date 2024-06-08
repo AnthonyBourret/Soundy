@@ -2,6 +2,7 @@ export { default as AddIconChecked } from './AddIconChecked';
 export { default as AddIconUnchecked } from './AddIconUnchecked';
 export { default as ArrowDown } from './ArrowDown';
 export { default as Logo } from './Logo';
+export { default as MuteIcon } from './MuteIcon';
 export { default as PencilIcon } from './PencilIcon';
 export { default as PlayerPauseIcon } from './PlayerPauseIcon';
 export { default as PlayerPlayIcon } from './PlayerPlayIcon';

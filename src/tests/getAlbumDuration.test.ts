@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 
-import { getAlbumDuration } from '../utils/get';
+import getAlbumDuration from '../utils/getAlbumDuration';
 
 test('getAlbumDuration should return the converted duration of the album', async () => {
   const result = getAlbumDuration([

@@ -26,7 +26,7 @@ const documents = {
     "\n  mutation UpdateSong(\n    $songId: Int!,\n    $input: SongUpdateInput!\n  ) {\n    updateSong(\n      songId: $songId,\n      input: $input\n    ) {\n      title\n      cover\n      release_year\n    }\n  }\n": types.UpdateSongDocument,
     "\n    query FavoriteSongsQuery {\n        songs(filter: { liked: true }) {\n            cover\n            duration\n            id\n            lyrics\n            title\n            isLiked\n            release_year\n            artist {\n                name\n            }\n        }\n    }\n": types.FavoriteSongsQueryDocument,
     "\n  query ListenPageAlbumsQuery($limit: Int) {\n    albums(limit: $limit){\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      release_year\n      songs {\n        id\n        title\n        duration\n      }\n    }\n  }\n": types.ListenPageAlbumsQueryDocument,
-    "\n  query ListenPageSongsQuery($limit: Int) {\n    songs(limit: $limit) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n": types.ListenPageSongsQueryDocument,
+    "\n  query ListenPageSongsQuery($limit: Int, $offset: Int) {\n    songs(limit: $limit, offset: $offset) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n": types.ListenPageSongsQueryDocument,
     "\n  query Login($input: LoginInput!) {\n    login(input: $input) {\n      expire_at\n      token\n    }\n  }\n": types.LoginDocument,
     "\n  query OneSongPlayerQuery($songId: Int!) {\n    song(id: $songId) {\n      title\n      duration\n    }\n  }\n": types.OneSongPlayerQueryDocument,
     "\n  query ProfileAlbums($filter: AlbumFilterInput) {\n    albums(filter: $filter){\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      release_year\n      songs {\n        id\n        title\n        duration\n      }\n    }\n  }\n": types.ProfileAlbumsDocument,
@@ -107,7 +107,7 @@ export function gql(source: "\n  query ListenPageAlbumsQuery($limit: Int) {\n   
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query ListenPageSongsQuery($limit: Int) {\n    songs(limit: $limit) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n"): (typeof documents)["\n  query ListenPageSongsQuery($limit: Int) {\n    songs(limit: $limit) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n"];
+export function gql(source: "\n  query ListenPageSongsQuery($limit: Int, $offset: Int) {\n    songs(limit: $limit, offset: $offset) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n"): (typeof documents)["\n  query ListenPageSongsQuery($limit: Int, $offset: Int) {\n    songs(limit: $limit, offset: $offset) {\n      id\n      title\n      artist {\n        name\n      }\n      cover\n      duration\n      release_year\n      isLiked\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

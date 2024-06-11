@@ -1,8 +1,8 @@
 import { gql } from '../../types/__generated_schemas__/gql';
 
 const ListenPageSongsQuery = gql(`
-  query ListenPageSongsQuery($limit: Int) {
-    songs(limit: $limit) {
+  query ListenPageSongsQuery($limit: Int, $offset: Int) {
+    songs(limit: $limit, offset: $offset) {
       id
       title
       artist {

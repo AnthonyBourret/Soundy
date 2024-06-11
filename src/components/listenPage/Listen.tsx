@@ -9,7 +9,6 @@ import SearchBar from './SearchBar';
 import { ListenPageSongsQuery } from '../../requests/queries';
 import type {
   ListenPageSongsQueryQuery,
-  ListenPageAlbumsQueryQuery,
   DurationRange,
   ReleaseYear,
 } from '../../types/__generated_schemas__/graphql';
@@ -22,25 +21,35 @@ function Listen({ isLogin }: { isLogin: boolean }) {
   const [durationFilter, setDurationFilter] = useState<DurationRange>();
   const [yearFilter, setYearFilter] = useState<ReleaseYear>();
 
-  const { data, loading, error } = useQuery(
+  const {
+    data, loading, error, fetchMore,
+  } = useQuery<ListenPageSongsQueryQuery>(
     ListenPageSongsQuery,
     {
-      variables: { limit: 30 },
+      variables: { offset: 0, limit: 5 },
       fetchPolicy: 'network-only',
     },
   );
-
-  const resetFilters = () => {
-    setSortBy(null);
-    setDurationFilter(undefined);
-    setYearFilter(undefined);
-  };
 
   useEffect(() => {
     if (data?.songs !== undefined) {
       setSongs(data.songs);
     }
   }, [data]);
+
+  const loadMore = () => {
+    fetchMore({
+      variables: {
+        offset: songs?.length,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+        return {
+          songs: [...prev.songs as any, ...fetchMoreResult.songs as any],
+        };
+      },
+    });
+  };
 
   const songOrAlbumJSX = useMemo(() => {
     if (loading) {
@@ -56,13 +65,10 @@ function Listen({ isLogin }: { isLogin: boolean }) {
     }
 
     if (chosenDisplay === 'albums') {
-      return (
-        <AlbumDisplay albums={albums} sortBy={sortBy} />
-      );
+      return <AlbumDisplay albums={albums} sortBy={sortBy} />;
     }
-    return (
-      <SongDisplay songs={songs} isLogin={isLogin} sortBy={sortBy} />
-    );
+
+    return <SongDisplay songs={songs} isLogin={isLogin} sortBy={sortBy} />;
   }, [albums, chosenDisplay, error, isLogin, loading, songs, sortBy]);
 
   return (
@@ -71,17 +77,25 @@ function Listen({ isLogin }: { isLogin: boolean }) {
       <SearchBar
         chosenDisplay={chosenDisplay}
         setChosenDisplay={setChosenDisplay}
-        setSongs={setSongs}
+        setSongs={() => {}}
+        resetFilters={() => {}}
         setAlbums={setAlbums}
         setYearFilter={setYearFilter}
         setDurationFilter={setDurationFilter}
         yearFilter={yearFilter}
         durationFilter={durationFilter}
-        resetFilters={resetFilters}
       />
       <SongAndAlbumOrder sortBy={sortBy} setSortBy={setSortBy} chosenDisplay={chosenDisplay} />
 
       {songOrAlbumJSX}
+
+      <button
+        type="button"
+        onClick={loadMore}
+        disabled={loading}
+      >
+        {loading ? 'Loading...' : 'Load More'}
+      </button>
 
       <ScrollToTopButton />
     </div>

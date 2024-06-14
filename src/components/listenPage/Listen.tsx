@@ -1,17 +1,22 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, {
+  useState, useEffect, useMemo, useRef, useCallback,
+} from 'react';
 import { useQuery } from '@apollo/client';
+
 import Header from '../header/Header';
-import SongDisplay from './SongDisplay';
-import AlbumDisplay from './AlbumDisplay';
 import { ScrollToTopButton, SongAndAlbumOrder, Spinner } from '../customElements';
 import { ChosenDisplay } from '../../types';
-import SearchBar from './SearchBar';
 import { ListenPageSongsQuery } from '../../requests/queries';
 import type {
-  ListenPageSongsQueryQuery,
   DurationRange,
+  ListenPageAlbumsQueryQuery,
+  ListenPageSongsQueryQuery,
   ReleaseYear,
 } from '../../types/__generated_schemas__/graphql';
+
+import SearchBar from './SearchBar';
+import AlbumDisplay from './AlbumDisplay';
+import SongDisplay from './SongDisplay';
 
 function Listen({ isLogin }: { isLogin: boolean }) {
   const [songs, setSongs] = useState<ListenPageSongsQueryQuery['songs']>([]);
@@ -20,13 +25,15 @@ function Listen({ isLogin }: { isLogin: boolean }) {
   const [sortBy, setSortBy] = useState<string | null>(null);
   const [durationFilter, setDurationFilter] = useState<DurationRange>();
   const [yearFilter, setYearFilter] = useState<ReleaseYear>();
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const {
     data, loading, error, fetchMore,
   } = useQuery<ListenPageSongsQueryQuery>(
     ListenPageSongsQuery,
     {
-      variables: { offset: 0, limit: 5 },
+      variables: { offset: 0, limit: 30 },
       fetchPolicy: 'network-only',
     },
   );
@@ -37,7 +44,7 @@ function Listen({ isLogin }: { isLogin: boolean }) {
     }
   }, [data]);
 
-  const loadMore = () => {
+  const loadMore = useCallback(() => {
     fetchMore({
       variables: {
         offset: songs?.length,
@@ -49,7 +56,25 @@ function Listen({ isLogin }: { isLogin: boolean }) {
         };
       },
     });
-  };
+  }, [fetchMore, songs]);
+
+  useEffect(() => {
+    if (observerRef.current) observerRef.current.disconnect();
+
+    observerRef.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        loadMore();
+      }
+    });
+
+    if (loadMoreRef.current) {
+      observerRef.current.observe(loadMoreRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) observerRef.current.disconnect();
+    };
+  }, [loadMore]);
 
   const songOrAlbumJSX = useMemo(() => {
     if (loading) {
@@ -89,13 +114,7 @@ function Listen({ isLogin }: { isLogin: boolean }) {
 
       {songOrAlbumJSX}
 
-      <button
-        type="button"
-        onClick={loadMore}
-        disabled={loading}
-      >
-        {loading ? 'Loading...' : 'Load More'}
-      </button>
+      <div ref={loadMoreRef} className="observer-element" />
 
       <ScrollToTopButton />
     </div>

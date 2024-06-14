@@ -29,7 +29,8 @@ function CreateAlbumSongsOrder({
       <div className="flex flex-col gap-2 border border-stone-700 rounded-md p-2">
         <Reorder.Group values={selectedSongs} onReorder={handlePositionChange}>
           {selectedSongs.map((song, index) => (
-            <Reorder.Item value={song} key={song.title} className="py-1">
+            // eslint-disable-next-line react/no-array-index-key
+            <Reorder.Item value={song} key={`${song.title}-${index}`} className="py-1">
               <div key={song.id} className="label border-2 gap-8 border-stone-700 rounded-md bg-base-100 px-4 cursor-grab active:cursor-grabbing hover:border-primary">
                 <span className="label-text font-semibold">{index + 1}</span>
                 <span className="label-text font-semibold truncate">{song.title}</span>

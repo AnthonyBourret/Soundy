@@ -66,13 +66,14 @@ function SongDisplay({
 
     if (fromProfilePage) {
       return sortedSongs.map(
-        (song) => {
+        (song, index) => {
           if (song == null) {
             return null;
           }
 
           return (
-            <div className="indicator w-full sm:w-auto">
+            // eslint-disable-next-line react/no-array-index-key
+            <div className="indicator w-full sm:w-auto" key={`${song}-${index}`}>
               <ProfileUpdateSong song={song} />
               <SongCard
                 isLiked={song!.isLiked || false}
@@ -93,7 +94,7 @@ function SongDisplay({
     }
 
     return sortedSongs.map(
-      (song) => (
+      (song, index) => (
         <SongCard
           isLiked={song!.isLiked || false}
           artist={song!.artist || { name: '' }}
@@ -101,7 +102,8 @@ function SongDisplay({
           duration={song!.duration}
           releaseYear={song!.release_year ?? 0}
           isLogin={isLogin}
-          key={song?.id}
+          // eslint-disable-next-line react/no-array-index-key
+          key={`${song}-${index}`}
           songId={song!.id}
           title={song!.title}
           likable={likable}
